@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 @Entity
 public class Joueur extends Compte{
 
@@ -15,10 +14,10 @@ public class Joueur extends Compte{
 	private int life=3;
 
 	private int nbEtoiles=100;
+	
 
-
-	@OneToOne
-	private Historique historique;
+	@OneToMany(mappedBy = "joueur")
+	private List<Historique> historiques;
 
 
 	//	@OneToMany (mappedBy = "j")
@@ -105,19 +104,22 @@ public class Joueur extends Compte{
 	}
 
 
-	public Historique getHistorique() {
-		return historique;
+	
+	public List<Historique> getHistoriques() {
+		return historiques;
 	}
 
-	public void setHistorique(Historique historique) {
-		this.historique = historique;
+
+	public void setHistoriques(List<Historique> historiques) {
+		this.historiques = historiques;
 	}
-	
+
+
 	@Override
 	public String toString() {
 		return "Joueur [id=" + id + ", login=" + login + ", password=" + password + ", nom=" + nom + ", prenom="
 				+ prenom + ", mail=" + mail + ", pseudo=" + pseudo + ", level=" + level + ", life=" + life
-				+ ", historique=" + historique + "]";
+				+ ", historique=" + historiques + "]";
 	}
 
 
