@@ -6,11 +6,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 
 @Entity
+@JsonView(Views.ViewsCommon.class)
 public class Historique  {
 	
 	@Id
@@ -32,13 +36,15 @@ public class Historique  {
 	
 	@OneToOne
 	private Partie partie;
+	@ManyToOne
+	private Joueur joueur;
 	
 	
 	
 
 
 	public Historique(Long id, LocalDateTime dateHeureDebutPartie, LocalDateTime dateHeureFinPartie, int positionArrivee,
-			int nbEtoilesGagnees, Partie partie) {
+			int nbEtoilesGagnees, Partie partie, Joueur joueur) {
 		super();
 		this.id = id;
 		this.dateHeureDebutPartie = dateHeureDebutPartie;
@@ -46,6 +52,7 @@ public class Historique  {
 		this.positionArrivee = positionArrivee;
 		this.nbEtoilesGagnees = nbEtoilesGagnees;
 		this.partie = partie;
+		this.joueur = joueur;
 	}
 
 	

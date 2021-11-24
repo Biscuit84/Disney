@@ -51,29 +51,29 @@ public class JoueurRestController {
 		}
 	}
 
-	@GetMapping("{id}/historiques")
-	@JsonView(Views.ViewsJoueurHistoriques.class)
-	public Joueur findWithHistoriques(@PathVariable Long id) {
-		Optional<Joueur> optJoueur = joueurRepo.findByIdWithHistorique(id);
-
-		if (optJoueur.isPresent()) {
-			return optJoueur.get();
-		} else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Joueur non trouvé");
-		}
-	}
-	
-	@GetMapping("{id}/persos-obtenus")
-	@JsonView(Views.ViewsJoueurPersos.class)
-	public Joueur findWithPersos(@PathVariable Long id) {
-		Optional<Joueur> optJoueur = joueurRepo.findByIdWithPersos(id);
-
-		if (optJoueur.isPresent()) {
-			return optJoueur.get();
-		} else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Joueur non trouvé");
-		}
-	}
+//	@GetMapping("{id}/historiques")
+//	@JsonView(Views.ViewsJoueurHistoriques.class)
+//	public Joueur findWithHistoriques(@PathVariable Long id) {
+//		Optional<Joueur> optJoueur = joueurRepo.findByIdWithHistorique(id);
+//
+//		if (optJoueur.isPresent()) {
+//			return optJoueur.get();
+//		} else {
+//			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Joueur non trouvé");
+//		}
+//	}
+//	
+//	@GetMapping("{id}/persos-obtenus")
+//	@JsonView(Views.ViewsJoueurPersos.class)
+//	public Joueur findWithPersos(@PathVariable Long id) {
+//		Optional<Joueur> optJoueur = joueurRepo.findByIdWithPersos(id);
+//
+//		if (optJoueur.isPresent()) {
+//			return optJoueur.get();
+//		} else {
+//			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Joueur non trouvé");
+//		}
+//	}
 	
 
 	@PostMapping("")

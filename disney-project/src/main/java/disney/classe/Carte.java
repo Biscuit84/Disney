@@ -9,8 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 //@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@JsonView(Views.ViewsCommon.class)
 public class Carte {
 	
 	@Id

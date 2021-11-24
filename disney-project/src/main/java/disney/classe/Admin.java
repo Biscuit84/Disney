@@ -2,7 +2,12 @@ package disney.classe;
 
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+
+
 @Entity
+
 public class Admin extends Compte {
 
 	public Admin() {

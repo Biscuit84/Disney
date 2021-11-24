@@ -10,9 +10,12 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "Type_Compte")
+@JsonView(Views.ViewsCommon.class)
 public abstract class Compte  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -12,7 +12,7 @@ import disney.classe.Views.ViewsJoueurPersos;
 
 
 @Entity
-@JsonView(ViewsCommon.class)
+
 public class Joueur extends Compte{
 
 	private String pseudo;

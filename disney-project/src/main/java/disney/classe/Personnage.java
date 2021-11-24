@@ -6,8 +6,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 
 @Entity
+@JsonView(Views.ViewsCommon.class)
 public class Personnage  {
 	
 		
