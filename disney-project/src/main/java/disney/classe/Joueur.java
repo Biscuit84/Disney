@@ -3,11 +3,12 @@ package disney.classe;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import disney.classe.Views.ViewsCommon;
 import disney.classe.Views.ViewsJoueurPersos;
 
 
@@ -28,6 +29,9 @@ public class Joueur extends Compte{
 	@JsonView(Views.ViewsJoueurHistoriques.class)
 	private List<Historique> historiques;
 
+	@ManyToOne
+	@JoinColumn(name="id_partie")
+	private Partie partie;
 
 	//	@OneToMany (mappedBy = "j")
 	//	private List<Partie> listePartie;
