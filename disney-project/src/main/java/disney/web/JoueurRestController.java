@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import disney.classe.Joueur;
 import disney.classe.Views;
+import disney.repo.ICompteRepo;
 import disney.repo.IJoueurRepo;
 
 
@@ -30,6 +31,8 @@ public class JoueurRestController {
 
 	@Autowired
 	private IJoueurRepo joueurRepo;
+	@Autowired
+	private ICompteRepo compteRepo;
 	
 	@GetMapping("")
 	@JsonView(Views.ViewsJoueur.class)
@@ -54,7 +57,7 @@ public class JoueurRestController {
 //	@GetMapping("{id}/historiques")
 //	@JsonView(Views.ViewsJoueurHistoriques.class)
 //	public Joueur findWithHistoriques(@PathVariable Long id) {
-//		Optional<Joueur> optJoueur = joueurRepo.findByIdWithHistorique(id);
+//		Optional<Joueur> optJoueur = compteRepo.findByIdWithHistorique(id);
 //
 //		if (optJoueur.isPresent()) {
 //			return optJoueur.get();
@@ -66,7 +69,7 @@ public class JoueurRestController {
 //	@GetMapping("{id}/persos-obtenus")
 //	@JsonView(Views.ViewsJoueurPersos.class)
 //	public Joueur findWithPersos(@PathVariable Long id) {
-//		Optional<Joueur> optJoueur = joueurRepo.findByIdWithPersos(id);
+//		Optional<Joueur> optJoueur = compteRepo.findByIdWithPersos(id);
 //
 //		if (optJoueur.isPresent()) {
 //			return optJoueur.get();
