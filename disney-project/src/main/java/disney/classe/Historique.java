@@ -1,13 +1,12 @@
 package disney.classe;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Version;
 
 
@@ -29,35 +28,37 @@ public class Historique  {
 	
 	private int nbEtoilesGagnees;
 	
+	private boolean victoire; // victoire = true ça veut dire qu'on a gagné hehe
+	
+	@OneToOne
+	private Partie partie;
 	
 	
-	@OneToMany
-	private List <Partie> parties;
 	
 
 
 	public Historique(Long id, LocalDateTime dateHeureDebutPartie, LocalDateTime dateHeureFinPartie, int positionArrivee,
-			int nbEtoilesGagnees, List<Partie> parties) {
+			int nbEtoilesGagnees, Partie partie) {
 		super();
 		this.id = id;
 		this.dateHeureDebutPartie = dateHeureDebutPartie;
 		this.dateHeureFinPartie = dateHeureFinPartie;
 		this.positionArrivee = positionArrivee;
 		this.nbEtoilesGagnees = nbEtoilesGagnees;
-		this.parties = parties;
+		this.partie = partie;
 	}
 
 	
 
 
 	public Historique(LocalDateTime dateHeureDebutPartie, LocalDateTime dateHeureFinPartie, int positionArrivee, int nbEtoilesGagnees,
-			List<Partie> parties) {
+			Partie partie) {
 		super();
 		this.dateHeureDebutPartie = dateHeureDebutPartie;
 		this.dateHeureFinPartie = dateHeureFinPartie;
 		this.positionArrivee = positionArrivee;
 		this.nbEtoilesGagnees = nbEtoilesGagnees;
-		this.parties = parties;
+		this.partie = partie;
 	}
 
 
@@ -113,18 +114,34 @@ public class Historique  {
 
 
 
-	public List<Partie> getParties() {
-		return parties;
+
+
+
+
+	public int getVersion() {
+		return version;
 	}
 
 
 
 
-
-	public void setParties(List<Partie> parties) {
-		this.parties = parties;
+	public void setVersion(int version) {
+		this.version = version;
 	}
 
+
+
+
+	public Partie getPartie() {
+		return partie;
+	}
+
+
+
+
+	public void setPartie(Partie partie) {
+		this.partie = partie;
+	}
 
 
 
@@ -144,6 +161,15 @@ public class Historique  {
 	
 
 	
+	public boolean isVictoire() {
+		return victoire;
+	}
+
+	public void setVictoire(boolean victoire) {
+		this.victoire = victoire;
+	}
+
+
 	
 	
 
