@@ -31,6 +31,8 @@ public abstract class Compte  {
 	@Column(unique = true)
 	protected String mail;
 	
+	protected String avatar;
+	
 	
 	
 	
@@ -115,6 +117,39 @@ public abstract class Compte  {
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
+
+	
+
+
+	public int getVersion() {
+		return version;
+	}
+
+
+
+
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
+
+
+
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+
+
+
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
+
 
 
 
