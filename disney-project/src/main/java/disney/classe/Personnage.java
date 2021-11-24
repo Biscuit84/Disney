@@ -57,6 +57,14 @@ public class Personnage  {
 	
 
 
+	public Partie getPartie() {
+		return partie;
+	}
+
+	public void setPartie(Partie partie) {
+		this.partie = partie;
+	}
+
 	public CasesPlateau getPosition() {
 		return position;
 	}
