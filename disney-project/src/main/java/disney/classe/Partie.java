@@ -29,10 +29,10 @@ public class Partie {
 	@OneToOne
 	private Plateau plateau;
 		
-	@OneToMany
+	@OneToMany(mappedBy = "partie")
 	private List<Personnage> personnages;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "partie")
 	private List<Joueur> joueursPartie;
 	
     

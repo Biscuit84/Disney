@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonView;
@@ -29,6 +30,10 @@ public class Personnage  {
 	private CasesPlateau position;
 
 	private int prixAchatPerso;
+	
+	@ManyToOne
+	@JoinColumn(name="id_partie")
+	private Partie partie;
 	
 	public Personnage(String nom, String prince, String mechant, String pouvoir) {
 		this.nom = nom;
