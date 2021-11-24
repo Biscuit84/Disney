@@ -81,4 +81,16 @@ public class HistoriqueRestController {
 		
 		historiqueRepo.deleteById(id);
 	}
+	
+	@GetMapping("{id}/joueur")
+	@JsonView(Views.ViewsHistorique.class)
+	public List<Historique> findAllByJoueur(@PathVariable Long id) {
+		List<Historique> historiques = historiqueRepo.findAllByJoueur(id);
+
+		
+			return historiques;
+		
+			
+	}
+	
 }

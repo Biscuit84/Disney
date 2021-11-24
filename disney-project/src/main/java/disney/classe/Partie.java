@@ -6,14 +6,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Version;
+
+import com.fasterxml.jackson.annotation.JsonView;
 
 
 
 
 @Entity
+@JsonView(Views.ViewsCommon.class)
 public class Partie {
 
 	
@@ -26,11 +30,11 @@ public class Partie {
 	@OneToOne
 	private Plateau plateau;
 		
-	@OneToMany
-	private List<Personnage> personnages;
+	@ManyToOne
+	private Personnage personnage;
 	
-	@OneToMany
-	private List<Joueur> joueursPartie;
+	@ManyToOne
+	private Joueur joueurPartie;
 	
     
 		
@@ -38,10 +42,10 @@ public class Partie {
 		
 	}
 	
-	public Partie(Plateau plateau, List<Personnage> personnages) {
+	public Partie(Plateau plateau, Personnage personnage) {
 		super();
 		this.plateau = plateau;
-		this.personnages = personnages;
+		this.personnage = personnage;
 	}
 
 
@@ -92,29 +96,29 @@ public class Partie {
 
 
 
-	public List<Personnage> getPersonnages() {
-		return personnages;
+	public Personnage getPersonnage() {
+		return personnage;
 	}
 
 
 
 
-	public void setPersonnages(List<Personnage> personnages) {
-		this.personnages = personnages;
+	public void setPersonnage(Personnage personnage) {
+		this.personnage = personnage;
 	}
 
 
 
 
-	public List<Joueur> getJoueursPartie() {
-		return joueursPartie;
+	public Joueur getJoueurPartie() {
+		return joueurPartie;
 	}
 
 
 
 
-	public void setJoueursPartie(List<Joueur> joueursPartie) {
-		this.joueursPartie = joueursPartie;
+	public void setJoueurPartie(Joueur joueurPartie) {
+		this.joueurPartie = joueurPartie;
 	}
 
 	

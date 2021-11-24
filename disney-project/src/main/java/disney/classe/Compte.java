@@ -10,9 +10,12 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "Type_Compte")
+@JsonView(Views.ViewsCommon.class)
 public abstract class Compte  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +33,8 @@ public abstract class Compte  {
 	protected String prenom;
 	@Column(unique = true)
 	protected String mail;
+	
+	protected String avatar;
 	
 	
 	
@@ -53,6 +58,15 @@ public abstract class Compte  {
 	public Compte() {
 		
 	}
+
+
+
+	public Compte(String nom, String prenom) {
+		this.nom = nom;
+		this.prenom = prenom;
+	}
+
+
 
 
 
@@ -115,6 +129,39 @@ public abstract class Compte  {
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
+
+	
+
+
+	public int getVersion() {
+		return version;
+	}
+
+
+
+
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
+
+
+
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+
+
+
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
+
 
 
 

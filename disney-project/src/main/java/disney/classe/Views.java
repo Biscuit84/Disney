@@ -22,6 +22,10 @@ public class Views {
 	}
 	public static class ViewsJoueur extends ViewsCommon{
 	}
+	public static class ViewsJoueurHistoriques extends ViewsJoueur{
+	}
+	public static class ViewsJoueurPersos extends ViewsJoueur{
+	}
 	public static class ViewsPartie extends ViewsCommon{
 	}
 	public static class ViewsPersonnage extends ViewsCommon{

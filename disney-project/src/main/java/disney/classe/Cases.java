@@ -12,7 +12,10 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
+@JsonView(Views.ViewsCommon.class)
 public  class Cases {
 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

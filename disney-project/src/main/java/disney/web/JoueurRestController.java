@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import disney.classe.Joueur;
 import disney.classe.Views;
+import disney.repo.ICompteRepo;
 import disney.repo.IJoueurRepo;
 
 
@@ -30,6 +31,8 @@ public class JoueurRestController {
 
 	@Autowired
 	private IJoueurRepo joueurRepo;
+	@Autowired
+	private ICompteRepo compteRepo;
 	
 	@GetMapping("")
 	@JsonView(Views.ViewsJoueur.class)
@@ -47,10 +50,34 @@ public class JoueurRestController {
 		if (optJoueur.isPresent()) {
 			return optJoueur.get();
 		} else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Joueur non trouvé");
 		}
 	}
 
+//	@GetMapping("{id}/historiques")
+//	@JsonView(Views.ViewsJoueurHistoriques.class)
+//	public Joueur findWithHistoriques(@PathVariable Long id) {
+//		Optional<Joueur> optJoueur = compteRepo.findByIdWithHistorique(id);
+//
+//		if (optJoueur.isPresent()) {
+//			return optJoueur.get();
+//		} else {
+//			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Joueur non trouvé");
+//		}
+//	}
+//	
+//	@GetMapping("{id}/persos-obtenus")
+//	@JsonView(Views.ViewsJoueurPersos.class)
+//	public Joueur findWithPersos(@PathVariable Long id) {
+//		Optional<Joueur> optJoueur = compteRepo.findByIdWithPersos(id);
+//
+//		if (optJoueur.isPresent()) {
+//			return optJoueur.get();
+//		} else {
+//			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Joueur non trouvé");
+//		}
+//	}
+	
 
 	@PostMapping("")
 	@JsonView(Views.ViewsJoueur.class)
@@ -64,7 +91,7 @@ public class JoueurRestController {
 	@JsonView(Views.ViewsJoueur.class)
 	public Joueur update(@PathVariable Long id, @RequestBody Joueur joueur) {
 		if (!joueurRepo.existsById(id)) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Joueur non trouvé");
 		}
 
 		joueur = joueurRepo.save(joueur);
@@ -76,7 +103,7 @@ public class JoueurRestController {
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
 		if (!joueurRepo.existsById(id)) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Joueur non trouvé");
 		}
 		
 		joueurRepo.deleteById(id);

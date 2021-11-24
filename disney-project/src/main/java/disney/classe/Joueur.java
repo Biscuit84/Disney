@@ -3,8 +3,18 @@ package disney.classe;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
+import disney.classe.Views.ViewsJoueurPersos;
+
+
 @Entity
+
 public class Joueur extends Compte{
 
 	private String pseudo;
@@ -17,13 +27,18 @@ public class Joueur extends Compte{
 	
 
 	@OneToMany(mappedBy = "joueur")
+	@JsonView(Views.ViewsJoueurHistoriques.class)
 	private List<Historique> historiques;
 
+	@OneToMany(mappedBy = "joueurPartie")
+	private List<Partie> parties;
 
 	//	@OneToMany (mappedBy = "j")
 	//	private List<Partie> listePartie;
 
+	
 	@OneToMany(mappedBy = "joueur")
+	@JsonView(ViewsJoueurPersos.class)
 	List<PersoObtenu> persos;
 
 
@@ -61,6 +76,18 @@ public class Joueur extends Compte{
 
 	}
 	
+	
+	
+	public List<Partie> getParties() {
+		return parties;
+	}
+
+
+	public void setParties(List<Partie> parties) {
+		this.parties = parties;
+	}
+
+
 	public int getNbEtoiles() {
 		return nbEtoiles;
 	}
