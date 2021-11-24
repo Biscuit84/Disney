@@ -1,7 +1,5 @@
 package disney.classe;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -24,7 +22,7 @@ public class Partie {
 	private Long id;
 	@Version
 	private int version;
-	
+
 	@OneToOne
 	private Plateau plateau;
 		
@@ -34,6 +32,7 @@ public class Partie {
 	@OneToMany
 	private List<Joueur> joueursPartie;
 	
+    
 		
 	public Partie() {
 		
@@ -118,6 +117,7 @@ public class Partie {
 		this.joueursPartie = joueursPartie;
 	}
 
+	
 
 
 
