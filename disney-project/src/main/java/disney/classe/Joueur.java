@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -29,9 +30,8 @@ public class Joueur extends Compte{
 	@JsonView(Views.ViewsJoueurHistoriques.class)
 	private List<Historique> historiques;
 
-	@ManyToOne
-	@JoinColumn(name="id_partie")
-	private Partie partie;
+	@OneToMany(mappedBy = "joueurPartie")
+	private List<Partie> parties;
 
 	//	@OneToMany (mappedBy = "j")
 	//	private List<Partie> listePartie;
@@ -76,6 +76,18 @@ public class Joueur extends Compte{
 
 	}
 	
+	
+	
+	public List<Partie> getParties() {
+		return parties;
+	}
+
+
+	public void setParties(List<Partie> parties) {
+		this.parties = parties;
+	}
+
+
 	public int getNbEtoiles() {
 		return nbEtoiles;
 	}
