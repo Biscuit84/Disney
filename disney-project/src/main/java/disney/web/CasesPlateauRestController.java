@@ -1,0 +1,84 @@
+package disney.web;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
+import disney.classe.CasesPlateau;
+import disney.classe.Views;
+import disney.repo.ICasesPlateauRepo;
+
+
+@RestController
+@RequestMapping("/casesplateau")
+@CrossOrigin("*")
+public class CasesPlateauRestController {
+
+	@Autowired
+	private ICasesPlateauRepo casesplateauRepo;
+	
+	@GetMapping("")
+	@JsonView(Views.ViewsCasesPlateau.class)
+	public List<CasesPlateau> findAll() {
+		List<CasesPlateau> casesplateaus = casesplateauRepo.findAll();
+
+		return casesplateaus;
+	}
+
+	@GetMapping("{id}")
+	@JsonView(Views.ViewsCasesPlateau.class)
+	public CasesPlateau find(@PathVariable Long id) {
+		Optional<CasesPlateau> optCasesPlateau = casesplateauRepo.findById(id);
+
+		if (optCasesPlateau.isPresent()) {
+			return optCasesPlateau.get();
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+		}
+	}
+
+
+	@PostMapping("")
+	@JsonView(Views.ViewsCasesPlateau.class)
+	public CasesPlateau create(@RequestBody CasesPlateau casesplateau) {
+		casesplateau = casesplateauRepo.save(casesplateau);
+
+		return casesplateau;
+	}
+
+	@PutMapping("/{id}")
+	@JsonView(Views.ViewsCasesPlateau.class)
+	public CasesPlateau update(@PathVariable Long id, @RequestBody CasesPlateau casesplateau) {
+		if (!casesplateauRepo.existsById(id)) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+		}
+
+		casesplateau = casesplateauRepo.save(casesplateau);
+
+		return casesplateau;
+	}
+
+	
+	@DeleteMapping("/{id}")
+	public void delete(@PathVariable Long id) {
+		if (!casesplateauRepo.existsById(id)) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+		}
+		
+		casesplateauRepo.deleteById(id);
+	}
+}
