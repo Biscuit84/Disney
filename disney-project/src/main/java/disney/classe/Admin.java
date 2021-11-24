@@ -10,7 +10,10 @@ public class Admin extends Compte {
 		// TODO Auto-generated constructor stub
 	}
 
-	
+	public Admin(String nom, String prenom) {
+		super(nom, prenom);
+		// TODO Auto-generated constructor stub
+	}
 	
 
 	public Admin(String login, String password, String nom, String prenom, String mail) {
