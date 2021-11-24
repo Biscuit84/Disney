@@ -1,65 +1,30 @@
 package disney.test;
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import disney.App.AppConfig;
-import disney.classe.Admin;
-import disney.classe.Boutique;
-import disney.classe.Carte;
-import disney.classe.Cases;
-import disney.classe.CasesPlateau;
 import disney.classe.Compte;
-import disney.classe.Historique;
-import disney.classe.Joueur;
-import disney.classe.Partie;
-import disney.classe.PersoObtenu;
-import disney.classe.Personnage;
-import disney.classe.Plateau;
-import disney.classe.TypeCarte;
-import disney.classe.TypeCase;
-import disney.repo.IAdminRepo;
-import disney.repo.IBoutiqueRepo;
-import disney.repo.ICarteRepo;
-import disney.repo.ICasesPlateauRepo;
-import disney.repo.ICasesRepo;
-import disney.repo.ICompteRepo;
-import disney.repo.IHistoriqueRepo;
-import disney.repo.IJoueurRepo;
-import disney.repo.IPartieRepo;
-import disney.repo.IPersoObtenuRepo;
-import disney.repo.IPersonnageRepo;
-import disney.repo.IPlateauRepo;
 
 public class TestMain {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		AnnotationConfigApplicationContext spring = new AnnotationConfigApplicationContext(AppConfig.class);
+//		AnnotationConfigApplicationContext spring = new AnnotationConfigApplicationContext(AppConfig.class);
 		
-		IJoueurRepo joueurRepo= spring.getBean(IJoueurRepo.class);
-		IAdminRepo adminRepo= spring.getBean(IAdminRepo.class);
-		IPersonnageRepo persoRepo= spring.getBean(IPersonnageRepo.class);
-		ICasesRepo casesRepo= spring.getBean(ICasesRepo.class);
-		IBoutiqueRepo boutiqueRepo= spring.getBean(IBoutiqueRepo.class);
-		ICarteRepo carteRepo= spring.getBean(ICarteRepo.class);
-		ICasesPlateauRepo casesPlateauRepo= spring.getBean(ICasesPlateauRepo.class);
-		IHistoriqueRepo historiqueRepo= spring.getBean(IHistoriqueRepo.class);
-		IPartieRepo partieRepo= spring.getBean(IPartieRepo.class);
-		IPersoObtenuRepo persoObtenuRepo= spring.getBean(IPersoObtenuRepo.class);
-		IPlateauRepo plateauRepo= spring.getBean(IPlateauRepo.class);
-		ICompteRepo compteRepo= spring.getBean(ICompteRepo.class);
-		
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("HH:mm");
-		
+//		IJoueurRepo joueurRepo= spring.getBean(IJoueurRepo.class);
+//		IAdminRepo adminRepo= spring.getBean(IAdminRepo.class);
+//		IPersonnageRepo persoRepo= spring.getBean(IPersonnageRepo.class);
+//		ICasesRepo casesRepo= spring.getBean(ICasesRepo.class);
+//		IBoutiqueRepo boutiqueRepo= spring.getBean(IBoutiqueRepo.class);
+//		ICarteRepo carteRepo= spring.getBean(ICarteRepo.class);
+//		ICasesPlateauRepo casesPlateauRepo= spring.getBean(ICasesPlateauRepo.class);
+//		IHistoriqueRepo historiqueRepo= spring.getBean(IHistoriqueRepo.class);
+//		IPartieRepo partieRepo= spring.getBean(IPartieRepo.class);
+//		IPersoObtenuRepo persoObtenuRepo= spring.getBean(IPersoObtenuRepo.class);
+//		IPlateauRepo plateauRepo= spring.getBean(IPlateauRepo.class);
+//		ICompteRepo compteRepo= spring.getBean(ICompteRepo.class);
 //		
+//		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+//		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("HH:mm");
+//		
+////		
 //		//JOUEURS
 //		Joueur joueur1 = new Joueur("joueur1", "1234", "Toto", "Titi", "toto.titi@gmail.com", "TotoTropFort", "noob", 3);
 //		joueur1=joueurRepo.save(joueur1);
