@@ -4,7 +4,15 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
+import disney.classe.Views.ViewsCommon;
+import disney.classe.Views.ViewsJoueurPersos;
+
+
 @Entity
+@JsonView(ViewsCommon.class)
 public class Joueur extends Compte{
 
 	private String pseudo;
@@ -17,13 +25,16 @@ public class Joueur extends Compte{
 	
 
 	@OneToMany(mappedBy = "joueur")
+	@JsonView(Views.ViewsJoueurHistoriques.class)
 	private List<Historique> historiques;
 
 
 	//	@OneToMany (mappedBy = "j")
 	//	private List<Partie> listePartie;
 
+	
 	@OneToMany(mappedBy = "joueur")
+	@JsonView(ViewsJoueurPersos.class)
 	List<PersoObtenu> persos;
 
 
