@@ -19,6 +19,7 @@ public class Boutique {
 	
 
 	@OneToMany
+	@JsonView(Views.ViewsBoutiqueDetail.class)
 	private List<Personnage> personnages = new ArrayList<Personnage>();
 	
 	private int vies; 

@@ -38,6 +38,14 @@ public class BoutiqueRestController {
 
 		return boutiques;
 	}
+	
+	@GetMapping("/detail")
+	@JsonView(Views.ViewsBoutiqueDetail.class)
+	public List<Boutique> findAllWithPersonnages() {
+		List<Boutique> boutiques = boutiqueRepo.findAllWithPersonnages();
+
+		return boutiques;
+	}
 
 	@GetMapping("{id}")
 	@JsonView(Views.ViewsBoutique.class)
@@ -47,7 +55,19 @@ public class BoutiqueRestController {
 		if (optBoutique.isPresent()) {
 			return optBoutique.get();
 		} else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Boutique non trouvée");
+		}
+	}
+	
+	@GetMapping("{id}/detail")
+	@JsonView(Views.ViewsBoutiqueDetail.class)
+	public Boutique findWithDetail(@PathVariable Long id) {
+		Optional<Boutique> optBoutique = boutiqueRepo.findByIdWithPersonnages(id);
+
+		if (optBoutique.isPresent()) {
+			return optBoutique.get();
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Boutique non trouvée");
 		}
 	}
 
@@ -64,7 +84,7 @@ public class BoutiqueRestController {
 	@JsonView(Views.ViewsBoutique.class)
 	public Boutique update(@PathVariable Long id, @RequestBody Boutique boutique) {
 		if (!boutiqueRepo.existsById(id)) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Boutique non trouvée");
 		}
 
 		boutique = boutiqueRepo.save(boutique);
@@ -76,7 +96,7 @@ public class BoutiqueRestController {
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
 		if (!boutiqueRepo.existsById(id)) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Boutique non trouvée");
 		}
 		
 		boutiqueRepo.deleteById(id);
