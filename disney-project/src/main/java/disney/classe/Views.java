@@ -10,6 +10,8 @@ public class Views {
 	}
 	public static class ViewsBoutique extends ViewsCommon{
 	}
+	public static class ViewsBoutiqueDetail extends ViewsCommon{
+	}
 	public static class ViewsCarte extends ViewsCommon{
 	}
 	public static class ViewsCasesPlateau extends ViewsCommon{
