@@ -28,6 +28,7 @@ public class Plateau   {
 	private int nbCases;
 	
 	@OneToMany(mappedBy = "plateau")
+	@JsonView(Views.ViewsPlateauDetail.class)
 	private List<CasesPlateau> cases= new ArrayList<CasesPlateau>();
 	
 	

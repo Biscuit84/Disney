@@ -1,5 +1,7 @@
 package disney.web;
 
+import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,8 +21,11 @@ import org.springframework.web.server.ResponseStatusException;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import disney.classe.Historique;
+import disney.classe.Joueur;
 import disney.classe.PersoObtenu;
+import disney.classe.Personnage;
 import disney.classe.Views;
+import disney.repo.IJoueurRepo;
 import disney.repo.IPersoObtenuRepo;
 
 
@@ -31,9 +36,23 @@ public class PersoObtenuRestController {
 
 	@Autowired
 	private IPersoObtenuRepo persoObtenuRepo;
-	
+
+	@Autowired
+	private IJoueurRepo iJoueurRepo;
+
+	@GetMapping("/detail/{id}")
+	@JsonView(Views.ViewsPersoObtenuDetailJoueur.class)
+	public List<Personnage> findAllPersoObtenuByIdJoueur(@PathVariable Long id) {
+		List<PersoObtenu> persosObtenu = persoObtenuRepo.findAllByJoueur(id);
+		List<Personnage> listPerso = new ArrayList<Personnage>();
+		for(PersoObtenu po : persosObtenu) {
+			listPerso.add(po.getPerso());
+		}
+		return listPerso;
+	}
+
 	@GetMapping("")
-	@JsonView(Views.ViewsPersoObtenu.class)
+	@JsonView(Views.ViewsPersoObtenuDetailJoueur.class)
 	public List<PersoObtenu> findAll() {
 		List<PersoObtenu> persoObtenus = persoObtenuRepo.findAll();
 
@@ -65,8 +84,8 @@ public class PersoObtenuRestController {
 	public List<PersoObtenu> findAllByJoueur(@PathVariable Long id) {
 		List<PersoObtenu> persos = persoObtenuRepo.findAllByJoueur(id);
 
-		
-			return persos;
+
+		return persos;
 	}
 
 	@PutMapping("/{id}")
@@ -81,13 +100,13 @@ public class PersoObtenuRestController {
 		return persoObtenu;
 	}
 
-	
+
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
 		if (!persoObtenuRepo.existsById(id)) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
 		}
-		
+
 		persoObtenuRepo.deleteById(id);
 	}
 }

@@ -2,38 +2,58 @@ package disney.classe;
 
 
 
-public class Views {
+public interface Views {
 	
-	public static class ViewsCommon {
+	public static interface ViewsCommon {
 	}
-	public static class ViewsAdmin extends ViewsCommon{
+	public static interface ViewsAdmin extends ViewsCommon{
 	}
-	public static class ViewsBoutique extends ViewsCommon{
+	public static interface ViewsBoutique extends ViewsCommon{
 	}
-	public static class ViewsBoutiqueDetail extends ViewsCommon{
+	public static interface ViewsBoutiqueDetail extends ViewsCommon{
 	}
-	public static class ViewsCarte extends ViewsCommon{
+	public static interface ViewsCarte extends ViewsCommon{
 	}
-	public static class ViewsCasesPlateau extends ViewsCommon{
+	public static interface ViewsCasesPlateau extends ViewsCommon{
 	}
-	public static class ViewsCases extends ViewsCommon{
+	public static interface CasesPlateauDetail extends ViewsCasesPlateau{
 	}
-	public static class ViewsCompte extends ViewsCommon{
+	
+	public static interface ViewsCases extends ViewsCommon{
 	}
-	public static class ViewsHistorique extends ViewsCommon{
+	public static interface ViewsCompte extends ViewsCommon{
 	}
-	public static class ViewsJoueur extends ViewsCommon{
+	public static interface ViewsHistorique extends ViewsCommon{
 	}
-	public static class ViewsJoueurHistoriques extends ViewsJoueur{
+	public static interface ViewsHistoriqueDetail extends ViewsCommon{
 	}
-	public static class ViewsJoueurPersos extends ViewsJoueur{
+	public static interface ViewsJoueur extends ViewsCommon{
 	}
-	public static class ViewsPartie extends ViewsCommon{
+	public static interface ViewsJoueurHistoriques extends ViewsJoueur{
 	}
-	public static class ViewsPersonnage extends ViewsCommon{
+	public static interface ViewsJoueurPersos extends ViewsJoueur{
 	}
-	public static class ViewsPersoObtenu extends ViewsCommon{
+	public static interface ViewsJoueurParties extends ViewsJoueur{
 	}
-	public static class ViewsPlateau extends ViewsCommon{
+	public static interface ViewsPartie extends ViewsCommon{
+	}
+	public static interface ViewsPartieDetail extends ViewsPartie{
+	}
+
+	public static interface ViewsPersonnage extends ViewsCommon{
+	}
+	public static interface ViewsPersoObtenu extends ViewsCommon{
+	}
+	public static interface ViewsPersoObtenuDetailJoueur extends ViewsCommon{
+	}
+	public static interface ViewsPersoObtenuDetailPerso extends ViewsCommon{
+	}
+	
+	public static interface ViewsJoueurAndPersos extends ViewsPersoObtenuDetailPerso, ViewsJoueurPersos{
+		
+	}
+	public static interface ViewsPlateau extends ViewsCommon{
+	}
+	public static interface ViewsPlateauDetail extends ViewsPlateau{
 	}
 }

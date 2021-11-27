@@ -39,10 +39,22 @@ public class PartieRestController {
 		return parties;
 	}
 
-	@GetMapping("{id}")
+	@GetMapping("/{id}")
 	@JsonView(Views.ViewsPartie.class)
 	public Partie find(@PathVariable Long id) {
 		Optional<Partie> optPartie = partieRepo.findById(id);
+
+		if (optPartie.isPresent()) {
+			return optPartie.get();
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+		}
+	}
+	
+	@GetMapping("/detail/{id}")
+	@JsonView(Views.ViewsPartieDetail.class)
+	public Partie findWithDetail(@PathVariable Long id) {
+		Optional<Partie> optPartie = partieRepo.findByIdAllDetail(id);
 
 		if (optPartie.isPresent()) {
 			return optPartie.get();

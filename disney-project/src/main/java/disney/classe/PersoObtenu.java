@@ -18,9 +18,11 @@ public class PersoObtenu {
 	@GeneratedValue(strategy =GenerationType.IDENTITY)
 	private Long id;
 	@ManyToOne
+	@JsonView(Views.ViewsPersoObtenuDetailPerso.class)
 	private Personnage perso;
 	
 	@ManyToOne
+	@JsonView(Views.ViewsPersoObtenuDetailJoueur.class)
 	private Joueur joueur;
 	
 	@Version
@@ -58,6 +60,16 @@ public class PersoObtenu {
 
 	public void setJoueur(Joueur joueur) {
 		this.joueur = joueur;
+	}
+	
+	
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
 	}
 
 	@Override
