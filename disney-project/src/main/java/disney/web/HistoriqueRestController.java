@@ -38,11 +38,39 @@ public class HistoriqueRestController {
 
 		return historiques;
 	}
+	
+	@GetMapping("/allByJoueur/{id}")
+	@JsonView(Views.ViewsHistorique.class)
+	public List<Historique> findAllByJoueurId(@PathVariable Long id) {
+		List<Historique> historiques = historiqueRepo.findAllByJoueur(id);
 
-	@GetMapping("{id}")
+		return historiques;
+	}
+	
+	@GetMapping("/allWithDetail/{id}")
+	@JsonView(Views.ViewsHistoriqueDetail.class)
+	public List<Historique> findAllWithJoueur() {
+		List<Historique> historiques = historiqueRepo.findAllWithDetail();
+
+		return historiques;
+	}
+
+	@GetMapping("/{id}")
 	@JsonView(Views.ViewsHistorique.class)
 	public Historique find(@PathVariable Long id) {
 		Optional<Historique> optHistorique = historiqueRepo.findById(id);
+
+		if (optHistorique.isPresent()) {
+			return optHistorique.get();
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+		}
+	}
+	
+	@GetMapping("{id}/detail")
+	@JsonView(Views.ViewsHistoriqueDetail.class)
+	public Historique findByIdWithDetail(@PathVariable Long id) {
+		Optional<Historique> optHistorique = historiqueRepo.findByIdWithDetail(id);
 
 		if (optHistorique.isPresent()) {
 			return optHistorique.get();

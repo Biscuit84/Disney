@@ -14,6 +14,6 @@ import disney.classe.Personnage;
 
 public interface IPersoObtenuRepo extends JpaRepository<PersoObtenu,Long> {
 
-	@Query("select h from PersoObtenu h where h.joueur.id = :id")
+	@Query("select h from PersoObtenu h left join fetch h.joueur j where h.joueur.id = :id")
 	List<PersoObtenu> findAllByJoueur(@Param("id") Long id);
 }

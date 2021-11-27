@@ -37,6 +37,7 @@ public class Historique  {
 	@OneToOne
 	private Partie partie;
 	@ManyToOne
+	@JsonView(Views.ViewsHistoriqueDetail.class)
 	private Joueur joueur;
 	
 	

@@ -28,12 +28,15 @@ public class Partie {
 	private int version;
 
 	@OneToOne
+	@JsonView(Views.ViewsPartieDetail.class)
 	private Plateau plateau;
 		
 	@ManyToOne
+	@JsonView(Views.ViewsPartieDetail.class)
 	private Personnage personnage;
 	
 	@ManyToOne
+	@JsonView(Views.ViewsPartieDetail.class)
 	private Joueur joueurPartie;
 	
     
@@ -132,16 +135,5 @@ public class Partie {
 
 
 
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

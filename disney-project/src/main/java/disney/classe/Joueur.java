@@ -31,6 +31,7 @@ public class Joueur extends Compte{
 	private List<Historique> historiques;
 
 	@OneToMany(mappedBy = "joueurPartie")
+	@JsonView(Views.ViewsJoueurParties.class)
 	private List<Partie> parties;
 
 	//	@OneToMany (mappedBy = "j")
@@ -146,7 +147,7 @@ public class Joueur extends Compte{
 	public String toString() {
 		return "Joueur [id=" + id + ", login=" + login + ", password=" + password + ", nom=" + nom + ", prenom="
 				+ prenom + ", mail=" + mail + ", pseudo=" + pseudo + ", level=" + level + ", life=" + life
-				+ ", historique=" + historiques + "]";
+				+ "]";
 	}
 
 

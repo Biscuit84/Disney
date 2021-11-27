@@ -23,11 +23,14 @@ public class CasesPlateau {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idCasePlateau;
 	@ManyToOne
+	@JsonView(Views.CasesPlateauDetail.class)
 	private Plateau plateau;
 	@OneToOne
+	@JsonView(Views.CasesPlateauDetail.class)
 	private Cases uneCase;
 	
 	@OneToMany(mappedBy = "position")
+	@JsonView(Views.CasesPlateauDetail.class)
 	private List<Personnage> joueurs;
 	
 	private int ordreCase;	

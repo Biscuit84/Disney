@@ -13,8 +13,7 @@ public interface ICompteRepo extends JpaRepository<Compte,Long> {
 
 	Compte findByLoginAndPassword(String login, String password);
 	
-//	@Query("select distinct c from Joueur c left join fetch c.historiques h where c.id :id")
-//	Optional<Joueur> findByIdWithHistorique(@Param("id") Long id);
+
 //	
 //	@Query("select distinct j from Joueur j left join fetch j.persos h where j.id :id")
 //	Optional<Joueur> findByIdWithPersos(@Param("id")Long id);

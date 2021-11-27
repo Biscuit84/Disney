@@ -11,9 +11,17 @@ import disney.classe.Carte;
 import disney.classe.Cases;
 import disney.classe.Historique;
 import disney.classe.Joueur;
+import disney.classe.Partie;
 
 public interface IHistoriqueRepo extends JpaRepository<Historique,Long> {
 
 	@Query("select h from Historique h where h.joueur.id = :id")
 	List<Historique> findAllByJoueur(@Param("id") Long id);
+	
+	@Query("select distinct h from Historique h left join fetch h.joueur j")
+	List<Historique> findAllWithDetail();
+	
+	@Query("select distinct h from Historique h left join fetch h.joueur j where h.id = :id")
+	Optional<Historique> findByIdWithDetail(@Param("id") Long id);
+	
 }
