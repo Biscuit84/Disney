@@ -18,9 +18,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import disney.classe.Cases;
-import disney.classe.Views;
-import disney.repo.ICasesRepo;
+import disney.model.Cases;
+import disney.model.Views;
+import disney.repository.ICasesRepo;
 
 
 @RestController

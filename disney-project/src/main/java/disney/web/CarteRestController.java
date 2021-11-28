@@ -18,9 +18,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import disney.classe.Carte;
-import disney.classe.Views;
-import disney.repo.ICarteRepo;
+import disney.model.Carte;
+import disney.model.Views;
+import disney.repository.ICarteRepo;
 
 
 @RestController

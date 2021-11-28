@@ -18,10 +18,10 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import disney.classe.Joueur;
-import disney.classe.Views;
-import disney.repo.ICompteRepo;
-import disney.repo.IJoueurRepo;
+import disney.model.Joueur;
+import disney.model.Views;
+import disney.repository.ICompteRepo;
+import disney.repository.IJoueurRepo;
 
 
 @RestController

@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import disney.classe.Personnage;
-import disney.repo.IPersonnageRepo;
+import disney.model.Personnage;
+import disney.repository.IPersonnageRepo;
 import disney.web.PersoObtenuRestController;
 
 @SpringBootTest

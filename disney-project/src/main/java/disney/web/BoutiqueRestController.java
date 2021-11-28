@@ -18,9 +18,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import disney.classe.Boutique;
-import disney.classe.Views;
-import disney.repo.IBoutiqueRepo;
+import disney.model.Boutique;
+import disney.model.Views;
+import disney.repository.IBoutiqueRepo;
 
 
 @RestController

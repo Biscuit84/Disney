@@ -18,9 +18,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import disney.classe.Historique;
-import disney.classe.Views;
-import disney.repo.IHistoriqueRepo;
+import disney.model.Historique;
+import disney.model.Views;
+import disney.repository.IHistoriqueRepo;
 
 
 @RestController
