@@ -16,16 +16,6 @@ import com.fasterxml.jackson.annotation.JsonView;
 @JsonView(Views.ViewsCommon.class)
 public class Boutique {
 	
-	
-
-	@OneToMany
-	@JsonView(Views.ViewsBoutiqueDetail.class)
-	private List<Personnage> personnages = new ArrayList<Personnage>();
-	
-	private int vies; 
-	
-	private int nbEtoile;
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -33,18 +23,30 @@ public class Boutique {
 	@Version
 	private int version;
 
-	public Boutique(List<Personnage> personnages, int vies, int nbEtoile) {
+	@OneToMany
+	@JsonView(Views.ViewsBoutiqueDetail.class)
+	private List<Personnage> personnages = new ArrayList<Personnage>();
+	
+	@OneToMany
+	private List<Vie> listVies = new ArrayList<>();
+
+	@OneToMany
+	private List<Etoile> listEtoiles = new ArrayList<>();
+	
+
+
+	public Boutique(List<Personnage> personnages, List<Vie>listVies, List<Etoile>listEtoiles) {
 		super();
 		this.personnages = personnages;
-		this.vies = vies;
-		this.nbEtoile = nbEtoile;
+		this.listVies = listVies;
+		this.listEtoiles = listEtoiles;
 	}
 
-	public Boutique(List<Personnage> personnages, int vies, int nbEtoile, Long id, int version) {
+	public Boutique(List<Personnage> personnages, List<Vie>listVies, List<Etoile>listEtoiles, Long id, int version) {
 		super();
 		this.personnages = personnages;
-		this.vies = vies;
-		this.nbEtoile = nbEtoile;
+		this.listVies = listVies;
+		this.listEtoiles = listEtoiles;
 		this.id = id;
 		this.version = version;
 	}
@@ -61,20 +63,22 @@ public class Boutique {
 		this.personnages = personnages;
 	}
 
-	public int getVies() {
-		return vies;
+
+
+	public List<Vie> getListVies() {
+		return listVies;
 	}
 
-	public void setVies(int vies) {
-		this.vies = vies;
+	public void setListVies(List<Vie> listVies) {
+		this.listVies = listVies;
 	}
 
-	public int getNbEtoile() {
-		return nbEtoile;
+	public List<Etoile> getListEtoiles() {
+		return listEtoiles;
 	}
 
-	public void setNbEtoile(int nbEtoile) {
-		this.nbEtoile = nbEtoile;
+	public void setListEtoiles(List<Etoile> listEtoiles) {
+		this.listEtoiles = listEtoiles;
 	}
 
 	public Long getId() {
@@ -95,9 +99,11 @@ public class Boutique {
 
 	@Override
 	public String toString() {
-		return "Boutique [personnages=" + personnages + ", vies=" + vies + ", nbEtoile=" + nbEtoile + ", id=" + id
-				+ ", version=" + version + "]";
+		return "Boutique [id=" + id + ", version=" + version + ", personnages=" + personnages + ", listVies=" + listVies
+				+ ", listEtoiles=" + listEtoiles + "]";
 	}
+
+
 	
 	
 	

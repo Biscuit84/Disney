@@ -10,12 +10,14 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import disney.model.Admin;
 import disney.model.Boutique;
 import disney.model.Carte;
 import disney.model.Cases;
 import disney.model.CasesPlateau;
+import disney.model.Etoile;
 import disney.model.Historique;
 import disney.model.Joueur;
 import disney.model.Partie;
@@ -24,20 +26,21 @@ import disney.model.Personnage;
 import disney.model.Plateau;
 import disney.model.TypeCarte;
 import disney.model.TypeCase;
+import disney.model.Vie;
 import disney.repository.IAdminRepo;
 import disney.repository.IBoutiqueRepo;
 import disney.repository.ICarteRepo;
 import disney.repository.ICasesPlateauRepo;
 import disney.repository.ICasesRepo;
 import disney.repository.ICompteRepo;
+import disney.repository.IEtoileRepo;
 import disney.repository.IHistoriqueRepo;
 import disney.repository.IJoueurRepo;
 import disney.repository.IPartieRepo;
 import disney.repository.IPersoObtenuRepo;
 import disney.repository.IPersonnageRepo;
 import disney.repository.IPlateauRepo;
-
-import org.springframework.boot.test.context.SpringBootTest;
+import disney.repository.IVieRepo;
 
 @SpringBootTest
 class TestMain {
@@ -71,6 +74,10 @@ class TestMain {
 		IPlateauRepo plateauRepo;
 		@Autowired
 		ICompteRepo compteRepo;
+		@Autowired
+		IVieRepo vieRepo;
+		@Autowired
+		IEtoileRepo etoilesRepo;
 
 		
 //		
@@ -85,14 +92,20 @@ class TestMain {
 		joueur1=joueurRepo.save(joueur1);
 		Joueur joueur2 = new Joueur("joueur2", "password", "Tartanpion", "Tintin", "Tart.tintin@gmail.com", "TintinTheBest", "champion", 3);
 		joueur2=joueurRepo.save(joueur2);
+		Joueur joueur3 = new Joueur("joueur3", "1234", "j3", "Titi", "j3@gmail.com", "TotoTropFort", "noob", 3);
+		joueur3.setNbEtoiles(1000);
+		joueur3 = joueurRepo.save(joueur3);
+		
 		
 		List <Joueur>listeJoueurs = new ArrayList<Joueur>();
 		listeJoueurs.add(joueur1);
 		listeJoueurs.add(joueur2);
+		listeJoueurs.add(joueur3);
 		
 		Set <Joueur>listeJoueursPartie = new HashSet<Joueur>();
 		listeJoueursPartie.add(joueur1);
 		listeJoueursPartie.add(joueur2);
+		listeJoueursPartie.add(joueur3);
 		
 		//ADMIN
 		Admin admin1 = new Admin("admin1", "987654321", "admin1", "admin1","admin1@gmail.com");
@@ -101,10 +114,10 @@ class TestMain {
 		admin2=adminRepo.save(admin2);
 		
 		//Personnages
-		Personnage perso1 = new Personnage("Elsa", "Olaf", "Hans", "Glace");
-		Personnage perso2 = new Personnage("Ariel", "Eric", "Ursula", "Eau");
-		Personnage perso3 = new Personnage("Jasmine", "Aladdin", "Jafar", "feu");
-		Personnage perso4 = new Personnage("Mulan", "Amoureux", "Atila", "terre");
+		Personnage perso1 = new Personnage("Elsa", "Olaf", "Hans", "Glace",100);
+		Personnage perso2 = new Personnage("Ariel", "Eric", "Ursula", "Eau",200);
+		Personnage perso3 = new Personnage("Jasmine", "Aladdin", "Jafar", "feu",300);
+		Personnage perso4 = new Personnage("Mulan", "Amoureux", "Atila", "terre",400);
 		
 		List<Personnage> listeTotalePerso = new ArrayList<> ();
 		listeTotalePerso.add(perso1);
@@ -142,8 +155,21 @@ class TestMain {
 		casePioche = casesRepo.save(casePioche);
 		
 		//BOUTIQUE
-		Boutique boutique = new Boutique(listeTotalePerso, 2, 2);
-		
+		final List<Vie> listeTotaleVie = new ArrayList<>();
+		listeTotaleVie.add(new Vie(1, 100));
+		listeTotaleVie.add(new Vie(3, 275));
+		listeTotaleVie.add(new Vie(5, 400));
+		listeTotaleVie.add(new Vie(10, 750));
+		vieRepo.saveAll(listeTotaleVie);
+
+		final List<Etoile> listeTotaleEtoiles = new ArrayList<>();
+		listeTotaleEtoiles.add(new Etoile(100, 5));
+		listeTotaleEtoiles.add(new Etoile(300, 13));
+		listeTotaleEtoiles.add(new Etoile(500, 22));
+		listeTotaleEtoiles.add(new Etoile(1000, 40));
+		etoilesRepo.saveAll(listeTotaleEtoiles);
+
+		Boutique boutique = new Boutique(listeTotalePerso, listeTotaleVie, listeTotaleEtoiles);
 		boutique = boutiqueRepo.save(boutique);
 		
 		//Cartes
