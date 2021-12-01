@@ -20,11 +20,13 @@ import org.springframework.web.server.ResponseStatusException;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import disney.dto.BoutiqueDto;
+import disney.dto.BoutiqueEtoileDto;
 import disney.dto.BoutiquePersoAndLifeDto;
 import disney.dto.PersonnageDto;
 import disney.model.Admin;
 import disney.model.Boutique;
 import disney.model.Compte;
+import disney.model.Etoile;
 import disney.model.Joueur;
 import disney.model.PersoObtenu;
 import disney.model.Personnage;
@@ -32,6 +34,7 @@ import disney.model.Vie;
 import disney.model.Views;
 import disney.repository.IBoutiqueRepo;
 import disney.repository.ICompteRepo;
+import disney.repository.IEtoileRepo;
 import disney.repository.IJoueurRepo;
 import disney.repository.IPersoObtenuRepo;
 import disney.repository.IPersonnageRepo;
@@ -54,6 +57,9 @@ public class BoutiqueRestController {
 
 	@Autowired
 	private IVieRepo vieRepo;
+
+	@Autowired
+	private IEtoileRepo etoileRepo;
 
 	@Autowired
 	private IPersonnageRepo persoRepo;
@@ -154,6 +160,13 @@ public class BoutiqueRestController {
 		}
 	}
 
+
+	/**
+	 * Achat des items de la boutique avec des etoiles
+	 * @param idJoueur
+	 * @param bpalDto
+	 * @return boutiquePoueJoueur si joueur et non null
+	 */
 	@PutMapping("/{idJoueur}")
 	@JsonView(Views.ViewsBoutique.class)
 	public BoutiqueDto achatPersoAndLife(@PathVariable Long idJoueur, @RequestBody BoutiquePersoAndLifeDto bpalDto) {
@@ -211,6 +224,46 @@ public class BoutiqueRestController {
 				joueurRepo.save(joueur);
 				return boutiquePourJoueur(idJoueur);
 			}
+
+		} else {
+			// TODO REMONTER CETTE ERREUR AU FRONT
+			System.out.println("je ne suis ni admin, ni joueur... qui suis-je ?!");
+		}
+		return null;
+	}
+
+
+
+	/**
+	 * pas de validation car vrai argent
+		TODO: faire une vraie validation du panier
+	 * @param idJoueur
+	 * @return
+	 */
+	@PutMapping("/{idJoueur}/etoiles")
+	@JsonView(Views.ViewsBoutique.class)
+	public BoutiqueDto achatEtoiles(@PathVariable Long idJoueur, @RequestBody BoutiqueEtoileDto boutiqueEtoileDto) {
+		Compte compte = compteRepo.findById(idJoueur).get();
+
+		if (compte instanceof Admin) {
+			System.out.println("un admin ne peut pas acheter dans la boutique, il fait juste de l'administration");
+			return null;
+		} else if (compte instanceof Joueur) {
+			Joueur joueur = (Joueur) compte;
+			// on recupere l'argent du joueur + calcul du montant du panier
+			int joueurNbEtoiles = joueur.getNbEtoiles();
+			int totalPanier = 0;
+
+
+			// pour chaque etoiles dans le panier ==> chercher en base la table etoile pour ajouter le prix au montant total
+			for (Long idEtoile : boutiqueEtoileDto.getIdEtoile()) {
+				Etoile etoile = etoileRepo.findById(idEtoile).get();
+				//valider l'achat:
+				joueur.setNbEtoiles(joueur.getNbEtoiles()+etoile.getNombre());
+			}
+
+			joueur=joueurRepo.save(joueur);
+			return boutiquePourJoueur(idJoueur);
 
 		} else {
 			// TODO REMONTER CETTE ERREUR AU FRONT
