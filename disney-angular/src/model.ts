@@ -229,30 +229,35 @@ export class CasesPlateau {
 export class Personnage {
     id: number;
     version: number;
+    nom: string;
     prince:string;
     mechant:string;
     pouvoir:string;
     position:CasesPlateau;
     prixAchatPerso:number;
-
+    avatar:string;
 
 
   constructor(
     id?: number, 
     version?: number, 
+    nom?:string,
     prince?: string, 
     mechant?: string, 
     pouvoir?: string, 
     position?: CasesPlateau, 
-    prixAchatPerso?: number
+    prixAchatPerso?: number,
+    avatar?:string
 ) {
     this.id = id
     this.version = version
+    this.nom=nom
     this.prince = prince
     this.mechant = mechant
     this.pouvoir = pouvoir
     this.position = position
     this.prixAchatPerso = prixAchatPerso
+    this.avatar=avatar
   }
 
 

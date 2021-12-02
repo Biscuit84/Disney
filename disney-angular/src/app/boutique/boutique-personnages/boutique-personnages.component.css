@@ -186,6 +186,25 @@
   }
   
 
+  /* *********************************************body********************************************** */
+
+.titrePage {
+  text-align: center;
+  color: rgb(41, 37, 66);
+  font-size: 4em;
+  font-family: 'Devonshire', cursive;
+  z-index: 1;
+}
+
+.dropdown-toggle::after {
+  content: none !important;
+}
+
+.achat {
+  display: flex;
+  justify-content: center;
+}
+
   /* pour ajuster le menu avatars à droite de la page: */
 
 .dropdown-pull-right {

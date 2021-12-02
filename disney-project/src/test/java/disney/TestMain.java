@@ -118,6 +118,10 @@ class TestMain {
 		Personnage perso2 = new Personnage("Ariel", "Eric", "Ursula", "Eau",200);
 		Personnage perso3 = new Personnage("Jasmine", "Aladdin", "Jafar", "feu",300);
 		Personnage perso4 = new Personnage("Mulan", "Amoureux", "Atila", "terre",400);
+		perso1.setAvatar("../../assets/images/persoBoutique/elsa.jpg");
+		perso2.setAvatar("../../assets/images/persoBoutique/arel.jpg");
+		perso3.setAvatar("../../assets/images/persoBoutique/jasmine.jpg");
+		perso4.setAvatar("../../assets/images/persoBoutique/mulan.jpg");;
 		
 		List<Personnage> listeTotalePerso = new ArrayList<> ();
 		listeTotalePerso.add(perso1);

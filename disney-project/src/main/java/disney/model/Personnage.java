@@ -31,6 +31,8 @@ public class Personnage  {
 
 	private int prixAchatPerso;
 	
+	private String avatar;
+	
 	@ManyToOne
 	@JoinColumn(name="id_partie")
 	@JsonView(Views.ViewsPersonnageDetail.class)
@@ -57,6 +59,14 @@ public class Personnage  {
 
 	
 
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
 
 	public Partie getPartie() {
 		return partie;
