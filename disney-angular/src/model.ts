@@ -7,8 +7,9 @@ export class Compte {
     nom: string;
     prenom:string;
     mail:string;
+    role:string;
 
-    constructor(id?: number, version?: number, login?:string, password?: string, nom?: string,prenom?:string, mail?:string) {
+    constructor(id?: number, version?: number, login?:string, password?: string, nom?: string,prenom?:string, mail?:string,role?:string) {
         this.id = id;
         this.version = version;
         this.login=login;
@@ -16,6 +17,7 @@ export class Compte {
         this.nom=nom;
         this.prenom=prenom;
         this.mail=mail;
+        this.role=role
 
     }
 }
@@ -275,5 +277,19 @@ export class PersoObtenu {
     this.joueur = joueur
   }
 
+}
+export class ConnexionDTO {
+    mail: string;
+    password: string;
+
+  constructor(
+   mail?:string,
+   password?:string
+) {
+    this.mail=mail
+    this.password=password
+  }
+
+    
 }
 

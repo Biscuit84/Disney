@@ -22,6 +22,8 @@ import disney.model.Compte;
 import disney.model.Views;
 import disney.repository.ICompteRepo;
 
+import disney.dto.ConnexionDTO;
+
 
 @RestController
 @RequestMapping("/compte")
@@ -80,5 +82,16 @@ public class CompteRestController {
 		}
 		
 		compteRepo.deleteById(id);
+	}
+	@PostMapping("/connexion")
+	@JsonView(Views.ViewsCompte.class)
+	public Compte connexion(@RequestBody ConnexionDTO connexion) {
+		Optional<Compte> optCompte = compteRepo.findByMailAndPassword(connexion.getMail(), connexion.getPassword());
+
+		if (optCompte.isPresent()) {
+			return optCompte.get();
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Compte non trouvé");
+		}
 	}
 }

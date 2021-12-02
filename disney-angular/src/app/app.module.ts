@@ -20,6 +20,7 @@ import { FormsModule } from '@angular/forms';
 import { BoutiquePersonnagesComponent } from './boutique/boutique-personnages/boutique-personnages.component';
 import { GestionComponent } from './Gestion/gestion.component';
 import { PlateauComponent } from './Gestion/plateau/plateau.component';
+import { PageConnexionService } from './page-connexion/page-connexion.service';
 
 
 
@@ -48,7 +49,7 @@ import { PlateauComponent } from './Gestion/plateau/plateau.component';
     HttpClientModule
    
   ],
-  providers: [],
+  providers: [PageConnexionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
