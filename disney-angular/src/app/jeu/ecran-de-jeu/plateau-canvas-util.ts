@@ -67,7 +67,3 @@ export class pionPlayer {
 }
 
 
-export class CasesFRONT {
-
-  
-}
