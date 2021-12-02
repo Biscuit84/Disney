@@ -28,7 +28,7 @@ import javassist.expr.Instanceof;
 @JsonTypeInfo(
 		use = JsonTypeInfo.Id.NAME,
 		include = JsonTypeInfo.As.PROPERTY,
-		property = "type")
+		property = "role")
 @JsonSubTypes({
 	@Type(value=Joueur.class, name="joueur"),
 	@Type(value=Admin.class, name="admin")

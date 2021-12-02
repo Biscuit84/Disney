@@ -10,7 +10,7 @@ import { PageConnexionService } from './page-connexion/page-connexion.service';
 export class AppComponent {
   title = 'AngularDisney';
   
-  constructor(public pageConnexionService: PageConnexionService,){
+  constructor(public pageConnexionService: PageConnexionService){
    
   }
  

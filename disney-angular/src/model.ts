@@ -7,9 +7,9 @@ export class Compte {
     nom: string;
     prenom:string;
     mail:string;
-    type:string;
+    role:string;
 
-    constructor(id?: number, version?: number, login?:string, password?: string, nom?: string,prenom?:string, mail?:string,type?:string) {
+    constructor(id?: number, version?: number, login?:string, password?: string, nom?: string,prenom?:string, mail?:string,role?:string) {
         this.id = id;
         this.version = version;
         this.login=login;
@@ -17,7 +17,7 @@ export class Compte {
         this.nom=nom;
         this.prenom=prenom;
         this.mail=mail;
-        this.type=type
+        this.role=role
 
     }
 }

@@ -23,4 +23,12 @@ export class PageConnexionService {
   deconnexion() {
     this.compte = null;
   }
+
+  isJoueur(): boolean {
+    return this.compte?.role=='joueur';
+  }
+
+  isAdmin(): boolean {
+    return this.compte?.role=='admin';
+  }
 }
