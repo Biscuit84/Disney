@@ -13,6 +13,10 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import javassist.expr.Instanceof;
@@ -21,6 +25,14 @@ import javassist.expr.Instanceof;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "Type_Compte")
 @JsonView(Views.ViewsCommon.class)
+@JsonTypeInfo(
+		use = JsonTypeInfo.Id.NAME,
+		include = JsonTypeInfo.As.PROPERTY,
+		property = "type")
+@JsonSubTypes({
+	@Type(value=Joueur.class, name="joueur"),
+	@Type(value=Admin.class, name="admin")
+})
 public abstract class Compte  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

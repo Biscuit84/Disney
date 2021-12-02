@@ -2,44 +2,84 @@
 
 <div id="ecran-boutique">
     <body>
-<!--//////////////////////////MAIN////////////////////////-->
-<main>
+<!-- //////////////////////////MAIN////////////////////////-->
+<main class="d-flex justify-content-around">
 
 
     <div class="card containerCard" id="ecranconnec">
-      <div class="card-body">
 
-        <div class="row row-cols-1 row-cols-md-4 g-4">
-          <div class="col">
-            <div class="card h-100 itemsBoutique">
-              <img src="../../assets/images/Disney_Princesses_Selfie.jpg" class="card-img-top" alt="...">
+  
+    </div> -->
+
+   <div class="card containerCard" id="ecranconnec">
+
+        <!-- <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                  Accordion Item #1
+                </button>
+              </h2>
+              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                  Accordion Item #2
+                </button>
+              </h2>
+              <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                  Accordion Item #3
+                </button>
+              </h2>
+              <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+              </div>
+            </div>
+       </div>  -->
+     <div class="card-body">
+
+        <div class="d-flex flex-column bd-highlight mb-3">
+          <div>
+            <div class="card h-50 itemsBoutique">
+                <div class ="image_Boutique" >
+              <img  src="../../assets/images/Disney_Princesses_Selfie.jpg" class="card-img-top" alt="...">
+            </div>
               <div class="card-body">
-                <h5 class="card-title"> <a [routerLink]="['/boutique/personnages']" routerLinkActive="active">Achat des personnages</a></h5>
+                <h5 class="card-title"> <a class="lienBoutiques" [routerLink]="['/boutique/personnages']" routerLinkActive="active">Achat des personnages</a></h5>
                 <p class="card-text">Variez les plaisirs en changeant de personnage</p>
               </div>
             </div>
           </div>
-          <div class="col">
-            <div class="card h-100 itemsBoutique">
-              <img src="../../assets/images/boutique/stars.jpg" class="card-img-top" alt="...">
+          <div>
+            <div class="card h-50 itemsBoutique">
+              <img class ="image_Boutique"  src="../../assets/images/boutique/stars.jpg" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title"><a class="lienBoutiques" href="BoutiqueAchatPersonnagesDynamique.html">Achat d'Etoiles</a></h5>
                 <p class="card-text">This is a short card.</p>
               </div>
             </div>
           </div>
-          <div class="col">
-            <div class="card h-100 itemsBoutique">
-              <img src="../../assets/images/boutique/Rose_enchantee_480x480.gif" class="card-img-top" alt="...">
+          <div>
+            <div class="card h-50 itemsBoutique">
+              <img class ="image_Boutique" src="../../assets/images/boutique/Rose_enchantee_480x480.gif" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title"><a class="lienBoutiques" href="BoutiqueAchatPersonnagesDynamique.html">Achat de vies</a></h5>
                 <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
               </div>
             </div>
           </div>
-          <div class="col">
-            <div class="card h-100 itemsBoutique">
-              <img src="../../assets/images/boutique/magie_disney.jpg" class="card-img-top" alt="...">
+          <div>
+            <div class="card h-50 itemsBoutique">
+              <img class ="image_Boutique"  src="../../assets/images/boutique/magie_disney.jpg" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title"><a class="lienBoutiques" href="BoutiqueAchatPersonnagesDynamique.html">Achat de plateaux</a></h5>
                 <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
@@ -58,7 +98,7 @@
    
 
 
-  </main>
+ </main> 
 
 
 
