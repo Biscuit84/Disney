@@ -35,7 +35,7 @@ justify-content: center;
 }
 
 #ecranconnec{
-width:80rem;
+width:45%;
 display:flex;
 justify-content:center;
 align-items:center;
@@ -49,4 +49,8 @@ margin-top: 1rem;
 .itemsBoutique{
   background-color: aliceblue;
   border-radius: 5px;
+}
+
+.image_Boutique{
+  height: fit-content;
 }
