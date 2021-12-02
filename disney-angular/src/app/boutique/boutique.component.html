@@ -1,10 +1,68 @@
 
+
 <div id="ecran-boutique">
-    <p>boutique works!</p>
-    <a [routerLink]="['/boutique/personnages']" routerLinkActive="active">
-        <button id="boutonBoutiquePersonnages" type="button" class="btn btn-success bouton" >Boutique des personnages </button></a>
+    <body>
+<!--//////////////////////////MAIN////////////////////////-->
+<main>
+
+
+    <div class="card containerCard" id="ecranconnec">
+      <div class="card-body">
+
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+          <div class="col">
+            <div class="card h-100 itemsBoutique">
+              <img src="../../assets/images/Disney_Princesses_Selfie.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title"> <a [routerLink]="['/boutique/personnages']" routerLinkActive="active">Achat des personnages</a></h5>
+                <p class="card-text">Variez les plaisirs en changeant de personnage</p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card h-100 itemsBoutique">
+              <img src="../../assets/images/boutique/stars.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title"><a class="lienBoutiques" href="BoutiqueAchatPersonnagesDynamique.html">Achat d'Etoiles</a></h5>
+                <p class="card-text">This is a short card.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card h-100 itemsBoutique">
+              <img src="../../assets/images/boutique/Rose_enchantee_480x480.gif" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title"><a class="lienBoutiques" href="BoutiqueAchatPersonnagesDynamique.html">Achat de vies</a></h5>
+                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card h-100 itemsBoutique">
+              <img src="../../assets/images/boutique/magie_disney.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title"><a class="lienBoutiques" href="BoutiqueAchatPersonnagesDynamique.html">Achat de plateaux</a></h5>
+                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
 
 
 
+
+   
+
+
+  </main>
+
+
+
+  <!--//////////////////////////FOOTER////////////////////////-->
+  <footer></footer>
+</body>
 </div>
-    
