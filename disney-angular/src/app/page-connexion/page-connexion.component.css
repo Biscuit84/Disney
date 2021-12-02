@@ -10,7 +10,7 @@
     width:100%;
     height:100%;
     margin: 0px;
-    background-image: url(../asset/img/princess.png);
+    background-image: url(../../assets/images/princess.png);
     background-repeat:no-repeat;
     background-attachment: fixed;
     background-size: cover;
