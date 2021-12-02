@@ -4,38 +4,43 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import disney.classe.Admin;
-import disney.classe.Boutique;
-import disney.classe.Carte;
-import disney.classe.Cases;
-import disney.classe.CasesPlateau;
-import disney.classe.Historique;
-import disney.classe.Joueur;
-import disney.classe.Partie;
-import disney.classe.PersoObtenu;
-import disney.classe.Personnage;
-import disney.classe.Plateau;
-import disney.classe.TypeCarte;
-import disney.classe.TypeCase;
-import disney.repo.IAdminRepo;
-import disney.repo.IBoutiqueRepo;
-import disney.repo.ICarteRepo;
-import disney.repo.ICasesPlateauRepo;
-import disney.repo.ICasesRepo;
-import disney.repo.ICompteRepo;
-import disney.repo.IHistoriqueRepo;
-import disney.repo.IJoueurRepo;
-import disney.repo.IPartieRepo;
-import disney.repo.IPersoObtenuRepo;
-import disney.repo.IPersonnageRepo;
-import disney.repo.IPlateauRepo;
-
 import org.springframework.boot.test.context.SpringBootTest;
+
+import disney.model.Admin;
+import disney.model.Boutique;
+import disney.model.Carte;
+import disney.model.Cases;
+import disney.model.CasesPlateau;
+import disney.model.Etoile;
+import disney.model.Historique;
+import disney.model.Joueur;
+import disney.model.Partie;
+import disney.model.PersoObtenu;
+import disney.model.Personnage;
+import disney.model.Plateau;
+import disney.model.TypeCarte;
+import disney.model.TypeCase;
+import disney.model.Vie;
+import disney.repository.IAdminRepo;
+import disney.repository.IBoutiqueRepo;
+import disney.repository.ICarteRepo;
+import disney.repository.ICasesPlateauRepo;
+import disney.repository.ICasesRepo;
+import disney.repository.ICompteRepo;
+import disney.repository.IEtoileRepo;
+import disney.repository.IHistoriqueRepo;
+import disney.repository.IJoueurRepo;
+import disney.repository.IPartieRepo;
+import disney.repository.IPersoObtenuRepo;
+import disney.repository.IPersonnageRepo;
+import disney.repository.IPlateauRepo;
+import disney.repository.IVieRepo;
 
 @SpringBootTest
 class TestMain {
@@ -69,6 +74,10 @@ class TestMain {
 		IPlateauRepo plateauRepo;
 		@Autowired
 		ICompteRepo compteRepo;
+		@Autowired
+		IVieRepo vieRepo;
+		@Autowired
+		IEtoileRepo etoilesRepo;
 
 		
 //		
@@ -83,10 +92,20 @@ class TestMain {
 		joueur1=joueurRepo.save(joueur1);
 		Joueur joueur2 = new Joueur("joueur2", "password", "Tartanpion", "Tintin", "Tart.tintin@gmail.com", "TintinTheBest", "champion", 3);
 		joueur2=joueurRepo.save(joueur2);
+		Joueur joueur3 = new Joueur("joueur3", "1234", "j3", "Titi", "j3@gmail.com", "TotoTropFort", "noob", 3);
+		joueur3.setNbEtoiles(1000);
+		joueur3 = joueurRepo.save(joueur3);
+		
 		
 		List <Joueur>listeJoueurs = new ArrayList<Joueur>();
 		listeJoueurs.add(joueur1);
 		listeJoueurs.add(joueur2);
+		listeJoueurs.add(joueur3);
+		
+		Set <Joueur>listeJoueursPartie = new HashSet<Joueur>();
+		listeJoueursPartie.add(joueur1);
+		listeJoueursPartie.add(joueur2);
+		listeJoueursPartie.add(joueur3);
 		
 		//ADMIN
 		Admin admin1 = new Admin("admin1", "987654321", "admin1", "admin1","admin1@gmail.com");
@@ -95,15 +114,25 @@ class TestMain {
 		admin2=adminRepo.save(admin2);
 		
 		//Personnages
-		Personnage perso1 = new Personnage("Elsa", "Olaf", "Hans", "Glace");
-		Personnage perso2 = new Personnage("Ariel", "Eric", "Ursula", "Eau");
+		Personnage perso1 = new Personnage("Elsa", "Olaf", "Hans", "Glace",100);
+		Personnage perso2 = new Personnage("Ariel", "Eric", "Ursula", "Eau",200);
+		Personnage perso3 = new Personnage("Jasmine", "Aladdin", "Jafar", "feu",300);
+		Personnage perso4 = new Personnage("Mulan", "Amoureux", "Atila", "terre",400);
 		
-		List<Personnage> listeTotalePerso = new ArrayList ();
+		List<Personnage> listeTotalePerso = new ArrayList<> ();
 		listeTotalePerso.add(perso1);
 		listeTotalePerso.add(perso2);
+		listeTotalePerso.add(perso3);
+		listeTotalePerso.add(perso4);
+		
+		Set<Personnage> listePersoPartie = new HashSet<>();
+		listePersoPartie.add(perso2);
+		listePersoPartie.add(perso1);
 		
 		perso1=persoRepo.save(perso1);
 		perso2=persoRepo.save(perso2);
+		perso3=persoRepo.save(perso3);
+		perso4=persoRepo.save(perso4);
 		
 		//Cases
 		Cases caseMechant = new Cases("Mechant",TypeCase.mechant);
@@ -126,8 +155,21 @@ class TestMain {
 		casePioche = casesRepo.save(casePioche);
 		
 		//BOUTIQUE
-		Boutique boutique = new Boutique(listeTotalePerso, 2, 2);
-		
+		final List<Vie> listeTotaleVie = new ArrayList<>();
+		listeTotaleVie.add(new Vie(1, 100));
+		listeTotaleVie.add(new Vie(3, 275));
+		listeTotaleVie.add(new Vie(5, 400));
+		listeTotaleVie.add(new Vie(10, 750));
+		vieRepo.saveAll(listeTotaleVie);
+
+		final List<Etoile> listeTotaleEtoiles = new ArrayList<>();
+		listeTotaleEtoiles.add(new Etoile(100, 5));
+		listeTotaleEtoiles.add(new Etoile(300, 13));
+		listeTotaleEtoiles.add(new Etoile(500, 22));
+		listeTotaleEtoiles.add(new Etoile(1000, 40));
+		etoilesRepo.saveAll(listeTotaleEtoiles);
+
+		Boutique boutique = new Boutique(listeTotalePerso, listeTotaleVie, listeTotaleEtoiles);
 		boutique = boutiqueRepo.save(boutique);
 		
 		//Cartes
@@ -215,8 +257,8 @@ class TestMain {
 		plateau1=plateauRepo.save(plateau1);
 		
 		//Partie
-		Partie partie1 = new Partie(plateau1,perso1);
-		partie1.setJoueurPartie(joueur1);
+		Partie partie1 = new Partie(plateau1,listeTotalePerso);
+		partie1.setJoueurs(listeJoueurs);
 		partie1=partieRepo.save(partie1);
 		
 		//HISTORIQUE
@@ -237,10 +279,18 @@ class TestMain {
 		
 		PersoObtenu perso1ObtenuJoueur2 = new PersoObtenu(perso2, joueur2);
 		PersoObtenu perso2ObtenuJoueur2 = new PersoObtenu(perso1, joueur2);
+		PersoObtenu perso3ObtenuJoueur2 = new PersoObtenu(perso3, joueur2);
+		PersoObtenu perso4ObtenuJoueur2 = new PersoObtenu(perso4, joueur2);
 		PersoObtenu perso1ObtenuJoueur1 = new PersoObtenu (perso1, joueur1);
+		PersoObtenu perso2ObtenuJoueur1 = new PersoObtenu (perso2, joueur1);
+		
 		perso1ObtenuJoueur2=persoObtenuRepo.save(perso1ObtenuJoueur2);
 		perso2ObtenuJoueur2=persoObtenuRepo.save(perso2ObtenuJoueur2);
+		perso3ObtenuJoueur2=persoObtenuRepo.save(perso3ObtenuJoueur2);
+		perso4ObtenuJoueur2=persoObtenuRepo.save(perso4ObtenuJoueur2);
+		
 		perso1ObtenuJoueur1=persoObtenuRepo.save(perso1ObtenuJoueur1);
+		perso2ObtenuJoueur1=persoObtenuRepo.save(perso2ObtenuJoueur1);
 		
 		}
 		

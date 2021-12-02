@@ -18,9 +18,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import disney.classe.CasesPlateau;
-import disney.classe.Views;
-import disney.repo.ICasesPlateauRepo;
+import disney.model.CasesPlateau;
+import disney.model.Views;
+import disney.repository.ICasesPlateauRepo;
 
 
 @RestController
@@ -38,10 +38,31 @@ public class CasesPlateauRestController {
 
 		return casesplateaus;
 	}
+	
+	@GetMapping("/detail")
+	@JsonView(Views.CasesPlateauDetail.class)
+	public List<CasesPlateau> findAllWithPerso() {
+		List<CasesPlateau> casesplateaus = casesplateauRepo.findAll();
 
-	@GetMapping("{id}")
+		return casesplateaus;
+	}
+
+
+	@GetMapping("/{id}")
 	@JsonView(Views.ViewsCasesPlateau.class)
 	public CasesPlateau find(@PathVariable Long id) {
+		Optional<CasesPlateau> optCasesPlateau = casesplateauRepo.findById(id);
+
+		if (optCasesPlateau.isPresent()) {
+			return optCasesPlateau.get();
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+		}
+	}
+	
+	@GetMapping("/{id}/detail")
+	@JsonView(Views.CasesPlateauDetail.class)
+	public CasesPlateau findWithDetail(@PathVariable Long id) {
 		Optional<CasesPlateau> optCasesPlateau = casesplateauRepo.findById(id);
 
 		if (optCasesPlateau.isPresent()) {

@@ -18,10 +18,10 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import disney.classe.Joueur;
-import disney.classe.Views;
-import disney.repo.ICompteRepo;
-import disney.repo.IJoueurRepo;
+import disney.model.Joueur;
+import disney.model.Views;
+import disney.repository.ICompteRepo;
+import disney.repository.IJoueurRepo;
 
 
 @RestController
@@ -42,7 +42,7 @@ public class JoueurRestController {
 		return joueurs;
 	}
 
-	@GetMapping("{id}")
+	@GetMapping("/{id}")
 	@JsonView(Views.ViewsJoueur.class)
 	public Joueur find(@PathVariable Long id) {
 		Optional<Joueur> optJoueur = joueurRepo.findById(id);
@@ -54,29 +54,29 @@ public class JoueurRestController {
 		}
 	}
 
-//	@GetMapping("{id}/historiques")
-//	@JsonView(Views.ViewsJoueurHistoriques.class)
-//	public Joueur findWithHistoriques(@PathVariable Long id) {
-//		Optional<Joueur> optJoueur = compteRepo.findByIdWithHistorique(id);
-//
-//		if (optJoueur.isPresent()) {
-//			return optJoueur.get();
-//		} else {
-//			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Joueur non trouvé");
-//		}
-//	}
-//	
-//	@GetMapping("{id}/persos-obtenus")
-//	@JsonView(Views.ViewsJoueurPersos.class)
-//	public Joueur findWithPersos(@PathVariable Long id) {
-//		Optional<Joueur> optJoueur = compteRepo.findByIdWithPersos(id);
-//
-//		if (optJoueur.isPresent()) {
-//			return optJoueur.get();
-//		} else {
-//			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Joueur non trouvé");
-//		}
-//	}
+	@GetMapping("/{id}/historiques")
+	@JsonView(Views.ViewsJoueurHistoriques.class)
+	public Joueur findWithHistoriques(@PathVariable Long id) {
+		Optional<Joueur> optJoueur = joueurRepo.findByIdWithHistorique(id);
+
+		if (optJoueur.isPresent()) {
+			return optJoueur.get();
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Joueur non trouvé");
+		}
+	}
+	
+	@GetMapping("/{id}/persos-obtenus")
+	@JsonView(Views.ViewsJoueurAndPersos.class)
+	public Joueur findWithPersos(@PathVariable Long id) {
+		Optional<Joueur> optJoueur = joueurRepo.findByIdWithPersos(id);
+
+		if (optJoueur.isPresent()) {
+			return optJoueur.get();
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Joueur non trouvé");
+		}
+	}
 	
 
 	@PostMapping("")

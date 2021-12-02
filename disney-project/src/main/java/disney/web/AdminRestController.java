@@ -18,9 +18,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import disney.classe.Admin;
-import disney.classe.Views;
-import disney.repo.IAdminRepo;
+import disney.model.Admin;
+import disney.model.Views;
+import disney.repository.IAdminRepo;
 
 
 @RestController

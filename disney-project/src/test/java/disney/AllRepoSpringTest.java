@@ -8,9 +8,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import disney.classe.Admin;
-import disney.classe.Compte;
-import disney.repo.IAdminRepo;
+import disney.model.Admin;
+import disney.model.Compte;
+import disney.repository.IAdminRepo;
 
 
 @SpringBootTest

@@ -1,0 +1,31 @@
+<!-- fin de partie -->
+
+
+<div id="InterfaceFinDePartie">
+    <!-- https://jsfiddle.net/elin/7m3bL/-->
+    <div id="Fireworks">
+        <div class="fondfond" style="z-index: -1;"> </div>
+        <div id="beforeFireworks"></div>
+        <div id="afterFireworks"></div>
+    </div>
+
+    <!-- source : https://codepen.io/arickle/pen/XKjMZY -->
+    <div id="pluie" class="back-row-toggle splat-toggle" style="z-index: -1;">
+        <div class="rain front-row" style="z-index: 5;"></div>
+        <div class="rain back-row" style="z-index: 5;"></div>
+    </div>
+
+    <div class="fond">
+        <!-- Texte -->
+        <div class="texteFin">
+            <div *ngIf="perdu" id="textFinPerdu" class="texte" style="z-index: 11;">PERDU</div>
+            <div *ngIf="gagne" id="textFinGagne" class="texte" style="z-index: 11;">GAGNÉ</div>
+
+        </div>
+        <div class="Resume" style="z-index: 100;">
+            <a [routerLink]="['/home']" routerLinkActive="active"><button id="boutonResume" type="button"
+                    class="btn btn-success bouton">Revenir au menu principal</button></a>
+
+        </div>
+    </div>
+</div>

@@ -18,9 +18,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import disney.classe.Plateau;
-import disney.classe.Views;
-import disney.repo.IPlateauRepo;
+import disney.model.Plateau;
+import disney.model.Views;
+import disney.repository.IPlateauRepo;
 
 
 @RestController
@@ -34,6 +34,14 @@ public class PlateauRestController {
 	@GetMapping("")
 	@JsonView(Views.ViewsPlateau.class)
 	public List<Plateau> findAll() {
+		List<Plateau> plateaus = plateauRepo.findAll();
+
+		return plateaus;
+	}
+	
+	@GetMapping("/detail")
+	@JsonView(Views.ViewsPlateauDetail.class)
+	public List<Plateau> findAllWithDetail() {
 		List<Plateau> plateaus = plateauRepo.findAll();
 
 		return plateaus;
