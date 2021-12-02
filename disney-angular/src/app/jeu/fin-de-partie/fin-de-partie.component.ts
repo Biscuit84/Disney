@@ -7,12 +7,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FinDePartieComponent implements OnInit {
 
-  gagne=true;
-  perdu=false;
+  // recupérer si on a gagné ou perdu
+  gagne = false;
 
-  constructor() { }
 
   ngOnInit(): void {
+    this.getImage();
   }
 
+
+
+
+  imageName: String;
+
+
+  getImage() {
+    
+    switch (this.gagne) {
+      case true: {
+        this.imageName = "../../assets/images/jeu/win.jpg";
+        console.log(this.imageName);
+        break;
+      }
+      case false: {
+        this.imageName = "../../assets/images/jeu/gameover.jpg";
+        break;
+      }
+    }
+  }
 }
+

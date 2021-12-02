@@ -11,6 +11,12 @@
     overflow: hidden;
     margin: auto;
     width: 100%;
+
+    background-image: url(src\assets\images\PageNotFound.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+     
 }
 
 
