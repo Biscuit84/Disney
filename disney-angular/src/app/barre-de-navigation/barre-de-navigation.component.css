@@ -1,0 +1,51 @@
+
+
+
+/* partie de la barre de navigation */
+#barre{
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+    .logo_menu {
+      width: 5em;
+      height: 4em;
+       /*background-image: url(src\assets\images\logoPrincessA.png);*/
+       background-size: cover;
+      filter: drop-shadow(-10px 1px 4px rgb(175, 115, 115));
+      transform: rotate(-10deg);
+    }
+
+    .navbar-light{
+      padding-left: 0rem;
+      padding-right: 0rem;
+    }
+  
+    .container-fluid {
+      background-color: #dab4daa1;
+      color: purple;
+      top:inherit;
+      left: inherit;
+      right: inherit;
+      margin:0;
+    }
+  
+  
+    .navbar-light .navbar-nav .nav-link:hover {
+      color: white;
+    }
+  
+    .navbar {
+      padding-top: 0rem;
+      padding-bottom: 0rem;
+    }
+   
+    .activebutton {
+      color: rgb(233, 116, 233);
+      text-shadow: 0 1px 0 rgba(170, 48, 48, 0.315);
+      cursor: pointer;
+      font-weight: bold;
+   
+  }
