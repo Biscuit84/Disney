@@ -65,3 +65,9 @@ export class pionPlayer {
     this.finished = finished;
   }
 }
+
+
+export class CasesFRONT {
+
+  
+}
