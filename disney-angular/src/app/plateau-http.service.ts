@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AppConfigService } from './app-config.service';
-import { Plateau } from './model';
+import { Plateau } from '../model';
 
 @Injectable({
   providedIn: 'root'
