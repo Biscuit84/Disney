@@ -1,0 +1,36 @@
+/* You can add global styles to this file, and also import other style files */
+/*@import url("node_modules/bootstrap/dist/css/bootstrap.min.css");
+@import url("node_modules/bootstrap-icons/font/bootstrap-icons.css");*/
+
+body {
+    margin: 0px;
+    background-image: url(src\assets\images\FOND.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+  }
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  
+
+
+/* partie du bas de page */
+#BasPage {
+    background-color: lightgrey;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    opacity: 50%;
+  }
+  
+  #BasPage span { /*ça c'est le texte*/
+    display: flex;
+    justify-content: center;
+    align-content: center;
+  }
+    
