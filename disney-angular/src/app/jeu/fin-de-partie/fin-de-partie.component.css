@@ -10,6 +10,11 @@
     overflow: hidden;
     margin: auto;
     width: 100%;
+
+    background-image: url(src\assets\images\jeu\gameover.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 #InterfaceFinDePartie::after {
 content: '';
@@ -65,7 +70,11 @@ margin: auto;
  margin-top: 3vh;
 height: 10vh;
  width: 25vw;
-  font-size: 2vw;
+  font-size: 1.7vw;
+  background-color:rgba(71, 3, 73, 0.616);
+  color:rgba(255,255,255,0.8);
+  border: solid rgba(71, 3, 73, 0.616);
+  border-radius:5px;
 
 
 }
@@ -219,13 +228,13 @@ margin-top: 4vh;
   }
   
   @keyframes texteP {
-    0%{color:purple; text-shadow:0 0 20px pink}
-    25%{color:pink; text-shadow:2px 0px 2px pink; transform: translate(-10px,0px)}
-    40%{color:red; text-shadow:none; transform: translate(0,0)}
-    50%{color:pink; text-shadow:5px 0px 2px orange, -5px -5px 2px red; transform: translate(10px,0px)}
-    70%{color:pink; text-shadow:none; transform: translate(0,0)}
-    80%{color:pink; text-shadow:0 0 20px pink; transform: translate(-2px,0px)}
-    100%{color:orange; text-shadow:none;}
+    0%{color:rgb(4, 48, 40); text-shadow:0 0 20px rgb(176, 218, 224)}
+    25%{color:rgb(51, 125, 138); text-shadow:2px 0px 2px rgb(176, 218, 224); transform: translate(-10px,0px)}
+    40%{color:rgb(25, 102, 96); text-shadow:none; transform: translate(0,0)}
+    50%{color:rgb(176, 218, 224); text-shadow:5px 0px 2px rgb(51, 125, 138), -5px -5px 2px rgb(4, 48, 40); transform: translate(10px,0px)}
+    70%{color:rgb(176, 218, 224); text-shadow:none; transform: translate(0,0)}
+    80%{color:rgb(176, 218, 224); text-shadow:0 0 20px rgb(176, 218, 224); transform: translate(-2px,0px)}
+    100%{color:rgb(51, 125, 138); text-shadow:none;}
   }
 
   
@@ -249,17 +258,20 @@ margin-top: 4vh;
   }
   
   .fondfond{
-    background: linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%),
-              linear-gradient(127deg, rgba(0,255,0,.8), rgba(0,255,0,0) 70.71%),
-              linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%);
-              display: flex;
-              position: fixed;
-              top: 4em;
-              bottom: 1rem;
-              right: 0;
-              left: 0;
-              overflow: hidden;
-              margin: auto;
+    background: linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 50%),
+              linear-gradient(127deg, rgba(0,255,0,.8), rgba(0,255,0,0) 50%),
+              linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 50%);
+
+    display: flex;
+    position: fixed;
+    top: 4em;
+    bottom: 1rem;
+    right: 0;
+    left: 0;
+    overflow: hidden;
+    margin: auto;
+
+
   }
   
   @keyframes color-change {

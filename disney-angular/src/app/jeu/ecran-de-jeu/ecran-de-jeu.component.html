@@ -1,93 +1,97 @@
+<div id="ecran-de-jeu">
+    <div id="ecranDeJeu">
+        <div id="tableauDeControl">
+
+            <!-- boutons / des -->
+            <div class="gameControl">
+                <div class="bouttons">
+                    <div class="Tour">
+                        <p> Tour : <span id="NbTour"> 0 </span> </p>
+                    </div>
+                    <div class="TourJoueur">
+                        <p> Tour du joueur :<span id="JoueurTour"> 0 </span> </p>
+                    </div>
+                    <div class="Avance">
+                        <button id="boutonJouer" type="button" class="btn btn-primary bouton"
+                            (click)="Play()">Jouer</button>
+                        <p>Lancé de dé: <span id="valeurDeAvance">{{valeurDesDes}}</span></p>
+                    </div>
+                    <div class="Fin">
+                        <button id="boutonFinDeTour" type="button" class="btn btn-primary bouton"
+                            (click)="EndTurn()">Fin de tour </button>
+                        <p></p>
+                    </div>
+                    <div class="dice" id="de1">
+                        <p><span id="affichageDe"> </span></p>
+                        <img id="imageDe" src="../../assets/images/jeu/de0.png" alt="de1">
+                    </div>
+                    <div>
+                        <p></p>
+                    </div>
+                    <div class="dice" id="de2">
+                        <p><span id="affichageDe2"> </span></p>
+                        <img id="imageDe2" src="../../assets/images/jeu/de0.png" alt="de2">
+                    </div>
+                </div>
+            </div>
 
 
-<div id="ecranDeJeu">
-    <div id="tableauDeControl">
 
-        <!-- boutons / des -->
-        <div class="gameControl">
-            <div class="bouttons">
-                <div class="Tour">
-                    <p> Tour : <span id="NbTour"> 0 </span> </p>
+        </div>
+        <div id="zoneDuPlateau">
+            <div id="canvasesdiv">
+                <!--<img id="imageduplateau" src="../img/texture.jpg" alt="texture" height="100%" width="100%">-->
+
+                <!-- mon plateau -->
+                <canvas #canvasBackground class="canvasdujeu" id="background" style="z-index: 1; " height="800px"
+                    width="800px"> </canvas>
+                <canvas #canvasPlateau class="canvasdujeu" id="plateauCanvas" style="z-index: 2; " height="800px"
+                    width="800px"></canvas>
+
+                <!-- mon perso -->
+                <canvas #canvasJoueur class="canvasdujeu" id="player" style="z-index: 4; " height="800px"
+                    width="800px"></canvas>
+
+                <!-- IA -->
+                <canvas #canvasIA1 class="canvasdujeu" id="IA1" style="z-index: 4;" height="800px" width="800px">
+                </canvas>
+                <canvas #canvasIA2 class="canvasdujeu" id="IA2" style="z-index: 4;" height="800px" width="800px">
+                </canvas>
+                <canvas #canvasIA3 class="canvasdujeu" id="IA3" style="z-index: 4;" height="800px" width="800px">
+                </canvas>
+            </div>
+
+
+
+
+        </div>
+        <div id="interfaceUtilisateur">
+            <div class=titreInterface> Ton personnage ! </div>
+            <div id="infojoueur">
+                    Mettre des infos sur le joueur et son personnage pour rappel
+            </div>
+            <!-- l'audio -->
+            <div class="soundControl">
+                <audio id="diceThrowAudio"></audio>
+                <span class="parameter">volume du son du dé :</span>
+                <div class="volume-slider-con">
+                    <div class="volume-slider"></div>
                 </div>
-                <div class="TourJoueur">
-                    <p> Tour du joueur :<span id="JoueurTour"> 0 </span> </p>
-                </div>
-                <div class="Avance">
-                    <button id="boutonJouer" type="button" class="btn btn-primary bouton"
-                        onclick="Jouer(pionJoueur);">Jouer</button>
-                    <p>Lancé de dé: <span id="valeurDeAvance">0</span></p>
-                </div>
-                <div class="Fin">
-                    <button id="boutonFinDeTour" type="button" class="btn btn-primary bouton"
-                        onclick="FinDeTour(pionJoueur);">Fin de tour </button>
-                    <p></p>
-                </div>
-                <div class="dice" id="de1">
-                    <p><span id="affichageDe"> </span></p>
-                    <img id="imageDe" src="../../assets/images/de0.png"  alt="de1">
-                </div>
-                <div>
-                    <p></p>
-                </div>
-                <div class="dice" id="de2">
-                    <p><span id="affichageDe2"> </span></p>
-                    <img id="imageDe2" src="../../assets/images/de0.png" alt="de2">
+            </div>
+
+
+            <!-- la vitesse des pions -->
+            <div id="vitesseControl">
+                <span class="parameter">vitesse du pion :</span> <!--<span id="vitesse">1</span>-->
+                <div class="slidecontainer">
+                    <input type="range" min="1" max="7" value="1" class="slider" id="vitesseRange">
                 </div>
             </div>
         </div>
 
-        <!-- l'audio -->
-        <div class="soundControl">
-            <audio id="diceThrowAudio"></audio>
-            <span class="parameter">volume du son du dé :</span>
-            <div class="volume-slider-con">
-                <div class="volume-slider"></div>
-            </div>
-        </div>
 
-
-        <!-- la vitesse des pions -->
-        <div id="vitesseControl">
-            <span class="parameter">vitesse du pion :</span> <span id="vitesse">1</span>
-            <div class="slidecontainer">
-                <input type="range" min="1" max="7" value="1" class="slider" id="vitesseRange">
-            </div>
-        </div>
-
-    </div>
-    <div id="zoneDuPlateau">
-        <div id="canvasesdiv">
-            <!--<img id="imageduplateau" src="../img/texture.jpg" alt="texture" height="100%" width="100%">-->
-
-            <!-- mon plateau -->
-            <canvas #canvasBackground class="canvasdujeu" id="background" style="z-index: 1; "height="800px" width="800px"> </canvas>
-            <canvas #canvasPlateau class="canvasdujeu" id="plateauCanvas" style="z-index: 2; " height="800px" width="800px" ></canvas>
-
-            <!-- mon perso -->
-            <canvas #canvasJoueur class="canvasdujeu" id="player" style="z-index: 4; "height="800px" width="800px"></canvas>
-
-            <!-- IA -->
-            <canvas #canvasIA1 class="canvasdujeu" id="IA1" style="z-index: 4;"height="800px" width="800px"> </canvas>
-            <canvas #canvasIA2 class="canvasdujeu" id="IA2" style="z-index: 4;"height="800px" width="800px"> </canvas>
-            <canvas #canvasIA3 class="canvasdujeu" id="IA3" style="z-index: 4;"height="800px" width="800px"> </canvas>
-        </div>
-
-
-
-
-    </div>
-    <div id="interfaceUtilisateur">
-        <p class=titreInterface> Ceci sera l'interface de l'utilisateur ! </p>
+        <!--quand on gagne-->
+        <div fin-de-partie id="InterfaceFinDePartie"></div>
     </div>
 
-
-    <!--quand on gagne-->
-    <div fin-de-partie id="InterfaceFinDePartie"></div>
 </div>
-
-
-
-<!--script jeu-->
-<script id="ScriptJeu" src="src\assets\js\notre_jeu.js"></script>
-<!-- Ce script doit être placer apres le DOM (pour que le DOM soit chargé sinon ça ne marche pas avec le canvas) -->
-

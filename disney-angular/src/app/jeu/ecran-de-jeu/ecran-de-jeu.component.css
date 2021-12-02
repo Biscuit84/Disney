@@ -1,13 +1,31 @@
 @import url("https://fonts.googleapis.com/css2?family=Devonshire&display=swap");
 /* **********************************************plateau jeu***************************************************************** */
-/* juste la partie jeu +  controls*/
-#ecranDeJeu {
+
+#ecran-de-jeu{
   top: 4em;
+  background-image: url(src\assets\images\jeu\fond1.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+   
   display: flex;
   background-color: #dbbadbc4;
   height: 100%;
   width: 100%;
   position: relative;
+  bottom:0;
+}
+
+
+/* juste la partie jeu +  controls*/
+#ecranDeJeu {
+ 
+  display: flex;
+  background-color: #dbbadbc4;
+  height: 100%;
+  width: 100%;
+  position: relative;
+
 }
 
 /* le plateau seul*/
@@ -16,8 +34,9 @@
   border-radius: 5px;
   display: flex;
   justify-content: space-around;
-  width: 70%;
+  width: 60%;
   height: 100%;
+  padding:20px;
 }
 
 /* /* TODO: rendre ça responsive ! */
@@ -48,9 +67,8 @@
 
 /* la partie entiere avec les control donc bouton et reglages*/
 #tableauDeControl {
-  flex-wrap: wrap;
-  width: 15%;
-  height: 100%;
+  width: 20%;
+  bottom:0;
 }
 
 /* **********************************************game control***************************************************************** */
@@ -74,7 +92,7 @@
   justify-content: space-around;
   align-items: center;
   align-content: center;
-  height: 70%;
+  height: 100%;
   width: 100%;
 
 }
@@ -93,11 +111,43 @@
 .dice{
   height: 110px;
   width: 110px;
+  border-radius: 20%;
+  display: flex;
   background-color:white;
   border: solid grey 2px;
-  border-radius: 5px;
-  display: flex;
+  object-fit: contain;
+  overflow: hidden;
+  margin-bottom: 2px;
 }
+
+
+
+/* ********************************************** inventaire control***************************************************************** */
+/* partie de l'int utilisateur sur le coté */
+#interfaceUtilisateur {
+  display: flex;
+  /* justify-content: space-around; */
+  flex-wrap: wrap;
+  border: solid grey 2px;
+  border-radius: 5px;
+  width: 20%;
+
+}
+
+.titreInterface{
+  text-align: center;
+  font-size: 1em;
+  font-family: 'Devonshire', cursive;
+  z-index: 1;
+  justify-content: center;
+  }
+
+
+  #infojoueur{
+    height: 50%;
+    border: solid grey 2px;
+    border-radius: 5px;
+  }
 
 
 
@@ -108,7 +158,7 @@
   border-radius: 5px;
   display: flex;
   flex-direction: column;
-  height: 30%;
+  height: 20%;
   width: 100%;
   align-self: center;
 }
@@ -142,7 +192,7 @@
   border-radius: 5px;
   display: flex;
   flex-direction: column;
-  height:50%;
+  height:20%;
   width: 100%;
   align-self: center;
 }
@@ -197,24 +247,3 @@
   /*cursor: pointer; /* Cursor on hover */
 /*}*/
 
-
-
-/* ********************************************** inventaire control***************************************************************** */
-/* partie de l'int utilisateur sur le coté */
-  #interfaceUtilisateur {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    border: solid grey 2px;
-    border-radius: 5px;
-    background-color: #dbbadbc4;
-    width: 15%;
-
-  }
-
-  .titreInterface{
-    text-align: center;
-    font-size: 1em;
-    font-family: 'Devonshire', cursive;
-    z-index: 1;
-    }
