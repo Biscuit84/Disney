@@ -1,0 +1,65 @@
+<body id="page">
+
+
+
+    <!-- menu de creation de compte-->
+
+
+    <div class="center" id="ecranconnec">
+        <div class="card ">
+            <div class="card-header">
+                Creation d'un nouveau compte
+            </div>
+            <div class="card-body">
+               
+                    <div id="formulaire">
+                        <div id="champsFormulaire">
+                            <div id="connexGauche">
+                                <div class="mb-3">
+                                    <label for="nom">Nom</label>
+                                    <input type="texte" placeholder="Nom" class="form-control" id="nom" [(ngModel)]="creatForm.nom">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="prenom">Prenom</label>
+                                    <input type="texte" placeholder="Prenom" class="form-control" id="prenom" [(ngModel)]="creatForm.prenom">
+                                </div>
+
+                                <div id="connexDroite">
+                                    <div class="mb-3 ">
+                                        <label for="mail">Email</label>
+                                        <input type="email" placeholder="lorem@mail.fr" class="form-control" id="mail" [(ngModel)]="creatForm.mail">
+                                    </div>
+                                    <div class="mb-3 ">
+                                        <label for="password">Mot-de-passe</label>
+                                        <input type="password" placeholder="*****" minlength="5" class="form-control" id="password" [(ngModel)]="creatForm.password">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="pseudo">Pseudo</label>
+                                        <input type="texte" placeholder="Pseudo" class="form-control" id="pseudo" [(ngModel)]="creatForm.pseudo">
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <button type="submit" class="btn btn-primary" (click)="save()">Créer un nouveau compte</button>
+
+                        </div>
+                    </div>
+                
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body>
+<!--fin de connexion-->
+<footer>
+    <div id="BasPage">
+        <span class="textBas">Photos non contractuelles</span>
+    </div>
+    <!--fin de bas de page-->
+</footer>
