@@ -17,6 +17,7 @@ import { BoutiquePersonnagesComponent } from './boutique/boutique-personnages/bo
 import { PlateauComponent } from './Gestion/plateau/plateau.component';
 import { GestionComponent } from './Gestion/gestion.component';
 import { CreationCompteComponent } from './creation-compte/creation-compte.component';
+import { ModificationProfilJoueurComponent } from './modification-profil-joueur/modification-profil-joueur.component';
 
 const routes : Routes= [
 
@@ -32,6 +33,9 @@ const routes : Routes= [
   {path : "accueilJoueur", component: GestionDuCompteComponent},
   {path : "connexion", component: PageConnexionComponent},
   {path : "newjoueur", component: CreationCompteComponent},
+  {path : "modifProfil", component: ModificationProfilJoueurComponent},
+  
+
 
   // pour l'admin :
   {path : "gestionAdmin", component: GestionComponent},
