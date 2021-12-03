@@ -22,6 +22,7 @@ export class BoutiquePersonnagesComponent implements OnInit {
   compte: Compte;
   nombreEtoilesJoueur:number;
   joueur:Compte;
+  isDisabled: boolean = false;
 
   constructor(private pageConnexionService: PageConnexionService ,private persoService: PersonnageHttpService, private boutiqueService: BoutiqueHttpService) {
     // this.compte= pageConnexionService.connexion;
@@ -62,10 +63,23 @@ nombreEtoileJoueur(id: number){
   }
 
   validerPanier() {
+if(this.joueur.nbEtoiles >= this.prixTotalPanier){
+
+  
+}else {
+
+}
+
 
   }
 
   afficheRecapCommande() {
+    // for (let p of this.listePersonnagesPanier) {
+    //   let nom = p.nom;
+    //   this.prixTotalPanier = (this.prixTotalPanier + p.prixAchatPerso);
+    // }
+    this.montantDuPanier();
+return this.listePersonnagesPanier;
 
   }
 
@@ -73,7 +87,20 @@ nombreEtoileJoueur(id: number){
   ajouterAuPanier(personnage: Personnage) {
     this.listePersonnagesPanier.push(personnage);
     console.log("ma list dans le panier : {}", this.listePersonnagesPanier);
+
+
+
+    // for (let i=0; i<this.listePersonnagesPanier.length; i++ ){
+    //     this.isDisabled=true;
+
+    // }
+
+    
+
   }
+
+
+
 
 
   // somme des achats en etoile: 
@@ -85,7 +112,7 @@ nombreEtoileJoueur(id: number){
 
     }
 
-    $(".montantTotalPanier").html(this.prixTotalPanier + '<i class="fas fa-star etoile"></i>');
+    // $(".montantTotalPanier").html(this.prixTotalPanier + '<i class="fas fa-star etoile"></i>');
   }
 
 

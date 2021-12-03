@@ -21,6 +21,7 @@ import { BoutiquePersonnagesComponent } from './boutique/boutique-personnages/bo
 import { GestionComponent } from './Gestion/gestion.component';
 import { PlateauComponent } from './Gestion/plateau/plateau.component';
 import { PageConnexionService } from './page-connexion/page-connexion.service';
+import { BtnDisablePipe } from './boutique/boutique-personnages/btn-disable.pipe';
 
 
 
@@ -40,7 +41,8 @@ import { PageConnexionService } from './page-connexion/page-connexion.service';
     PageNotFoundComponent,
     BoutiquePersonnagesComponent,
     GestionComponent,
-    PlateauComponent
+    PlateauComponent,
+    BtnDisablePipe
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Boutique, BoutiqueDto, Compte } from 'src/model';
+import { Boutique, BoutiqueDto, Compte, Joueur, Personnage, PersonnageDto, PersoObtenu } from 'src/model';
 import { AppConfigService } from '../app-config.service';
 import { PageConnexionService } from '../page-connexion/page-connexion.service';
 
@@ -39,9 +39,8 @@ export class BoutiqueHttpService {
   //   }, error => console.log(error));
   // }
 
-  // modify(personnage: Personnage) {
-  //   this.http.put<Personnage>(this.persoUrl + personnage.id, personnage).subscribe(resp => {
-  //     this.load();
+  // modify(personnage: PersonnageDto) {
+  //   this.http.put<PersoObtenu>("http://localhost:8080/persoObtenu/" + personnage.personnage.id, this.personnage ).subscribe(resp => {
   //   }, error => console.log(error));
   // }
 

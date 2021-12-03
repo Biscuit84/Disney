@@ -92,7 +92,7 @@ public class PersoObtenuRestController {
 	@JsonView(Views.ViewsPersoObtenu.class)
 	public PersoObtenu update(@PathVariable Long id, @RequestBody PersoObtenu persoObtenu) {
 		if (!persoObtenuRepo.existsById(id)) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Personnage obtenu non trouvé");
 		}
 
 		persoObtenu = persoObtenuRepo.save(persoObtenu);
@@ -104,7 +104,7 @@ public class PersoObtenuRestController {
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
 		if (!persoObtenuRepo.existsById(id)) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Personnage obtenu non trouvé");
 		}
 
 		persoObtenuRepo.deleteById(id);
