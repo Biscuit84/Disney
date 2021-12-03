@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Boutique, BoutiqueDto, Compte, Joueur, Personnage, PersonnageDto, PersoObtenu } from 'src/model';
+import { Boutique, BoutiqueDto, BoutiquePersoAndLifeDto, Compte} from 'src/model';
 import { AppConfigService } from '../app-config.service';
 import { PageConnexionService } from '../page-connexion/page-connexion.service';
 
@@ -14,19 +13,24 @@ export class BoutiqueHttpService {
   boutique: Boutique = new Boutique();
   // boutiques: Array<BoutiqueDto> = new Array <BoutiqueDto>();
   boutiqueUrl: string;
-  idJoueur: number ;
-  joueur:Compte;
+  idJoueur: number;
+  joueur: Compte;
 
   constructor(public compteService: PageConnexionService, private http: HttpClient, private appConfig: AppConfigService) {
     this.boutiqueUrl = this.appConfig.backEndUrl + "boutique/"
-  this.joueur= this.compteService.compte;
-   this.idJoueur= this.joueur.id
+    this.joueur = this.compteService.compte;
+    console.log("mon joueur ::::::: {}", this.joueur);
+    
+    this.idJoueur = this.joueur.id
     this.load(this.idJoueur);
-
   }
 
   findBoutique(): BoutiqueDto {
     return this.boutiqueDto;
+  }
+
+  achatBoutique(panierDto: BoutiquePersoAndLifeDto){
+    return this.http.put(this.boutiqueUrl+ this.joueur.id, panierDto);
   }
 
   // findBoutiqueBase(id: number): Boutique {
@@ -54,5 +58,9 @@ export class BoutiqueHttpService {
     this.http.get<BoutiqueDto>(this.boutiqueUrl + id).subscribe(response => {
       this.boutiqueDto = response;
     }, error => console.log(error));
+  }
+
+  loadBoutique() {
+    return this.http.get<BoutiqueDto>(this.boutiqueUrl + this.joueur.id);
   }
 }

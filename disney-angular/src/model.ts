@@ -197,9 +197,6 @@ export class Personnage {
 export class PersonnageDto {
   personnage: Personnage;
   persoDejaEnPossession: boolean;
-
-
-
 }
 
 
