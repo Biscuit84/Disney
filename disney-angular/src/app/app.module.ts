@@ -44,7 +44,7 @@ import { ModificationProfilJoueurComponent } from './modification-profil-joueur/
     BoutiquePersonnagesComponent,
     GestionComponent,
     PlateauComponent,
-    BtnDisablePipe
+    BtnDisablePipe,
     PlateauComponent,
     CreationCompteComponent,
     ModificationProfilJoueurComponent
