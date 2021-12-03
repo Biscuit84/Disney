@@ -1,6 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Devonshire&display=swap");
+/* ***************************navbar************************* */
+
 #ecran-boutique{
   top: 4em;
   height: 100%;
   width: 100%;
   position: relative;
+  background-image: url(../../assets/images/princesses_transparent_couleurs.png);
+  background-repeat:no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+}
+
+
+.container-fluid {
+  background-color: thistle;
+  color: purple;
+  height: 5em;
+}
+
+
+/* ########## MAIN ######### */
+
+.containerCard {
+  background-color: rgba(245, 245, 245, 0.7);
+  border-radius: 10px;
+}
+
+main{
+display: flex;
+justify-content: center;
+}
+
+.ecranconnec{
+width:48%;
+display:flex;
+justify-content:center;
+align-items:center;
+margin-top: 10%;
+padding: 1rem;
+}
+
+.lienBoutiques{
+  text-decoration:none; 
+}
+
+.itemsBoutique{
+  background-color: aliceblue;
+  border-radius: 5px;
+}
+
+.image_Boutique{
+  /* height: 30%;
+  width: 30%; */
+}
+
+.boutonAccordeon{
+  background-color: aliceblue;
+ 
+}
+
+.accordeon{
+  border-radius: 20px;
+}
+
+.ensembleCard{
+  justify-content: center;
 }

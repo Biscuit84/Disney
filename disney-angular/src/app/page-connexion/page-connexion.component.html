@@ -1,1 +1,50 @@
-<div id="ecran-connexion"><p>page-connexion works!</p></div>
+<div id="ecran-connexion">
+
+
+    <body id="page">
+      
+          <!-- menu de connexion-->
+           
+      
+          <div class="center" id="ecranconnec">
+            <div class="card ">
+              <div class="card-header">
+                Se connecter
+              </div>
+              <div class="card-body">
+                  <form>
+                    <div id="connex">
+                      <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Addresse Email</label>
+                        <input name="mail" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                          placeholder="lorem@mail.fr" [(ngModel)]="connexionForm.mail">
+                        <div id="emailHelp" class="form-text" style="color:grey">Votre addresse Email ne sera pas diffusée.
+                        </div>
+                      </div>
+                      <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Mot-de-Passe</label>
+                        <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="******"  [(ngModel)]="connexionForm.password">
+                      </div>
+                      <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Se souvenir de moi</label>
+                      </div>
+                      <button type="submit" class="btn btn-primary" (click)="login()">Soumettre</button>
+                    </div>
+                  </form>
+                  <a>Pas encore inscrit? Créez-vous un compte</a>
+              </div>
+            </div>
+          </div>
+      
+         <!--fin de connexion-->
+      <footer>
+        <div id="BasPage">
+            <span class="textBas">Photos non contractuelles</span>
+        </div> <!--fin de bas de page-->
+      </footer>
+      
+      
+      
+        </body>
+</div>

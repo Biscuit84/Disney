@@ -470,13 +470,14 @@ function disabledButtonFalse() {
   //  $(".bouton").prop('disabled', false);
 }
 
+
 // permet de jouer
 function Jouer(pion) {
   playSoundDice();
   roulementDe();
   setTimeout(TourJoueur, 2200, pion);  //setTimeout(TourJoueur(pionJoueur), 2200); //marche pas  //setTimeout(function() {TourJoueur(pionJoueur);}, 2200); //autre ecriture
   joueurActuel = pion.numeroPassage;
-
+/*
   if (joueurActuel != 0) { // si ce n'est pas le joueur qui joue on "click" auto sur la suite
     pionSuivant = listePion[joueurActuel + 1];
     setTimeout(FinDeTour, 5000, pionSuivant);
@@ -493,6 +494,7 @@ function Jouer(pion) {
     $("#boutonJouer").prop('disabled', true);
     $("#boutonFinDeTour").prop('disabled', false);
   }
+  */
 
 }
 
