@@ -68,9 +68,11 @@ public class Joueur extends Compte{
 	}
 
 
-	public Joueur(String pseudo) {
+	public Joueur(String mail, String password,String pseudo) {
 		super();
 		this.pseudo = pseudo;
+		this.mail=mail;
+		this.password=password;
 	}
 
 
