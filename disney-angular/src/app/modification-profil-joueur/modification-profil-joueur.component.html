@@ -1,0 +1,350 @@
+<body>
+
+    <!-- <div navbar> -->
+
+
+
+    <!-- main  -->
+
+    <div class="card containerCard" id="ecranconnec">
+        <div class="card-body">
+
+            <div class="card blocksCard" style="width: 30rem;">
+                <div class="card-header">
+                    Informations générales
+                </div>
+                <div class="list-group">
+                    <a href="#"
+                        class="list-group-item list-group-item-action list-group-item-light d-flex justify-content-between"><span
+                            class="infoGeneraleNomItem">Avatar</span> <span><img src="../img/avatar/avatar_mickey.png"
+                                class="logo_admin rounded" id="avatarJoueur2" /></span> <span><i
+                                class="fas fa-chevron-right"></i></span></a>
+                    <a href="#"
+                        class="list-group-item list-group-item-action list-group-item-light d-flex justify-content-between"
+                        data-bs-toggle="modal" data-bs-target="#modalModifNom"><span
+                            class="infoGeneraleNomItem">Nom</span> <span class="infoGeneraleDef" id="nomJoueur">
+                            <!--fonction javaScript-->
+                        </span> <span><i class="fas fa-chevron-right"></i></span></a>
+                    <a href="#"
+                        class="list-group-item list-group-item-action list-group-item-light d-flex justify-content-between"
+                        data-bs-toggle="modal" data-bs-target="#modalModifPseudo"><span
+                            class="infoGeneraleNomItem">Pseudo</span> <span class="infoGeneraleDef" id="pseudoJoueur">
+                            <!--fonction javaScript-->
+                        </span> <span><i class="fas fa-chevron-right"></i></span></a>
+                    <a href="#"
+                        class="list-group-item list-group-item-action list-group-item-light d-flex justify-content-between"
+                        data-bs-toggle="modal" data-bs-target="#modalModifDateNaissance"><span
+                            class="infoGeneraleNomItem">Date de naissance</span> <span class="infoGeneraleDef"
+                            id="dateNaissanceJoueur">
+                            <!--fonction javaScript-->
+                        </span> <span><i class="fas fa-chevron-right"></i></span></a>
+                    <a href="#"
+                        class="list-group-item list-group-item-action list-group-item-light d-flex justify-content-between"
+                        data-bs-toggle="modal" data-bs-target="#modalModifGenre"><span
+                            class="infoGeneraleNomItem">Genre</span> <span class="infoGeneraleDef" id="GenreJoueur">
+                            <!--fonction javaScript-->
+                        </span> <span><i class="fas fa-chevron-right"></i></span></a>
+                </div>
+            </div>
+            <br>
+            <div class="card blocksCard" style="width: 30rem;">
+                <div class="card-header">
+                    Coordonnées
+                </div>
+                <div class="list-group">
+                    <a href="#"
+                        class="list-group-item list-group-item-action list-group-item-light d-flex justify-content-between"
+                        data-bs-toggle="modal" data-bs-target="#modalModifEmail"><span
+                            class="infoGeneraleNomItem">Adresse E-mail</span> <span class="infoGeneraleDef"
+                            id="emailJoueur">
+                            <!--fonction javaScript-->
+                        </span> <span><i class="fas fa-chevron-right"></i></span></a>
+                    <a href="#"
+                        class="list-group-item list-group-item-action list-group-item-light d-flex justify-content-between"
+                        data-bs-toggle="modal" data-bs-target="#modalModifTel"><span
+                            class="infoGeneraleNomItem">Téléphone</span> <span class="infoGeneraleDef" id="telJoueur">
+                            <!--fonction javaScript-->
+                        </span> <span><i class="fas fa-chevron-right"></i></span></a>
+                </div>
+            </div>
+            <br>
+            <div class="card blocksCard" style="width: 30rem;">
+                <div class="card-header">
+                    Mot de passe
+                </div>
+                <div class="list-group">
+                    <a href="#"
+                        class="list-group-item list-group-item-action list-group-item-light d-flex justify-content-between"
+                        data-bs-toggle="modal" data-bs-target="#modalModifMdp"><span class="infoGeneraleNomItem">Changez
+                            votre mot de passe</span><span class="infoGeneraleNomItem">**********</span> <span><i
+                                class="fas fa-chevron-right"></i></span></a>
+                    <p class="d-flex justify-content-center">Dernière modification: <span id="dateModification">
+                            <!--Modif avec JavaScript-->
+                        </span> </p>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <!-- Modal changer nom -->
+    <div class="modal fade" id="modalModifNom" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modification du nom</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <form class="needs-validation" novalidate>
+                        <div class="mb-3">
+                            <label for="validationNom" class="form-label">Nom</label>
+                            <input type="text" class="form-control" id="validationNom">
+                        </div>
+                        <div class="mb-3">
+                            <label for="validationPrenom" class="form-label">Prenom</label>
+                            <input type="text" class="form-control" id="validationPrenom">
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Valider</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal changer Pseudo-->
+    <div class="modal fade" id="modalModifPseudo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modification du pseudo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <form class="needs-validation" novalidate>
+                        <div class="mb-3">
+                            <label for="validatePseudo" class="form-label">Pseudo</label>
+                            <input type="text" class="form-control" id="validatePseudo">
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Valider</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Modal changer DateNaissance-->
+    <div class="modal fade" id="modalModifDateNaissance" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modification du pseudo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <form class="needs-validation" novalidate>
+                        <div class="mb-3">
+                            <label for="validateDateNaissance" class="form-label">Date de naissance</label>
+                            <input type="date" min="1900-01-01" max="2021-10-19" value="2000-01-01"
+                                id="validateDateNaissance">
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Valider</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal changer Genre-->
+    <div class="modal fade" id="modalModifGenre" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modification du genre</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <form class="needs-validation" novalidate>
+                        <div class="mb-3">
+                            <label for="validateGenre" class="form-label">Genre</label>
+                            <select name="civilite" id="validateGenre">
+                                <option value="H">Homme</option>
+                                <option value="F" selected>Femme</option>
+                                <option value="NC">NC</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Valider</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal changer Email-->
+    <div class="modal fade" id="modalModifEmail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modification de l'adresse e-mail</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <form class="needs-validation" novalidate>
+                        <div class="mb-3">
+                            <label for="validationAncienEmail" class="form-label">Ancienne adresse e-mail</label>
+                            <input type="email" placeholder="lorem@mail.fr" id="validationAncienEmail">
+                        </div>
+                        <div class="mb-3">
+                            <label for="validationNouveauEmail" class="form-label">Nouvelle adresse e-mail</label>
+                            <input type="email" placeholder="lorem@mail.fr" id="validationNouveauEmail">
+                        </div>
+                        <div class="mb-3">
+                            <label for="validationConfirmationNouveauEmail" class="form-label">Confirmation de la
+                                nouvelle adresse e-mail</label>
+                            <input type="email" placeholder="lorem@mail.fr" id="validationConfirmationNouveauEmail">
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Valider</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal changer Tel-->
+    <div class="modal fade" id="modalModifTel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modification du numero de telephone</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <form class="needs-validation" novalidate>
+                        <div class="mb-3">
+                            <label for="validationTel" class="form-label">Nouveau numero de telephone</label>
+                            <input type="text" id="validationTel">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Valider</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal changer Mot de Passe-->
+    <div class="modal fade" id="modalModifMdp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modification du mot de passe</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <form class="needs-validation" novalidate>
+                        <div class="row g-3 align-items-center">
+                            <div class="col-auto">
+                                <label for="ancienPassword" class="form-label">Ancien mot de passe</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="password" id="ancienPassword" class="form-control"
+                                    aria-describedby="passwordHelpInline">
+                            </div>
+                            <div class="col-auto">
+                                <span id="passwordHelpInline" class="form-text">
+                                    Entre 8 et 20 characteres.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row g-3 align-items-center">
+                            <div class="col-auto">
+                                <label for="nouveauPassword" class="form-label">Nouveau mot de passe</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="password" id="nouveauPassword" class="form-control"
+                                    aria-describedby="passwordHelpInline">
+                            </div>
+                            <div class="col-auto">
+                                <span id="passwordHelpInline" class="form-text">
+                                    Entre 8 et 20 characteres.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row g-3 align-items-center">
+                            <div class="col-auto">
+                                <label for="confirmationNouveauPassword" class="form-label">Confirmation du nouveau mot
+                                    de passe</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="password" id="confirmationNouveauPassword" class="form-control"
+                                    aria-describedby="passwordHelpInline">
+                            </div>
+                            <div class="col-auto">
+                                <span id="passwordHelpInline" class="form-text">
+                                    Entre 8 et 20 characteres.
+                                </span>
+                            </div>
+                        </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Valider</button>
+                    </div>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</body>
