@@ -304,7 +304,6 @@
 
 #listePanier {
   min-width: max-content;
-  visibility: hidden;
   top: 100%;
   margin-top: 0.5rem;
 }
@@ -321,4 +320,13 @@ button {
 
 .pd100{
   padding-right: 100px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.monPanier{
+  padding-right: 15px;
+  padding-left: 15px;
 }

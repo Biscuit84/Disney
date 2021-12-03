@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Boutique, BoutiqueDto } from 'src/model';
+import { Boutique, BoutiqueDto, Compte } from 'src/model';
 import { AppConfigService } from '../app-config.service';
+import { PageConnexionService } from '../page-connexion/page-connexion.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +14,15 @@ export class BoutiqueHttpService {
   boutique: Boutique = new Boutique();
   // boutiques: Array<BoutiqueDto> = new Array <BoutiqueDto>();
   boutiqueUrl: string;
-  idJoueur: number = 2;
+  idJoueur: number ;
+  joueur:Compte;
 
-  constructor(private http: HttpClient, private appConfig: AppConfigService) {
+  constructor(public compteService: PageConnexionService, private http: HttpClient, private appConfig: AppConfigService) {
     this.boutiqueUrl = this.appConfig.backEndUrl + "boutique/"
+  this.joueur= this.compteService.compte;
+   this.idJoueur= this.joueur.id
     this.load(this.idJoueur);
+
   }
 
   findBoutique(): BoutiqueDto {

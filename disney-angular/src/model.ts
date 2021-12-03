@@ -148,7 +148,6 @@ export class Personnage {
     prince?: string,
     mechant?: string,
     pouvoir?: string,
-    position?: CasesPlateau,
     prixAchatPerso?: number,
     avatar?: string
   ) {
@@ -158,7 +157,6 @@ export class Personnage {
     this.prince = prince
     this.mechant = mechant
     this.pouvoir = pouvoir
-    this.position = position
     this.prixAchatPerso = prixAchatPerso
     this.avatar = avatar
   }
@@ -166,15 +164,11 @@ export class Personnage {
 
 }
 
-export class PersonnageDto extends Personnage {
+export class PersonnageDto {
   personnage: Personnage;
   persoDejaEnPossession: boolean;
 
-  constructor(personnage?: Personnage, persoDejaEnPossession?: boolean) {
-    super();
-    this.personnage = personnage
-    this.persoDejaEnPossession = persoDejaEnPossession
-  }
+
 
 }
 
