@@ -8,18 +8,51 @@ export class Compte {
   prenom: string;
   mail: string;
   role: string;
+  avatar: string;
+  pseudo: string;
+  level: string;
+  life: number;
+  nbEtoiles: number;
+  nbVictoire: number;
+  nbDefaite: number;
 
-  constructor(id?: number, version?: number, login?: string, password?: string, nom?: string, prenom?: string, mail?: string, role?: string) {
-    this.id = id;
-    this.version = version;
-    this.login = login;
-    this.password = password;
-    this.nom = nom;
-    this.prenom = prenom;
-    this.mail = mail;
+  constructor(
+    id?: number, 
+    version?: number, 
+    login?: string, 
+    password?: string, 
+    nom?: string, 
+    prenom?: string, 
+    mail?: string, 
+    role?: string, 
+    avatar?: string, 
+    pseudo?: string, 
+    level?: string, 
+    life?: number, 
+    nbEtoiles?: number,
+    nbVictoire?: number,
+    nbDefaite?: number
+) {
+    this.id = id
+    this.version = version
+    this.login = login
+    this.password = password
+    this.nom = nom
+    this.prenom = prenom
+    this.mail = mail
     this.role = role
-
+    this.avatar = avatar
+    this.pseudo = pseudo
+    this.level = level
+    this.life = life
+    this.nbEtoiles = nbEtoiles
+    this.nbVictoire= nbVictoire
+    this.nbDefaite= nbDefaite
   }
+  
+
+
+  
 }
 
 
@@ -32,10 +65,7 @@ export class Admin extends Compte {
 }
 
 export class Joueur extends Compte {
-  pseudo: string;
-  level: string;
-  life: number;
-  nbEtoile: number;
+ 
   historiques: Array<Historique>;
   persos: Array<PersoObtenu>;
 
@@ -50,7 +80,7 @@ export class Joueur extends Compte {
     pseudo?: string,
     level?: string,
     life?: number,
-    nbEtoile?: number,
+    nbEtoiles?: number,
     historiques?: Array<Historique>,
     persos?: Array<PersoObtenu>
   ) {
@@ -58,7 +88,7 @@ export class Joueur extends Compte {
     this.pseudo = pseudo
     this.level = level
     this.life = life
-    this.nbEtoile = nbEtoile
+    this.nbEtoiles = nbEtoiles
     this.historiques = historiques
     this.persos = persos
   }
@@ -249,6 +279,7 @@ export class Historique {
   dateHeureFinPartie: string;
   positionArrivee: number;
   nbEtoilesGagnees: number;
+  victoire:boolean
   parties: Array<Partie>;
 
 
@@ -259,6 +290,7 @@ export class Historique {
     dateHeureFinPartie?: string,
     positionArrivee?: number,
     nbEtoilesGagnees?: number,
+    victoire?:boolean,
     parties?: Array<Partie>
   ) {
     this.id = id
@@ -267,6 +299,7 @@ export class Historique {
     this.dateHeureFinPartie = dateHeureFinPartie
     this.positionArrivee = positionArrivee
     this.nbEtoilesGagnees = nbEtoilesGagnees
+    this.victoire=victoire
     this.parties = parties
   }
 

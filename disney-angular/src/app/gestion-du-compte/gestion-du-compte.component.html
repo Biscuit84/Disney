@@ -5,10 +5,10 @@
 <div class="card">
   <img id="joueur" src="../../assets/images/elsa.png" alt="Avatar" >
   <div class="profil">
-    <h4><b>Pseudo</b></h4>
-    <p>Niveau</p>
-    <p>Nombre de victoire</p>
-    <p>Nombre d'étoiles</p>
+    <h4><b>Pseudo : {{joueur.pseudo}}</b></h4>
+    <p>Niveau: {{joueur.level}}</p>
+    <p>Nombre de victoire: {{joueur.nbVictoire}}</p>
+    <p>Nombre d'étoiles: {{joueur.nbEtoiles}}</p>
     <button id="jouerBtn" type="submit" class="btn btn-primary">Jouer</button>
   </div>
 </div> 
@@ -19,46 +19,22 @@
   <span></span>
   <div class="list-group">
     <div  id="blocTitre" class="list-group-item list-group-item-action active" aria-current="true">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 id="list-titre" class="">Historique des parties</h5>
-        <small></small>
+        <div class="d-flex w-100 justify-content-between">
+          <h5 id="list-titre" class="">Historique des parties</h5>
+          <small></small>
+        </div>
+          <p class="mb-1"></p>
+          <small></small>
+    </div >
+        <a href="#" class="list-group-item list-group-item-action" *ngFor="let histo of showHistorique()">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1"><span *ngIf="histo.victoire==true" style="color: green;">VICTOIRE</span><span *ngIf="histo.victoire==false" style="color: red;">DEFAITE</span></h5>
+           <small class="text-muted">3 days ago</small>
+          </div>
+          <p class="mb-1">Some placeholder content in a paragraph.</p>
+          <small class="text-muted">And some muted small print.</small>
+       </a>
       </div>
-      <p class="mb-1"></p>
-      <small></small>
-    </div>
-    <a href="#" class="list-group-item list-group-item-action">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">List group item heading</h5>
-        <small class="text-muted">3 days ago</small>
-      </div>
-      <p class="mb-1">Some placeholder content in a paragraph.</p>
-      <small class="text-muted">And some muted small print.</small>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">List group item heading</h5>
-        <small class="text-muted">3 days ago</small>
-      </div>
-      <p class="mb-1">Some placeholder content in a paragraph.</p>
-      <small class="text-muted">And some muted small print.</small>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">List group item heading</h5>
-        <small class="text-muted">3 days ago</small>
-      </div>
-      <p class="mb-1">Some placeholder content in a paragraph.</p>
-      <small class="text-muted">And some muted small print.</small>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">List group item heading</h5>
-        <small class="text-muted">3 days ago</small>
-      </div>
-      <p class="mb-1">Some placeholder content in a paragraph.</p>
-      <small class="text-muted">And some muted small print.</small>
-    </a>
-  </div>
     </div>
   </div>
 </div>

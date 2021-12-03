@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -39,14 +41,7 @@ public class HistoriqueRestController {
 		return historiques;
 	}
 	
-	@GetMapping("/allByJoueur/{id}")
-	@JsonView(Views.ViewsHistorique.class)
-	public List<Historique> findAllByJoueurId(@PathVariable Long id) {
-		List<Historique> historiques = historiqueRepo.findAllByJoueur(id);
-
-		return historiques;
-	}
-	
+		
 	@GetMapping("/allWithDetail/{id}")
 	@JsonView(Views.ViewsHistoriqueDetail.class)
 	public List<Historique> findAllWithJoueur() {
@@ -113,7 +108,7 @@ public class HistoriqueRestController {
 	@GetMapping("{id}/joueur")
 	@JsonView(Views.ViewsHistorique.class)
 	public List<Historique> findAllByJoueur(@PathVariable Long id) {
-		List<Historique> historiques = historiqueRepo.findAllByJoueur(id);
+		List<Historique> historiques = historiqueRepo.findAllByJoueur(id, PageRequest.of(0, 5));
 
 		
 			return historiques;
