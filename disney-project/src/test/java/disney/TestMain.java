@@ -86,7 +86,15 @@ class TestMain {
 //		
 		@Test
 		void contextLoads() throws ParseException {
-////		
+////	
+			
+			Joueur ia1 = new Joueur("mickey.mickey@adresseMail.com","mickeyTropFortMickey","Mickey");
+			Joueur ia2 = new Joueur("donald.donald@adresseMail.com","donaldTropFortDonald","Donald");
+			Joueur ia3 = new Joueur("dingo.dingo@adresseMail.com","dingoTropFortDonald","Dingo");
+			ia1 = joueurRepo.save(ia1);
+			ia2 = joueurRepo.save(ia2);
+			ia3 = joueurRepo.save(ia3);
+			
 		//JOUEURS
 		Joueur joueur1 = new Joueur("joueur1", "1234", "Toto", "Titi", "toto.titi@gmail.com", "TotoTropFort", "noob", 3);
 		joueur1=joueurRepo.save(joueur1);
@@ -95,6 +103,8 @@ class TestMain {
 		Joueur joueur3 = new Joueur("joueur3", "1234", "j3", "Titi", "j3@gmail.com", "TotoTropFort", "noob", 3);
 		joueur3.setNbEtoiles(1000);
 		joueur3 = joueurRepo.save(joueur3);
+		
+		
 		
 		
 		List <Joueur>listeJoueurs = new ArrayList<Joueur>();
