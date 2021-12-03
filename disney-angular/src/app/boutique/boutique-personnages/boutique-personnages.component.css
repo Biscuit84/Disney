@@ -330,3 +330,12 @@ ul {
   padding-right: 15px;
   padding-left: 15px;
 }
+
+
+/* //modal  */
+
+.red{
+  color:red;
+  font-weight: bold;
+  text-align: center;
+}

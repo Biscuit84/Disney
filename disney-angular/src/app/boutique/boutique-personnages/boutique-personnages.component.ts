@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { PersonnageHttpService } from 'src/app/personnage-http.service';
-import { BoutiqueDto, Compte, Personnage, PersonnageDto } from 'src/model';
+import { BoutiqueDto, BoutiquePersoAndLifeDto, Compte, Personnage, PersonnageDto, Vie } from 'src/model';
 import { BoutiqueHttpService } from '../boutique-http.service';
 import * as $ from 'jquery';
 import { PageConnexionService } from 'src/app/page-connexion/page-connexion.service';
+import { JoueurHttpService } from 'src/app/joueur-http.service';
 // declare var $:JQueryStatic;
 
 @Component({
@@ -17,20 +18,24 @@ export class BoutiquePersonnagesComponent implements OnInit {
   portfolio: string = "";
   boutiquePerso: Array<PersonnageDto> = new Array<PersonnageDto>();
   listePersonnagesPanier: Array<Personnage> = new Array<Personnage>();
-  boutiques: BoutiqueDto;
+  listeViePanier: Array<Vie> = new Array<Vie>();
+  boutique: BoutiqueDto;
   prixTotalPanier: number = 0;
-  compte: Compte;
-  nombreEtoilesJoueur:number;
-  joueur:Compte;
-  isDisabled: boolean = false;
+  // compte: Compte;
+  nombreEtoilesJoueur: number;
+  joueur: Compte;
 
-  constructor(private pageConnexionService: PageConnexionService ,private persoService: PersonnageHttpService, private boutiqueService: BoutiqueHttpService) {
+
+  constructor(private pageConnexionService: PageConnexionService, private persoService: PersonnageHttpService, private boutiqueService: BoutiqueHttpService, private joueurService: JoueurHttpService) {
     // this.compte= pageConnexionService.connexion;
-    this.joueur= this.pageConnexionService.compte;
+    this.joueur = this.pageConnexionService.compte;
     // this.nombreEtoileJoueur=this.joueur.nbEtoiles
-   }
+  }
 
   ngOnInit(): void {
+    console.log("ON CHARGE LE TOUT");
+    
+    this.listAllPersoBoutiqueDto();
   }
 
   // connecJoueur(){
@@ -45,17 +50,25 @@ export class BoutiquePersonnagesComponent implements OnInit {
     return this.persoService.findAll();
   }
 
-  listAllPersoBoutiqueDto(): Array<PersonnageDto> {
-    this.boutiques = this.boutiqueService.findBoutique();
-    // this.boutiquePerso= this.boutiques
-    this.boutiquePerso = this.boutiques.personnages;
+  listAllPersoBoutiqueDto(){
+    // this.boutique = this.boutiqueService.findBoutique();
 
-    return this.boutiquePerso;
+    this.boutiqueService.loadBoutique().subscribe(res => {
+      this.boutique = res;
+      this.boutiquePerso = this.boutique.personnages;
+    })
   }
 
-nombreEtoileJoueur(id: number){
+  nombreEtoileJoueur(id: number) {
 
-}
+  }
+
+  /**
+   * @returns true si le perso est dans le panier, false sinon
+   */
+  isPersonnageEstDansLePanier(personnage: Personnage) {
+    return this.listePersonnagesPanier.includes(personnage);
+  }
 
 
   viderPanier() {
@@ -63,12 +76,21 @@ nombreEtoileJoueur(id: number){
   }
 
   validerPanier() {
-if(this.joueur.nbEtoiles >= this.prixTotalPanier){
+    var panierDto: BoutiquePersoAndLifeDto = new BoutiquePersoAndLifeDto();
 
-  
-}else {
+    panierDto.idPersonnages = this.listePersonnagesPanier.map(({ id }) => id);
+    //TODO mapper avec la liste de vie plus tard
+    panierDto.idVies = this.listeViePanier.map(({ id }) => id);
+    this.boutiqueService.achatBoutique(panierDto).subscribe((resp: BoutiqueDto) => {
+      this.joueurService.infosJoueur().subscribe(respJoueur => {
+        this.joueur = respJoueur;
+      }, error => console.log(error));
 
-}
+      this.boutique = resp;
+      this.boutiquePerso = this.boutique.personnages;
+    }, error => console.log(error));
+    console.log("panierDto::::::::::::::::::::::{}", panierDto);
+
 
 
   }
@@ -79,7 +101,7 @@ if(this.joueur.nbEtoiles >= this.prixTotalPanier){
     //   this.prixTotalPanier = (this.prixTotalPanier + p.prixAchatPerso);
     // }
     this.montantDuPanier();
-return this.listePersonnagesPanier;
+    return this.listePersonnagesPanier;
 
   }
 
@@ -95,7 +117,7 @@ return this.listePersonnagesPanier;
 
     // }
 
-    
+
 
   }
 

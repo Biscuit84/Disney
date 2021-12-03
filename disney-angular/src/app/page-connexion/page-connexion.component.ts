@@ -23,6 +23,8 @@ export class PageConnexionComponent implements OnInit {
   login() {
     this.connexionService.connexion(this.connexionForm).subscribe(resp => {
       this.connexionService.compte = resp;
+      console.log("#### this.connexionService.compte : {}", this.connexionService.compte);
+      
       this.errorLogin = null;
       if(this.connexionService.compte.role == 'joueur'){
         this.router.navigate(['accueilJoueur'])
