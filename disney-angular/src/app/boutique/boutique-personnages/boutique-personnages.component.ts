@@ -26,6 +26,10 @@ export class BoutiquePersonnagesComponent implements OnInit {
     return this.persoService.findAll();
   }
 
+  ajouterAuPanier(event){
+    
+  }
+
   // add() {
   //   this.personnageForm = new Personnage();
   // }
