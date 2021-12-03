@@ -16,6 +16,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { BoutiquePersonnagesComponent } from './boutique/boutique-personnages/boutique-personnages.component';
 import { PlateauComponent } from './Gestion/plateau/plateau.component';
 import { GestionComponent } from './Gestion/gestion.component';
+import { CreationCompteComponent } from './creation-compte/creation-compte.component';
 
 const routes : Routes= [
 
@@ -30,6 +31,7 @@ const routes : Routes= [
   {path : "boutique/personnages", component: BoutiquePersonnagesComponent},
   {path : "accueilJoueur", component: GestionDuCompteComponent},
   {path : "connexion", component: PageConnexionComponent},
+  {path : "newjoueur", component: CreationCompteComponent},
 
   // pour l'admin :
   {path : "gestionAdmin", component: GestionComponent},
