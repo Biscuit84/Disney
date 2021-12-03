@@ -25,7 +25,7 @@ export class PageConnexionComponent implements OnInit {
       this.connexionService.compte = resp;
       this.errorLogin = null;
       if(this.connexionService.compte.role == 'joueur'){
-        this.router.navigate(['acceuilJoueur'])
+        this.router.navigate(['accueilJoueur'])
       }
       else if(this.connexionService.compte.role == 'admin'){
         this.router.navigate(['gestionAdmin'])
