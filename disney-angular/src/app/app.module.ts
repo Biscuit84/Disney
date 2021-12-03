@@ -22,6 +22,7 @@ import { GestionComponent } from './Gestion/gestion.component';
 import { PlateauComponent } from './Gestion/plateau/plateau.component';
 import { PageConnexionService } from './page-connexion/page-connexion.service';
 import { CreationCompteComponent } from './creation-compte/creation-compte.component';
+import { ModificationProfilJoueurComponent } from './modification-profil-joueur/modification-profil-joueur.component';
 
 
 
@@ -42,7 +43,8 @@ import { CreationCompteComponent } from './creation-compte/creation-compte.compo
     BoutiquePersonnagesComponent,
     GestionComponent,
     PlateauComponent,
-    CreationCompteComponent
+    CreationCompteComponent,
+    ModificationProfilJoueurComponent
   ],
   imports: [
     BrowserModule,
