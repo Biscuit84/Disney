@@ -13,7 +13,7 @@ export class PageConnexionComponent implements OnInit {
 
   connexionForm: ConnexionDTO = new ConnexionDTO();
   errorLogin: String;
-  compteConnec: Compte
+  
 
   constructor(private connexionService: PageConnexionService, private router:Router) { }
 
