@@ -49,23 +49,32 @@
                             <button type="button" class="btn bg-transparent dropdown-toggle" data-bs-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                                 <i class="bi bi-cart4"></i><span class="badge badge-primary badge-pill"
-                                    id="nombreElementsDansPanier">0</span>
+                                    id="nombreElementsDansPanier">{{listePersonnagesPanier.length}}</span>
                             </button>
-                            <ul class="dropdown-menu" id="listePanier" onclick="event.stopPropagation()">
-                                <div id="listePersosPanier">
+                            <div class="dropdown-menu">
+                                <ul id="listePanier" class="monPanier" *ngIf="listePersonnagesPanier.length>0">
+                                    <!-- <div *ngIf="listePersonnagesPanier.length>0" id="listePersosPanier"> -->
+                                    <li *ngFor="let p of listePersonnagesPanier"> {{p.nom}}</li>
                                     <!-- construit par la methode afficherListePersoPanier -->
-                                </div>
-                                <div class="dropdown-divider"></div>
-                                <li>Total de la commande: <span class="montantTotalPanier"></span></li>
-                                <li><button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#validerPanierModal1" onclick="afficheRecapCommande()">
-                                        Valider le panier
-                                    </button></li>
-                                <!-- Modal -->
-                                <li><button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    <!-- </div> -->
+                                    <div class="dropdown-divider"></div>
+                                    <li>Total de la commande: <span class="montantTotalPanier"></span></li>
+                                    <li>
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#validerPanierModal1" (click)="afficheRecapCommande()">
+                                            Valider le panier
+                                        </button>
+                                        &nbsp;
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#viderPanierModal2" id="viderPanier">Vider le
-                                        panier</button></li>
-                            </ul>
+                                        panier</button>
+                                    </li>
+                                </ul>
+                                <div *ngIf="listePersonnagesPanier.length==0">
+                                    Votre panier est vide
+                                </div>
+                            </div>
+
                         </div>
 
 
@@ -216,7 +225,7 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
                             <button type="button" class="btn btn-primary" data-bs-target="#exampleModalToggle2"
-                                data-bs-toggle="modal" onclick="validerPanier()" id="liveToastBtn">Valider le
+                                data-bs-toggle="modal" (click)="validerPanier()" id="liveToastBtn">Valider le
                                 panier</button>
                         </div>
                     </div>
@@ -259,7 +268,7 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
                             <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                                onclick="viderPanier()">Oui</button>
+                                (click)="viderPanier()">Oui</button>
                         </div>
                     </div>
                 </div>
@@ -302,15 +311,17 @@
                 <div class="row">
                     <div *ngFor="let p of listAllPersoBoutiqueDto()" class="col pb-4 pd100">
                         <div class="media achat">
-                            <img class="mr-3 portfolio rounded-circle" src='{{p.personnage.avatar}}' alt='{{p.personnage.nom}}'
-                                data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse'+ p.personnage.id"
-                                aria-expanded="false" aria-controls="collapseWidthExample">
+                            <img class="mr-3 portfolio rounded-circle" src='{{p.personnage.avatar}}'
+                                alt='{{p.personnage.nom}}' data-bs-toggle="collapse"
+                                [attr.data-bs-target]="'#collapse'+ p.personnage.id" aria-expanded="false"
+                                aria-controls="collapseWidthExample">
                             <div class="media-body collapse collapse-horizontal mr-200" style="min-height: 180px;"
                                 [attr.id]="'collapse' + p.personnage.id" data-bs-parent="#portfolioCollapse">
                                 <div class="card card-body detail" style="width: 35rem;">
                                     <h2 class="nomPerso">{{p.personnage.nom}}</h2>
                                     <p class="contenuPouvoir" data-bs-toggle="collapse" aria-expanded="false"
-                                        aria-controls="collapseExample" [attr.data-bs-target]="'#collapseChild'+ p.personnage.id">
+                                        aria-controls="collapseExample"
+                                        [attr.data-bs-target]="'#collapseChild'+ p.personnage.id">
                                         {{p.personnage.pouvoir}} &nbsp;</p>
                                     <!-- <img class="iconePouvoir"
                                         src="' + perso.pouvoirImg + '" /> -->
@@ -319,12 +330,13 @@
                                             TODO : avant ici ct la description des pouvoir
                                         </div>
                                     </div>
-                                    <p class="prix"> {{p.personnage.prixAchatPerso}}&nbsp;<i class="fas fa-star etoile"></i>
+                                    <p class="prix"> {{p.personnage.prixAchatPerso}}&nbsp;<i
+                                            class="fas fa-star etoile"></i>
                                     </p>
                                     <div class="divBouton" [attr.id]="p.personnage.id + p.personnage.prixAchatPerso">
-                                        <button type="button" class="btn btn-info btn-sm bouton" [attr.id]="p.personnage.id"
-                                            (click)="ajouterAuPanier(p.personnage.id)"><i class="fas fa-cart-plus"
-                                                style="color: white"></i> Acheter</button>
+                                        <button type="button" class="btn btn-info btn-sm bouton"
+                                            [attr.id]="p.personnage.id" (click)="ajouterAuPanier(p.personnage)"><i
+                                                class="fas fa-cart-plus" style="color: white"></i> Acheter</button>
                                     </div>
                                 </div>
                             </div>

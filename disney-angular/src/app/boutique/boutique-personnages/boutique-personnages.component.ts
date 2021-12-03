@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { PersonnageHttpService } from 'src/app/personnage-http.service';
-import { BoutiqueDto, Personnage, PersonnageDto } from 'src/model';
+import { BoutiqueDto, Compte, Personnage, PersonnageDto } from 'src/model';
 import { BoutiqueHttpService } from '../boutique-http.service';
-
+import * as $ from 'jquery';
+import { PageConnexionService } from 'src/app/page-connexion/page-connexion.service';
+// declare var $:JQueryStatic;
 
 @Component({
   selector: 'app-boutique-personnages',
@@ -12,14 +14,27 @@ import { BoutiqueHttpService } from '../boutique-http.service';
 export class BoutiquePersonnagesComponent implements OnInit {
 
   personnageForm: Personnage;
-  portfolio:string="";
-  boutiquePerso: Array<PersonnageDto>= new Array<PersonnageDto>();
+  portfolio: string = "";
+  boutiquePerso: Array<PersonnageDto> = new Array<PersonnageDto>();
+  listePersonnagesPanier: Array<Personnage> = new Array<Personnage>();
   boutiques: BoutiqueDto;
+  prixTotalPanier: number = 0;
+  compte: Compte;
+  nombreEtoilesJoueur:number;
+  joueur:Compte;
 
-  constructor(private persoService: PersonnageHttpService, private boutiqueService : BoutiqueHttpService) { }
+  constructor(private pageConnexionService: PageConnexionService ,private persoService: PersonnageHttpService, private boutiqueService: BoutiqueHttpService) {
+    // this.compte= pageConnexionService.connexion;
+    this.joueur= this.pageConnexionService.compte;
+    // this.nombreEtoileJoueur=this.joueur.nbEtoiles
+   }
 
   ngOnInit(): void {
   }
+
+  // connecJoueur(){
+  //   this.pageConnexionService.connexion().;
+  // }
 
   // list(): Array<Personnage> {
   //   return this.boutiquePersoService.findAll();
@@ -32,16 +47,70 @@ export class BoutiquePersonnagesComponent implements OnInit {
   listAllPersoBoutiqueDto(): Array<PersonnageDto> {
     this.boutiques = this.boutiqueService.findBoutique();
     // this.boutiquePerso= this.boutiques
+    this.boutiquePerso = this.boutiques.personnages;
+
+    return this.boutiquePerso;
+  }
+
+nombreEtoileJoueur(id: number){
+
+}
 
 
-    return this.boutiques.personnages;
+  viderPanier() {
+
+  }
+
+  validerPanier() {
+
+  }
+
+  afficheRecapCommande() {
+
+  }
+
+
+  ajouterAuPanier(personnage: Personnage) {
+    this.listePersonnagesPanier.push(personnage);
+    console.log("ma list dans le panier : {}", this.listePersonnagesPanier);
+  }
+
+
+  // somme des achats en etoile: 
+  montantDuPanier() {
+    this.prixTotalPanier = 0;
+    for (let p of this.listePersonnagesPanier) {
+      // console.log(p.prix);
+      this.prixTotalPanier = (this.prixTotalPanier + p.prixAchatPerso);
+
+    }
+
+    $(".montantTotalPanier").html(this.prixTotalPanier + '<i class="fas fa-star etoile"></i>');
+  }
+
+
+  afficherListePersoPanier() {
+    // let li = "";
+    // this.listePersonnagesPanier.forEach(function (pp) {
+    //     console.log("pp : ", pp);
+    //     li += '<li class="itemAchatPerso" >' + pp.personnage.nom + ': ' + pp.personnage.prixAchatPerso + ' <i class="fas fa-star etoile"></i> <button type="button" class="btn " onclick="removePerso(id)" id="' + pp.personnage.nom + '"> <i class="far fa-trash-alt poubelle"></i> </button> </li>';
+    // });
+
+    // document.getElementById("listePersosPanier").innerHTML = li;
   }
 
 
 
-  ajouterAuPanier(event){
-    
+  //Afficher le bouton Panier seulement si on achète des choses
+  afficherListePanier() {
+    // if (this.listePersonnagesPanier.length > 0) {
+    //     $("#listePanier").css("visibility", "visible");
+    // } else {
+    //     $("#listePanier").css("visibility", "hidden");
+    // }
+
   }
+
 
   // add() {
   //   this.personnageForm = new Personnage();
@@ -71,52 +140,52 @@ export class BoutiquePersonnagesComponent implements OnInit {
   //   this.boutiquePersoService.deleteById(id);
   // }
 
-// loadPortfolio() : string{
-//   this.portfolio= "";
-//   var nb : number=0;
+  // loadPortfolio() : string{
+  //   this.portfolio= "";
+  //   var nb : number=0;
 
-//  var listePersonnages : Array<Personnage> = new Array<Personnage>();
-//   listePersonnages= this.persoService.findAll();
+  //  var listePersonnages : Array<Personnage> = new Array<Personnage>();
+  //   listePersonnages= this.persoService.findAll();
 
-// for (let perso of listePersonnages){
-// //si on est modulo 3 et que l'on ne vient pas juste de rajouter un ligne
-// if (nb % 3 == 0 && nb !== 0) {
-//   // je ferme ma balise row
-//   this.portfolio += '</div>';
-//   this.portfolio += '<br/>';
-// }
-// //on met 3 perso par ligne
-// if (nb % 3 == 0) {
-//   this.portfolio += '<div class="row">';
-// }
-// this.portfolio += '<div class="media achat col">';
-// this.portfolio += '<img class="mr-3 portfolio rounded-circle" src="' + perso.avatar + '" alt="' + perso.nom + '" data-bs-toggle="collapse" data-bs-target="#collapse' + perso.id + '" aria-expanded="false" aria-controls="collapseWidthExample">'
-// this.portfolio += '<div class="media-body collapse collapse-horizontal mr-200" style="min-height: 180px;" id="collapse' + perso.id + '" data-bs-parent="#portfolioCollapse">';
-// this.portfolio += '<div class="card card-body detail" style="width: 35rem;">';
-// this.portfolio += '<h2 class="nomPerso">' + perso.nom + '</h2>';
-// // portolio += '<p class="contenuPouvoir" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseExample" data-bs-target="#collapseChild' + perso.id + '">' + perso.pouvoirLibelle + '&nbsp; <img class="iconePouvoir" src="' + perso.pouvoirImg + '" /></p>';
-// // portolio += '<div class="collapse" id="collapseChild' + perso.id + '">';
-// // portolio += '<div class="card card-body descriptionPouvoir">'
-// // portolio += perso.pouvoirDescription;
-// // portolio += '</div>';
-// // portolio += '</div>';
-// this.portfolio += '<p class="prix">' + perso.prixAchatPerso + '&nbsp;<i class="fas fa-star etoile"></i></p>';
-// this.portfolio += '<div class="divBouton" id="' + perso.id + perso.prixAchatPerso + '">';
-// this.portfolio += '<button type="button" class="btn btn-info btn-sm bouton" id="' + perso.id + '" onclick="ajouterAuPanier(id)"><i class="bi bi-star-fill" style:color="yellow"></i> Acheter</button>';
-// this.portfolio += '</div>';
-// this.portfolio += '</div>';
-// this.portfolio += '</div>';
-// // fin de la div media achat col
-// this.portfolio += '</div>'
-// nb++;
-// // si je suis sur mon dernier perso, je close ma balise row
-// if (nb == listePersonnages.length) {
-//   // je ferme ma balise row
-//   this.portfolio += '</div>';
-// }
-// };
+  // for (let perso of listePersonnages){
+  // //si on est modulo 3 et que l'on ne vient pas juste de rajouter un ligne
+  // if (nb % 3 == 0 && nb !== 0) {
+  //   // je ferme ma balise row
+  //   this.portfolio += '</div>';
+  //   this.portfolio += '<br/>';
+  // }
+  // //on met 3 perso par ligne
+  // if (nb % 3 == 0) {
+  //   this.portfolio += '<div class="row">';
+  // }
+  // this.portfolio += '<div class="media achat col">';
+  // this.portfolio += '<img class="mr-3 portfolio rounded-circle" src="' + perso.avatar + '" alt="' + perso.nom + '" data-bs-toggle="collapse" data-bs-target="#collapse' + perso.id + '" aria-expanded="false" aria-controls="collapseWidthExample">'
+  // this.portfolio += '<div class="media-body collapse collapse-horizontal mr-200" style="min-height: 180px;" id="collapse' + perso.id + '" data-bs-parent="#portfolioCollapse">';
+  // this.portfolio += '<div class="card card-body detail" style="width: 35rem;">';
+  // this.portfolio += '<h2 class="nomPerso">' + perso.nom + '</h2>';
+  // // portolio += '<p class="contenuPouvoir" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseExample" data-bs-target="#collapseChild' + perso.id + '">' + perso.pouvoirLibelle + '&nbsp; <img class="iconePouvoir" src="' + perso.pouvoirImg + '" /></p>';
+  // // portolio += '<div class="collapse" id="collapseChild' + perso.id + '">';
+  // // portolio += '<div class="card card-body descriptionPouvoir">'
+  // // portolio += perso.pouvoirDescription;
+  // // portolio += '</div>';
+  // // portolio += '</div>';
+  // this.portfolio += '<p class="prix">' + perso.prixAchatPerso + '&nbsp;<i class="fas fa-star etoile"></i></p>';
+  // this.portfolio += '<div class="divBouton" id="' + perso.id + perso.prixAchatPerso + '">';
+  // this.portfolio += '<button type="button" class="btn btn-info btn-sm bouton" id="' + perso.id + '" onclick="ajouterAuPanier(id)"><i class="bi bi-star-fill" style:color="yellow"></i> Acheter</button>';
+  // this.portfolio += '</div>';
+  // this.portfolio += '</div>';
+  // this.portfolio += '</div>';
+  // // fin de la div media achat col
+  // this.portfolio += '</div>'
+  // nb++;
+  // // si je suis sur mon dernier perso, je close ma balise row
+  // if (nb == listePersonnages.length) {
+  //   // je ferme ma balise row
+  //   this.portfolio += '</div>';
+  // }
+  // };
 
-// return this.portfolio;
-// }
+  // return this.portfolio;
+  // }
 
 }
