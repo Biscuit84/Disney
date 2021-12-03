@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PersonnageHttpService } from 'src/app/personnage-http.service';
-import { Personnage } from 'src/model';
-import { BoutiquePersoHttpService } from './boutique-perso-http.service';
+import { BoutiqueDto, Personnage, PersonnageDto } from 'src/model';
+import { BoutiqueHttpService } from '../boutique-http.service';
+
 
 @Component({
   selector: 'app-boutique-personnages',
@@ -12,8 +13,10 @@ export class BoutiquePersonnagesComponent implements OnInit {
 
   personnageForm: Personnage;
   portfolio:string="";
+  boutiquePerso: Array<PersonnageDto>= new Array<PersonnageDto>();
+  boutiques: BoutiqueDto;
 
-  constructor(private persoService: PersonnageHttpService) { }
+  constructor(private persoService: PersonnageHttpService, private boutiqueService : BoutiqueHttpService) { }
 
   ngOnInit(): void {
   }
@@ -22,9 +25,19 @@ export class BoutiquePersonnagesComponent implements OnInit {
   //   return this.boutiquePersoService.findAll();
   // }
 
-  listAllPerso():Array<Personnage> {
+  listAllPerso(): Array<Personnage> {
     return this.persoService.findAll();
   }
+
+  listAllPersoBoutiqueDto(): Array<PersonnageDto> {
+    this.boutiques = this.boutiqueService.findBoutique();
+    // this.boutiquePerso= this.boutiques
+
+
+    return this.boutiques.personnages;
+  }
+
+
 
   ajouterAuPanier(event){
     

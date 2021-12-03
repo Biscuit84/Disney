@@ -129,11 +129,49 @@ export class Etoile {
 
 }
 
-export class PersonnageDto {
+export class Personnage {
+  id: number;
+  version: number;
+  nom: string;
+  prince: string;
+  mechant: string;
+  pouvoir: string;
+  position: CasesPlateau;
+  prixAchatPerso: number;
+  avatar: string;
+
+
+  constructor(
+    id?: number,
+    version?: number,
+    nom?: string,
+    prince?: string,
+    mechant?: string,
+    pouvoir?: string,
+    position?: CasesPlateau,
+    prixAchatPerso?: number,
+    avatar?: string
+  ) {
+    this.id = id
+    this.version = version
+    this.nom = nom
+    this.prince = prince
+    this.mechant = mechant
+    this.pouvoir = pouvoir
+    this.position = position
+    this.prixAchatPerso = prixAchatPerso
+    this.avatar = avatar
+  }
+
+
+}
+
+export class PersonnageDto extends Personnage {
   personnage: Personnage;
   persoDejaEnPossession: boolean;
 
   constructor(personnage?: Personnage, persoDejaEnPossession?: boolean) {
+    super();
     this.personnage = personnage
     this.persoDejaEnPossession = persoDejaEnPossession
   }
@@ -178,6 +216,8 @@ export class BoutiquePersoAndLifeDto {
  
 
 }
+
+
 
 export class Partie {
   id: number;
@@ -311,42 +351,7 @@ export class CasesPlateau {
 
 }
 
-export class Personnage {
-  id: number;
-  version: number;
-  nom: string;
-  prince: string;
-  mechant: string;
-  pouvoir: string;
-  position: CasesPlateau;
-  prixAchatPerso: number;
-  avatar: string;
 
-
-  constructor(
-    id?: number,
-    version?: number,
-    nom?: string,
-    prince?: string,
-    mechant?: string,
-    pouvoir?: string,
-    position?: CasesPlateau,
-    prixAchatPerso?: number,
-    avatar?: string
-  ) {
-    this.id = id
-    this.version = version
-    this.nom = nom
-    this.prince = prince
-    this.mechant = mechant
-    this.pouvoir = pouvoir
-    this.position = position
-    this.prixAchatPerso = prixAchatPerso
-    this.avatar = avatar
-  }
-
-
-}
 
 export class PersoObtenu {
   id: number;
