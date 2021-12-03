@@ -300,30 +300,30 @@
             <div id="portfolioCollapse">
                 <!-- CREATION DYNAMIQUE DES PORTFOLIO ICI -->
                 <div class="row">
-                    <div *ngFor="let p of listAllPerso()" class="col pb-4 pd100">
+                    <div *ngFor="let p of listAllPersoBoutiqueDto()" class="col pb-4 pd100">
                         <div class="media achat">
-                            <img class="mr-3 portfolio rounded-circle" src='{{p.avatar}}' alt='{{p.nom}}'
-                                data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse'+ p.id"
+                            <img class="mr-3 portfolio rounded-circle" src='{{p.personnage.avatar}}' alt='{{p.personnage.nom}}'
+                                data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse'+ p.personnage.id"
                                 aria-expanded="false" aria-controls="collapseWidthExample">
                             <div class="media-body collapse collapse-horizontal mr-200" style="min-height: 180px;"
-                                [attr.id]="'collapse' + p.id" data-bs-parent="#portfolioCollapse">
+                                [attr.id]="'collapse' + p.personnage.id" data-bs-parent="#portfolioCollapse">
                                 <div class="card card-body detail" style="width: 35rem;">
-                                    <h2 class="nomPerso">{{p.nom}}</h2>
+                                    <h2 class="nomPerso">{{p.personnage.nom}}</h2>
                                     <p class="contenuPouvoir" data-bs-toggle="collapse" aria-expanded="false"
-                                        aria-controls="collapseExample" [attr.data-bs-target]="'#collapseChild'+ p.id">
-                                        {{p.pouvoir}} &nbsp;</p>
+                                        aria-controls="collapseExample" [attr.data-bs-target]="'#collapseChild'+ p.personnage.id">
+                                        {{p.personnage.pouvoir}} &nbsp;</p>
                                     <!-- <img class="iconePouvoir"
                                         src="' + perso.pouvoirImg + '" /> -->
-                                    <div class="collapse" [attr.id]="'collapseChild' + p.id">
+                                    <div class="collapse" [attr.id]="'collapseChild' + p.personnage.id">
                                         <div class="card card-body descriptionPouvoir">
                                             TODO : avant ici ct la description des pouvoir
                                         </div>
                                     </div>
-                                    <p class="prix"> {{p.prixAchatPerso}}&nbsp;<i class="fas fa-star etoile"></i>
+                                    <p class="prix"> {{p.personnage.prixAchatPerso}}&nbsp;<i class="fas fa-star etoile"></i>
                                     </p>
-                                    <div class="divBouton" [attr.id]="p.id + p.prixAchatPerso">
-                                        <button type="button" class="btn btn-info btn-sm bouton" [attr.id]="p.id"
-                                            (click)="ajouterAuPanier(p.id)"><i class="fas fa-cart-plus"
+                                    <div class="divBouton" [attr.id]="p.personnage.id + p.personnage.prixAchatPerso">
+                                        <button type="button" class="btn btn-info btn-sm bouton" [attr.id]="p.personnage.id"
+                                            (click)="ajouterAuPanier(p.personnage.id)"><i class="fas fa-cart-plus"
                                                 style="color: white"></i> Acheter</button>
                                     </div>
                                 </div>

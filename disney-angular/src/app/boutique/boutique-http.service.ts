@@ -10,21 +10,23 @@ import { AppConfigService } from '../app-config.service';
 export class BoutiqueHttpService {
 
   boutiqueDto: BoutiqueDto = new BoutiqueDto();
-  boutique: Boutique= new Boutique();
+  boutique: Boutique = new Boutique();
+  // boutiques: Array<BoutiqueDto> = new Array <BoutiqueDto>();
   boutiqueUrl: string;
+  idJoueur: number = 2;
 
   constructor(private http: HttpClient, private appConfig: AppConfigService) {
     this.boutiqueUrl = this.appConfig.backEndUrl + "boutique/"
-    // this.load();
+    this.load(this.idJoueur);
   }
 
-  // findAll(): Array<Personnage> {
-  //   return this.personnages;
+  findBoutique(): BoutiqueDto {
+    return this.boutiqueDto;
+  }
+
+  // findBoutiqueBase(id: number): Boutique {
+  //   return this.http.get<Boutique>(this.boutiqueUrl + id);
   // }
-
-  findByIdWithDetail(id: number): Observable<Boutique> {
-    return this.http.get<Boutique>(this.boutiqueUrl + id);
-  }
 
   // create(personnage: Personnage) {
   //   this.http.post<Personnage>(this.persoUrl, personnage).subscribe(resp => {
@@ -44,7 +46,7 @@ export class BoutiqueHttpService {
   //   }, error => console.log(error));
   // }
 
-  load(id : number) {
+  load(id: number) {
     this.http.get<BoutiqueDto>(this.boutiqueUrl + id).subscribe(response => {
       this.boutiqueDto = response;
     }, error => console.log(error));
