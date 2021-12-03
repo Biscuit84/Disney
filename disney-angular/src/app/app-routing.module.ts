@@ -28,7 +28,7 @@ const routes : Routes= [
   {path : "jeu/findepartie", component: FinDePartieComponent},
   {path : "boutique", component: BoutiqueComponent},
   {path : "boutique/personnages", component: BoutiquePersonnagesComponent},
-  {path : "compte", component: GestionDuCompteComponent},
+  {path : "accueilJoueur", component: GestionDuCompteComponent},
   {path : "connexion", component: PageConnexionComponent},
 
   // pour l'admin :

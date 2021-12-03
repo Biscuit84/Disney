@@ -15,21 +15,21 @@ export class EcranDeJeuComponent implements OnInit {
 
 
   // variables : 
-  velocityH: number = 1; // nb de pixel d'avancement du pion par raffraichissement (10ms)
-  velocityW: number = 1;
-  tauxRaffraichissement: number = 10; // vitesse du setinterval
-  niveauDeVitesseDuPion: number = 1;
+  public velocityH: number = 1; // nb de pixel d'avancement du pion par raffraichissement (10ms)
+  public velocityW: number = 1;
+  public tauxRaffraichissement: number = 10; // vitesse du setinterval
+  public niveauDeVitesseDuPion: number = 1;
   // vitesse
-  valeurdelavitesse: number = 1;
-  slider = document.getElementById("vitesseRange");
-  output = document.getElementById("vitesse");
+  public valeurdelavitesse: number = 1;
+  public slider = document.getElementById("vitesseRange");
+  public output = document.getElementById("vitesse");
 
   // lancement partie var
-  partieEnCours: boolean = true;
-  Tour: number = 0;
-  joueurActuel: number = 0;
-  tourActuel = document.getElementById("NbTour");
-  tourJoueur = document.getElementById("JoueurTour");
+  public partieEnCours: boolean = true;
+  public Tour: number = 0;
+  public joueurActuel: number = 0;
+  public tourActuel = document.getElementById("NbTour");
+  public tourJoueur = document.getElementById("JoueurTour");
 
   // nombre de case du plateau
 
@@ -38,14 +38,14 @@ export class EcranDeJeuComponent implements OnInit {
   //nbcasePlateau:number = format[0];
   //nBcaseW:number = format[1];
   //vnBcaseH:number = format[2];
-  nbcasePlateau: number = 61;
-  nBcaseW: number = 8;
-  nBcaseH: number = 8;
+  public nbcasePlateau: number = 61;
+  public nBcaseW: number = 8;
+  public nBcaseH: number = 8;
 
-  nombreDe=2;
-  valeurDesDes:number =0;
+  public nombreDe:number=2;
+  public valeurDesDes:number =0;
 
-  listeCases = [];
+  public listeCases = [];
 
   // taille du canvas
   //w:number=800;
@@ -58,12 +58,12 @@ export class EcranDeJeuComponent implements OnInit {
   //w = this.wMax - (this.wMax%this.nBcaseW); // pour couper les cases proprement
   //h= this.hMax - (this.hMax%this.nBcaseH);
 
-  w: number = 800;
-  h: number = 800;
+  public w: number = 800;
+  public h: number = 800;
 
   // taille des cases
-  taillecaseW: number = this.w / this.nBcaseW;
-  taillecaseH: number = this.h / this.nBcaseH;
+  public taillecaseW: number = this.w / this.nBcaseW;
+  public taillecaseH: number = this.h / this.nBcaseH;
 
   //initialisation des canvas : 
   ctxPlateau: CanvasRenderingContext2D;
@@ -88,6 +88,7 @@ export class EcranDeJeuComponent implements OnInit {
   imagePlayerIA1 = new Image();
   imagePlayerIA2 = new Image();
   imagePlayerIA3 = new Image();
+
 
 
   // création des objets pion
@@ -132,6 +133,7 @@ ngOnInit() {
   listePion.push(pionIA3);
   console.log(listePion);
 
+ 
 
   //this.Render();
 
@@ -170,11 +172,11 @@ ngOnDestroy() {
 ////////////////////////// Methode de la classe  //////////////////////////
 
 Play(){
-  this.Jouer(this.pionJoueur); // sauf qu'on recupere pas les données ici :/ 
+  this.Jouer(this, this.pionJoueur); 
 }
 
 EndTurn(){
-
+  this.FinDeTour(this.pionJoueur); 
 }
 
 
@@ -301,7 +303,7 @@ drawPlayer = function (self, pion) {
 
 
   let diff: number = pion.positionIndexCasePlayer - pion.futurePositionIndexCasePlayer;
-
+ console.log("on doit bouger de " + diff)
 
   // rentre dans la boucle seulement si l'index <= à la longueur de la liste des cases du plateau
   if (pion.positionIndexCasePlayerSuivante <= this.nbcasePlateau - 1 || pion.positionIndexCasePlayerPrecedente >= 0) {
@@ -412,7 +414,7 @@ drawPlayer = function (self, pion) {
 
 
 // permet de jouer
-Jouer(pion) {
+Jouer(self, pion) {
 
   playSoundDice();
   this.roulementDe();
@@ -420,7 +422,7 @@ Jouer(pion) {
   console.log("c'est le pion :" + pion.numeroPassage);
 
 
-  setTimeout(this.TourJoueur, 2200, pion);  //setTimeout(TourJoueur(pionJoueur), 2200); //marche pas  //setTimeout(function() {TourJoueur(pionJoueur);}, 2200); //autre ecriture
+  setTimeout(this.TourJoueur, 2200, this, pion);  //setTimeout(TourJoueur(pionJoueur), 2200); //marche pas  //setTimeout(function() {TourJoueur(pionJoueur);}, 2200); //autre ecriture
   //this.joueurActuel = pion.numeroPassage;
 
   /*
@@ -483,9 +485,9 @@ FinDeTour(pion) {
 
 
 // lances les dés et donne la valeur que doit atteindre le pion
-TourJoueur(pion) {
+TourJoueur(self, pion) {
 
-  
+  console.log(this.taillecaseH);
 
   // Affiche la valeur du dé dans le html
   //var monDeAvance = document.getElementById("valeurDeAvance");
@@ -493,19 +495,35 @@ TourJoueur(pion) {
 
   let totalDe = 0;
   //random de 1 à 6s
-   let lanceDe = this.DiceValue("imageDe");
+  //var idDe = "imageDe";
+  let lanceDe:number = Math.floor(Math.random() * 6) + 1;
+  //let lanceDe = this.DiceValue(idDe);
+  // let lanceDe = this.DiceValue("imageDe");
+  console.log(this.nombreDe + "des")
    if (this.nombreDe == 1) {
      totalDe = lanceDe;
    }
    else if (this.nombreDe == 2) {
-     var lanceDe2 = this.DiceValue("imageDe2");
+    let lanceDe2:number = Math.floor(Math.random() * 6) + 1;
+     //var lanceDe2 = this.DiceValue("imageDe2");
      totalDe = lanceDe + lanceDe2;
+     console.log("lanceDe2");
+     console.log(lanceDe2);
    }
-
+  totalDe = 6;
   this.valeurDesDes = totalDe;
   //monDeAvance.innerHTML = toString(thtotalDe);
 
-  
+  console.log("lanceDe");
+  console.log(lanceDe);
+
+
+
+  console.log("pion.positionIndexCasePlayer");
+  console.log(pion.positionIndexCasePlayer);
+  console.log("totalDe");
+  console.log(totalDe);
+
   //calcule le nouvel index:
   var nouvelIndex = Number(pion.positionIndexCasePlayer) + Number(totalDe);
 
@@ -523,6 +541,8 @@ TourJoueur(pion) {
 
   //détermine la future position X et Y du player
   pion.futurePositionIndexCasePlayer = nouvelIndex;
+  console.log("pion.futurePositionIndexCasePlayer");
+  console.log(pion.futurePositionIndexCasePlayer);
   //// TODO: faire les actions/pouvoirs des joueurs
 }
 
