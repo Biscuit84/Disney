@@ -33,7 +33,7 @@
                                             class="bi bi-trophy-fill"></i></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="nombreEtoilesJoueur" href="#">Nombre d'étoiles <i
+                                    <a class="nav-link" id="nombreEtoilesJoueur" href="#">Nombre d'étoiles: {{joueur.nbEtoiles}} <i
                                             class="bi bi-star-fill"></i></a>
                                 </li>
                                 <li class="nav-item">
@@ -217,10 +217,11 @@
                         <div class="modal-body">
                             <h6>Etes-vous sur de vouloir valider le panier?</h6>
                             <p>Récapitulatif de la commande:</p>
+                            <span *ngFor="let p of afficheRecapCommande()">{{p.nom}} {{p.prixAchatPerso}} <br></span>
                             <ul id="recapCommande"></ul>
                             <br>
                             <h6>Total de la commande:</h6>
-                            <p class="montantTotalPanier"></p>
+                            <p class="montantTotalPanier"> {{prixTotalPanier}}</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
@@ -334,9 +335,11 @@
                                             class="fas fa-star etoile"></i>
                                     </p>
                                     <div class="divBouton" [attr.id]="p.personnage.id + p.personnage.prixAchatPerso">
-                                        <button type="button" class="btn btn-info btn-sm bouton"
-                                            [attr.id]="p.personnage.id" (click)="ajouterAuPanier(p.personnage)"><i
+                                        <!-- <span [ngClass]="{'negatif':client.ca<0}"> -->
+                                        <button type="button" class="btn btn-info btn-sm bouton" id=p.personnage
+                                            [attr.id]="p.personnage.id" [disabled]="isDisabled" (click)="ajouterAuPanier(p.personnage)"><i
                                                 class="fas fa-cart-plus" style="color: white"></i> Acheter</button>
+                                        <!-- </span> -->
                                     </div>
                                 </div>
                             </div>
