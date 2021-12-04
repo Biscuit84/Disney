@@ -99,6 +99,14 @@ public  class Cases {
 		return "Cases [nom=" + nom + ", parameter=" + parameter + ", version=" + version + "]";
 	}
 
+	public TypeCase getTypeCase() {
+		return typeCase;
+	}
+
+	public void setTypeCase(TypeCase typeCase) {
+		this.typeCase = typeCase;
+	}
+
 
 
 

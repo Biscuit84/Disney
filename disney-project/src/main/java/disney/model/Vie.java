@@ -24,6 +24,8 @@ public class Vie {
 
 	// prix en fonction du nombre (1vie =100etoiles, 3vies=250etoiles...)
 	private int prix;
+	
+	private String image;
 
 	public Vie(int nombre, int prix) {
 		super();
@@ -73,6 +75,16 @@ public class Vie {
 
 	public void setVersion(int version) {
 		this.version = version;
+	}
+	
+	
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	@Override
