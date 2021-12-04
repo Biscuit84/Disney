@@ -1,11 +1,15 @@
-body {
+#page {
+    top: 7vh;
     width: 100%;
-    height: 100%;
+    height: 93vh;
     margin: 0px;
     background-image: url(../../assets/images/princess.png);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
+    position: absolute;
+    display: flex;
+ 
   }
 
   footer {
@@ -18,7 +22,7 @@ body {
 
   #ecranconnec {
     width: 100%;
-    height: 800px;
+    /*height: 800px;*/
     display: flex;
     justify-content: center;
     align-items: center;
@@ -57,7 +61,7 @@ body {
     opacity: 1
   }
 
-  .card-header {
+  /* .card-header {
     font-weight: bold;
   }
 
@@ -83,7 +87,7 @@ body {
   .navbar {
     padding-top: 0rem;
     padding-bottom: 0rem;
-  }
+  } */
 
 /* #champsFormulaire{
   display: flex;

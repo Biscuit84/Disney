@@ -4,7 +4,9 @@
 
 #back{
   background-image: url(https://cdn.discordapp.com/attachments/892028003289301084/916322919150391306/GV3QZBp581hNYk68cVFFuBtRVkIqrYg3vBrWvfboX6XT_tGak1SPsJXatTiIDvuk5cxhMJJ3IR60qZ7YkRB5Swh0YHsmIy4vU9m4fpze63XpOG_WUvJGZw9wtUgkqik.png);
-
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 #ecran-compte{
