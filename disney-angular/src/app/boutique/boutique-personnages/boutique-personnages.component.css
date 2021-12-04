@@ -85,7 +85,8 @@
 /* pour mettre l'image sur la card : */
 
 .mr-200 {
-  margin-left: -200px;
+  margin-left: -195px;
+  margin-top: 8px;
 }
 
 .portfolio:hover {
@@ -124,6 +125,7 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 1.5rem;
   font-style: italic;
+  /* padding-bottom: 35px; */
 }
 
 .etoile {

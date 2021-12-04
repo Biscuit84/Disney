@@ -232,11 +232,11 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Validation de la commande</h5>
+                            <h1 class="modal-title" id="exampleModalLabel">Validation de la commande</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <h6>Etes-vous sur de vouloir valider le panier?</h6>
+                            <h3>Etes-vous sur de vouloir valider le panier?</h3>
                             <p>Récapitulatif de la commande:</p>
                             <span *ngFor="let p of afficheRecapCommande()">{{p.nom}} {{p.prixAchatPerso}}
                                 <i class="fas fa-star etoile"></i> <br>
@@ -248,7 +248,7 @@
                             <ul id="recapCommande"></ul>
 
                             <br>
-                            <h6>Total de la commande:</h6>
+                            <h3>Total de la commande:</h3>
                             <p class="montantTotalPanier"> {{prixTotalPanier}} <i class="fas fa-star etoile"></i></p>
 
                             <p *ngIf="joueur.nbEtoiles < prixTotalPanier" class="red">Votre solde est insuffisant. Pour
@@ -269,9 +269,9 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalToggleLabel2">
+                            <h1 class="modal-title" id="exampleModalToggleLabel2">
                                 <!-- Affichage automatique par JS -->
-                            </h5>
+                            </h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body" id="messageAchatPanier">
@@ -292,11 +292,11 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Vider le panier</h5>
+                            <h1 class="modal-title" id="exampleModalLabel">Vider le panier</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <h6>Etes-vous sur de vouloir vider le panier?</h6>
+                            <h3>Etes-vous sur de vouloir vider le panier?</h3>
                             <p id="recapCommande"></p>
                         </div>
                         <div class="modal-footer">
@@ -315,11 +315,11 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Se déconnecter</h5>
+                            <h1 class="modal-title" id="exampleModalLabel">Se déconnecter</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <h6>Etes-vous sur de vouloir vous déconnecter?</h6>
+                            <h3>Etes-vous sur de vouloir vous déconnecter?</h3>
                             <p id="recapCommande"></p>
                         </div>
                         <div class="modal-footer">
@@ -352,11 +352,11 @@
                             <div class="media-body collapse collapse-horizontal mr-200" style="min-height: 180px;"
                                 [attr.id]="'collapse' + p.personnage.id" data-bs-parent="#portfolioCollapse">
                                 <div class="card card-body detail" style="width: 35rem;">
-                                    <h2 class="nomPerso">{{p.personnage.nom}}</h2>
-                                    <p class="contenuPouvoir" data-bs-toggle="collapse" aria-expanded="false"
+                                    <h1 class="nomPerso">{{p.personnage.nom}}</h1>
+                                    <h3 class="contenuPouvoir" data-bs-toggle="collapse" aria-expanded="false"
                                         aria-controls="collapseExample"
                                         [attr.data-bs-target]="'#collapseChild'+ p.personnage.id">
-                                        {{p.personnage.pouvoir}} &nbsp;</p>
+                                        {{p.personnage.pouvoir}} &nbsp;</h3>
                                     <!-- <img class="iconePouvoir"
                                         src="' + perso.pouvoirImg + '" /> -->
                                     <div class="collapse" [attr.id]="'collapseChild' + p.personnage.id">
@@ -403,7 +403,7 @@
                     <div class="card borderAjust" style="width: 18rem;">
                         <img src="../../assets/images/Disney_Princesses_Selfie.jpg" class="card-img-top borderImage" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Package {{vie.nombre}} <i class="fas fa-heart coeur"></i></h5>
+                            <h1 class="card-title">Package {{vie.nombre}} <i class="fas fa-heart coeur"></i></h1>
                             <p class="card-text">Prix : {{vie.prix}} <i class="fas fa-star etoile"></i></p>
                             <div class="boutonVie"> <button type="button" class="btn btn-info btn-sm bouton" id="vie" [attr.id]="vie.id"
                                 (click)="ajouterVieAuPanier(vie)"><i class="fas fa-cart-plus" style="color: white"></i>
@@ -420,7 +420,7 @@
                         <div class="card h-100 itemsBoutique">
                             <img src="../../assets/images/Disney_Princesses_Selfie.jpg" class="card-img-top" alt="...">
                             <div class="card-body">
-                                <h5 class="card-title">Nombre : {{vie.nombre}}</h5>
+                                <h1 class="card-title">Nombre : {{vie.nombre}}</h1>
                                 <p class="card-text">Prix : {{vie.prix}}</p>
                                 <div class="divBouton" [attr.id]="vie.id + vie.prix"></div>
                             </div>
@@ -436,7 +436,7 @@
 
                 <!-- <div class="card col" style="width: 18rem;">
                     <div class="card-body">
-                        <h5 class="card-title">Nombre : {{vie.nombre}}</h5>
+                        <h1 class="card-title">Nombre : {{vie.nombre}}</h1>
                         <p class="card-text">Prix : {{vie.prix}}</p>
                         <div class="divBouton" [attr.id]="vie.id + vie.prix">
                              <span [ngClass]="{'negatif':client.ca<0}"> -->
