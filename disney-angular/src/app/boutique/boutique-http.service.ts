@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Boutique, BoutiqueDto, BoutiquePersoAndLifeDto, Compte} from 'src/model';
+import { Boutique, BoutiqueDto, BoutiqueEtoileDto, BoutiquePersoAndLifeDto, Compte} from 'src/model';
 import { AppConfigService } from '../app-config.service';
 import { PageConnexionService } from '../page-connexion/page-connexion.service';
 
@@ -31,6 +31,10 @@ export class BoutiqueHttpService {
 
   achatBoutique(panierDto: BoutiquePersoAndLifeDto){
     return this.http.put(this.boutiqueUrl+ this.joueur.id, panierDto);
+  }
+
+  achatBoutiqueEtoile(panierDto: BoutiqueEtoileDto){
+    return this.http.put(this.boutiqueUrl+ this.joueur.id+"/etoiles", panierDto);
   }
 
   // findBoutiqueBase(id: number): Boutique {

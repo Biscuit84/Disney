@@ -49,39 +49,23 @@
                             <button type="button" class="btn bg-transparent dropdown-toggle" data-bs-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                                 <i class="bi bi-cart4"></i><span class="badge badge-primary badge-pill"
-                                    id="nombreElementsDansPanier">{{listePersonnagesPanier.length +
-                                    listeViePanier.length}}</span>
+                                    id="nombreElementsDansPanier">{{listeEtoilesPanier.length}}</span>
                             </button>
                             <div class="dropdown-menu contenuPanier">
-                                <span *ngIf="listePersonnagesPanier.length>0" style="font-weight: bold;">Liste des personnages dans le
-                                    panier : </span>
-                                <ul id="listePanier" class="monPanier" *ngIf="listePersonnagesPanier.length>0"
-                                    (click)="$event.stopPropagation()">
+                                <span *ngIf="listeEtoilesPanier.length>0" style="font-weight: bold;">Liste des étoiles dans le panier : </span>
+                                <ul id="listePanierEtoile" class="monPanier" *ngIf="listeEtoilesPanier.length>0" (click)="$event.stopPropagation()">
                                     <!-- <div *ngIf="listePersonnagesPanier.length>0" id="listePersosPanier"> -->
-                                    <li *ngFor="let p of listePersonnagesPanier"> {{p.nom}}: {{p.prixAchatPerso}}
-                                        <i class="fas fa-star etoile"></i> <button type="button" class="btn " (click)="removePerso(p.nom)"> <i
-                                            class="far fa-trash-alt poubelle"></i> </button>
-                                    </li>
-                                    <!-- construit par la methode afficherListePersoPanier -->
-                                    <!-- </div> -->
-                                    <div class="dropdown-divider"></div>
-                                </ul>
-                                <span *ngIf="listeViePanier.length>0" style="font-weight: bold;">Liste des vies dans le panier : </span>
-                                <ul id="listePanierVie" class="monPanier" *ngIf="listeViePanier.length>0" (click)="$event.stopPropagation()">
-                                    <!-- <div *ngIf="listePersonnagesPanier.length>0" id="listePersosPanier"> -->
-                                    <li *ngFor="let vie of listeViePanier"> Package {{vie.nombre}} <i class="fas fa-heart coeur"></i> : {{vie.prix}}<i
-                                            class="fas fa-star etoile"></i> 
-                                            <button type="button" class="btn " (click)="removeVie(vie.id)"> <i
+                                    <li *ngFor="let etoile of listeEtoilesPanier"> Package {{etoile.nombre}} <i class="fas fa-star etoile"></i>  : {{etoile.prix}}<i class="fas fa-euro-sign"></i>
+                                            <button type="button" class="btn " (click)="removeEtoile(etoile.id)"> <i
                                                 class="far fa-trash-alt poubelle"></i> </button>
                                     <!-- construit par la methode afficherListePersoPanier -->
                                     <!-- </div> -->
                                     <div class="dropdown-divider"></div>
                                 </ul>
-                                <div *ngIf="listePersonnagesPanier.length>0 || listeViePanier.length>0">
-                                    <li>Total de la commande: <span class="montantTotalPanier">{{prixTotalPanier}} <i
-                                                class="fas fa-star etoile"></i></span></li>
+                                <div *ngIf="listeEtoilesPanier.length>0">
+                                    <li>Total de la commande: <span class="montantTotalPanier"> {{prixTotalPanier}} <i class="fas fa-euro-sign"></i></span></li>
                                 </div>
-                                <div *ngIf="listePersonnagesPanier.length>0 || listeViePanier.length>0">
+                                <div *ngIf="listeEtoilesPanier.length>0">
                                     <button type="button" class="btn btn-success" data-bs-toggle="modal"
                                         data-bs-target="#validerPanierModal1" (click)="afficheRecapCommande()">
                                         Valider le panier
@@ -91,7 +75,7 @@
                                         data-bs-target="#viderPanierModal2" id="viderPanier">Vider le
                                         panier</button>
                                 </div>
-                                <div *ngIf="listePersonnagesPanier.length==0 && listeViePanier.length==0">
+                                <div *ngIf="listeEtoilesPanier.length==0">
                                     Votre panier est vide
                                 </div>
                             </div>
@@ -238,28 +222,20 @@
                         <div class="modal-body">
                             <h6>Etes-vous sur de vouloir valider le panier?</h6>
                             <p>Récapitulatif de la commande:</p>
-                            <span *ngFor="let p of afficheRecapCommande()">{{p.nom}} {{p.prixAchatPerso}}
-                                <i class="fas fa-star etoile"></i> <br>
-                            </span>
                             <hr>
-                            <span *ngFor="let vie of listeViePanier">{{vie.nombre}} : {{vie.prix}}
-                                <i class="fas fa-star etoile"></i> <br>
+                            <span *ngFor="let etoile of listeEtoilesPanier">{{etoile.nombre}} : {{etoile.prix}}
+                                <i class="fas fa-euro-sign"></i><br>
                             </span>
                             <ul id="recapCommande"></ul>
 
                             <br>
                             <h6>Total de la commande:</h6>
-                            <p class="montantTotalPanier"> {{prixTotalPanier}} <i class="fas fa-star etoile"></i></p>
-
-                            <p *ngIf="joueur.nbEtoiles < prixTotalPanier" class="red">Votre solde est insuffisant. Pour
-                                acheter des étoiles, merci de cliquer <a href="#">ici </a></p>
+                            <p class="montantTotalPanier"> {{prixTotalPanier}} <i class="fas fa-euro-sign"></i></p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
                             <button type="button" class="btn btn-primary" data-bs-target="#exampleModalToggle2"
-                                data-bs-toggle="modal" (click)="validerPanier()" id="liveToastBtn"
-                                [disabled]="joueur.nbEtoiles < prixTotalPanier">Valider le
-                                panier</button>
+                                data-bs-toggle="modal" (click)="validerPanier()" id="liveToastBtn">Valider le panier</button>
                         </div>
                     </div>
                 </div>
@@ -332,121 +308,29 @@
             </div>
 
 
-            <!-- Titre page -->
-            <h1 class="titrePage">
-                Les personnages disponibles
-            </h1>
-            <br>
-            <br>
-
-            <!-- Portfolios -->
-            <div id="portfolioCollapse" *ngIf="boutiquePerso?.length>0">
-                <!-- CREATION DYNAMIQUE DES PORTFOLIO ICI -->
-                <div class="row">
-                    <div *ngFor="let p of boutiquePerso" class="col pb-4 pd100">
-                        <div class="media achat">
-                            <img class="mr-3 portfolio rounded-circle" src='{{p.personnage.avatar}}'
-                                alt='{{p.personnage.nom}}' data-bs-toggle="collapse"
-                                [attr.data-bs-target]="'#collapse'+ p.personnage.id" aria-expanded="false"
-                                aria-controls="collapseWidthExample">
-                            <div class="media-body collapse collapse-horizontal mr-200" style="min-height: 180px;"
-                                [attr.id]="'collapse' + p.personnage.id" data-bs-parent="#portfolioCollapse">
-                                <div class="card card-body detail" style="width: 35rem;">
-                                    <h2 class="nomPerso">{{p.personnage.nom}}</h2>
-                                    <p class="contenuPouvoir" data-bs-toggle="collapse" aria-expanded="false"
-                                        aria-controls="collapseExample"
-                                        [attr.data-bs-target]="'#collapseChild'+ p.personnage.id">
-                                        {{p.personnage.pouvoir}} &nbsp;</p>
-                                    <!-- <img class="iconePouvoir"
-                                        src="' + perso.pouvoirImg + '" /> -->
-                                    <div class="collapse" [attr.id]="'collapseChild' + p.personnage.id">
-                                        <div class="card card-body descriptionPouvoir">
-                                            TODO : avant ici ct la description des pouvoir
-                                        </div>
-                                    </div>
-                                    <p class="prix"> {{p.personnage.prixAchatPerso}}&nbsp;<i
-                                            class="fas fa-star etoile"></i>
-                                    </p>
-                                    <div class="divBouton" [attr.id]="p.personnage.id + p.personnage.prixAchatPerso">
-                                        <!-- <span [ngClass]="{'negatif':client.ca<0}"> -->
-                                        <button type="button" class="btn btn-info btn-sm bouton" id="p.personnage"
-                                            [attr.id]="p.personnage.id"
-                                            [disabled]="isPersonnageEstDansLePanier(p.personnage)"
-                                            *ngIf="!p.persoDejaEnPossession" (click)="ajouterAuPanier(p.personnage)"><i
-                                                class="fas fa-cart-plus" style="color: white"></i> Acheter</button>
-
-                                                <p style="font-style:italic;" *ngIf="p.persoDejaEnPossession"><i class="fas fa-check-circle" style="color: green"></i> Personnage déjà en votre possession</p>
-                                        <!-- <button type="button" class="btn btn-success" *ngIf="p.persoDejaEnPossession"
-                                            disabled>Personnage déjà en votre
-                                            possession</button> -->
-                                        <!-- </span> -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <!-- *********VIE*************** -->
+            <!-- *********Etoiles*************** -->
 <!-- Titre page -->
 <h1 class="titrePage">
-    Les packages Vie
+    Les packages Etoile
 </h1>
 <br>
             <br>
 
             <div class="row">
-                <div *ngFor="let vie of boutiqueVie" class="col">
+                <div *ngFor="let etoile of boutiqueEtoiles" class="col">
                     <div class="card borderAjust" style="width: 18rem;">
                         <img src="../../assets/images/Disney_Princesses_Selfie.jpg" class="card-img-top borderImage" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Package {{vie.nombre}} <i class="fas fa-heart coeur"></i></h5>
-                            <p class="card-text">Prix : {{vie.prix}} <i class="fas fa-star etoile"></i></p>
-                            <div class="boutonVie"> <button type="button" class="btn btn-info btn-sm bouton" id="vie" [attr.id]="vie.id"
-                                (click)="ajouterVieAuPanier(vie)"><i class="fas fa-cart-plus" style="color: white"></i>
+                            <h5 class="card-title">Package {{etoile.nombre}} <i class="fas fa-star etoile"></i></h5>
+                            <p class="card-text">Prix : {{etoile.prix}} <i class="fas fa-euro-sign"></i></p>
+                            <div class="boutonEtoile"> <button type="button" class="btn btn-info btn-sm bouton" id="etoile" [attr.id]="etoile.id"
+                                (click)="ajouterEtoileAuPanier(etoile)"><i class="fas fa-cart-plus" style="color: white"></i>
                                 Acheter</button></div>
                            
                         </div>
                     </div>
                 </div>
 
-
-
-                <!-- <div class="row row-cols-1 row-cols-md-3 g-3 ensembleCard">
-                    <div class="col">
-                        <div class="card h-100 itemsBoutique">
-                            <img src="../../assets/images/Disney_Princesses_Selfie.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Nombre : {{vie.nombre}}</h5>
-                                <p class="card-text">Prix : {{vie.prix}}</p>
-                                <div class="divBouton" [attr.id]="vie.id + vie.prix"></div>
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-info btn-sm bouton" id="vie" [attr.id]="vie.id"
-                            (click)="ajouterVieAuPanier(vie)"><i class="fas fa-cart-plus" style="color: white"></i>
-                            Acheter</button>
-                    </div>
-                </div> -->
-
-
-
-
-                <!-- <div class="card col" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">Nombre : {{vie.nombre}}</h5>
-                        <p class="card-text">Prix : {{vie.prix}}</p>
-                        <div class="divBouton" [attr.id]="vie.id + vie.prix">
-                             <span [ngClass]="{'negatif':client.ca<0}"> -->
-                <!-- <button type="button" class="btn btn-info btn-sm bouton" id="vie" [attr.id]="vie.id"
-                                (click)="ajouterVieAuPanier(vie)"><i class="fas fa-cart-plus" style="color: white"></i>
-                                Acheter</button> -->
-                <!-- </span> -->
-                <!-- </div>
-                    </div>
-                </div> -->
             </div>
             <br>
             <br>
