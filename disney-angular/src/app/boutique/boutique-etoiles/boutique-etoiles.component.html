@@ -48,22 +48,28 @@
                         <div class="btn-group dropdown dropdown-pull-right" id="boutonPanier">
                             <button type="button" class="btn bg-transparent dropdown-toggle" data-bs-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-shopping-cart fa-2x panier"></i><span class="badge badge-primary badge-pill"
+                                <i class="fas fa-shopping-cart fa-2x panier"></i><span
+                                    class="badge badge-primary badge-pill"
                                     id="nombreElementsDansPanier">{{listeEtoilesPanier.length}}</span>
                             </button>
                             <div class="dropdown-menu contenuPanier">
-                                <span *ngIf="listeEtoilesPanier.length>0" style="font-weight: bold;">Liste des étoiles dans le panier : </span>
-                                <ul id="listePanierEtoile" class="monPanier" *ngIf="listeEtoilesPanier.length>0" (click)="$event.stopPropagation()">
+                                <span *ngIf="listeEtoilesPanier.length>0" style="font-weight: bold;">Liste des étoiles
+                                    dans le panier : </span>
+                                <ul id="listePanierEtoile" class="monPanier" *ngIf="listeEtoilesPanier.length>0"
+                                    (click)="$event.stopPropagation()">
                                     <!-- <div *ngIf="listePersonnagesPanier.length>0" id="listePersosPanier"> -->
-                                    <li *ngFor="let etoile of listeEtoilesPanier"> Package {{etoile.nombre}} <i class="fas fa-star etoile"></i>  : {{etoile.prix}}<i class="fas fa-euro-sign"></i>
-                                            <button type="button" class="btn " (click)="removeEtoile(etoile.id)"> <i
+                                    <li *ngFor="let etoile of listeEtoilesPanier"> Package {{etoile.nombre}} <i
+                                            class="fas fa-star etoile"></i> : {{etoile.prix}}<i
+                                            class="fas fa-euro-sign"></i>
+                                        <button type="button" class="btn " (click)="removeEtoile(etoile.id)"> <i
                                                 class="far fa-trash-alt poubelle"></i> </button>
-                                    <!-- construit par la methode afficherListePersoPanier -->
-                                    <!-- </div> -->
-                                    <div class="dropdown-divider"></div>
+                                        <!-- construit par la methode afficherListePersoPanier -->
+                                        <!-- </div> -->
+                                        <div class="dropdown-divider"></div>
                                 </ul>
                                 <div *ngIf="listeEtoilesPanier.length>0">
-                                    <li>Total de la commande: <span class="montantTotalPanier"> {{prixTotalPanier}} <i class="fas fa-euro-sign"></i></span></li>
+                                    <li>Total de la commande: <span class="montantTotalPanier"> {{prixTotalPanier}} <i
+                                                class="fas fa-euro-sign"></i></span></li>
                                 </div>
                                 <div *ngIf="listeEtoilesPanier.length>0">
                                     <button type="button" class="btn btn-success" data-bs-toggle="modal"
@@ -233,7 +239,8 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
                             <button type="button" class="btn btn-primary" data-bs-target="#exampleModalToggle2"
-                                data-bs-toggle="modal" (click)="validerPanier()" id="liveToastBtn">Valider le panier</button>
+                                data-bs-toggle="modal" (click)="validerPanier()" id="liveToastBtn">Valider le
+                                panier</button>
                         </div>
                     </div>
                 </div>
@@ -244,7 +251,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalToggleLabel2">
-                             Validation des achats
+                                Validation des achats
                             </h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
@@ -258,7 +265,7 @@
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
 
             <!-- Modal Vider Panier -->
             <div class="modal fade" id="viderPanierModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -307,24 +314,26 @@
 
 
             <!-- *********Etoiles*************** -->
-<!-- Titre page -->
-<h1 class="titrePage">
-    Les packages Etoile
-</h1>
-<br>
+            <!-- Titre page -->
+            <h1 class="titrePage">
+                Les packages Etoile
+            </h1>
+            <br>
             <br>
 
             <div class="row">
                 <div *ngFor="let etoile of boutiqueEtoiles" class="col">
                     <div class="card borderAjust" style="width: 18rem;">
-                        <img src="../../assets/images/Disney_Princesses_Selfie.jpg" class="card-img-top borderImage" alt="...">
+                        <img src="../../assets/images/Disney_Princesses_Selfie.jpg" class="card-img-top borderImage"
+                            alt="...">
                         <div class="card-body">
                             <h5 class="card-title">Package {{etoile.nombre}} <i class="fas fa-star etoile"></i></h5>
                             <p class="card-text">Prix : {{etoile.prix}} <i class="fas fa-euro-sign"></i></p>
-                            <div class="boutonEtoile"> <button type="button" class="btn btn-info btn-sm bouton" id="etoile" [attr.id]="etoile.id"
-                                (click)="ajouterEtoileAuPanier(etoile)"><i class="fas fa-cart-plus" style="color: white"></i>
-                                Acheter</button></div>
-                           
+                            <div class="boutonEtoile"> <button type="button" class="btn btn-info btn-sm bouton"
+                                    id="etoile" [attr.id]="etoile.id" (click)="ajouterEtoileAuPanier(etoile)"><i
+                                        class="fas fa-cart-plus" style="color: white"></i>
+                                    Acheter</button></div>
+
                         </div>
                     </div>
                 </div>
