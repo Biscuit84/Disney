@@ -18,7 +18,9 @@ export class PersonnageHttpService {
   }
 
   findAll(): Array<Personnage> {
+    //console.log(this.personnages)
     return this.personnages;
+    
   }
 
   findById(id: number): Observable<Personnage> {
@@ -46,6 +48,7 @@ export class PersonnageHttpService {
   load() {
     this.http.get<Array<Personnage>>(this.persoUrl).subscribe(response => {
       this.personnages = response;
+     // console.log(this.personnages)
     }, error => console.log(error));
   }
 }

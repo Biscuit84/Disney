@@ -2,6 +2,11 @@ import { Component, ElementRef, OnInit, ViewChild, NgZone } from '@angular/core'
 import { pionPlayer, Square } from './plateau-canvas-util';
 import * as $ from 'jquery';
 import { Router } from '@angular/router';
+import { PageConnexionService } from 'src/app/page-connexion/page-connexion.service';
+import { AppConfigService } from 'src/app/app-config.service';
+import { PartieHttpService } from 'src/app/partie-http.service';
+import { Compte, Partie, Plateau, TourDeJeuDto } from 'src/model';
+import { PlateauHttpService } from 'src/app/plateau-http.service';
 
 @Component({
   selector: 'ecran-de-jeu, [ecran-de-jeu]',
@@ -12,6 +17,37 @@ export class EcranDeJeuComponent implements OnInit {
 
 
   ////////////////// On cherche en base les données du plateau //////////////////
+  // en fonction du joueur
+  idJoueur: number;
+  joueur: Compte;
+  idPartie: number;
+  partie: Partie;
+
+  plateau: Plateau;
+  public tourEnCours:TourDeJeuDto;
+
+
+   ////////////////////////// CONSTRUCTEUR  //////////////////////////
+   constructor(public compteService: PageConnexionService, public partieService: PartieHttpService, private plateauService :PlateauHttpService) 
+   { 
+     this.joueur = this.compteService.compte;
+     //console.log(this.compteService.compte);
+     this.idJoueur = this.joueur.id;
+     this.partie=this.partieService.LaPartie;
+     console.log("///// dans le jeu ")
+     console.log(this.partieService.LaPartie); // _a marche mais c'est vide
+     
+     //this.idPartie=this.partie.id;
+     //this.plateau=this.partie.plateau;
+
+     //console.log(this.idPartie)
+     //console.log(this.plateau)
+     
+   }
+    
+
+
+
 
 
 
@@ -36,38 +72,36 @@ export class EcranDeJeuComponent implements OnInit {
   public tourActuel = document.getElementById("NbTour");
   public tourJoueur = document.getElementById("JoueurTour");
 
-  // nombre de case du plateau
-  public nbcasePlateau: number = 10; // à recuperer en base
 
-  nbcaseDemande(): [number, number] {
-    if (this.nbcasePlateau <= 9) { this.nBcaseW = 3; this.nBcaseH = 3 }
-    else if (this.nbcasePlateau <= 16) { this.nBcaseW = 4; this.nBcaseH = 4; }
-    else if (this.nbcasePlateau <= 25) { this.nBcaseW = 5; this.nBcaseH = 5; }
-    else if (this.nbcasePlateau <= 36) { this.nBcaseW = 6; this.nBcaseH = 6; }
-    else if (this.nbcasePlateau <= 49) { this.nBcaseW = 7; this.nBcaseH = 7; }
-    else if (this.nbcasePlateau <= 64) { this.nBcaseW = 8; this.nBcaseH = 8; }
-    else if (this.nbcasePlateau <= 91) { this.nBcaseW = 9; this.nBcaseH = 9; }
-    else if (this.nbcasePlateau <= 100) { this.nBcaseW = 10; this.nBcaseH = 10; }
+  // plateau
+  public nbcasePlateau: number;
 
-    var format: [number, number] = [this.nBcaseW, this.nBcaseH];
-    return format;
-  }
 
-  public format = this.nbcaseDemande();
-  public nBcaseW: number = this.format[0];
-  public nBcaseH: number = this.format[1];
+  // // nombre de case du plateau
+  // public nbcasePlateau: number = 10; // à recuperer en base
+  // //public nbcasePlateau: number = this.plateau.nbCases;
 
-  public nombreDe: number = 2;
-  public valeurDesDes: number = 0;
+  //   var format: [number, number] = [this.nBcaseW, this.nBcaseH];
+  //   return format;
+  // }
+   public format: [number, number];
+  public nBcaseW: number;
+  public nBcaseH: number ;
+  // public format = this.nbcaseDemande();
+  // public nBcaseW: number = this.format[0];
+  // public nBcaseH: number = this.format[1];
 
-  public listeCases = [];
+   public nombreDe: number = 2;
+   public valeurDesDes: number = 0;
 
-  public w: number;// = 800;
-  public h: number;// = 800;
+   public listeCases = [];
 
-  // taille des cases
-  public taillecaseW: number;// = this.w / this.nBcaseW;
-  public taillecaseH: number;// = this.h / this.nBcaseH;
+   public w: number;// = 800;
+   public h: number;// = 800;
+
+  // // taille des cases
+   public taillecaseW: number;// = this.w / this.nBcaseW;
+   public taillecaseH: number;// = this.h / this.nBcaseH;
 
   //initialisation des canvas : 
   ctxPlateau: CanvasRenderingContext2D;
@@ -102,8 +136,6 @@ export class EcranDeJeuComponent implements OnInit {
 
   public listePion: pionPlayer[] = [this.pionJoueur, this.pionIA1, this.pionIA2, this.pionIA3];
 
-  ////////////////////////// CONSTRUCTEUR  //////////////////////////
-  constructor(private ngZone: NgZone, private router: Router) { }
 
 
   ////////////////////////// ngOnInit  //////////////////////////
@@ -118,9 +150,16 @@ export class EcranDeJeuComponent implements OnInit {
     this.ctxPlayerIA2 = this.canvasIA2.nativeElement.getContext('2d');
     this.ctxPlayerIA3 = this.canvasIA3.nativeElement.getContext('2d');
 
-    this.drawPlateau(this);
 
 
+      // quel plateau    
+   // this.partie=this.partieService.LaPartie;
+      //console.log(this.partie);
+    //this.plateau=this.partie.plateau;
+    console.log(this.plateau)
+    this.drawPlateau(this, this.plateau);
+
+   
     this.drawPlayer(this, this.pionJoueur);
     this.drawPlayer(this, this.pionIA1);
     this.drawPlayer(this, this.pionIA2);
@@ -155,15 +194,46 @@ export class EcranDeJeuComponent implements OnInit {
   // bouton joueur
   Play() {
     this.Jouer(this, this.pionJoueur);
+    this.tourEnCours=this.partieService.GameTour(this.idJoueur, this.partie);
   }
   // bouton fin de tour
   EndTurn() {
     this.FinDeTour(this, this.pionJoueur);
   }
 
+  nbcaseDemande(): [number, number] {
+    if (this.nbcasePlateau <= 9) { this.nBcaseW = 3; this.nBcaseH = 3 }
+    else if (this.nbcasePlateau <= 16) { this.nBcaseW = 4; this.nBcaseH = 4; }
+    else if (this.nbcasePlateau <= 25) { this.nBcaseW = 5; this.nBcaseH = 5; }
+    else if (this.nbcasePlateau <= 36) { this.nBcaseW = 6; this.nBcaseH = 6; }
+    else if (this.nbcasePlateau <= 49) { this.nBcaseW = 7; this.nBcaseH = 7; }
+    else if (this.nbcasePlateau <= 64) { this.nBcaseW = 8; this.nBcaseH = 8; }
+    else if (this.nbcasePlateau <= 91) { this.nBcaseW = 9; this.nBcaseH = 9; }
+    else if (this.nbcasePlateau <= 100) { this.nBcaseW = 10; this.nBcaseH = 10; }
+
+    var format: [number, number] = [this.nBcaseW, this.nBcaseH];
+    return format;
+  }
 
   // dessine le plateau
-  drawPlateau(self) {
+  drawPlateau(self, plateau) {
+/*
+  id: number;
+  version: number;
+  nom: string;
+  nbCases: number;
+  cases: Array<CasesPlateau>;
+*/
+
+  this.nbcasePlateau = 61; //this.plateau.nbCases;
+
+
+  this.format = this.nbcaseDemande();
+  this.nBcaseW = this.format[0];
+  this.nBcaseH = this.format[1];
+
+
+
 
 
 
@@ -275,7 +345,7 @@ export class EcranDeJeuComponent implements OnInit {
 
     //clear pour refresh
     if (pion.numeroPassage == 0) {
-      console.log(self.canvasJoueur.nativeElement.width);
+      //console.log(self.canvasJoueur.nativeElement.width);
       //self.ctxJoueur.clearRect(0, 0, self.canvasJoueur.nativeElement.width , self.canvasJoueur.nativeElement.height);
     }
     else if (pion.numeroPassage == 1) {
@@ -655,15 +725,7 @@ export class EcranDeJeuComponent implements OnInit {
       console.log("on est arrivé perdu")
       self.router.navigate(['jeu/findepartie']);
     }
-
   }
-
-
-
-
-
-
-
 }
 
 

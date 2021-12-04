@@ -25,13 +25,19 @@ export class PlateauHttpService {
   }
 
   findAll(): Array<Plateau> {
-    console.log(this.plateaux);
+    //console.log(this.plateaux);
     return this.plateaux;
   }
 
   findById(id: number): Observable<Plateau> {
     return this.http.get<Plateau>(this.plateauUrl + id);
   }
+
+
+  findByPartie(idPartie:number): Observable<Plateau> {
+  return this.http.get<Plateau>(this.plateauUrl + idPartie);
+  }
+  /*
 
   deleteById(id: number) {
     this.http.delete<void>(this.plateauUrl + id).subscribe(resp => {
@@ -50,5 +56,7 @@ export class PlateauHttpService {
       this.load();
     }, error => console.log(error));
   }
+
+  */
 
 }
