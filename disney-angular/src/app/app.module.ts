@@ -25,6 +25,7 @@ import { BtnDisablePipe } from './boutique/boutique-personnages/btn-disable.pipe
 import { CreationCompteComponent } from './creation-compte/creation-compte.component';
 import { ModificationProfilJoueurComponent } from './modification-profil-joueur/modification-profil-joueur.component';
 import { DateAgoPipe } from './date-ago.pipe';
+import { BoutiqueEtoilesComponent } from './boutique/boutique-etoiles/boutique-etoiles.component';
 
 
 
@@ -49,7 +50,8 @@ import { DateAgoPipe } from './date-ago.pipe';
     PlateauComponent,
     CreationCompteComponent,
     ModificationProfilJoueurComponent,
-    DateAgoPipe
+    DateAgoPipe,
+    BoutiqueEtoilesComponent
   ],
   imports: [
     BrowserModule,
