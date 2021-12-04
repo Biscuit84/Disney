@@ -58,7 +58,19 @@ public class PlateauRestController {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
 		}
 	}
+	/*
+	@GetMapping("{id}")
+	@JsonView(Views.ViewsPlateau.class)
+	public Plateau findByPartie(@PathVariable Long id) {
+		Optional<Plateau> optPlateau = plateauRepo.findByPartieID(id);
 
+		if (optPlateau.isPresent()) {
+			return optPlateau.get();
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+		}
+	}
+*/
 
 	@PostMapping("")
 	@JsonView(Views.ViewsPlateau.class)
@@ -80,6 +92,9 @@ public class PlateauRestController {
 		return plateau;
 	}
 
+	
+	
+	
 	
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
