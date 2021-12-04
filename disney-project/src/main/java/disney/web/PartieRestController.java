@@ -98,6 +98,7 @@ public class PartieRestController {
 	}
 
 
+
 	@PostMapping("")
 	@JsonView(Views.ViewsPartie.class)
 	public Partie create(@RequestBody Partie partie) {
@@ -180,8 +181,8 @@ public class PartieRestController {
 			//TODO calcul de l'effet
 //			tourDeJeuDto.setEffetAActiver(true);
 			
-			if(positionFuturePersonnage >= 20) {
-				positionFuturePersonnage = 20;
+			if(positionFuturePersonnage >= partie.getPlateau().getNbCases()-1) {
+				positionFuturePersonnage = partie.getPlateau().getNbCases();
 				persoQuiJoue.setPosition(positionFuturePersonnage);
 				//est-ce le joueur qui a gagne ou un ia ?
 				//si le joueur a gagne
@@ -266,7 +267,7 @@ public class PartieRestController {
 		partie.setNbTourDeJeu(0);
 		
 		//	2. Creer une nouvelle partie et creation de la liste des joueurs:
-		Set <Joueur> listeDesJoueurs = listeJoueursPartie(idJoueur, historique);
+		Set <Joueur> listeDesJoueurs = listeJoueursPartie(idJoueur, historique, partie);
 		partie.setJoueurs(new ArrayList<>(listeDesJoueurs));
 
 		//	3. choix du perso: 
@@ -287,13 +288,14 @@ public class PartieRestController {
 	}
 
 	//creation de la liste des joueurs:
-	public Set<Joueur> listeJoueursPartie(Long idJoueur, Historique historique) {
+	public Set<Joueur> listeJoueursPartie(Long idJoueur, Historique historique, Partie partie) {
 		Set <Joueur> listeDesJoueurs = new HashSet <Joueur> ();
 		Joueur IA1 = joueurRepo.findById((long) 1).get();
 		Joueur IA2 = joueurRepo.findById((long) 2).get();
 		Joueur IA3 = joueurRepo.findById((long) 3).get();
 		Joueur joueurCourant = joueurRepo.findById(idJoueur).get();
 
+		joueurCourant.setPartie(partie);
 		listeDesJoueurs.add(joueurCourant);
 		listeDesJoueurs.add(IA1);
 		listeDesJoueurs.add(IA2);

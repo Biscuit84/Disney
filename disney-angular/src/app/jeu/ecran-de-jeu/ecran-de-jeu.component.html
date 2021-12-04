@@ -12,12 +12,12 @@
                         <p> Tour du joueur :<span id="JoueurTour"> {{joueurActuel}} </span> </p>
                     </div>
                     <div class="Avance">
-                        <button id="boutonJouer" type="button" class="btn btn-primary bouton"
+                        <button id="boutonJouer" type="button" class="btn btn-primary bouton" [disabled]="!dispoBoutonJouer"
                             (click)="Play()">Jouer</button>
                         <p>Lancé de dé: <span id="valeurDeAvance">{{valeurDesDes}}</span></p>
                     </div>
                     <div class="Fin">
-                        <button id="boutonFinDeTour" type="button" class="btn btn-primary bouton"
+                        <button id="boutonFinDeTour" type="button" class="btn btn-primary bouton" [disabled]="!dispoBoutonFin"
                             (click)="EndTurn()">Fin de tour </button>
                         <p></p>
                     </div>
@@ -49,18 +49,17 @@
                     width="800px"></canvas>
 
                 <!-- mon perso -->
-                <canvas #canvasJoueur class="canvasdujeu" id="player" style="z-index: 4; " height="800px"
+                <canvas #canvasJoueur class="canvasdujeu" id="player" style="z-index: 2; " height="800px"
                     width="800px"></canvas>
 
                 <!-- IA -->
-                <canvas #canvasIA1 class="canvasdujeu" id="IA1" style="z-index: 4;" height="800px" width="800px">
+                <canvas #canvasIA1 class="canvasdujeu" id="IA1" style="z-index: 3;" height="800px" width="800px">
                 </canvas>
                 <canvas #canvasIA2 class="canvasdujeu" id="IA2" style="z-index: 4;" height="800px" width="800px">
                 </canvas>
-                <canvas #canvasIA3 class="canvasdujeu" id="IA3" style="z-index: 4;" height="800px" width="800px">
+                <canvas #canvasIA3 class="canvasdujeu" id="IA3" style="z-index: 5;" height="800px" width="800px">
                 </canvas>
             </div>
-
 
 
 
@@ -84,7 +83,7 @@
             <div id="vitesseControl">
                 <span class="parameter">vitesse du pion :</span> <!--<span id="vitesse">1</span>-->
                 <div class="slidecontainer">
-                    <input type="range" min="1" max="7" value="1" class="slider" id="vitesseRange">
+                    <input type="range" min="1" max="7" value="1" class="slider" id="vitesseRange" [disabled]="!commandeDispo" [(ngModel)] = "niveauDeVitesseDuPion">
                 </div>
             </div>
         </div>

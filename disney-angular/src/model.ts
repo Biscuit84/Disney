@@ -15,6 +15,7 @@ export class Compte {
   nbEtoiles: number;
   nbVictoire: number;
   nbDefaite: number;
+  partie: Partie;
 
   constructor(
     id?: number,
@@ -31,7 +32,8 @@ export class Compte {
     life?: number,
     nbEtoiles?: number,
     nbVictoire?: number,
-    nbDefaite?: number
+    nbDefaite?: number,
+    partie?: Partie
   ) {
     this.id = id
     this.version = version
@@ -48,6 +50,7 @@ export class Compte {
     this.nbEtoiles = nbEtoiles
     this.nbVictoire = nbVictoire
     this.nbDefaite = nbDefaite
+    this.partie = partie
   }
 
 
@@ -265,29 +268,33 @@ export class Partie {
   }
 
 }
+/*
 export class PartieDTO {
   id: number;
   version: number;
   plateau: Plateau;
-  MonPersonnage: Personnage;
+  monPersonnage: Personnage;
   nbTourDeJeu:number;
+  joueur: Joueur;
 
   constructor(
     id?: number,
     version?: number,
     plateau?: Plateau,
-    MonPersonnage?: Personnage,
-    nbTourDeJeu?:number
+    monPersonnage?: Personnage,
+    nbTourDeJeu?:number,
+    joueur?:Joueur,
   ) {
     this.id = id
     this.version = version
     this.plateau = plateau
-    this.MonPersonnage = MonPersonnage
+    this.monPersonnage = monPersonnage
     this.nbTourDeJeu = nbTourDeJeu
+    this.joueur= joueur
   }
 
 }
-
+*/
 
 export class TourDeJeuDto {
   valueDice1: number;
