@@ -12,7 +12,9 @@
   }
     .logo_menu {
       width: 5em;
-      height: 4em;
+      /*height: 4em;*/
+      height: 7vh;
+      min-height: 4em;
        /*background-image: url(src\assets\images\logoPrincessA.png);*/
        background-size: cover;
       filter: drop-shadow(-10px 1px 4px rgb(175, 115, 115));
