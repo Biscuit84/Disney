@@ -29,7 +29,7 @@
         <a href="#" class="list-group-item list-group-item-action" *ngFor="let histo of showHistorique()">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1"><span *ngIf="histo.victoire==true" style="color: green;">VICTOIRE</span><span *ngIf="histo.victoire==false" style="color: red;">DEFAITE</span></h5>
-           <small class="text-muted">{{histo.dateHeureFinPartie | dateAgo}} day(s) ago</small>
+           <small class="text-muted">{{histo.dateHeureFinPartie | date }} </small>
           </div>
           <img src="{{histo.personnage.avatar}}">
           <p class="mb-1"> Position : {{histo.positionArrivee}}</p>
