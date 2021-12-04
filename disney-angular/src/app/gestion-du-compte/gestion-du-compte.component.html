@@ -1,4 +1,4 @@
-
+<div id="back" style="height: 920px;">
 <div id="ecran-compte"> 
  
   <div class="gauche">
@@ -8,7 +8,7 @@
     <h4><b>Pseudo : {{joueur.pseudo}}</b></h4>
     <p>Niveau: {{joueur.level}}</p>
     <p>Nombre de victoire: {{joueur.nbVictoire}}</p>
-    <p>Nombre d'étoiles: {{joueur.nbEtoiles}}</p>
+    <p> <i class="fas fa-star etoile"></i>: {{joueur.nbEtoiles}}</p>
     <button id="jouerBtn" type="submit" class="btn btn-primary">Jouer</button>
   </div>
 </div> 
@@ -29,78 +29,18 @@
         <a href="#" class="list-group-item list-group-item-action" *ngFor="let histo of showHistorique()">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1"><span *ngIf="histo.victoire==true" style="color: green;">VICTOIRE</span><span *ngIf="histo.victoire==false" style="color: red;">DEFAITE</span></h5>
-           <small class="text-muted">3 days ago</small>
+           <small class="text-muted">{{histo.dateHeureFinPartie | dateAgo}} day(s) ago</small>
           </div>
-          <p class="mb-1">Some placeholder content in a paragraph.</p>
-          <small class="text-muted">And some muted small print.</small>
+          <img src="{{histo.personnage.avatar}}">
+          <p class="mb-1"> Position : {{histo.positionArrivee}}</p>
+          <small class="text-muted"><i class="fas fa-star etoile"></i>:{{histo.nbEtoilesGagnees}}</small>
        </a>
       </div>
     </div>
   </div>
 </div>
+</div>
 
 
-  <script>
-  /*
-    var joueur1 = { id: "idJoueur1", nom: "Nom", prenom: "Prenom", dateNaissance: "2015-03-25", genre: "Femme", pseudo: "JoueurToto", email: "prenom.nom@gmail.com", tel: "non renseigné", mdp: "1234" };
   
-    // changer nom
-    function changeName() {
-      $("#nomJoueur").html(joueur1.prenom + " " + joueur1.nom);
-    }
-  
-    // changer pseudo 
-    function changePseudo() {
-      $("#pseudoJoueur").html(joueur1.pseudo);
-    }
-  
-    // changer date de naissance 
-    function changeDateNaissance() {
-      $("#dateNaissanceJoueur").html(joueur1.dateNaissance);
-    }
-  
-    // changer genre
-    function changeGenre() {
-      $("#GenreJoueur").html(joueur1.genre);
-    }
-  
-    // changer email
-    function changeEmail() {
-      $("#emailJoueur").html(joueur1.email);
-    }
-  
-    // changer tel
-    function changeTel() {
-      $("#telJoueur").html(joueur1.tel);
-    }
-  
-  
-    changeName();
-    changePseudo();
-    changeDateNaissance();
-    changeGenre();
-    changeEmail();
-    changeTel();
-  
-    var urlLogoAdmin;
-    var newUrlLogoAdmin;
-    var event2;
-
-    //changer l'avatar d'un joueur sur cette page
-    //TODO: faire en sorte de pouvoir le changer sur toutes les autres pages de manière dynamique!
-    function changeURLAvatar(event) {
-      $('#' + event2 + ' img').css("border", "none");
-      $('#' + event + ' img').css("border", "4px solid cornflowerblue");
-      console.log("event:" + '#' + event + ' img');
-      newUrlLogoAdmin = $('#' + event + ' img').attr('src');
-      event2 = event;
-      // newUrlLogoAdmin = event.srcElement.currentSrc;
-  
-    }
-  
-    function changeAvatar() {
-      $(".logo_admin").attr("src", newUrlLogoAdmin);
-    }
-    */
-  </script>
   
