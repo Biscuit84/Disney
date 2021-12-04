@@ -11,6 +11,16 @@ import { Observable } from 'rxjs';
 })
 export class JoueurHttpService {
 
+
+  joueurUrl:string;
+  joueurs: Array<Joueur> = new Array<Joueur>();
+
+  constructor(public compteService: PageConnexionService,private http: HttpClient, private appConfig: AppConfigService) { 
+    this.load();
+    this.joueurUrl = this.appConfig.backEndUrl + "joueur/"
+  }
+
+
   findAll(): Array<Joueur> {
     return this.joueurs;
   }
@@ -23,12 +33,11 @@ export class JoueurHttpService {
       this.joueurs = response;
     }, error => console.log(error));
   }
+  
   infosJoueur(): Observable<Compte>{
     var url=this.appConfig.backEndUrl+"compte/"+this.compteService.compte.id;
     return this.http.get<Compte>(url);
   }
-  constructor(public compteService: PageConnexionService,private http: HttpClient, private appConfig: AppConfigService) { 
-    this.load();
-    this.joueurUrl = this.appConfig.backEndUrl + "joueur/"
+
 
 }
