@@ -49,28 +49,43 @@
                             <button type="button" class="btn bg-transparent dropdown-toggle" data-bs-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                                 <i class="bi bi-cart4"></i><span class="badge badge-primary badge-pill"
-                                    id="nombreElementsDansPanier">{{listePersonnagesPanier.length}}</span>
+                                    id="nombreElementsDansPanier">{{listePersonnagesPanier.length + listeViePanier.length}}</span>
                             </button>
                             <div class="dropdown-menu">
+                                <span *ngIf="listePersonnagesPanier.length>0">Liste des personnages dans le
+                                    panier : </span>
                                 <ul id="listePanier" class="monPanier" *ngIf="listePersonnagesPanier.length>0">
                                     <!-- <div *ngIf="listePersonnagesPanier.length>0" id="listePersosPanier"> -->
-                                    <li *ngFor="let p of listePersonnagesPanier"> {{p.nom}}: {{p.prixAchatPerso}}<i class="fas fa-star etoile"></i></li>
+                                    <li *ngFor="let p of listePersonnagesPanier"> {{p.nom}}: {{p.prixAchatPerso}}<i
+                                            class="fas fa-star etoile"></i></li>
                                     <!-- construit par la methode afficherListePersoPanier -->
                                     <!-- </div> -->
                                     <div class="dropdown-divider"></div>
-                                    <li>Total de la commande: <span class="montantTotalPanier">{{prixTotalPanier}} <i class="fas fa-star etoile"></i></span></li>
-                                    <li>
-                                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                            data-bs-target="#validerPanierModal1" (click)="afficheRecapCommande()">
-                                            Valider le panier
-                                        </button>
-                                        &nbsp;
-                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                            data-bs-target="#viderPanierModal2" id="viderPanier">Vider le
-                                            panier</button>
-                                    </li>
                                 </ul>
-                                <div *ngIf="listePersonnagesPanier.length==0">
+                                <span *ngIf="listeViePanier.length>0">Liste des vie dans le panier : </span>
+                                <ul id="listePanierVie" class="monPanier" *ngIf="listeViePanier.length>0">
+                                    <!-- <div *ngIf="listePersonnagesPanier.length>0" id="listePersosPanier"> -->
+                                    <li *ngFor="let vie of listeViePanier"> {{vie.nombre}} : {{vie.prix}}<i
+                                            class="fas fa-star etoile"></i></li>
+                                    <!-- construit par la methode afficherListePersoPanier -->
+                                    <!-- </div> -->
+                                    <div class="dropdown-divider"></div>
+                                </ul>
+                                <div *ngIf="listePersonnagesPanier.length>0 || listeViePanier.length>0">
+                                    <li>Total de la commande: <span class="montantTotalPanier">{{prixTotalPanier}} <i
+                                                class="fas fa-star etoile"></i></span></li>
+                                </div>
+                                <div *ngIf="listePersonnagesPanier.length>0 || listeViePanier.length>0">
+                                    <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                        data-bs-target="#validerPanierModal1" (click)="afficheRecapCommande()">
+                                        Valider le panier
+                                    </button>
+                                    &nbsp;
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                        data-bs-target="#viderPanierModal2" id="viderPanier">Vider le
+                                        panier</button>
+                                </div>
+                                <div *ngIf="listePersonnagesPanier.length==0 && listeViePanier.length==0">
                                     Votre panier est vide
                                 </div>
                             </div>
@@ -217,18 +232,27 @@
                         <div class="modal-body">
                             <h6>Etes-vous sur de vouloir valider le panier?</h6>
                             <p>Récapitulatif de la commande:</p>
-                            <span *ngFor="let p of afficheRecapCommande()">{{p.nom}} {{p.prixAchatPerso}} <i class="fas fa-star etoile"></i> <br></span>
+                            <span *ngFor="let p of afficheRecapCommande()">{{p.nom}} {{p.prixAchatPerso}}
+                                <i class="fas fa-star etoile"></i> <br>
+                            </span>
+                            <hr>
+                            <span *ngFor="let vie of listeViePanier">{{vie.nombre}} :  {{vie.prix}}
+                                <i class="fas fa-star etoile"></i> <br>
+                            </span>
                             <ul id="recapCommande"></ul>
+
                             <br>
                             <h6>Total de la commande:</h6>
                             <p class="montantTotalPanier"> {{prixTotalPanier}} <i class="fas fa-star etoile"></i></p>
 
-                            <p *ngIf="joueur.nbEtoiles < prixTotalPanier" class="red">Votre solde est insuffisant. Pour acheter des étoiles, merci de cliquer <a href="#">ici </a></p>
+                            <p *ngIf="joueur.nbEtoiles < prixTotalPanier" class="red">Votre solde est insuffisant. Pour
+                                acheter des étoiles, merci de cliquer <a href="#">ici </a></p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
                             <button type="button" class="btn btn-primary" data-bs-target="#exampleModalToggle2"
-                                data-bs-toggle="modal" (click)="validerPanier()" id="liveToastBtn" [disabled]="joueur.nbEtoiles < prixTotalPanier">Valider le
+                                data-bs-toggle="modal" (click)="validerPanier()" id="liveToastBtn"
+                                [disabled]="joueur.nbEtoiles < prixTotalPanier">Valider le
                                 panier</button>
                         </div>
                     </div>
@@ -245,7 +269,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body" id="messageAchatPanier">
-                            <p><span id="checkIcon"><i class="fas fa-check-circle"></i></span>Bravo! Vous avez acheté de nouveaux personnages!</p>
+                            <p><span id="checkIcon"><i class="fas fa-check-circle"></i></span>Félicitations pour vos achats ! </p>
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-primary" data-bs-target="#exampleModalToggle"
@@ -343,12 +367,30 @@
                                             [disabled]="isPersonnageEstDansLePanier(p.personnage)"
                                             *ngIf="!p.persoDejaEnPossession" (click)="ajouterAuPanier(p.personnage)"><i
                                                 class="fas fa-cart-plus" style="color: white"></i> Acheter</button>
-                                        <button type="button" class="btn btn-success" *ngIf="p.persoDejaEnPossession" disabled>Personnage déjà en votre
+                                        <button type="button" class="btn btn-success" *ngIf="p.persoDejaEnPossession"
+                                            disabled>Personnage déjà en votre
                                             possession</button>
                                         <!-- </span> -->
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngFor="let vie of boutiqueVie" class="row">
+
+                <div class="card col" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Nombre : {{vie.nombre}}</h5>
+                        <p class="card-text">Prix : {{vie.prix}}</p>
+                        <div class="divBouton" [attr.id]="vie.id + vie.prix">
+                            <!-- <span [ngClass]="{'negatif':client.ca<0}"> -->
+                            <button type="button" class="btn btn-info btn-sm bouton" id="vie" [attr.id]="vie.id"
+                                (click)="ajouterVieAuPanier(vie)"><i class="fas fa-cart-plus" style="color: white"></i>
+                                Acheter</button>
+                            <!-- </span> -->
                         </div>
                     </div>
                 </div>
