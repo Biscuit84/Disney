@@ -17,22 +17,22 @@ export class Compte {
   nbDefaite: number;
 
   constructor(
-    id?: number, 
-    version?: number, 
-    login?: string, 
-    password?: string, 
-    nom?: string, 
-    prenom?: string, 
-    mail?: string, 
-    role?: string, 
-    avatar?: string, 
-    pseudo?: string, 
-    level?: string, 
-    life?: number, 
+    id?: number,
+    version?: number,
+    login?: string,
+    password?: string,
+    nom?: string,
+    prenom?: string,
+    mail?: string,
+    role?: string,
+    avatar?: string,
+    pseudo?: string,
+    level?: string,
+    life?: number,
     nbEtoiles?: number,
     nbVictoire?: number,
     nbDefaite?: number
-) {
+  ) {
     this.id = id
     this.version = version
     this.login = login
@@ -46,13 +46,13 @@ export class Compte {
     this.level = level
     this.life = life
     this.nbEtoiles = nbEtoiles
-    this.nbVictoire= nbVictoire
-    this.nbDefaite= nbDefaite
+    this.nbVictoire = nbVictoire
+    this.nbDefaite = nbDefaite
   }
-  
 
 
-  
+
+
 }
 
 
@@ -65,7 +65,7 @@ export class Admin extends Compte {
 }
 
 export class Joueur extends Compte {
- 
+
   historiques: Array<Historique>;
   persos: Array<PersoObtenu>;
 
@@ -106,7 +106,7 @@ export class Boutique {
   version: number;
   personnages: Array<Personnage>;
   listVies: Array<Vie>;
-  listEtoiles:  Array<Etoile>;
+  listEtoiles: Array<Etoile>;
 
   constructor(
     id?: number,
@@ -126,11 +126,11 @@ export class Vie {
   prix: number;
 
   constructor(
-    id?: number, 
-    version?: number, 
-    nombre?: number, 
+    id?: number,
+    version?: number,
+    nombre?: number,
     prix?: number
-) {
+  ) {
     this.id = id
     this.version = version
     this.nombre = nombre
@@ -146,11 +146,11 @@ export class Etoile {
   prix: number;
 
   constructor(
-    id?: number, 
-    version?: number, 
-    nombre?: number, 
+    id?: number,
+    version?: number,
+    nombre?: number,
     prix?: number
-) {
+  ) {
     this.id = id
     this.version = version
     this.nombre = nombre
@@ -237,7 +237,7 @@ export class BoutiquePersoAndLifeDto {
     this.idVies = idVies
   }
 
- 
+
 
 }
 
@@ -249,19 +249,75 @@ export class Partie {
   plateau: Plateau;
   personnages: Array<Personnage>;
   joueursPartie: Array<Joueur>;
+  nbTourDeJeu:number;
 
   constructor(
     id?: number,
     version?: number,
     plateau?: Plateau,
     personnages?: Array<Personnage>,
-    joueursPartie?: Array<Joueur>
+    joueursPartie?: Array<Joueur>,
+    nbTourDeJeu?:number
   ) {
     this.id = id
     this.version = version
     this.plateau = plateau
     this.personnages = personnages
     this.joueursPartie = joueursPartie
+    this.nbTourDeJeu = nbTourDeJeu
+  }
+
+}
+export class PartieDTO {
+  id: number;
+  version: number;
+  plateau: Plateau;
+  MonPersonnage: Personnage;
+  nbTourDeJeu:number;
+
+  constructor(
+    id?: number,
+    version?: number,
+    plateau?: Plateau,
+    MonPersonnage?: Personnage,
+    nbTourDeJeu?:number
+  ) {
+    this.id = id
+    this.version = version
+    this.plateau = plateau
+    this.MonPersonnage = MonPersonnage
+    this.nbTourDeJeu = nbTourDeJeu
+  }
+
+}
+
+
+export class TourDeJeuDto {
+  valueDice1: number;
+  valueDice2: number;
+  tourDeJeuEnCours: number;
+  positionFutureJoueur: number;
+  finPartie: boolean = false;
+  effetAActiver: boolean = false;
+  
+
+
+  constructor(
+    valueDice1?: number,
+    valueDice2?: number,
+    tourDeJeuEnCours?: number,
+    positionFutureJoueur?: number,
+    finPartie?: boolean,
+    effetAActiver?: boolean
+
+  ) {
+    this.valueDice1 = valueDice1
+    this.valueDice2 = valueDice2
+    this.tourDeJeuEnCours = tourDeJeuEnCours
+    this.positionFutureJoueur = positionFutureJoueur
+    this.finPartie = finPartie
+    this.effetAActiver = effetAActiver
+   
   }
 
 }
@@ -273,7 +329,7 @@ export class Historique {
   dateHeureFinPartie: string;
   positionArrivee: number;
   nbEtoilesGagnees: number;
-  victoire:boolean
+  victoire: boolean
   parties: Array<Partie>;
 
 
@@ -284,7 +340,7 @@ export class Historique {
     dateHeureFinPartie?: string,
     positionArrivee?: number,
     nbEtoilesGagnees?: number,
-    victoire?:boolean,
+    victoire?: boolean,
     parties?: Array<Partie>
   ) {
     this.id = id
@@ -293,7 +349,7 @@ export class Historique {
     this.dateHeureFinPartie = dateHeureFinPartie
     this.positionArrivee = positionArrivee
     this.nbEtoilesGagnees = nbEtoilesGagnees
-    this.victoire=victoire
+    this.victoire = victoire
     this.parties = parties
   }
 
