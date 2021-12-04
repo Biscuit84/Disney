@@ -86,7 +86,15 @@ class TestMain {
 //		
 		@Test
 		void contextLoads() throws ParseException {
-////		
+////	
+			
+			Joueur ia1 = new Joueur("mickey.mickey@adresseMail.com","mickeyTropFortMickey","Mickey");
+			Joueur ia2 = new Joueur("donald.donald@adresseMail.com","donaldTropFortDonald","Donald");
+			Joueur ia3 = new Joueur("dingo.dingo@adresseMail.com","dingoTropFortDonald","Dingo");
+			ia1 = joueurRepo.save(ia1);
+			ia2 = joueurRepo.save(ia2);
+			ia3 = joueurRepo.save(ia3);
+			
 		//JOUEURS
 		Joueur joueur1 = new Joueur("joueur1", "1234", "Toto", "Titi", "toto.titi@gmail.com", "TotoTropFort", "noob", 3);
 		joueur1=joueurRepo.save(joueur1);
@@ -95,6 +103,8 @@ class TestMain {
 		Joueur joueur3 = new Joueur("joueur3", "1234", "j3", "Titi", "j3@gmail.com", "TotoTropFort", "noob", 3);
 		joueur3.setNbEtoiles(1000);
 		joueur3 = joueurRepo.save(joueur3);
+		
+		
 		
 		
 		List <Joueur>listeJoueurs = new ArrayList<Joueur>();
@@ -118,25 +128,57 @@ class TestMain {
 		Personnage perso2 = new Personnage("Ariel", "Eric", "Ursula", "Eau",200);
 		Personnage perso3 = new Personnage("Jasmine", "Aladdin", "Jafar", "feu",300);
 		Personnage perso4 = new Personnage("Mulan", "Amoureux", "Atila", "terre",400);
+		Personnage perso5 = new Personnage("Aurore", "Philippe", "Malefique", "terre",100);
+		Personnage perso6 = new Personnage("Belle", "La Bête", "Gaston", "terre",100);
+		Personnage perso7 = new Personnage("Blanche Neige", "Prince", "La méchante reine", "terre",100);
+		Personnage perso8 = new Personnage("Cendrillon", "Prince charmant", "Mme de Trénaine", "terre",100);
+		Personnage perso9 = new Personnage("Raiponce", "Eugene", "Gotel", "terre",100);
+		Personnage perso10 = new Personnage("Tiana", "ray", "Maitre des ombres", "terre",100);
 		perso1.setAvatar("../../assets/images/persoBoutique/elsa.jpg");
 		perso2.setAvatar("../../assets/images/persoBoutique/arel.jpg");
 		perso3.setAvatar("../../assets/images/persoBoutique/jasmine.jpg");
-		perso4.setAvatar("../../assets/images/persoBoutique/mulan.jpg");;
+		perso4.setAvatar("../../assets/images/persoBoutique/mulan.jpg");
+		perso5.setAvatar("../../assets/images/persoBoutique/aurore.jpg");
+		perso6.setAvatar("../../assets/images/persoBoutique/belle.jpg");
+		perso7.setAvatar("../../assets/images/persoBoutique/blanche-neige.jpg");
+		perso8.setAvatar("../../assets/images/persoBoutique/Cendrillon.jpg");
+		perso9.setAvatar("../../assets/images/persoBoutique/raiponce.jpg");
+		perso10.setAvatar("../../assets/images/persoBoutique/tiana.jpg");
 		
 		List<Personnage> listeTotalePerso = new ArrayList<> ();
 		listeTotalePerso.add(perso1);
 		listeTotalePerso.add(perso2);
 		listeTotalePerso.add(perso3);
 		listeTotalePerso.add(perso4);
+		listeTotalePerso.add(perso5);
+		listeTotalePerso.add(perso6);
+		listeTotalePerso.add(perso7);
+		listeTotalePerso.add(perso8);
+		listeTotalePerso.add(perso9);
+		listeTotalePerso.add(perso10);
 		
 		Set<Personnage> listePersoPartie = new HashSet<>();
-		listePersoPartie.add(perso2);
 		listePersoPartie.add(perso1);
+		listePersoPartie.add(perso2);
+		listePersoPartie.add(perso3);
+		listePersoPartie.add(perso4);
+		listePersoPartie.add(perso5);
+		listePersoPartie.add(perso6);
+		listePersoPartie.add(perso7);
+		listePersoPartie.add(perso8);
+		listePersoPartie.add(perso9);
+		listePersoPartie.add(perso10);
 		
 		perso1=persoRepo.save(perso1);
 		perso2=persoRepo.save(perso2);
 		perso3=persoRepo.save(perso3);
 		perso4=persoRepo.save(perso4);
+		perso5=persoRepo.save(perso5);
+		perso6=persoRepo.save(perso6);
+		perso7=persoRepo.save(perso7);
+		perso8=persoRepo.save(perso8);
+		perso9=persoRepo.save(perso9);
+		perso10=persoRepo.save(perso10);
 		
 		//Cases
 		Cases caseMechant = new Cases("Mechant",TypeCase.mechant);

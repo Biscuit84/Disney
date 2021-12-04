@@ -1,10 +1,48 @@
 <div id="ecran-jeu">
 
 
-<p>jeu works!</p>
+<div id="choix_personnage">
 
 
-<a [routerLink]="['/jeu/ecrandejeu']" routerLinkActive="active"><button id="boutonLancement" type="button" class="btn btn-success bouton" >Commencer la partie</button></a>
+
+   
+
+
+   <div class="card mt-3">
+    <div class="card-header bg-info text-white">
+        <h3> Créer ta partie</h3>
+    </div>
+    
+    <div class="form-group">
+        <label for="personnage"> Personnage :</label>
+        <select class="form-control" id="personnage" [(ngModel)]="idPerso">
+            <option value="">Choisis ton personnage</option>
+            <option *ngFor="let p of listPersonnageDispo()" [value]="p.id">{{p.nom}} avec son pouvoir : {{p.pouvoir}}</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="plateau"> plateau :</label>
+        <select class="form-control" id="plateau" [(ngModel)]="idPlateau">
+            <option value="">Choisis ton plateau</option>
+            <option *ngFor="let p of listPlateauxDispo()" [value]="p.id">{{p.nom}} de {{p.nbCases}}</option>
+        </select>
+    </div>
+    
+
+</div>
+  
+
+</div>
+
+
+<div id="choix_plateau">
+
+    
+</div>
+
+
+
+<a (click)="CreerLapartie()"  ><button id="boutonLancement" type="button" class="btn btn-success bouton" >Commencer la partie</button></a>
 
 
 

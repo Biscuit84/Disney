@@ -25,6 +25,10 @@ public class Joueur extends Compte{
 
 	private int nbEtoiles=100;
 	
+	private int nbVictoire=0;
+	
+	private int nbDefaite=0;
+	
 
 	@OneToMany(mappedBy = "joueur")
 	@JsonView(Views.ViewsJoueurHistoriques.class)
@@ -64,13 +68,27 @@ public class Joueur extends Compte{
 	}
 
 
-	public Joueur(String pseudo) {
+	public Joueur(String mail, String password,String pseudo) {
 		super();
 		this.pseudo = pseudo;
+		this.mail=mail;
+		this.password=password;
 	}
 
 
 
+
+
+	public Joueur(String login, String password, String nom, String prenom, String mail, String pseudo, String level,
+			int life, int nbEtoiles, int nbVictoire, int nbDefaite) {
+		super(login, password, nom, prenom, mail);
+		this.pseudo = pseudo;
+		this.level = level;
+		this.life = life;
+		this.nbEtoiles = nbEtoiles;
+		this.nbVictoire = nbVictoire;
+		this.nbDefaite = nbDefaite;
+	}
 
 
 	public Joueur() {
@@ -140,6 +158,26 @@ public class Joueur extends Compte{
 
 	public void setHistoriques(List<Historique> historiques) {
 		this.historiques = historiques;
+	}
+
+
+	public int getNbVictoire() {
+		return nbVictoire;
+	}
+
+
+	public void setNbVictoire(int nbVictoire) {
+		this.nbVictoire = nbVictoire;
+	}
+
+
+	public int getNbDefaite() {
+		return nbDefaite;
+	}
+
+
+	public void setNbDefaite(int nbDefaite) {
+		this.nbDefaite = nbDefaite;
 	}
 
 

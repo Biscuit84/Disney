@@ -289,9 +289,9 @@ public class PartieRestController {
 	//creation de la liste des joueurs:
 	public Set<Joueur> listeJoueursPartie(Long idJoueur, Historique historique) {
 		Set <Joueur> listeDesJoueurs = new HashSet <Joueur> ();
-		Joueur IA1 = new Joueur ("Mickey");
-		Joueur IA2 = new Joueur ("Donald");
-		Joueur IA3 = new Joueur ("Dingo");
+		Joueur IA1 = joueurRepo.findById((long) 1).get();
+		Joueur IA2 = joueurRepo.findById((long) 2).get();
+		Joueur IA3 = joueurRepo.findById((long) 3).get();
 		Joueur joueurCourant = joueurRepo.findById(idJoueur).get();
 
 		listeDesJoueurs.add(joueurCourant);

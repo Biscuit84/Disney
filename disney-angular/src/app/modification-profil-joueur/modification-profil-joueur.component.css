@@ -1,0 +1,57 @@
+#ecran-modif-profil{
+  top: 4em;
+  width: 100%;
+  position: relative;
+  margin:0px;
+  background-image: url(../../assets/images/princesses_transparent_couleurs.png);
+  background-repeat:no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+
+  height: 92.5vh;
+  justify-content : center;
+  display: flex;
+
+
+}
+
+/* *********************************************body********************************************** */
+
+  .containerCard {
+    background-color: rgba(245, 245, 245, 0.7);
+    border-radius: 10px;
+}
+
+#ecranconnec{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+}
+
+.cardbody{
+  height: auto;
+  width: auto;
+}
+
+  .infoGeneraleNomItem{
+    font-weight: bold;
+  }
+
+  .infoGeneraleDef{
+    font-style: italic;
+  }
+
+  
+/* pour ajuster le menu avatars à droite de la page: */
+
+  .dropdown-pull-right {
+    float: right !important;
+    right: 0;
+    left: auto;
+  }
+  
+  .dropdown-pull-right>.dropdown-menu {
+    right: 0;
+    left: auto;
+  }

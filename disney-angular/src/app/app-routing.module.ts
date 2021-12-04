@@ -16,6 +16,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { BoutiquePersonnagesComponent } from './boutique/boutique-personnages/boutique-personnages.component';
 import { PlateauComponent } from './Gestion/plateau/plateau.component';
 import { GestionComponent } from './Gestion/gestion.component';
+import { CreationCompteComponent } from './creation-compte/creation-compte.component';
+import { ModificationProfilJoueurComponent } from './modification-profil-joueur/modification-profil-joueur.component';
 
 const routes : Routes= [
 
@@ -28,8 +30,12 @@ const routes : Routes= [
   {path : "jeu/findepartie", component: FinDePartieComponent},
   {path : "boutique", component: BoutiqueComponent},
   {path : "boutique/personnages", component: BoutiquePersonnagesComponent},
-  {path : "compte", component: GestionDuCompteComponent},
+  {path : "accueilJoueur", component: GestionDuCompteComponent},
   {path : "connexion", component: PageConnexionComponent},
+  {path : "newjoueur", component: CreationCompteComponent},
+  {path : "modifProfil", component: ModificationProfilJoueurComponent},
+  
+
 
   // pour l'admin :
   {path : "gestionAdmin", component: GestionComponent},

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PageConnexionService } from '../page-connexion/page-connexion.service';
 
 @Component({
@@ -10,7 +11,7 @@ export class BarreDeNavigationComponent implements OnInit {
   cheminLogo:any = "src\assets\images\logoPrincessA.png";
   
 
-  constructor(public pageConnexionService: PageConnexionService) { 
+  constructor(public pageConnexionService: PageConnexionService,private router:Router) { 
     
   }
 
@@ -18,5 +19,6 @@ export class BarreDeNavigationComponent implements OnInit {
   }
   deconnexion() {
     this.pageConnexionService.deconnexion();
+    this.router.navigate(['home'])
   }
 }
