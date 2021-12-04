@@ -24,6 +24,7 @@ import { PageConnexionService } from './page-connexion/page-connexion.service';
 import { BtnDisablePipe } from './boutique/boutique-personnages/btn-disable.pipe';
 import { CreationCompteComponent } from './creation-compte/creation-compte.component';
 import { ModificationProfilJoueurComponent } from './modification-profil-joueur/modification-profil-joueur.component';
+import { DateAgoPipe } from './date-ago.pipe';
 
 
 
@@ -47,7 +48,8 @@ import { ModificationProfilJoueurComponent } from './modification-profil-joueur/
     BtnDisablePipe,
     PlateauComponent,
     CreationCompteComponent,
-    ModificationProfilJoueurComponent
+    ModificationProfilJoueurComponent,
+    DateAgoPipe
   ],
   imports: [
     BrowserModule,

@@ -327,7 +327,8 @@ export class Historique {
   positionArrivee: number;
   nbEtoilesGagnees: number;
   victoire: boolean
-  parties: Array<Partie>;
+  partie: Partie;
+  personnage: Personnage;
 
 
   constructor(
@@ -338,7 +339,8 @@ export class Historique {
     positionArrivee?: number,
     nbEtoilesGagnees?: number,
     victoire?: boolean,
-    parties?: Array<Partie>
+    partie?: Partie,
+    personnage?: Personnage
   ) {
     this.id = id
     this.version = version
@@ -347,7 +349,8 @@ export class Historique {
     this.positionArrivee = positionArrivee
     this.nbEtoilesGagnees = nbEtoilesGagnees
     this.victoire = victoire
-    this.parties = parties
+    this.partie = partie
+    this.personnage=personnage
   }
 
 }
