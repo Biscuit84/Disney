@@ -7,26 +7,26 @@
 
 
 footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
-  
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
 
 
 /* partie du bas de page */
 #BasPage {
-    background-color: lightgrey;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    opacity: 50%;
-  }
-  
-  #BasPage span { /*ça c'est le texte*/
-    display: flex;
-    justify-content: center;
-    align-content: center;
-  }
-    
+  background-color: lightgrey;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  opacity: 50%;
+}
+
+#BasPage span {
+  /*ça c'est le texte*/
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}

@@ -26,6 +26,7 @@ import { CreationCompteComponent } from './creation-compte/creation-compte.compo
 import { ModificationProfilJoueurComponent } from './modification-profil-joueur/modification-profil-joueur.component';
 import { DateAgoPipe } from './date-ago.pipe';
 import { BoutiqueEtoilesComponent } from './boutique/boutique-etoiles/boutique-etoiles.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -57,7 +58,8 @@ import { BoutiqueEtoilesComponent } from './boutique/boutique-etoiles/boutique-e
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
    
   ],
   providers: [PageConnexionService],
