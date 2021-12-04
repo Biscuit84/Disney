@@ -2,18 +2,16 @@
 /* **********************************************plateau jeu***************************************************************** */
 
 #ecran-de-jeu{
-  top: 4em;
+  top: 7vh;
   background-image: url(src\assets\images\jeu\fond1.jpg);
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
-   
-  display: flex;
   background-color: #dbbadbc4;
-  height: 100%;
   width: 100%;
-  position: relative;
-  bottom:0;
+  position: absolute;
+  bottom: 0px;
+  
 }
 
 

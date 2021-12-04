@@ -1,25 +1,14 @@
 #ecran-home{
-    top: 4em;
-    height: 90%;
     width: 100%;
-    position: relative;
+    top: 7vh;
+    position: fixed;
+    bottom: 0px;
   }
 
   body{
     margin:0px;
   }
-  
-  #site{
-    display:block;
-  }
-  
-  #header{
-    display:block;
-  }
-  
-  #container{
-    display:block;
-  }
+
   
   
   
@@ -44,14 +33,14 @@
   }
   
   img{
-  height:92vh;
-  
+  object-fit: cover;
+  height: 93vh;
   }
   
   
   .logo_menu {
       width: 5em;
-      height: 4em;
+      height: 7vh;
   }
   
   
