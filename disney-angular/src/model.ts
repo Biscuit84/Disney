@@ -269,21 +269,31 @@ export class PartieDTO {
   id: number;
   version: number;
   plateau: Plateau;
-  MonPersonnage: Personnage;
+  monPersonnage: Personnage;
   nbTourDeJeu:number;
+  idPlateau:number
+  idPerso:number
+  idJoueur:number
 
   constructor(
     id?: number,
     version?: number,
     plateau?: Plateau,
-    MonPersonnage?: Personnage,
-    nbTourDeJeu?:number
+    monPersonnage?: Personnage,
+    nbTourDeJeu?:number,
+    idPlateau?:number,
+  idPerso?:number,
+    idJoueur?:number
+
   ) {
     this.id = id
     this.version = version
     this.plateau = plateau
-    this.MonPersonnage = MonPersonnage
+    this.monPersonnage = monPersonnage
     this.nbTourDeJeu = nbTourDeJeu
+    this.idPerso=idPerso
+    this.idPlateau=idPlateau
+    this.idJoueur=idJoueur
   }
 
 }
