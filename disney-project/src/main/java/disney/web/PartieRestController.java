@@ -23,6 +23,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import disney.dto.PartieDTO;
 import disney.dto.TourDeJeuDto;
 import disney.model.CasesPlateau;
 import disney.model.Historique;
@@ -85,10 +86,10 @@ public class PartieRestController {
 		}
 	}
 
-	@GetMapping("/detail/{id}")
+	@PostMapping("/detail")
 	@JsonView(Views.ViewsPartieDetailPersos.class)
-	public Partie findWithDetailPlateauAndPersos(@PathVariable Long id) {
-		Optional<Partie> optPartie = partieRepo.findByIdWithDetailPlateauAndPersos(id);
+	public Partie findWithDetailPlateauAndPersos(@RequestBody PartieDTO partie) {
+		Optional<Partie> optPartie = partieRepo.findByIdWithDetailPlateauAndPersos(partie.getId());
 
 		if (optPartie.isPresent()) {
 			return optPartie.get();
@@ -285,7 +286,43 @@ public class PartieRestController {
 
 		return partie;
 	}
+	
+	//creation de la partie:
+//		@PostMapping("/debuterLaPartie/{partieDTO.idJoueur}/{partieDTO.idPersoChoisi}/{partieDTO.idPlateauChoisi}")
+//		@JsonView(Views.ViewsPartieDetailPersos.class)
+//		public Partie debuterLaPartie(@RequestBody PartieDTO partieDTO) {
+//			Historique historique = new Historique();
+//			Partie partie = new Partie();
+//			
+//			//	1. choix du plateau: afficher la liste des plateaux dispo grace a : PlateauRestController.findAll()
+//			//		Long idPlateau= (long) 1;
+//			Plateau p = plateauRepo.findById(partieDTO.getIdPlateau()).get();
+//			partie.setPlateau(p);
+//			partie.setNbTourDeJeu(0);
+//			
+//			//	2. Creer une nouvelle partie et creation de la liste des joueurs:
+//			Set <Joueur> listeDesJoueurs = listeJoueursPartie(partieDTO.getIdJoueur(), historique);
+//			partie.setJoueurs(new ArrayList<>(listeDesJoueurs));
+//
+//			//	3. choix du perso: 
+//			//		- afficher la liste des persos du joueur grace a: PersoObtenuRestController.findAllPersoObtenuByIdJoueur(idJoueur);
+//			//		- creation de la liste des persos de la partie:
+//			Set<Personnage> listePersoPartie = listePersosPartie(partieDTO.getIdPerso(), historique, partie);
+//			partie.setPersonnages(new ArrayList<>(listePersoPartie));
+//
+//			partie = partieRepo.save(partie);
+//
+//			historique.setPartie(partie);
+//			historique.setDateHeureDebutPartie(LocalDateTime.now());
+//			historiqueRepo.save(historique);
+//			System.out.println(partie.getPersonnages());
+//			//		System.out.println();
+//
+//			return partie;
+//		}
 
+	
+	
 	//creation de la liste des joueurs:
 	public Set<Joueur> listeJoueursPartie(Long idJoueur, Historique historique) {
 		Set <Joueur> listeDesJoueurs = new HashSet <Joueur> ();

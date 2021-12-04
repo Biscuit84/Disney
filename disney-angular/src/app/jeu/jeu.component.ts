@@ -62,7 +62,7 @@ export class JeuComponent implements OnInit {
     this.partieForm.plateau = resp;
    }, error => console.log(error))
    this.personnageService.findById(this.idPerso).subscribe( resp => {
-    this.partieForm.MonPersonnage = resp;
+    this.partieForm.monPersonnage = resp;
    }, error => console.log(error))
     this.partieService.launchGame(this.idJoueur, this.idPerso, this.idPlateau, this.partieForm).subscribe(resp => {
       this.partieService.LaPartie = resp;
