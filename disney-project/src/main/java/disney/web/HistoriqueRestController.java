@@ -106,7 +106,7 @@ public class HistoriqueRestController {
 	}
 	
 	@GetMapping("{id}/joueur")
-	@JsonView(Views.ViewsHistorique.class)
+	@JsonView(Views.ViewsHistoriqueDetail.class)
 	public List<Historique> findAllByJoueur(@PathVariable Long id) {
 		List<Historique> historiques = historiqueRepo.findAllByJoueur(id, PageRequest.of(0, 5));
 
