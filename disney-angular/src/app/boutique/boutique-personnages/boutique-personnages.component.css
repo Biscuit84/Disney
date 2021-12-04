@@ -18,7 +18,12 @@
 .navbar {
   padding-top: 0rem;
   padding-bottom: 0rem;
-  z-index: 3;
+  z-index: 99;
+  width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
 }
 
 /* logo du jeu */
@@ -65,6 +70,7 @@
   font-size: 4em;
   font-family: 'Devonshire', cursive;
   z-index: 1;
+  margin-top: 5rem;
 }
 
 .dropdown-toggle::after {
@@ -337,5 +343,22 @@ ul {
 .red{
   color:red;
   font-weight: bold;
+  text-align: center;
+}
+
+.coeur{
+  color: red;
+}
+
+.borderAjust{
+  border-bottom-right-radius: 50px;
+  border-top-left-radius: 50px;
+}
+
+.borderImage{
+  border-top-left-radius: 50px;
+}
+
+.boutonVie{
   text-align: center;
 }

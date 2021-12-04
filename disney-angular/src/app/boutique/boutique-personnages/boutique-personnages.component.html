@@ -49,24 +49,30 @@
                             <button type="button" class="btn bg-transparent dropdown-toggle" data-bs-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                                 <i class="bi bi-cart4"></i><span class="badge badge-primary badge-pill"
-                                    id="nombreElementsDansPanier">{{listePersonnagesPanier.length + listeViePanier.length}}</span>
+                                    id="nombreElementsDansPanier">{{listePersonnagesPanier.length +
+                                    listeViePanier.length}}</span>
                             </button>
                             <div class="dropdown-menu">
                                 <span *ngIf="listePersonnagesPanier.length>0">Liste des personnages dans le
                                     panier : </span>
-                                <ul id="listePanier" class="monPanier" *ngIf="listePersonnagesPanier.length>0" (click)="$event.stopPropagation()">
+                                <ul id="listePanier" class="monPanier" *ngIf="listePersonnagesPanier.length>0"
+                                    (click)="$event.stopPropagation()">
                                     <!-- <div *ngIf="listePersonnagesPanier.length>0" id="listePersosPanier"> -->
-                                    <li *ngFor="let p of listePersonnagesPanier"> {{p.nom}}: {{p.prixAchatPerso}} <button type="button" class="btn " (click)="removePerso(p.nom)"> <i class="far fa-trash-alt poubelle"></i> </button><i
-                                            class="fas fa-star etoile"></i></li>
+                                    <li *ngFor="let p of listePersonnagesPanier"> {{p.nom}}: {{p.prixAchatPerso}}
+                                        <i class="fas fa-star etoile"></i> <button type="button" class="btn " (click)="removePerso(p.nom)"> <i
+                                            class="far fa-trash-alt poubelle"></i> </button>
+                                    </li>
                                     <!-- construit par la methode afficherListePersoPanier -->
                                     <!-- </div> -->
                                     <div class="dropdown-divider"></div>
                                 </ul>
-                                <span *ngIf="listeViePanier.length>0">Liste des vie dans le panier : </span>
+                                <span *ngIf="listeViePanier.length>0">Liste des vies dans le panier : </span>
                                 <ul id="listePanierVie" class="monPanier" *ngIf="listeViePanier.length>0">
                                     <!-- <div *ngIf="listePersonnagesPanier.length>0" id="listePersosPanier"> -->
-                                    <li *ngFor="let vie of listeViePanier"> {{vie.nombre}} : {{vie.prix}}<i
-                                            class="fas fa-star etoile"></i></li>
+                                    <li *ngFor="let vie of listeViePanier"> Package {{vie.nombre}} <i class="fas fa-heart coeur"></i> : {{vie.prix}}<i
+                                            class="fas fa-star etoile"></i> 
+                                            <button type="button" class="btn " (click)="removeVie(vie.id)"> <i
+                                                class="far fa-trash-alt poubelle"></i> </button>
                                     <!-- construit par la methode afficherListePersoPanier -->
                                     <!-- </div> -->
                                     <div class="dropdown-divider"></div>
@@ -236,7 +242,7 @@
                                 <i class="fas fa-star etoile"></i> <br>
                             </span>
                             <hr>
-                            <span *ngFor="let vie of listeViePanier">{{vie.nombre}} :  {{vie.prix}}
+                            <span *ngFor="let vie of listeViePanier">{{vie.nombre}} : {{vie.prix}}
                                 <i class="fas fa-star etoile"></i> <br>
                             </span>
                             <ul id="recapCommande"></ul>
@@ -269,7 +275,8 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body" id="messageAchatPanier">
-                            <p><span id="checkIcon"><i class="fas fa-check-circle"></i></span>Félicitations pour vos achats ! </p>
+                            <p><span id="checkIcon"><i class="fas fa-check-circle"></i></span>Félicitations pour vos
+                                achats ! </p>
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-primary" data-bs-target="#exampleModalToggle"
@@ -379,22 +386,68 @@
                 </div>
             </div>
 
-            <div *ngFor="let vie of boutiqueVie" class="row">
 
-                <div class="card col" style="width: 18rem;">
+
+            <!-- *********VIE*************** -->
+<!-- Titre page -->
+<h1 class="titrePage">
+    Les packages Vie
+</h1>
+<br>
+            <br>
+
+            <div class="row">
+                <div *ngFor="let vie of boutiqueVie" class="col">
+                    <div class="card borderAjust" style="width: 18rem;">
+                        <img src="../../assets/images/Disney_Princesses_Selfie.jpg" class="card-img-top borderImage" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Package {{vie.nombre}} <i class="fas fa-heart coeur"></i></h5>
+                            <p class="card-text">Prix : {{vie.prix}} <i class="fas fa-star etoile"></i></p>
+                            <div class="boutonVie"> <button type="button" class="btn btn-info btn-sm bouton" id="vie" [attr.id]="vie.id"
+                                (click)="ajouterVieAuPanier(vie)"><i class="fas fa-cart-plus" style="color: white"></i>
+                                Acheter</button></div>
+                           
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- <div class="row row-cols-1 row-cols-md-3 g-3 ensembleCard">
+                    <div class="col">
+                        <div class="card h-100 itemsBoutique">
+                            <img src="../../assets/images/Disney_Princesses_Selfie.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Nombre : {{vie.nombre}}</h5>
+                                <p class="card-text">Prix : {{vie.prix}}</p>
+                                <div class="divBouton" [attr.id]="vie.id + vie.prix"></div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-info btn-sm bouton" id="vie" [attr.id]="vie.id"
+                            (click)="ajouterVieAuPanier(vie)"><i class="fas fa-cart-plus" style="color: white"></i>
+                            Acheter</button>
+                    </div>
+                </div> -->
+
+
+
+
+                <!-- <div class="card col" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">Nombre : {{vie.nombre}}</h5>
                         <p class="card-text">Prix : {{vie.prix}}</p>
                         <div class="divBouton" [attr.id]="vie.id + vie.prix">
-                            <!-- <span [ngClass]="{'negatif':client.ca<0}"> -->
-                            <button type="button" class="btn btn-info btn-sm bouton" id="vie" [attr.id]="vie.id"
+                             <span [ngClass]="{'negatif':client.ca<0}"> -->
+                <!-- <button type="button" class="btn btn-info btn-sm bouton" id="vie" [attr.id]="vie.id"
                                 (click)="ajouterVieAuPanier(vie)"><i class="fas fa-cart-plus" style="color: white"></i>
-                                Acheter</button>
-                            <!-- </span> -->
-                        </div>
+                                Acheter</button> -->
+                <!-- </span> -->
+                <!-- </div>
                     </div>
-                </div>
+                </div> -->
             </div>
+            <br>
+            <br>
         </main>
     </div>
 </div>
