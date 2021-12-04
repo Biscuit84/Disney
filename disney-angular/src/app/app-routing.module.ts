@@ -18,6 +18,7 @@ import { PlateauComponent } from './Gestion/plateau/plateau.component';
 import { GestionComponent } from './Gestion/gestion.component';
 import { CreationCompteComponent } from './creation-compte/creation-compte.component';
 import { ModificationProfilJoueurComponent } from './modification-profil-joueur/modification-profil-joueur.component';
+import { BoutiqueEtoilesComponent } from './boutique/boutique-etoiles/boutique-etoiles.component';
 
 const routes : Routes= [
 
@@ -30,6 +31,7 @@ const routes : Routes= [
   {path : "jeu/findepartie", component: FinDePartieComponent},
   {path : "boutique", component: BoutiqueComponent},
   {path : "boutique/personnages", component: BoutiquePersonnagesComponent},
+  {path : "boutique/etoiles", component: BoutiqueEtoilesComponent},
   {path : "accueilJoueur", component: GestionDuCompteComponent},
   {path : "connexion", component: PageConnexionComponent},
   {path : "newjoueur", component: CreationCompteComponent},

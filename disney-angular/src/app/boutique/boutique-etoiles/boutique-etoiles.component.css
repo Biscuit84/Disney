@@ -82,97 +82,12 @@
   justify-content: center;
 }
 
-/* pour mettre l'image sur la card : */
 
-.mr-200 {
-  margin-left: -200px;
-}
-
-.portfolio:hover {
-  box-shadow: 10px 10px 10px black;
-  cursor: pointer;
-  opacity: 0.8;
-}
-
-.portfolio {
-  width: 200px;
-  height: 200px;
-  float: left;
-  z-index: 2;
-  box-shadow: 2px 2px 2px black;
-}
-
-/* card avec le detail des personnages: */
-
-.detail {
-  background-color: aliceblue;
-  text-align: left;
-  padding-left: 13rem;
-  z-index: 1;
-  border-bottom-left-radius: 100px;
-  border-top-left-radius: 100px;
-  border-bottom-right-radius: 40px;
-  border-top-right-radius: 40px;
-  color: black;
-  box-shadow: 5px 5px 3px darkblue;
-  padding-top: 0rem;
-  padding-bottom: 0rem;
-}
-
-.prix {
-  text-align: center;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 1.5rem;
-  font-style: italic;
-}
 
 .etoile {
   color: rgb(255, 195, 0);
 }
 
-.iconePouvoir {
-  width: 1.7rem;
-  height: 1.7rem;
-}
-
-.bouton {
-  width: 10rem;
-  text-align: center;
-  font-size: 1.2rem;
-  color: white;
-  border-radius: 7px;
-  box-shadow: 3px 2px 2px lightgrey;
-}
-
-.divBouton {
-  display: flex;
-  justify-content: center;
-  padding-bottom: 1rem;
-}
-
-.nomPerso {
-  font-family: 'Devonshire', cursive;
-}
-
-.contenuPouvoir {
-  font-family: cursive;
-}
-
-.contenuPouvoir:hover {
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.descriptionPouvoir {
-  font-style: italic;
-  background-color: transparent;
-  border-style: dashed;
-}
-
-.deuxElements {
-  margin-right: 11rem;
-  margin-left: 11rem;
-}
 
 /* **********************************************background anime***************************************************************** */
 
@@ -359,7 +274,7 @@ ul {
   border-top-left-radius: 50px;
 }
 
-.boutonVie{
+.boutonEtoile{
   text-align: center;
 }
 
