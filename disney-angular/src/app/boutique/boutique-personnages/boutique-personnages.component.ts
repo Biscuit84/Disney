@@ -127,4 +127,13 @@ export class BoutiquePersonnagesComponent implements OnInit {
     }
   }
 
+
+  removeVie(id: number){
+
+    let idx = this.listeViePanier.findIndex(vie => vie.id == id);
+    if (idx != -1) {
+      this.listeViePanier.splice(idx, 1);
+    }
+  }
+
 }
