@@ -1,4 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Devonshire&display=swap");
+
+
+
+
+
+
 /* ***************************navbar************************* */
 
 #ecran-boutique{
@@ -40,7 +46,6 @@ display:flex;
 justify-content:center;
 align-items:center;
 margin-top: 10%;
-padding: 1rem;
 }
 
 .lienBoutiques{
@@ -52,10 +57,10 @@ padding: 1rem;
   border-radius: 5px;
 }
 
-.image_Boutique{
-  /* height: 30%;
-  width: 30%; */
-}
+/* .imageVersBoutique{
+  height: 50%;
+  width: 50%;
+} */
 
 .boutonAccordeon{
   background-color: aliceblue;
@@ -68,4 +73,25 @@ padding: 1rem;
 
 .ensembleCard{
   justify-content: center;
+}
+
+/* centrer et couleur body  */
+
+#ecranconnec1{
+  height: 60%;
+  width: 60%;
+  /* align-content: center; */
+  align-self: center;
+  margin-top: 4rem;
+  border: none;
+  background-color: darkorchid;
+}    
+
+body{
+  height: 90vh;
+  background-color: darkorchid;
+}
+
+.imageCaroussel{
+  border-radius:20px;
 }
