@@ -35,7 +35,7 @@ public class Joueur extends Compte{
 	private List<Historique> historiques;
 
 	@ManyToOne
-	@JsonView(Views.ViewsJoueurParties.class)
+	@JsonView(Views.ViewsJoueur.class)
 	private Partie partie;
 
 	//	@OneToMany (mappedBy = "j")
