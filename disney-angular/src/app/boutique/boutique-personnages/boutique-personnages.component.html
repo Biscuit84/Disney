@@ -54,9 +54,9 @@
                             <div class="dropdown-menu">
                                 <span *ngIf="listePersonnagesPanier.length>0">Liste des personnages dans le
                                     panier : </span>
-                                <ul id="listePanier" class="monPanier" *ngIf="listePersonnagesPanier.length>0">
+                                <ul id="listePanier" class="monPanier" *ngIf="listePersonnagesPanier.length>0" (click)="$event.stopPropagation()">
                                     <!-- <div *ngIf="listePersonnagesPanier.length>0" id="listePersosPanier"> -->
-                                    <li *ngFor="let p of listePersonnagesPanier"> {{p.nom}}: {{p.prixAchatPerso}}<i
+                                    <li *ngFor="let p of listePersonnagesPanier"> {{p.nom}}: {{p.prixAchatPerso}} <button type="button" class="btn " (click)="removePerso(p.nom)"> <i class="far fa-trash-alt poubelle"></i> </button><i
                                             class="fas fa-star etoile"></i></li>
                                     <!-- construit par la methode afficherListePersoPanier -->
                                     <!-- </div> -->
