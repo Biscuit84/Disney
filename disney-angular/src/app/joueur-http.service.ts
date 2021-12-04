@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Compte } from 'src/model';
+import { Compte, Partie } from 'src/model';
 import { Joueur } from 'src/model';
 import { PageConnexionService } from './page-connexion/page-connexion.service';
 import { AppConfigService } from './app-config.service';
@@ -14,6 +14,7 @@ export class JoueurHttpService {
 
   joueurUrl:string;
   joueurs: Array<Joueur> = new Array<Joueur>();
+  joueur: Joueur;
 
   constructor(public compteService: PageConnexionService,private http: HttpClient, private appConfig: AppConfigService) { 
     this.load();
@@ -38,6 +39,8 @@ export class JoueurHttpService {
     var url=this.appConfig.backEndUrl+"compte/"+this.compteService.compte.id;
     return this.http.get<Compte>(url);
   }
+
+
 
 
 }

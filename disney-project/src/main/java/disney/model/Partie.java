@@ -37,7 +37,7 @@ public class Partie {
 	private List<Personnage> personnages;
 	
 	@OneToMany(mappedBy = "partie")
-	@JsonView(Views.ViewsPartieDetailJoueurs.class)
+	@JsonView(Views.ViewsPartieDetailPersos.class)
 	private List<Joueur> joueurs;
 	
 	// représente le nombre de tours dans la partie
