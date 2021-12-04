@@ -17,6 +17,7 @@ export class BoutiquePersonnagesComponent implements OnInit {
   personnageForm: Personnage;
   portfolio: string = "";
   boutiquePerso: Array<PersonnageDto> = new Array<PersonnageDto>();
+  boutiqueVie: Array<Vie> = new Array<Vie>();
   listePersonnagesPanier: Array<Personnage> = new Array<Personnage>();
   listeViePanier: Array<Vie> = new Array<Vie>();
   boutique: BoutiqueDto;
@@ -26,7 +27,8 @@ export class BoutiquePersonnagesComponent implements OnInit {
   joueur: Compte;
 
 
-  constructor(private pageConnexionService: PageConnexionService, private persoService: PersonnageHttpService, private boutiqueService: BoutiqueHttpService, private joueurService: JoueurHttpService) {
+  constructor(private pageConnexionService: PageConnexionService, private persoService: PersonnageHttpService,
+    private boutiqueService: BoutiqueHttpService, private joueurService: JoueurHttpService) {
     // this.compte= pageConnexionService.connexion;
     this.joueur = this.pageConnexionService.compte;
     // this.nombreEtoileJoueur=this.joueur.nbEtoiles
@@ -34,28 +36,20 @@ export class BoutiquePersonnagesComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("ON CHARGE LE TOUT");
-    
+
     this.listAllPersoBoutiqueDto();
   }
-
-  // connecJoueur(){
-  //   this.pageConnexionService.connexion().;
-  // }
-
-  // list(): Array<Personnage> {
-  //   return this.boutiquePersoService.findAll();
-  // }
-
   listAllPerso(): Array<Personnage> {
     return this.persoService.findAll();
   }
 
-  listAllPersoBoutiqueDto(){
+  listAllPersoBoutiqueDto() {
     // this.boutique = this.boutiqueService.findBoutique();
 
     this.boutiqueService.loadBoutique().subscribe(res => {
       this.boutique = res;
       this.boutiquePerso = this.boutique.personnages;
+      this.boutiqueVie = this.boutique.listVies;
     })
   }
 
@@ -88,53 +82,33 @@ export class BoutiquePersonnagesComponent implements OnInit {
 
       this.boutique = resp;
       this.boutiquePerso = this.boutique.personnages;
+      this.resetPanier();
     }, error => console.log(error));
-    console.log("panierDto::::::::::::::::::::::{}", panierDto);
-
-
-
   }
 
   afficheRecapCommande() {
-    // for (let p of this.listePersonnagesPanier) {
-    //   let nom = p.nom;
-    //   this.prixTotalPanier = (this.prixTotalPanier + p.prixAchatPerso);
-    // }
     this.montantDuPanier();
     return this.listePersonnagesPanier;
-
   }
 
 
   ajouterAuPanier(personnage: Personnage) {
     this.listePersonnagesPanier.push(personnage);
-    console.log("ma list dans le panier : {}", this.listePersonnagesPanier);
-
-
-
-    // for (let i=0; i<this.listePersonnagesPanier.length; i++ ){
-    //     this.isDisabled=true;
-
-    // }
-
-
-
   }
 
-
-
-
+  ajouterVieAuPanier(vie: Vie) {
+    this.listeViePanier.push(vie);
+  }
 
   // somme des achats en etoile: 
   montantDuPanier() {
     this.prixTotalPanier = 0;
     for (let p of this.listePersonnagesPanier) {
-      // console.log(p.prix);
       this.prixTotalPanier = (this.prixTotalPanier + p.prixAchatPerso);
-
     }
-
-    // $(".montantTotalPanier").html(this.prixTotalPanier + '<i class="fas fa-star etoile"></i>');
+    for (let vie of this.listeViePanier) {
+      this.prixTotalPanier = (this.prixTotalPanier + vie.prix);
+    }
   }
 
 
@@ -236,5 +210,11 @@ export class BoutiquePersonnagesComponent implements OnInit {
 
   // return this.portfolio;
   // }
+
+  private resetPanier() {
+    this.listePersonnagesPanier = [];
+    this.listeViePanier = [];
+    this.prixTotalPanier = 0;
+  }
 
 }
