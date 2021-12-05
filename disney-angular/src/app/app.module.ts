@@ -13,7 +13,7 @@ import { HomeComponent } from './Home/home.component';
 import { BoutiqueComponent } from './boutique/boutique.component';
 import { ActualitesComponent } from './actualites/actualites.component';
 import { NousComponent } from './nous/nous.component';
-import { GestionDuCompteComponent } from './gestion-du-compte/gestion-du-compte.component';
+
 import { PageConnexionComponent } from './page-connexion/page-connexion.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { FormsModule } from '@angular/forms';
@@ -27,9 +27,10 @@ import { ModificationProfilJoueurComponent } from './modification-profil-joueur/
 import { DateAgoPipe } from './date-ago.pipe';
 import { BoutiqueEtoilesComponent } from './boutique/boutique-etoiles/boutique-etoiles.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { GestionProfilAdminComponent } from './gestion-profil-admin/gestion-profil-admin.component';
-import { GestionCompteAdminComponent } from './gestion-compte-admin/gestion-compte-admin.component';
-import { GestionBoutiqueAdminComponent } from './gestion-boutique-admin/gestion-boutique-admin.component';
+import { GestionDuCompteComponent } from './gestion-du-compte/gestion-du-compte.component';
+import { GestionProfilAdminComponent } from './Gestion/gestion-profil-admin/gestion-profil-admin.component';
+import { GestionCompteAdminComponent } from './Gestion/gestion-compte-admin/gestion-compte-admin.component';
+import { GestionBoutiqueAdminComponent } from './Gestion/gestion-boutique-admin/gestion-boutique-admin.component';
 
 
 
