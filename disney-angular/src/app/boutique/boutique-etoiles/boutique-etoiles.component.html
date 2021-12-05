@@ -225,16 +225,17 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <h6>Etes-vous sur de vouloir valider le panier?</h6>
+                            <h2>Etes-vous sur de vouloir valider le panier?</h2>
                             <p>Récapitulatif de la commande:</p>
                             <hr>
-                            <span *ngFor="let etoile of listeEtoilesPanier">{{etoile.nombre}} : {{etoile.prix}}
+                            <span *ngFor="let etoile of listeEtoilesPanier">{{etoile.nombre}} <i
+                                class="fas fa-star etoile"></i>: {{etoile.prix}}
                                 <i class="fas fa-euro-sign"></i><br>
                             </span>
                             <ul id="recapCommande"></ul>
 
                             <br>
-                            <h6>Total de la commande:</h6>
+                            <h2>Total de la commande:</h2>
                             <p class="montantTotalPanier"> {{prixTotalPanier}} <i class="fas fa-euro-sign"></i></p>
                         </div>
                         <div class="modal-footer">
