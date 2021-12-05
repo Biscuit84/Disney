@@ -263,7 +263,8 @@ public class PartieRestController {
 		
 		//	1. choix du plateau: afficher la liste des plateaux dispo grace a : PlateauRestController.findAll()
 		//		Long idPlateau= (long) 1;
-		Plateau p = plateauRepo.findById(idPlateauChoisi).get();
+		Plateau p = plateauRepo.findByIdWithDetail(idPlateauChoisi).get();
+		System.out.println("le plateau" + plateauRepo.findByIdWithDetail(idPlateauChoisi).get());
 		partie.setPlateau(p);
 		partie.setNbTourDeJeu(0);
 		

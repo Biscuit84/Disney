@@ -9,9 +9,9 @@
   background-size: cover;
   background-color: #dbbadbc4;
   width: 100%;
-  position: absolute;
+  position: fixed;
   bottom: 0px;
-
+  height: 93vh;
   
 }
 
