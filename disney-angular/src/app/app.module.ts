@@ -32,6 +32,9 @@ import { GestionProfilAdminComponent } from './Gestion/gestion-profil-admin/gest
 import { GestionCompteAdminComponent } from './Gestion/gestion-compte-admin/gestion-compte-admin.component';
 import { GestionBoutiqueAdminComponent } from './Gestion/gestion-boutique-admin/gestion-boutique-admin.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { GestionPlateauComponent } from './Gestion/plateau/gestion-plateau/gestion-plateau.component';
+import {MatInputModule} from '@angular/material/input';
+
 
 
 
@@ -60,7 +63,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     BoutiqueEtoilesComponent,
     GestionProfilAdminComponent,
     GestionCompteAdminComponent,
-    GestionBoutiqueAdminComponent
+    GestionBoutiqueAdminComponent,
+    GestionPlateauComponent
   ],
   imports: [
     BrowserModule,
@@ -68,8 +72,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    DragDropModule
-   
+    DragDropModule,
+    MatInputModule
   ],
   providers: [PageConnexionService],
   bootstrap: [AppComponent]
