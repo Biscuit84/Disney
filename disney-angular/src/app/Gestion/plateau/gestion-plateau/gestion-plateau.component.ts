@@ -120,7 +120,7 @@ export class GestionPlateauComponent implements OnInit {
     this.plateau.nbCases = this.listCasesPlateau.length;
 
     var listCp = new Array<CasesPlateau>();
-    var position = 1;
+    var position = 0;
     for (var c of this.listCasesPlateau) {
       var cp = new CasesPlateau();
       cp.uneCase = c;
