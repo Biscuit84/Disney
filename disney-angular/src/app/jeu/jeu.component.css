@@ -1,23 +1,54 @@
 #ecran-jeu{
-    top: 4em;
-    height: 100%;
+    top: 7vh;
+    height: 93vh;
     width: 100%;
     position: relative;
+    display: flex;
+    background-image: url(../../assets/images/jeu/battlejpg.jpg);
+    background-repeat: none;
+    background-attachment: fixed;
+    background-size: cover;
+
   }
 
   #boutonLancement{
-
     font-family:  cursive;
     margin: auto;
-     top: 0;
-     right: 0;
-     bottom: 0;
-     left: 0;
-     margin-top: 3vh;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin-top: 3vh;
     height: 10vh;
-     width: 25vw;
-      font-size: 2vw;
-      z-index: 100;
-    
-    
+    width: 25vw;
+    font-size: 2vw;
+    z-index: 100;
     }
+
+  #choix_partie {
+    width: 50%;
+  }
+    
+  #previsulation{
+    text-align: center;
+  }
+
+  #regles{
+    margin-top:12vh;
+    margin-bottom: 12vh;
+    margin-left: 2%;
+    margin-right: 2%;
+    background-image: url(../../assets/images/jeu/texture.jpg);
+    background-repeat: none;
+    background-attachment: fixed;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 70vh;
+    opacity: 50%;
+  }
+
+  .texteRegles{
+    font-size: 2rem;
+    background-color: rgba(221, 202, 231, 0.541);
+  }

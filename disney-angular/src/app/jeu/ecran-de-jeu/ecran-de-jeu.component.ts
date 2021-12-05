@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { PageConnexionService } from 'src/app/page-connexion/page-connexion.service';
 import { AppConfigService } from 'src/app/app-config.service';
 import { PartieHttpService } from 'src/app/partie-http.service';
-import { Compte, Joueur, Partie, Plateau, TourDeJeuDto } from 'src/model';
+import { Compte, Joueur, Partie, Personnage, Plateau, TourDeJeuDto } from 'src/model';
 import { PlateauHttpService } from 'src/app/plateau-http.service';
 import { JoueurHttpService } from 'src/app/joueur-http.service';
 
@@ -23,6 +23,7 @@ export class EcranDeJeuComponent implements OnInit {
   joueur: Compte;
   idPartie: number;
   partie: Partie = new Partie;
+  personnage:Personnage;
 
   plateau: Plateau;
   public tourEnCours: TourDeJeuDto;
@@ -33,9 +34,9 @@ export class EcranDeJeuComponent implements OnInit {
   constructor(public compteService: PageConnexionService, public partieService: PartieHttpService, private plateauService: PlateauHttpService, private joueurService: JoueurHttpService) {
     this.joueur = this.compteService.compte;
     this.idJoueur = this.joueur.id;
-
     this.partie = this.partieService.LaPartie;
     console.log(this.partie);
+    this.personnage=this.partieService.LaPartie.personnages[0];
 
   }
 
@@ -111,6 +112,7 @@ export class EcranDeJeuComponent implements OnInit {
   public commandeDispo = true; // on peut appuyer sur les boutons
   public dispoBoutonJouer = true;
   public dispoBoutonFin = true;
+  public dispoBoutonPouvoir = false; // pas encore implémenté
   public volumeSon:number = 100;
   ////////////////////////// ngOnInit  //////////////////////////
   // note : ça sert à initialiser des données et est appelé qu'une fois ! 
@@ -157,6 +159,11 @@ export class EcranDeJeuComponent implements OnInit {
     this.Jouer(this, this.pionJoueur);
 
   }
+
+  Pouvoir(){
+    console.log("pouvoir")
+  }
+
   // bouton fin de tour
   EndTurn() {
     this.FinDeTour(this, this.pionJoueur);

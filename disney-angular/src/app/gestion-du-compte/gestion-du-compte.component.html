@@ -9,7 +9,7 @@
     <p>Niveau: {{joueur.level}}</p>
     <p>Nombre de victoire: {{joueur.nbVictoire}}</p>
     <p> <i class="fas fa-star etoile"></i>: {{joueur.nbEtoiles}}</p>
-    <button id="jouerBtn" type="submit" class="btn btn-primary">Jouer</button>
+    <button id="jouerBtn" type="submit" [routerLink]="['/jeu']" class="btn btn-primary">Jouer</button>
   </div>
 </div> 
 </div> 
