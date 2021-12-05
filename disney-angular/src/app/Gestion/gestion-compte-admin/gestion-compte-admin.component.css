@@ -1,0 +1,17 @@
+#ecran-gestion{
+    top: 7vh;
+    height: 100%;
+    width: 100%;
+    position: relative;
+  }
+
+
+  body{
+    width:100%;
+    height:93vh;
+    margin: 0px;
+    background-image: url(../../../assets/images/studioDisney.jpg);
+    background-repeat:no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    }

@@ -10,7 +10,7 @@ import { HomeComponent } from './Home/home.component';
 import { BoutiqueComponent } from './boutique/boutique.component';
 import { ActualitesComponent } from './actualites/actualites.component';
 import { NousComponent } from './nous/nous.component';
-import { GestionDuCompteComponent } from './gestion-du-compte/gestion-du-compte.component';
+
 import { PageConnexionComponent } from './page-connexion/page-connexion.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { BoutiquePersonnagesComponent } from './boutique/boutique-personnages/boutique-personnages.component';
@@ -19,6 +19,10 @@ import { GestionComponent } from './Gestion/gestion.component';
 import { CreationCompteComponent } from './creation-compte/creation-compte.component';
 import { ModificationProfilJoueurComponent } from './modification-profil-joueur/modification-profil-joueur.component';
 import { BoutiqueEtoilesComponent } from './boutique/boutique-etoiles/boutique-etoiles.component';
+import { GestionProfilAdminComponent } from './Gestion/gestion-profil-admin/gestion-profil-admin.component';
+import { GestionCompteAdminComponent } from './Gestion/gestion-compte-admin/gestion-compte-admin.component';
+import { GestionBoutiqueAdminComponent } from './Gestion/gestion-boutique-admin/gestion-boutique-admin.component';
+import { GestionDuCompteComponent } from './gestion-du-compte/gestion-du-compte.component';
 
 const routes : Routes= [
 
@@ -42,6 +46,9 @@ const routes : Routes= [
   // pour l'admin :
   {path : "gestionAdmin", component: GestionComponent},
   {path : "gestionAdmin/plateau", component: PlateauComponent},
+  {path : "gestionAdmin/profil", component: GestionProfilAdminComponent},
+  {path : "gestionAdmin/compte", component: GestionCompteAdminComponent},
+  {path : "gestionAdmin/boutique", component: GestionBoutiqueAdminComponent},
 
 
   // autres
