@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Compte, Partie, Personnage, Plateau } from 'src/model';
+import { CasesPlateauHttpService } from '../cases-plateau-http.service';
 import { PageConnexionService } from '../page-connexion/page-connexion.service';
 import { PartieHttpService } from '../partie-http.service';
 import { PersoObtenuHttpService } from '../perso-obtenu-http.service';
@@ -20,6 +21,7 @@ export class JeuComponent implements OnInit {
   joueur: Compte;
   partie: Partie;
   personnage: Personnage = new Personnage;
+  plateau:Plateau;
 
   idPerso: number = null;
   idPlateau: number = null;
@@ -30,10 +32,13 @@ export class JeuComponent implements OnInit {
     private persoObtenuService: PersoObtenuHttpService,
     private personnageService: PersonnageHttpService,
     private plateauService: PlateauHttpService,
-    public partieService: PartieHttpService) {
+    public partieService: PartieHttpService,
+    public casesPlateauService: CasesPlateauHttpService) {
 
     this.joueur = this.compteService.compte;
     this.idJoueur = this.joueur.id;
+
+    this.listPersonnageDispo();
   }
 
   ngOnInit(): void {
@@ -72,8 +77,10 @@ export class JeuComponent implements OnInit {
 >>>>>>> liaison back / front pour le plateau
       this.partieService.LaPartie = resp;
       this.partie = resp;
-      //console.log(this.partie);
-      this.router.navigate(['jeu/ecrandejeu']);
+       this.casesPlateauService.findAllCasesByPlateau(this.partie.plateau.id).subscribe(resp => {
+       this.casesPlateauService.lesCasesPlateau = resp;
+       this.router.navigate(['jeu/ecrandejeu']);
+       });      
     }, error => {
       console.log(error);
     }, () => {

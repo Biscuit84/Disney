@@ -67,3 +67,34 @@ export class pionPlayer {
 }
 
 
+export class CaseVirtuelle {
+  ordre: number;
+  nom: string;
+  parameter: number;
+  typeCase: string;
+  color:string;
+  positionCaseX: number;
+  positionCaseY:number;
+
+  constructor(
+    ordre?: number, 
+    nom?: string, 
+    parameter?: number, 
+    typeCase?: string, 
+    color?: string,
+    positionCaseX?: number,
+    positionCaseY?:number
+
+) {
+    this.ordre = ordre
+    this.nom = nom
+    this.parameter = parameter
+    this.typeCase = typeCase
+    this.color = color
+    this.positionCaseX=positionCaseX
+    this.positionCaseY=positionCaseY
+  }
+
+}
+
+

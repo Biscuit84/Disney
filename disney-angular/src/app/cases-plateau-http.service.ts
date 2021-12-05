@@ -10,14 +10,19 @@ import { AppConfigService } from './app-config.service';
 export class CasesPlateauHttpService {
 
   casesPlateauX: Array<CasesPlateau> = new Array<CasesPlateau>();
-  casesPlateauUrl:string;
+  casesPlateauUrl: string;
+  lesCasesPlateau : Array<CasesPlateau> = new Array<CasesPlateau>();
+
+
+
+  //casesPlateauPourUnPlateau:Array<CasesPlateau> = new Array<CasesPlateau>();
 
   constructor(private http: HttpClient, private appConfig: AppConfigService) {
-    this.casesPlateauUrl = this.appConfig.backEndUrl + "casesPlateau/"
+    this.casesPlateauUrl = this.appConfig.backEndUrl + "casesplateau/"
     this.load();
-   }
+  }
 
-   load() {
+  load() {
     this.http.get<Array<CasesPlateau>>(this.casesPlateauUrl).subscribe(response => {
 
       this.casesPlateauX = response;
@@ -52,6 +57,11 @@ export class CasesPlateauHttpService {
   }
 
   //AUTRES
+
+  // pour UN plateau donne la liste des cases plateau avec les details de celles ci et donc des cases en elle meme
+  findAllCasesByPlateau(idPlateau: number): Observable<Array<CasesPlateau>> {
+    return this.http.get<Array<CasesPlateau>>(this.casesPlateauUrl + "plateau/" + idPlateau);
+  }
 
 
 
