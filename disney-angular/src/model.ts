@@ -127,6 +127,7 @@ export class Vie {
   version: number;
   nombre: number;
   prix: number;
+  image: string;
 
   constructor(
     id?: number,
@@ -147,6 +148,7 @@ export class Etoile {
   version: number;
   nombre: number;
   prix: number;
+  image: string;
 
   constructor(
     id?: number,

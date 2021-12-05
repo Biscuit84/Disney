@@ -25,13 +25,15 @@ public class Vie {
 	// prix en fonction du nombre (1vie =100etoiles, 3vies=250etoiles...)
 	private int prix;
 	
+	//pour image boutique
 	private String image;
 
-	public Vie(int nombre, int prix) {
+	public Vie(int nombre, int prix, String image) {
 		super();
 		this.nombre = nombre;
 		this.prix = prix;
-	}
+		this.image=image;
+		}
 
 	public Vie(int nombre, int prix, Long id, int version) {
 		super();
