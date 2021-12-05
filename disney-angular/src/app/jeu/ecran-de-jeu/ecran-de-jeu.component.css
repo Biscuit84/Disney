@@ -11,6 +11,7 @@
   width: 100%;
   position: absolute;
   bottom: 0px;
+
   
 }
 
@@ -104,6 +105,8 @@
   height: 50px;
   width: 110px;
   font-family:  cursive;
+  background-color: rgb(87, 20, 87);
+  border-color: rgb(255, 255, 255);
 }
 
 .dice{
@@ -116,11 +119,12 @@
   object-fit: contain;
   overflow: hidden;
   margin-bottom: 2px;
+  box-shadow: darkorchid;
 }
 
 
 
-/* ********************************************** inventaire control***************************************************************** */
+/* ********************************************** player control***************************************************************** */
 /* partie de l'int utilisateur sur le coté */
 #interfaceUtilisateur {
   display: flex;
@@ -134,29 +138,41 @@
 
 .titreInterface{
   text-align: center;
-  font-size: 1em;
   font-family: 'Devonshire', cursive;
   z-index: 1;
   justify-content: center;
+  font-size: 3em;
+
   }
 
-
   #infojoueur{
-    height: 50%;
+    height: 80%;
     border: solid grey 2px;
     border-radius: 5px;
   }
+ 
+  #info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: none;
+  }
+
+  .joueur .personnage{
+    text-align: center;
+  }
+
 
 
 
 /* **********************************************sound control***************************************************************** */
 
 .soundControl {
-  border: solid grey 2px;
-  border-radius: 5px;
+  /* border: solid grey 2px;
+  border-radius: 5px; */
   display: flex;
   flex-direction: column;
-  height: 20%;
+  height: 10%;
   width: 100%;
   align-self: center;
 }
@@ -186,11 +202,11 @@
 /* **********************************************vitesse control***************************************************************** */
 
 #vitesseControl {
-  border: solid grey 2px;
-  border-radius: 5px;
+  /* border: solid grey 2px;
+  border-radius: 5px; */
   display: flex;
   flex-direction: column;
-  height:20%;
+  height:10%;
   width: 100%;
   align-self: center;
 }
