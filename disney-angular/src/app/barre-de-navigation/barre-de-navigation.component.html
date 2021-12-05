@@ -1,65 +1,70 @@
 <header>
-<!-- barre en haut de page-->
-<div id="barre">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <div id="logo">
-        <!--<img [src]="cheminLogo" class="logo_menu" />-->
-        <img src="../../assets/images/logoPrincessA.png" class="logo_menu" />
+  <!-- barre en haut de page-->
+  <div id="barre">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <div id="logo">
+          <!--<img [src]="cheminLogo" class="logo_menu" />-->
+          <img src="../../assets/images/logoPrincessA.png" class="logo_menu" />
 
+        </div>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav" *ngIf="!pageConnexionService.compte">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" [routerLink]="['/home']"
+                routerLinkActive="activebutton">Accueil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/nous']" routerLinkActive="activebutton">Qui sommes nous ? </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/actualites']" routerLinkActive="activebutton">Actualités</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/connexion']" routerLinkActive="activebutton">Connexion</a>
+            </li>
+          </ul>
+
+          <!-- Barre Nav Joueur -->
+
+          <ul class="navbar-nav" *ngIf="pageConnexionService.isJoueur()">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" [routerLink]="['/jeu']" routerLinkActive="activebutton">Le jeu</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/boutique']" routerLinkActive="activebutton">La boutique</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/compte']" routerLinkActive="activebutton">Mon compte</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" (click)=deconnexion()>Deconnexion</a>
+            </li>
+          </ul>
+
+
+
+          <!-- Barre Nav Admin -->
+
+          <ul class="navbar-nav" *ngIf="pageConnexionService.compte?.role == 'admin' ">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" [routerLink]="['/jeu']" routerLinkActive="activebutton">Gestion du
+                jeu</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/boutique']" routerLinkActive="activebutton">Gestion de la
+                boutique</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/compte']" routerLinkActive="activebutton">Mon compte</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" (click)=deconnexion()>Deconnexion</a>
+            </li>
+          </ul>
+        </div>
       </div>
-      <div class="collapse navbar-collapse" id="navbarNav" >
-        <ul class="navbar-nav" *ngIf="!pageConnexionService.compte">
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" [routerLink]="['/home']" routerLinkActive="activebutton">Acceuil</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/nous']" routerLinkActive="activebutton">Qui sommes nous ? </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/actualites']" routerLinkActive="activebutton">Actualités</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/connexion']" routerLinkActive="activebutton">Connexion</a>
-          </li>
-        </ul>
-
-                                                     <!-- Barre Nav Joueur -->
-
-        <ul class="navbar-nav" *ngIf="pageConnexionService.isJoueur()">
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" [routerLink]="['/jeu']" routerLinkActive="activebutton">Le jeu</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/boutique']" routerLinkActive="activebutton">La boutique</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/compte']" routerLinkActive="activebutton">Mon compte</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" (click)= deconnexion()>Deconnexion</a>
-          </li>
-        </ul>
-                                                    <!-- Barre Nav Admin -->
-
-        <ul class="navbar-nav" *ngIf="pageConnexionService.compte?.role == 'admin' ">
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" [routerLink]="['/jeu']" routerLinkActive="activebutton">Le jeu</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/boutique']" routerLinkActive="activebutton">La boutique</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/compte']" routerLinkActive="activebutton">Mon compte</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" (click)= deconnexion()>Deconnexion</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-</div>
+    </nav>
+  </div>
 </header>
 <!--fin de la barre-->
-
