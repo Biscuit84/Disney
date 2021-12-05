@@ -3,6 +3,7 @@ import { PlateauHttpService } from 'src/app/plateau-http.service';
 import { Cases, CasesPlateau, Plateau } from 'src/model';
 import { CdkDragDrop, copyArrayItem, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { CaseHttpService } from 'src/app/case-http.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-gestion-plateau',
@@ -14,8 +15,6 @@ export class GestionPlateauComponent implements OnInit {
   listeCases: Array<Cases> = new Array<Cases>();
   listCasesPlateau: Array<Cases> = new Array<Cases>();
   listePlateaux: Array<Plateau> = new Array<Plateau>();
-  
-  @Input()
   plateau: Plateau = new Plateau();
   nombreCases: number;
   // listCases = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
@@ -24,35 +23,45 @@ export class GestionPlateauComponent implements OnInit {
 
   nomPlateau: string = "";
 
+  @Input()
+  idPlateau: number = -1;
+
+  @Input()
   titre: string = "Creation du plateau"
 
-  constructor(private plateauService: PlateauHttpService, private caseService: CaseHttpService) {
+
+  constructor(private plateauService: PlateauHttpService, private caseService: CaseHttpService, private router: Router) {
     this.load();
   }
 
-  load(){
+  load() {
     //on récupère la liste des cases
     this.caseService.findAll2().subscribe(resp => {
       this.listeCases = resp;
     });
 
-    if(this.plateau.id){
-      this.nomPlateau = this.plateau.nom;
-      for (let cp of this.plateau.cases){
-        let uneCase: Cases = new Cases();
-        uneCase = cp.uneCase;
-        this.listCasesPlateau.push(uneCase);
-      }
-    }
   }
 
   ngOnInit(): void {
-  }
+    if (this.idPlateau != -1) {
+      this.plateauService.findByIdWithCasesDetails(this.idPlateau).subscribe(plat => {
+        var lcp = new Array<Cases>();
+        this.plateauService.findAllCasesByIdPlateau(this.idPlateau).subscribe(resp => {
+          var index = 0;
+          for (var cp of this.plateau.cases) {
+            cp.uneCase = resp[index];
+            index++;
+            lcp.push(cp.uneCase);
+          }
+        })
+        this.plateau = plat;
+        this.nomPlateau = this.plateau.nom;
 
-  // findListePlateaux(): Array<Plateau> {
-  //   this.listePlateaux = this.plateauService.findAll();
-  //   return this.listePlateaux;
-  // }
+        this.listCasesPlateau = lcp;
+        console.log(this.listCasesPlateau);
+      });
+    }
+  }
 
 
 
@@ -76,7 +85,37 @@ export class GestionPlateauComponent implements OnInit {
 
 
   savePlateau() {
-    this.plateau = new Plateau();
+    //update
+    if (this.plateau.id) {
+      this.majPlateau();
+      this.plateauService.updatePlateau(this.plateau).subscribe(resp => {
+        this.plateau = resp;
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+        this.router.onSameUrlNavigation = 'reload';
+        this.router.navigate(['gestionAdmin/updatePlateau']);
+        // this.router.navigate(['gestionAdmin/plateau']);
+      }, error => (console.log(error)))
+
+    } else {
+      //creation
+      this.plateau = new Plateau();
+      this.majPlateau();
+      this.plateauService.createPlateau(this.plateau).subscribe(resp => {
+        this.plateau = resp;
+        this.load();
+        this.listCasesPlateau = new Array<Cases>();
+        this.listePlateaux = new Array<Plateau>();
+        this.plateau = new Plateau();
+        this.nombreCases = 0;
+        this.nomPlateau = "";
+        this.idPlateau = -1;
+        this.titre = "Creation du plateau"
+      }, error => (console.log(error)))
+    }
+  }
+
+
+  private majPlateau() {
     this.plateau.nom = this.nomPlateau;
     this.plateau.nbCases = this.listCasesPlateau.length;
 
@@ -92,12 +131,6 @@ export class GestionPlateauComponent implements OnInit {
     }
 
     this.plateau.cases = listCp;
-    this.plateauService.createPlateau(this.plateau).subscribe(resp => {
-      this.plateau = resp;
-      console.log(this.plateau);
-    }, error => (console.log(error)))
   }
-
-
 
 }

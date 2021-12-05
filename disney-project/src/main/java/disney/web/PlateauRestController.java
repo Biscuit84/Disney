@@ -1,5 +1,6 @@
 package disney.web;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +19,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import disney.model.Cases;
 import disney.model.CasesPlateau;
 import disney.model.Plateau;
 import disney.model.Views;
@@ -63,6 +65,18 @@ public class PlateauRestController {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Plateau non trouvé");
 		}
 	}
+	
+	@GetMapping("/{id}/detailCase")
+	@JsonView(Views.ViewsPlateauDetail.class)
+	public Plateau findByIdWithDetailCase(@PathVariable Long id) {
+		Optional<Plateau> optPlateau = plateauRepo.findByIdWithDetail(id);
+		System.out.println("le plateau" + optPlateau);
+		if (optPlateau.isPresent()) {
+			return optPlateau.get();
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Plateau non trouvé");
+		}
+	}
 
 	@GetMapping("{id}")
 	@JsonView(Views.ViewsPlateau.class)
@@ -75,6 +89,7 @@ public class PlateauRestController {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Plateau non trouvé");
 		}
 	}
+	
 	/*
 	@GetMapping("{id}")
 	@JsonView(Views.ViewsPlateau.class)
@@ -112,21 +127,53 @@ public class PlateauRestController {
 		return plateau;
 	}
 
-	@PutMapping("/{id}/updatePlateauAvecCasesPlateau")
+	
+	//update avec plateau et cases plateau
+	@PutMapping("/updatePlateauAvecCasesPlateau")
 	@JsonView(Views.ViewsPlateau.class)
-	public Plateau updatePlateauAvecCasesPlateau(@PathVariable Long id, @RequestBody Plateau plateau) {
-		if (!plateauRepo.existsById(id)) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Plateau non trouvé");
+	public Plateau updatePlateauAvecCasesPlateau(@RequestBody Plateau plat) {
+		if (!plateauRepo.existsById(plat.getId())) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
 		}
 
-		for(CasesPlateau cp : plateau.getCases()) {
-			cp.setPlateau(plateau);
+		Plateau plateau = plateauRepo.findById(plat.getId()).get();
+		plateau.setNom(plat.getNom());
+		plateau.setNbCases(plat.getCases().size());
+
+		casesPlateauRepo.deleteAll(plateau.getCases());
+
+		int positionCase = 1;
+		List<CasesPlateau> lcp = new ArrayList<>();
+		for (CasesPlateau c : plat.getCases()) {
+			CasesPlateau cp = new CasesPlateau(plateau, c.getUneCase(), positionCase);
+			positionCase++;
+			lcp.add(cp);
 		}
-		
-		plateau = plateauRepo.save(plateau);		
-		casesPlateauRepo.saveAll(plateau.getCases());
-		
+		casesPlateauRepo.saveAll(lcp);
+		plateau.setCases(lcp);
+
+		plateau = plateauRepo.save(plateau);
+
 		return plateau;
+//		System.out.println(plateau);
+//		if (!plateauRepo.existsById(plateau.getId())) {
+//			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Plateau non trouvé");
+//		}
+//
+//		Plateau plateauEnBase = plateauRepo.findById(plateau.getId()).get();
+//
+//		casesPlateauRepo.deleteAll(plateauEnBase.getCases());	
+//
+//		for(CasesPlateau cp : plateau.getCases()) {
+//			cp.setPlateau(plateau);
+//		}
+//		
+//		plateauEnBase = plateau;
+//		casesPlateauRepo.saveAll(plateauEnBase.getCases());
+//
+//		plateau = plateauRepo.save(plateauEnBase);	
+//		
+//		return plateau;
 	}
 	
 	@PutMapping("/{id}")
