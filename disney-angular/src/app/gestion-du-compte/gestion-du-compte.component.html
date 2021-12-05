@@ -1,46 +1,45 @@
-<div id="back" style="height: 920px;">
-<div id="ecran-compte"> 
- 
-  <div class="gauche">
-<div class="card">
-  <img id="joueur" src="../../assets/images/elsa.png" alt="Avatar" >
-  <div class="profil">
-    <h4><b>Pseudo : {{joueur.pseudo}}</b></h4>
-    <p>Niveau: {{joueur.level}}</p>
-    <p>Nombre de victoire: {{joueur.nbVictoire}}</p>
-    <p> <i class="fas fa-star etoile"></i>: {{joueur.nbEtoiles}}</p>
-    <button id="jouerBtn" type="submit" [routerLink]="['/jeu']" class="btn btn-primary">Jouer</button>
-  </div>
-</div> 
-</div> 
+<div id="ecran-compte">
 
-<div class="droite">
-<div id="historique">
-  <span></span>
-  <div class="list-group">
-    <div  id="blocTitre" class="list-group-item list-group-item-action active" aria-current="true">
-        <div class="d-flex w-100 justify-content-between">
-          <h1 id="list-titre">Historique des parties</h1>
-          <small></small>
-        </div>
-          <p class="mb-1"></p>
-          <small></small>
-    </div >
-        <a href="#" class="list-group-item list-group-item-action" *ngFor="let histo of showHistorique()">
+  <div class="gauche">
+    <div class="card">
+      <img id="joueur" src="../../assets/images/elsa.png" alt="Avatar">
+      <div class="profil">
+        <h4><b>Pseudo : {{joueur.pseudo}}</b></h4>
+        <p>Niveau: {{joueur.level}}</p>
+        <p>Nombre de victoire: {{joueur.nbVictoire}}</p>
+        <p> <i class="fas fa-star etoile"></i>: {{joueur.nbEtoiles}}</p>
+        <button id="modifierBtn" type="submit" [routerLink]="['/modifProfil']" class="btn btn-primary">Modifier leprofil</button>
+      </div>
+    </div>
+    <div id="basgauche">
+      <button id="jouerBtn" type="submit" [routerLink]="['/jeu']" class="btn btn-primary">Jouer</button>
+    </div>
+  </div>
+
+  <div class="droite">
+    <div id="historique">
+      <span></span>
+      <div class="list-group">
+        <div id="blocTitre" class="list-group-item list-group-item-action active" aria-current="true">
           <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1"><span *ngIf="histo.victoire==true" style="color: green;">VICTOIRE</span><span *ngIf="histo.victoire==false" style="color: red;">DEFAITE</span></h5>
-           <small class="text-muted">{{histo.dateHeureFinPartie | date }} </small>
+            <h1 id="list-titre">Historique des parties</h1>
           </div>
-          <img src="{{histo.personnage.avatar}}">
-          <p class="mb-1"> Position : {{histo.positionArrivee}}</p>
-          <small class="text-muted"><i class="fas fa-star etoile"></i>:{{histo.nbEtoilesGagnees}}</small>
-       </a>
+          <p class="mb-1"></p>
+        </div>
+        <small ></small>
+        <a href="#" class="list-group-item list-group-item-action" *ngFor="let histo of showHistorique()">
+          <img class="image" src="{{histo.personnage.avatar}}">
+          <div id="info">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1"><span *ngIf="histo.victoire==true" style="color: green;">VICTOIRE</span><span
+                  *ngIf="histo.victoire==false" style="color: red;">DEFAITE</span></h5>
+              <small class="text-muted">{{histo.dateHeureFinPartie | date }} </small>
+            </div>
+            <p class="mb-1"> Position : {{histo.positionArrivee}}</p>
+            <small class="text-muted"><i class="fas fa-star etoile"></i>:{{histo.nbEtoilesGagnees}}</small>
+          </div>
+        </a>
       </div>
     </div>
   </div>
 </div>
-</div>
-
-
-  
-  

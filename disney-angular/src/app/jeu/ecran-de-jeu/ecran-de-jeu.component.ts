@@ -1,14 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild, NgZone } from '@angular/core';
-import { pionPlayer, Square } from './plateau-canvas-util';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { CaseVirtuelle, pionPlayer } from './plateau-canvas-util';
 import * as $ from 'jquery';
-import { Router } from '@angular/router';
 import { PageConnexionService } from 'src/app/page-connexion/page-connexion.service';
-import { AppConfigService } from 'src/app/app-config.service';
 import { PartieHttpService } from 'src/app/partie-http.service';
-import { Cases, CasesPlateau, Compte, Joueur, Partie, Personnage, Plateau, TourDeJeuDto } from 'src/model';
-import { PlateauHttpService } from 'src/app/plateau-http.service';
-import { JoueurHttpService } from 'src/app/joueur-http.service';
-import { CaseHttpService } from 'src/app/case-http.service';
+import { Cases, CasesPlateau, Compte, Partie, Personnage, Plateau, TourDeJeuDto } from 'src/model';
+import { CasesPlateauHttpService } from 'src/app/cases-plateau-http.service';
 
 @Component({
   selector: 'ecran-de-jeu, [ecran-de-jeu]',
@@ -24,23 +20,25 @@ export class EcranDeJeuComponent implements OnInit {
   joueur: Compte;
   idPartie: number;
   partie: Partie = new Partie;
-  personnage:Personnage;
+  personnage: Personnage;
 
   plateau: Plateau;
   public tourEnCours: TourDeJeuDto;
-  public casesPlateau:Array<CasesPlateau>;
-  public cases:Array<Cases>;
+  public casesPlateau: Array<CasesPlateau>;
+  public cases: Array<Cases>;
 
 
   //moi: Joueur = new Joueur;
   ////////////////////////// CONSTRUCTEUR  //////////////////////////
-  constructor(public compteService: PageConnexionService, public partieService: PartieHttpService, private plateauService: PlateauHttpService, private joueurService: JoueurHttpService, private casesService: CaseHttpService,) {
+  constructor(public compteService: PageConnexionService, public partieService: PartieHttpService, private casesPlateauService: CasesPlateauHttpService) {
     this.joueur = this.compteService.compte;
     this.idJoueur = this.joueur.id;
     this.partie = this.partieService.LaPartie;
-    console.log(this.partie);
-    this.personnage=this.partieService.LaPartie.personnages[0];
+    //console.log(this.partie);
+    this.personnage = this.partieService.LaPartie.personnages[0];
     this.plateau = this.partieService.LaPartie.plateau; // on recupere le plateau, son id et son nb de case seulement
+    this.casesPlateau = this.casesPlateauService.lesCasesPlateau;
+    //console.log(this.casesPlateau)
   }
 
   ////////////////////////// DECLARATION DES VARIABLES //////////////////////////
@@ -73,8 +71,9 @@ export class EcranDeJeuComponent implements OnInit {
   public h: number;// = 800;
   public nBcaseW: number;
   public nBcaseH: number;
-  public listeCases = [];
+  //public listeCases = [];
 
+  public listeCases: Array<CaseVirtuelle> = new Array<CaseVirtuelle>();
 
   // // taille des cases
   public taillecaseW: number;// = this.w / this.nBcaseW;
@@ -117,7 +116,7 @@ export class EcranDeJeuComponent implements OnInit {
   public dispoBoutonJouer = true;
   public dispoBoutonFin = true;
   public dispoBoutonPouvoir = false; // pas encore implémenté
-  public volumeSon:number = 100;
+  public volumeSon: number = 100;
   ////////////////////////// ngOnInit  //////////////////////////
   // note : ça sert à initialiser des données et est appelé qu'une fois ! 
 
@@ -129,24 +128,21 @@ export class EcranDeJeuComponent implements OnInit {
     this.ctxPlayerIA1 = this.canvasIA1.nativeElement.getContext('2d');
     this.ctxPlayerIA2 = this.canvasIA2.nativeElement.getContext('2d');
     this.ctxPlayerIA3 = this.canvasIA3.nativeElement.getContext('2d');
+    console.log(this.casesPlateau)
 
     // quel plateau 
-
-
-
     this.drawPlateau(this, this.plateau);
 
+    
+
     // joueur
-    this.drawPlayer(this, this.pionJoueur);
-    this.drawPlayer(this, this.pionIA1);
-    this.drawPlayer(this, this.pionIA2);
-    this.drawPlayer(this, this.pionIA3);
+     this.drawPlayer(this, this.pionJoueur);
+     this.drawPlayer(this, this.pionIA1);
+     this.drawPlayer(this, this.pionIA2);
+     this.drawPlayer(this, this.pionIA3);
 
     // actualisation (en setinterval pour les deplacements)
-    var actualisationJoueur1 = setInterval(this.drawPlayer, this.tauxRaffraichissement, this, this.pionJoueur);
-    var actualisationJoueur2 = setInterval(this.drawPlayer, this.tauxRaffraichissement, this, this.pionIA1);
-    var actualisationJoueur3 = setInterval(this.drawPlayer, this.tauxRaffraichissement, this, this.pionIA2);
-    var actualisationJoueur4 = setInterval(this.drawPlayer, this.tauxRaffraichissement, this, this.pionIA3);
+    setInterval(this.drawPlayers, this.tauxRaffraichissement, this);
 
   } //ngOnInit fin
 
@@ -166,7 +162,7 @@ export class EcranDeJeuComponent implements OnInit {
 
   }
 
-  Pouvoir(){
+  Pouvoir() {
     console.log("pouvoir")
   }
 
@@ -174,11 +170,6 @@ export class EcranDeJeuComponent implements OnInit {
   EndTurn() {
     this.FinDeTour(this, this.pionJoueur);
   }
-
-
-
-
-
 
 
   ////////////////////////// Methode de la classe liées au jeu  //////////////////////////
@@ -200,17 +191,6 @@ export class EcranDeJeuComponent implements OnInit {
 
   // dessine le plateau
   drawPlateau(self, plateau) {
-    /*plateau : 
-      id: number;
-      version: number;
-      nom: string;
-      nbCases: number;
-      cases: Array<CasesPlateau>;
-    */
-
-      
-
-
 
     //this.nbcasePlateau = 61; 
     this.nbcasePlateau = this.plateau.nbCases;
@@ -230,27 +210,43 @@ export class EcranDeJeuComponent implements OnInit {
     this.taillecaseW = this.w / this.nBcaseW;
     this.taillecaseH = this.h / this.nBcaseH;
 
-    // création des cases
-    let numeroCase = 0;
+    // listes des cases du front.
+    // on veut recuperer 3 infos : l'ordre de la case  / son type et son parameter
+    // il faut aussi trier la liste parce que sinon... bah on galere
+    // on map les indices de casesPlateau dans un tableau
+    let tableau: [number] = [this.nbcasePlateau];
 
+    for (let a = 0; a < this.casesPlateau.length; a++) { // on trie
+      tableau[this.casesPlateau[a].ordreCase] = a;
+    }
+    console.log(tableau)
+
+    for (let i = 0; i < this.casesPlateau.length; i++) // on parcours la liste 
+    {
+      let cetteCase: CaseVirtuelle = new CaseVirtuelle;
+      cetteCase.ordre = this.casesPlateau[tableau[i]].ordreCase;
+      cetteCase.nom = this.casesPlateau[tableau[i]].uneCase.nom;
+      cetteCase.typeCase = this.casesPlateau[tableau[i]].uneCase.typeCase;
+      cetteCase.parameter = this.casesPlateau[tableau[i]].uneCase.parameter;
+      this.listeCases.push(cetteCase);
+      //cette liste est triée en fonction de ordreCase.
+    }
+
+    console.log(this.listeCases)
+
+    // DESSIN DU PLATEAU
+    let numeroCase = 0;
     // sens de la ligne
     for (let y = 0; y < this.nBcaseW; y++) {
 
+      // sens de la colonne
       for (let x = 0; x < this.nBcaseH; x++) {
-        // on créé la case
-        var CaseVirtuelle = {
-          numero: 0,
-          positionCaseX: 0,
-          positionCaseY: 0
-        }
 
-        // incrémentation
         numeroCase++;
-
         // si on devrait dépasser le tableau
         if (numeroCase > this.nbcasePlateau) { break; } // on depasse le nombre de case
 
-        // sens
+        //position en fonction du sens de cheminement du plateau 
         if (isEven(y)) { // ligne paire (on va dans le bon sens)
           var pX = this.taillecaseW * x;
         }
@@ -259,24 +255,52 @@ export class EcranDeJeuComponent implements OnInit {
         }
         var pY = this.taillecaseH * y;
 
-        // on memorise la case :
-        CaseVirtuelle.numero = numeroCase;
-        CaseVirtuelle.positionCaseX = pX;
-        CaseVirtuelle.positionCaseY = pY;
-        this.listeCases.push(CaseVirtuelle);
+        // on enregistre la positon de cetteCase :
+        this.listeCases[numeroCase - 1].positionCaseX = pX;
+        this.listeCases[numeroCase - 1].positionCaseY = pY;
+
+        console.log(this.listeCases[numeroCase - 1])
 
         // on dessine la case :
         this.ctxPlateau.beginPath();
         this.ctxPlateau.rect(pX, pY, this.taillecaseW, this.taillecaseH);  //ctx.rect(x, y, width, height);
 
-        // pour le test :
-        if (isEven(numeroCase)) {
-          this.ctxPlateau.fillStyle = "lightpink"; // la couleur de la case
+        // en fonction du type de case 
+        if (this.listeCases[numeroCase - 1].typeCase == "depart") {
+          this.ctxPlateau.fillStyle = "blue"; // la couleur de la case
           this.ctxPlateau.globalAlpha = 0.5; // c'est l'opacité
         }
-        else {
-          this.ctxPlateau.fillStyle = "lightblue";
-          this.ctxPlateau.globalAlpha = 0.5;
+        else if (this.listeCases[numeroCase - 1].typeCase == "arrivee") {
+          this.ctxPlateau.fillStyle = "red"; // la couleur de la case
+          this.ctxPlateau.globalAlpha = 0.5; // c'est l'opacité
+        }
+        else if (this.listeCases[numeroCase - 1].typeCase == "vide") {
+          this.ctxPlateau.fillStyle = "white"; // la couleur de la case
+          this.ctxPlateau.globalAlpha = 0.5; // c'est l'opacité
+        }
+        else if (this.listeCases[numeroCase - 1].typeCase == "mechant") {
+          this.ctxPlateau.fillStyle = "black"; // la couleur de la case
+          this.ctxPlateau.globalAlpha = 0.5; // c'est l'opacité
+        }
+        else if (this.listeCases[numeroCase - 1].typeCase == "prince") {
+          this.ctxPlateau.fillStyle = "pink"; // la couleur de la case
+          this.ctxPlateau.globalAlpha = 0.5; // c'est l'opacité
+        }
+        else if (this.listeCases[numeroCase - 1].typeCase == "prison") {
+          this.ctxPlateau.fillStyle = "grey"; // la couleur de la case
+          this.ctxPlateau.globalAlpha = 0.5; // c'est l'opacité
+        }
+        else if (this.listeCases[numeroCase - 1].typeCase == "deplacement") {
+          this.ctxPlateau.fillStyle = "green"; // la couleur de la case
+          this.ctxPlateau.globalAlpha = 0.5; // c'est l'opacité
+        }
+        else if (this.listeCases[numeroCase - 1].typeCase == "duel") {
+          this.ctxPlateau.fillStyle = "yellow"; // la couleur de la case
+          this.ctxPlateau.globalAlpha = 0.5; // c'est l'opacité
+        }
+        else if (this.listeCases[numeroCase - 1].typeCase == "pioche") {
+          this.ctxPlateau.fillStyle = "magenta"; // la couleur de la case
+          this.ctxPlateau.globalAlpha = 0.5; // c'est l'opacité
         }
 
         //ctx.strokeStyle = "black";
@@ -297,13 +321,20 @@ export class EcranDeJeuComponent implements OnInit {
         }
         this.ctxPlateau.strokeText(str, pX + this.taillecaseW / 2, pY + this.taillecaseH / 2);  //ctx.strokeText(texte, x, y [, largeurMax]);
         this.ctxPlateau.closePath();
+
       }
     }
   }
 
+  drawPlayers(self){
+    self.drawPlayer( self,self.pionJoueur);
+    self.drawPlayer( self,self.pionIA1);
+    self.drawPlayer( self,self.pionIA2);
+    self.drawPlayer( self,self.pionIA3);
+  }
 
   // dessine un pion
-  drawPlayer = function (self, pion) {
+  drawPlayer(self, pion) {
 
     // vitesse en fonciton du range
     let n: number = self.niveauDeVitesseDuPion;
@@ -396,56 +427,86 @@ export class EcranDeJeuComponent implements OnInit {
       }
     }
 
+    // if (pion.playerIsMoving) {
+    //   // redessiner le player pour le refresh
 
-    // redessiner le player pour le refresh
-    if (pion.numeroPassage == 0) {
-      let image = new Image();
-      image.width = self.taillecaseW / 2;
-      image.height = self.taillecaseH / 2;
-      image.src = pion.image;
-      image.onload = function () {
-        //console.log("dans le log image");
-        self.ctxJoueur.clearRect(0, 0, self.canvasJoueur.nativeElement.width, self.canvasJoueur.nativeElement.height); //clear pour refresh
-        self.ctxJoueur.drawImage(image, pion.positionXPlayer, pion.positionYPlayer, image.width, image.height);
-      }
-    }
-    else if (pion.numeroPassage == 1) {
-      let positionx = pion.positionXPlayer + self.taillecaseW / 2;
-      let positiony = pion.positionYPlayer;
-      let image = new Image();
-      image.width = self.taillecaseW / 2;
-      image.height = self.taillecaseH / 2;
-      image.src = pion.image;
-      image.onload = function () {
-        self.ctxPlayerIA1.clearRect(0, 0, self.canvasIA1.nativeElement.width, self.canvasIA1.nativeElement.height);
-        self.ctxPlayerIA1.drawImage(image, positionx, positiony, image.width, image.height);
-      }
-    }
-    else if (pion.numeroPassage == 2) {
-      let positionx = pion.positionXPlayer;
-      let positiony = pion.positionYPlayer + self.taillecaseH / 2;
-      let image = new Image();
-      image.width = self.taillecaseW / 2;
-      image.height = self.taillecaseH / 2;
-      image.src = pion.image;
-      image.onload = function () {
-        self.ctxPlayerIA2.clearRect(0, 0, self.canvasIA2.nativeElement.width, self.canvasIA2.nativeElement.height);
-        self.ctxPlayerIA2.drawImage(image, positionx, positiony, image.width, image.height);
-      }
-    }
+    //   if (pion.numeroPassage == 0 ) {
+    //       self.ctxJoueur.clearRect(0, 0, self.canvasJoueur.nativeElement.width, self.canvasJoueur.nativeElement.height); //clear pour refresh
+    //   }
+    //   else if (pion.numeroPassage == 1) {
+    //       self.ctxPlayerIA1.clearRect(0, 0, self.canvasIA1.nativeElement.width, self.canvasIA1.nativeElement.height);
+    //   }
+    //   else if (pion.numeroPassage == 2) {
+    //       self.ctxPlayerIA2.clearRect(0, 0, self.canvasIA2.nativeElement.width, self.canvasIA2.nativeElement.height);
+    //   }
 
-    else if (pion.numeroPassage == 3) {
-      let positionx = pion.positionXPlayer + self.taillecaseW / 2;
-      let positiony = pion.positionYPlayer + self.taillecaseH / 2;
-      let image = new Image();
-      image.width = self.taillecaseW / 2;
-      image.height = self.taillecaseH / 2;
-      image.src = pion.image;
-      image.onload = function () {
-        self.ctxPlayerIA3.clearRect(0, 0, self.canvasIA3.nativeElement.width, self.canvasIA3.nativeElement.height);
-        self.ctxPlayerIA3.drawImage(image, positionx, positiony, image.width, image.height);
+    //   else if (pion.numeroPassage == 3) {
+    //       self.ctxPlayerIA3.clearRect(0, 0, self.canvasIA3.nativeElement.width, self.canvasIA3.nativeElement.height);
+
+    //   }
+
+    // }
+
+
+
+      if (pion.numeroPassage == 0 ) {
+        let image = new Image();
+        image.width = self.taillecaseW / 2;
+        image.height = self.taillecaseH / 2;
+        image.src = pion.image;
+        image.onload = function () {
+          //console.log("dans le log image");
+          if (pion.playerIsMoving) {
+          self.ctxJoueur.clearRect(0, 0, self.canvasJoueur.nativeElement.width, self.canvasJoueur.nativeElement.height); //clear pour refresh
+          }
+          self.ctxJoueur.drawImage(image, pion.positionXPlayer, pion.positionYPlayer, image.width, image.height);
+        }
       }
-    }
+      else if (pion.numeroPassage == 1) {
+        let positionx = pion.positionXPlayer + self.taillecaseW / 2;
+        let positiony = pion.positionYPlayer;
+        let image = new Image();
+        image.width = self.taillecaseW / 2;
+        image.height = self.taillecaseH / 2;
+        image.src = pion.image;
+        image.onload = function () {
+          if (pion.playerIsMoving) {
+          self.ctxPlayerIA1.clearRect(0, 0, self.canvasIA1.nativeElement.width, self.canvasIA1.nativeElement.height);
+        }
+          self.ctxPlayerIA1.drawImage(image, positionx, positiony, image.width, image.height);
+        }
+      }
+      else if (pion.numeroPassage == 2) {
+        let positionx = pion.positionXPlayer;
+        let positiony = pion.positionYPlayer + self.taillecaseH / 2;
+        let image = new Image();
+        image.width = self.taillecaseW / 2;
+        image.height = self.taillecaseH / 2;
+        image.src = pion.image;
+        image.onload = function () {
+          if (pion.playerIsMoving) {
+          self.ctxPlayerIA2.clearRect(0, 0, self.canvasIA2.nativeElement.width, self.canvasIA2.nativeElement.height);
+        }
+          self.ctxPlayerIA2.drawImage(image, positionx, positiony, image.width, image.height);
+        }
+      }
+
+      else if (pion.numeroPassage == 3) {
+        let positionx = pion.positionXPlayer + self.taillecaseW / 2;
+        let positiony = pion.positionYPlayer + self.taillecaseH / 2;
+        let image = new Image();
+        image.width = self.taillecaseW / 2;
+        image.height = self.taillecaseH / 2;
+        image.src = pion.image;
+        image.onload = function () {
+          if (pion.playerIsMoving) {
+          self.ctxPlayerIA3.clearRect(0, 0, self.canvasIA3.nativeElement.width, self.canvasIA3.nativeElement.height);
+        }
+          self.ctxPlayerIA3.drawImage(image, positionx, positiony, image.width, image.height);
+        }
+      }
+   // }
+
 
   }
 
@@ -460,7 +521,7 @@ export class EcranDeJeuComponent implements OnInit {
       console.log("TOUR DE JEUX : {}", this.tourEnCours);
 
 
-      console.log("///////")
+      //console.log("///////")
       console.log(self.tourEnCours)
 
       // animation des dés / sons
