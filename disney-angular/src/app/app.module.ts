@@ -27,6 +27,9 @@ import { ModificationProfilJoueurComponent } from './modification-profil-joueur/
 import { DateAgoPipe } from './date-ago.pipe';
 import { BoutiqueEtoilesComponent } from './boutique/boutique-etoiles/boutique-etoiles.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { GestionProfilAdminComponent } from './gestion-profil-admin/gestion-profil-admin.component';
+import { GestionCompteAdminComponent } from './gestion-compte-admin/gestion-compte-admin.component';
+import { GestionBoutiqueAdminComponent } from './gestion-boutique-admin/gestion-boutique-admin.component';
 
 
 
@@ -52,7 +55,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CreationCompteComponent,
     ModificationProfilJoueurComponent,
     DateAgoPipe,
-    BoutiqueEtoilesComponent
+    BoutiqueEtoilesComponent,
+    GestionProfilAdminComponent,
+    GestionCompteAdminComponent,
+    GestionBoutiqueAdminComponent
   ],
   imports: [
     BrowserModule,
