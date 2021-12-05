@@ -112,6 +112,23 @@ public class PlateauRestController {
 		return plateau;
 	}
 
+	@PutMapping("/{id}/updatePlateauAvecCasesPlateau")
+	@JsonView(Views.ViewsPlateau.class)
+	public Plateau updatePlateauAvecCasesPlateau(@PathVariable Long id, @RequestBody Plateau plateau) {
+		if (!plateauRepo.existsById(id)) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Plateau non trouvé");
+		}
+
+		for(CasesPlateau cp : plateau.getCases()) {
+			cp.setPlateau(plateau);
+		}
+		
+		plateau = plateauRepo.save(plateau);		
+		casesPlateauRepo.saveAll(plateau.getCases());
+		
+		return plateau;
+	}
+	
 	@PutMapping("/{id}")
 	@JsonView(Views.ViewsPlateau.class)
 	public Plateau update(@PathVariable Long id, @RequestBody Plateau plateau) {

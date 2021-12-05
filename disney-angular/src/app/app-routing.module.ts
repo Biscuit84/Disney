@@ -51,6 +51,7 @@ const routes : Routes= [
   {path : "gestionAdmin/compte", component: GestionCompteAdminComponent},
   {path : "gestionAdmin/boutique", component: GestionBoutiqueAdminComponent},
   {path : "gestionAdmin/createPlateau", component: GestionPlateauComponent},
+  {path : "gestionAdmin/updatePlateau", component: GestionPlateauComponent},
 
 
   // autres
