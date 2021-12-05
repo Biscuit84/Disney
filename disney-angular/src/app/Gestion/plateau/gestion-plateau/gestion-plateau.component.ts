@@ -11,11 +11,11 @@ import { CaseHttpService } from 'src/app/case-http.service';
 })
 export class GestionPlateauComponent implements OnInit {
 
-  @Input()
   listeCases: Array<Cases> = new Array<Cases>();
-  @Input()
   listCasesPlateau: Array<Cases> = new Array<Cases>();
   listePlateaux: Array<Plateau> = new Array<Plateau>();
+  
+  @Input()
   plateau: Plateau = new Plateau();
   nombreCases: number;
   // listCases = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
@@ -27,10 +27,23 @@ export class GestionPlateauComponent implements OnInit {
   titre: string = "Creation du plateau"
 
   constructor(private plateauService: PlateauHttpService, private caseService: CaseHttpService) {
+    this.load();
+  }
+
+  load(){
+    //on récupère la liste des cases
     this.caseService.findAll2().subscribe(resp => {
       this.listeCases = resp;
+    });
+
+    if(this.plateau.id){
+      this.nomPlateau = this.plateau.nom;
+      for (let cp of this.plateau.cases){
+        let uneCase: Cases = new Cases();
+        uneCase = cp.uneCase;
+        this.listCasesPlateau.push(uneCase);
+      }
     }
-    )
   }
 
   ngOnInit(): void {
