@@ -21,6 +21,8 @@
   width: 50%;
   height: 100%;
   justify-content: center;
+  /* align-items: center; */
+  /* justify-content: space-evenly; */
   align-items: center;
 }
 
@@ -50,11 +52,15 @@
   
   /* Add some padding inside the card container */
   .profil {
-    padding: 2px 16px;
-    width: 40vh;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
+    /* padding: 2px 16px; */
+    /* width: 40vh; */
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+    /* width: 77%; */
+    /* justify-content: center; */
+    /* justify-items: center; */
+    /* justify-self: center; */
+    text-align: center;
   }
 
  #joueur {
@@ -67,10 +73,10 @@
 
  #jouerBtn
  {
-   display: flex;
-   justify-content: center;
+  position: relative;
    background-color: #dd94cb;
    border-color: #dd94cb;
+   top: 40%;
  }
 
  #jouerBtn:hover
@@ -79,23 +85,41 @@
    border-color: #ce28a5;
  }
 
- #modifBtn
- {
-   display: flex;
-   justify-content: center;
-   background-color: #dd94cb;
-   border-color: #dd94cb;
+ #basgauche{
+  top: 40%;
+  position: relative;
+  width: 50%;
+  justify-content: center;
+  display: flex;
  }
+
+ #modifierBtn{
+  background-color: #53a1b4;
+  border-color: #53a1b4;
+  justify-content: center;
+} 
+
+#modifierBtn:hover
+{
+  background-color: #1390af;
+  border-color: #1390af;
+}
+
+
 
  /* Historique*/
  #historique
   {
-    width: 100%;
+    /* width: 100%; */
     position: absolute;
     justify-content: center;
-    justify-items: center;
-    padding: 3%;
+    /* justify-items: center; */
+    padding: 2%;
     display: flex;
+    height: 93vh;
+    width: 50vh;
+    /* align-content: center; */
+    align-items: center;
   } 
 
 .list-group {
@@ -138,3 +162,4 @@ border-color: #dd94cb;
 h5{
   font-size: 2vh;
 }
+

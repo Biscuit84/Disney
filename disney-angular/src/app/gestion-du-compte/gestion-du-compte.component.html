@@ -8,12 +8,11 @@
         <p>Niveau: {{joueur.level}}</p>
         <p>Nombre de victoire: {{joueur.nbVictoire}}</p>
         <p> <i class="fas fa-star etoile"></i>: {{joueur.nbEtoiles}}</p>
-        <button id="jouerBtn" type="submit" [routerLink]="['/jeu']" class="btn btn-primary">Jouer</button>
+        <button id="modifierBtn" type="submit" [routerLink]="['/modifProfil']" class="btn btn-primary">Modifier leprofil</button>
       </div>
     </div>
-    <div>
-      <button id="modifierrBtn" type="submit" [routerLink]="['/modifProfil']" class="btn btn-primary">Modifier le
-        profil</button>
+    <div id="basgauche">
+      <button id="jouerBtn" type="submit" [routerLink]="['/jeu']" class="btn btn-primary">Jouer</button>
     </div>
   </div>
 
@@ -27,6 +26,7 @@
           </div>
           <p class="mb-1"></p>
         </div>
+        <small ></small>
         <a href="#" class="list-group-item list-group-item-action" *ngFor="let histo of showHistorique()">
           <img class="image" src="{{histo.personnage.avatar}}">
           <div id="info">
