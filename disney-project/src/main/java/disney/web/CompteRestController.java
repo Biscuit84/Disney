@@ -1,5 +1,8 @@
 package disney.web;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,9 +22,10 @@ import org.springframework.web.server.ResponseStatusException;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import disney.model.Compte;
+import disney.model.Joueur;
 import disney.model.Views;
 import disney.repository.ICompteRepo;
-
+import disney.repository.IJoueurRepo;
 import disney.dto.ConnexionDTO;
 
 
@@ -32,6 +36,9 @@ public class CompteRestController {
 
 	@Autowired
 	private ICompteRepo compteRepo;
+	
+	@Autowired
+	private IJoueurRepo joueurRepo;
 	
 	@GetMapping("")
 	@JsonView(Views.ViewsCompte.class)
@@ -89,7 +96,20 @@ public class CompteRestController {
 		Optional<Compte> optCompte = compteRepo.findByMailAndPassword(connexion.getMail(), connexion.getPassword());
 
 		if (optCompte.isPresent()) {
-			return optCompte.get();
+			Compte compte = optCompte.get();
+			LocalDate ld = LocalDate.now();
+			if(compte.getDateLastConnexion() != null) {
+				if(compte.getDateLastConnexion().isBefore(ld)) {
+					Joueur j = (Joueur) compte;
+					if(j.getLife() < 3 ) {
+						j.setLife(3);
+						joueurRepo.save(j);
+					}
+				}
+			}
+			compte.setDateLastConnexion(ld);
+			compte = compteRepo.save(compte);
+			return compte;
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Compte non trouvé");
 		}
