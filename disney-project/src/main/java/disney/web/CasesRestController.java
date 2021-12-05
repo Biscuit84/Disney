@@ -1,5 +1,6 @@
 package disney.web;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,8 +20,11 @@ import org.springframework.web.server.ResponseStatusException;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import disney.model.Cases;
+import disney.model.CasesPlateau;
+import disney.model.Plateau;
 import disney.model.Views;
 import disney.repository.ICasesRepo;
+import disney.repository.IPlateauRepo;
 
 
 @RestController
@@ -30,6 +34,9 @@ public class CasesRestController {
 
 	@Autowired
 	private ICasesRepo casesRepo;
+	
+	@Autowired
+	private IPlateauRepo plateauRepo;
 	
 	@GetMapping("")
 	@JsonView(Views.ViewsCases.class)
@@ -80,5 +87,17 @@ public class CasesRestController {
 		}
 		
 		casesRepo.deleteById(id);
+	}
+	
+	@GetMapping("/listCases/{idPlateau}")
+	@JsonView(Views.ViewsCases.class)
+	public List<Cases> findAllCasesByIdPlateau(@PathVariable Long idPlateau) {
+		Plateau plateau = plateauRepo.findById(idPlateau).get();
+		List<Cases> lc = new ArrayList<Cases>();
+		for (CasesPlateau cp : plateau.getCases()) {
+			lc.add(cp.getUneCase());
+		}
+
+		return lc;
 	}
 }

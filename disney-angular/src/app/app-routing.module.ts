@@ -24,6 +24,8 @@ import { GestionCompteAdminComponent } from './Gestion/gestion-compte-admin/gest
 import { GestionBoutiqueAdminComponent } from './Gestion/gestion-boutique-admin/gestion-boutique-admin.component';
 import { GestionDuCompteComponent } from './gestion-du-compte/gestion-du-compte.component';
 import { GestionPlateauComponent } from './Gestion/plateau/gestion-plateau/gestion-plateau.component';
+import { ModificationPlateauComponent } from './Gestion/plateau/modification-plateau/modification-plateau.component';
+
 
 const routes : Routes= [
 
@@ -51,7 +53,7 @@ const routes : Routes= [
   {path : "gestionAdmin/compte", component: GestionCompteAdminComponent},
   {path : "gestionAdmin/boutique", component: GestionBoutiqueAdminComponent},
   {path : "gestionAdmin/createPlateau", component: GestionPlateauComponent},
-  {path : "gestionAdmin/updatePlateau", component: GestionPlateauComponent},
+  {path : "gestionAdmin/updatePlateau", component: ModificationPlateauComponent},
 
 
   // autres
@@ -61,7 +63,7 @@ const routes : Routes= [
 ]
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
