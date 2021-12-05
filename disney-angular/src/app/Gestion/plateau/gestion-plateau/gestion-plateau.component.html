@@ -1,0 +1,47 @@
+<div id="ecran-creation-plateau">
+    <div class="card">
+        <h1 class="card-title">{{titre}} <button class="rounded-circle top-right btn btn-info" type="button" [routerLink]="['/gestionAdmin/plateau']"><i class="fas fa-arrow-left"></i></button></h1>
+        
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Nom du plateau de jeu</mat-label>
+            <input matInput type="text" id="nomPlateau" name="nomPlateau" [(ngModel)]="nomPlateau">
+        </mat-form-field>
+        <!-- <input > -->
+
+        <div cdkDropListGroup class="row">
+            <div class="list-container col">
+                <h2>Liste des cases</h2>
+                <div cdkDropList [cdkDropListData]="listCases" class="element-list">
+                    <div class="element-box" *ngFor="let case of listCases" cdkDrag class="{{case}}">
+                        {{case}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-container col">
+                <h2>Plateau</h2>
+                <div cdkDropList [cdkDropListData]="listCasesPlateau" class="element-list" (cdkDropListDropped)="drop($event)">
+                    <div class="element-box" *ngFor="let casePlateau of listCasesPlateau" cdkDrag class="{{casePlateau}}">
+                        {{casePlateau}}
+                    </div>
+                </div>
+            </div>
+            <div class="list-container col">
+                <div cdkDropList id="trashCase" [cdkDropListData]="listCasesPlateau" (cdkDropListDropped)="drop($event)">
+                    <em class="fas fa-trash fa-10x"></em>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-success" >
+            Valider le plateau
+        </button>
+
+        <button type="button" class="btn btn-success" >
+            Mettre à jour le plateau
+        </button>
+
+
+    </div>
+</div>
+    
+

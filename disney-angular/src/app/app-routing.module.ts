@@ -23,6 +23,7 @@ import { GestionProfilAdminComponent } from './Gestion/gestion-profil-admin/gest
 import { GestionCompteAdminComponent } from './Gestion/gestion-compte-admin/gestion-compte-admin.component';
 import { GestionBoutiqueAdminComponent } from './Gestion/gestion-boutique-admin/gestion-boutique-admin.component';
 import { GestionDuCompteComponent } from './gestion-du-compte/gestion-du-compte.component';
+import { GestionPlateauComponent } from './Gestion/plateau/gestion-plateau/gestion-plateau.component';
 
 const routes : Routes= [
 
@@ -49,6 +50,7 @@ const routes : Routes= [
   {path : "gestionAdmin/profil", component: GestionProfilAdminComponent},
   {path : "gestionAdmin/compte", component: GestionCompteAdminComponent},
   {path : "gestionAdmin/boutique", component: GestionBoutiqueAdminComponent},
+  {path : "gestionAdmin/createPlateau", component: GestionPlateauComponent},
 
 
   // autres
