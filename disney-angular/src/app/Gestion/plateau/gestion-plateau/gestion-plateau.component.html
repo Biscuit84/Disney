@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div>
-        <button type="button" class="btn btn-success" (click)="savePlateau()" >
+        <button type="button" class="btn btn-success" (click)="savePlateau()" [disabled]="this.nomPlateau == '' || listCasesPlateau.length == 0">
             Valider le plateau
         </button>
     </div>

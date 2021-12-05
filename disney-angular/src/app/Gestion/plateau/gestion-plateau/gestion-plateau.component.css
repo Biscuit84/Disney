@@ -75,3 +75,54 @@
   .element-list.cdk-drop-list-dragging .element-box:not(.cdk-drag-placeholder) {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
   }
+
+  .depart {
+    background-color: green;
+    color: white;
+}
+
+.arrivee {
+    background-color: purple;
+    color: white;
+}
+
+.mechant {
+    background-color: red;
+    color: white;
+}
+
+.prince {
+    background-color: blue;
+    color: white;
+}
+
+.prison {
+    background-color: gray;
+    color: white;
+}
+
+.vide {}
+
+.duel {
+    background-color: maroon;
+    color: white;
+}
+
+.deplacement {
+    background-color: darkorange;
+    color: white;
+}
+
+.pioche {
+    background-color: cyan;
+    color: white;
+}
+
+button:disabled,
+button[disabled] {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+    pointer-events: all !important;
+}
