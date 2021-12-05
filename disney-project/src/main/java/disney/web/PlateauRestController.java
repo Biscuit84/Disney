@@ -18,8 +18,10 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import disney.model.CasesPlateau;
 import disney.model.Plateau;
 import disney.model.Views;
+import disney.repository.ICasesPlateauRepo;
 import disney.repository.IPlateauRepo;
 
 
@@ -30,6 +32,9 @@ public class PlateauRestController {
 
 	@Autowired
 	private IPlateauRepo plateauRepo;
+	
+	@Autowired
+	private ICasesPlateauRepo casesPlateauRepo;
 	
 	@GetMapping("")
 	@JsonView(Views.ViewsPlateau.class)
@@ -91,7 +96,39 @@ public class PlateauRestController {
 
 		return plateau;
 	}
+	
+	//essai creation plateau + cases
+	@PostMapping("/createPlateauAvecCasesPlateau")
+	@JsonView(Views.ViewsPlateau.class)
+	public Plateau createPlateauAvecCasesPlateau(@RequestBody Plateau plateau) {
+		
+		for(CasesPlateau cp : plateau.getCases()) {
+			cp.setPlateau(plateau);
+		}
+		
+		plateau = plateauRepo.save(plateau);		
+		casesPlateauRepo.saveAll(plateau.getCases());
+		
+		return plateau;
+	}
 
+	@PutMapping("/{id}/updatePlateauAvecCasesPlateau")
+	@JsonView(Views.ViewsPlateau.class)
+	public Plateau updatePlateauAvecCasesPlateau(@PathVariable Long id, @RequestBody Plateau plateau) {
+		if (!plateauRepo.existsById(id)) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Plateau non trouvé");
+		}
+
+		for(CasesPlateau cp : plateau.getCases()) {
+			cp.setPlateau(plateau);
+		}
+		
+		plateau = plateauRepo.save(plateau);		
+		casesPlateauRepo.saveAll(plateau.getCases());
+		
+		return plateau;
+	}
+	
 	@PutMapping("/{id}")
 	@JsonView(Views.ViewsPlateau.class)
 	public Plateau update(@PathVariable Long id, @RequestBody Plateau plateau) {

@@ -68,9 +68,20 @@ public class CasesPlateauRestController {
 		if (optCasesPlateau.isPresent()) {
 			return optCasesPlateau.get();
 		} else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "CasePlateau non trouvée");
 		}
 	}
+	
+	
+	@GetMapping("/plateau/{id}")
+	@JsonView(Views.CasesPlateauDetail.class)
+	public List<CasesPlateau> findByPlateau(@PathVariable Long id) {
+		List<CasesPlateau> casesPlateauX = casesplateauRepo.findAllByIdPlateau(id);
+
+       return casesPlateauX;
+	}
+	
+	
 
 
 	@PostMapping("")

@@ -1,29 +1,22 @@
-
-<div class="example-container">
-    <h2>To do</h2>
-  
-    <div
-      cdkDropList
-      #todoList="cdkDropList"
-      [cdkDropListData]="todo"
-      [cdkDropListConnectedTo]="[doneList]"
-      class="example-list"
-      (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div>
+<div id="ecran-gestion-plateau">
+    <div class="card globalCard">
+        <div class="row">
+            <div class="card col-4" style="width: 18rem;">
+                <img class="card-img-top" src="../../../assets/images/menuAdmin/gestionPlateau/creation.png" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Creation de plateau</h5>
+                    <p class="card-text">Laissez libre cours à votre imagination</p>
+                    <a class="btn btn-primary" [routerLink]="['/gestionAdmin/createPlateau']">Creation</a>
+                </div>
+            </div>
+            <div class="card col-4" style="width: 18rem;">
+                <img class="card-img-top" src="../../../assets/images/menuAdmin/gestionPlateau/update.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Modifier les plateaux existants</h5>
+                    <p class="card-text">Adapter vos plateaux existants à vos envis</p>
+                    <a class="btn btn-primary" [routerLink]="['/gestionAdmin/updatePlateau']">Modifier</a>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-  
-  <div class="example-container">
-    <h2>Done</h2>
-  
-    <div
-      cdkDropList
-      #doneList="cdkDropList"
-      [cdkDropListData]="done"
-      [cdkDropListConnectedTo]="[todoList]"
-      class="example-list"
-      (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>
-    </div>
-  </div>
-    
+</div>
