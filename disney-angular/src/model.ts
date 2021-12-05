@@ -374,7 +374,7 @@ export class Plateau {
   version: number;
   nom: string;
   nbCases: number;
-  casesPlateau: Array<CasesPlateau>;
+  cases: Array<CasesPlateau>;
 
 
   constructor(
@@ -382,13 +382,13 @@ export class Plateau {
     version?: number,
     nom?: string,
     nbCases?: number,
-    casesPlateau?: Array<CasesPlateau>
+    cases?: Array<CasesPlateau>
   ) {
     this.id = id
     this.version = version
     this.nom = nom
     this.nbCases = nbCases
-    this.casesPlateau = casesPlateau
+    this.cases = cases
   }
 
 }
