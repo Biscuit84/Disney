@@ -202,17 +202,17 @@ class TestMain {
 		
 		//BOUTIQUE
 		final List<Vie> listeTotaleVie = new ArrayList<>();
-		listeTotaleVie.add(new Vie(1, 100));
-		listeTotaleVie.add(new Vie(3, 275));
-		listeTotaleVie.add(new Vie(5, 400));
-		listeTotaleVie.add(new Vie(10, 750));
+		listeTotaleVie.add(new Vie(1, 100, "../../../assets/images/boutique/potion-1.png"));
+		listeTotaleVie.add(new Vie(3, 275, "../../../assets/images/boutique/potion-3.png"));
+		listeTotaleVie.add(new Vie(5, 400, "../../../assets/images/boutique/potion-5.png"));
+		listeTotaleVie.add(new Vie(10, 750, "../../../assets/images/boutique/potion-10.png"));
 		vieRepo.saveAll(listeTotaleVie);
 
 		final List<Etoile> listeTotaleEtoiles = new ArrayList<>();
-		listeTotaleEtoiles.add(new Etoile(100, 5));
-		listeTotaleEtoiles.add(new Etoile(300, 13));
-		listeTotaleEtoiles.add(new Etoile(500, 22));
-		listeTotaleEtoiles.add(new Etoile(1000, 40));
+		listeTotaleEtoiles.add(new Etoile(100, 5, "../../../assets/images/boutique/etoile-1.png"));
+		listeTotaleEtoiles.add(new Etoile(300, 13, "../../../assets/images/boutique/etoile-3.png"));
+		listeTotaleEtoiles.add(new Etoile(500, 22, "../../../assets/images/boutique/etoile-5.png"));
+		listeTotaleEtoiles.add(new Etoile(1000, 40, "../../../assets/images/boutique/etoile-10.png"));
 		etoilesRepo.saveAll(listeTotaleEtoiles);
 
 		Boutique boutique = new Boutique(listeTotalePerso, listeTotaleVie, listeTotaleEtoiles);

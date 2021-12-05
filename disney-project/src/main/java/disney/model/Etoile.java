@@ -25,12 +25,14 @@ public class Etoile {
 	// prix en fonction du nombre: ( 100 etoiles = 5euro, 300 etoiles = 13euros )
 	private int prix;
 
+	//pour image boutique
+	private String image;
 
-
-	public Etoile(int nombre, int prix) {
+	public Etoile(int nombre, int prix, String image) {
 		super();
 		this.nombre = nombre;
 		this.prix = prix;
+		this.image = image;
 	}
 
 	public Etoile(int nombre, int prix, Long id, int version) {
@@ -75,6 +77,15 @@ public class Etoile {
 
 	public void setVersion(int version) {
 		this.version = version;
+	}
+	
+	
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	@Override
