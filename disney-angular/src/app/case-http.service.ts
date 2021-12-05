@@ -15,7 +15,7 @@ export class CaseHttpService {
   casesUrl: string;
 
   constructor(private http: HttpClient, private appConfig: AppConfigService) {
-    this.caseUrl = this.appConfig.backEndUrl + "cases/"
+    this.casesUrl = this.appConfig.backEndUrl + "cases/"
     this.load();
   }
 
@@ -31,7 +31,7 @@ export class CaseHttpService {
   }
 
   findAll2(): Observable<Array<Cases>>{
-   return this.http.get<Array<Cases>>(this.caseUrl);
+   return this.http.get<Array<Cases>>(this.casesUrl);
   }
 
   findById(id: number): Observable<Cases> {
