@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Joueur, Partie, TourDeJeuDto } from 'src/model';
+import { CasesPlateau, Joueur, Partie, TourDeJeuDto } from 'src/model';
 import { AppConfigService } from './app-config.service';
 import { JoueurHttpService } from './joueur-http.service';
 
@@ -13,6 +13,7 @@ export class PartieHttpService {
 
   partieUrl: string;
   LaPartie: Partie = new Partie;
+  LesCasesPlateau: CasesPlateau;
 
   constructor(private http: HttpClient, private appConfig: AppConfigService, private joueurService: JoueurHttpService) {
     this.partieUrl = this.appConfig.backEndUrl + "partie/"
