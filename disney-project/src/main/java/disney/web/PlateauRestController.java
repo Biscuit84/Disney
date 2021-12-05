@@ -142,7 +142,7 @@ public class PlateauRestController {
 
 		casesPlateauRepo.deleteAll(plateau.getCases());
 
-		int positionCase = 1;
+		int positionCase = 0;
 		List<CasesPlateau> lcp = new ArrayList<>();
 		for (CasesPlateau c : plat.getCases()) {
 			CasesPlateau cp = new CasesPlateau(plateau, c.getUneCase(), positionCase);
