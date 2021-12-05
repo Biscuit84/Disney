@@ -31,6 +31,7 @@ import { GestionDuCompteComponent } from './gestion-du-compte/gestion-du-compte.
 import { GestionProfilAdminComponent } from './Gestion/gestion-profil-admin/gestion-profil-admin.component';
 import { GestionCompteAdminComponent } from './Gestion/gestion-compte-admin/gestion-compte-admin.component';
 import { GestionBoutiqueAdminComponent } from './Gestion/gestion-boutique-admin/gestion-boutique-admin.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 
@@ -66,7 +67,8 @@ import { GestionBoutiqueAdminComponent } from './Gestion/gestion-boutique-admin/
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    DragDropModule
    
   ],
   providers: [PageConnexionService],
