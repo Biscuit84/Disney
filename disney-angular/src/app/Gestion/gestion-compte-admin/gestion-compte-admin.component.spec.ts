@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GestionComponent } from './gestion.component';
+import { GestionCompteAdminComponent } from './gestion-compte-admin.component';
 
-describe('GestionComponent', () => {
-  let component: GestionComponent;
-  let fixture: ComponentFixture<GestionComponent>;
+describe('GestionCompteAdminComponent', () => {
+  let component: GestionCompteAdminComponent;
+  let fixture: ComponentFixture<GestionCompteAdminComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GestionComponent ]
+      declarations: [ GestionCompteAdminComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GestionComponent);
+    fixture = TestBed.createComponent(GestionCompteAdminComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
