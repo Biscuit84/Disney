@@ -10,14 +10,16 @@ import { Cases, Plateau } from '../model';
 export class PlateauHttpService {
 
   plateaux: Array<Plateau> = new Array<Plateau>();
-  plateauUrl:string;
+  plateauUrl: string;
+  casesUrl: string;
 
   constructor(private http: HttpClient, private appConfig: AppConfigService) {
     this.plateauUrl = this.appConfig.backEndUrl + "plateau/"
+    this.casesUrl = this.appConfig.backEndUrl + "cases/"
     this.load();
-   }
+  }
 
-   load() {
+  load() {
     this.http.get<Array<Plateau>>(this.plateauUrl).subscribe(response => {
 
       this.plateaux = response;
@@ -29,23 +31,32 @@ export class PlateauHttpService {
     return this.plateaux;
   }
 
+  findAllPlateau(): Observable<Array<Plateau>> {
+    //console.log(this.plateaux);
+    return this.http.get<Array<Plateau>>(this.plateauUrl);
+  }
+
   findById(id: number): Observable<Plateau> {
     return this.http.get<Plateau>(this.plateauUrl + id);
   }
 
 
-  findByPartie(idPartie:number): Observable<Plateau> {
-  return this.http.get<Plateau>(this.plateauUrl + idPartie);
+  findByPartie(idPartie: number): Observable<Plateau> {
+    return this.http.get<Plateau>(this.plateauUrl + idPartie);
   }
 
   findByIdWithCasesDetails(id: number): Observable<Plateau> {
-    return this.http.get<Plateau>(this.plateauUrl + id + "/details");
+    return this.http.get<Plateau>(this.plateauUrl + id + "/detailCase");
+  }
+
+
+  findAllCasesByIdPlateau(id: number): Observable<Array<Cases>> {
+    return this.http.get<Array<Cases>>(this.casesUrl + "listCases/" + id);
   }
 
 
 
 
-  
 
   // deleteById(id: number) {
   //   this.http.delete<void>(this.plateauUrl + id).subscribe(resp => {
@@ -55,14 +66,17 @@ export class PlateauHttpService {
 
   //save plateau avec les cases Plateau!!!
   createPlateau(plateau: Plateau): Observable<Plateau> {
-    return this.http.post<Plateau>(this.plateauUrl+"createPlateauAvecCasesPlateau", plateau);
+    return this.http.post<Plateau>(this.plateauUrl + "createPlateauAvecCasesPlateau", plateau);
   }
 
 
+  updatePlateau(plateau: Plateau): Observable<Plateau> {
+    return this.http.put<Plateau>(this.plateauUrl + "updatePlateauAvecCasesPlateau", plateau);
+  }
 
-  
+
   create(listeCases: Array<Cases>, plateauNom: string): Observable<Plateau> {
-    return this.http.post<Plateau>(this.plateauUrl+ plateauNom, listeCases);
+    return this.http.post<Plateau>(this.plateauUrl + plateauNom, listeCases);
   }
 
   // modify(plateau: Plateau) {
@@ -71,6 +85,6 @@ export class PlateauHttpService {
   //   }, error => console.log(error));
   // }
 
-  
+
 
 }
