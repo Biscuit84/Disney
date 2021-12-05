@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AppConfigService } from './app-config.service';
-import { Plateau } from '../model';
+import { Cases, Plateau } from '../model';
 
 @Injectable({
   providedIn: 'root'
@@ -45,26 +45,32 @@ export class PlateauHttpService {
 
 
 
-  /*
+  
 
-  deleteById(id: number) {
-    this.http.delete<void>(this.plateauUrl + id).subscribe(resp => {
-      this.load();
-    }, error => console.log(error));
+  // deleteById(id: number) {
+  //   this.http.delete<void>(this.plateauUrl + id).subscribe(resp => {
+  //     this.load();
+  //   }, error => console.log(error));
+  // }
+
+  //save plateau avec les cases Plateau!!!
+  createPlateau(plateau: Plateau): Observable<Plateau> {
+    return this.http.post<Plateau>(this.plateauUrl+"createPlateauAvecCasesPlateau", plateau);
   }
 
-  create(plateau: Plateau) {
-    this.http.post<Plateau>(this.plateauUrl, plateau).subscribe(resp => {
-      this.load();
-    }, error => console.log(error));
+
+
+  
+  create(listeCases: Array<Cases>, plateauNom: string): Observable<Plateau> {
+    return this.http.post<Plateau>(this.plateauUrl+ plateauNom, listeCases);
   }
 
-  modify(plateau: Plateau) {
-    this.http.put<Plateau>(this.plateauUrl + plateau.id, plateau).subscribe(resp => {
-      this.load();
-    }, error => console.log(error));
-  }
+  // modify(plateau: Plateau) {
+  //   this.http.put<Plateau>(this.plateauUrl + plateau.id, plateau).subscribe(resp => {
+  //     this.load();
+  //   }, error => console.log(error));
+  // }
 
-  */
+  
 
 }
