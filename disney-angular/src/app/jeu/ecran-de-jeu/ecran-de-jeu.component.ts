@@ -41,8 +41,6 @@ export class EcranDeJeuComponent implements OnInit {
     console.log(this.partie);
     this.personnage=this.partieService.LaPartie.personnages[0];
     this.plateau = this.partieService.LaPartie.plateau; // on recupere le plateau, son id et son nb de case seulement
-    //this.casesPlateau=this.partieService.LaPartie.plateau.casesPlateau;
-    //console.log(this.casesPlateau);
   }
 
   ////////////////////////// DECLARATION DES VARIABLES //////////////////////////
