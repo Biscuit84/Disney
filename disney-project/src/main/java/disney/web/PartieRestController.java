@@ -114,7 +114,7 @@ public class PartieRestController {
 	@JsonView(Views.ViewsPartie.class)
 	public Partie update(@PathVariable Long id, @RequestBody Partie partie) {
 		if (!partieRepo.existsById(id)) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Partie non trouvé");
 		}
 
 		partie = partieRepo.save(partie);
@@ -126,7 +126,7 @@ public class PartieRestController {
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
 		if (!partieRepo.existsById(id)) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Partie non trouvé");
 		}
 
 		partieRepo.deleteById(id);
@@ -284,6 +284,10 @@ public class PartieRestController {
 		historiqueRepo.save(historique);
 		System.out.println(partie.getPersonnages());
 		//		System.out.println();
+		
+		Joueur j = joueurRepo.getById(idJoueur);
+		j.setLife(j.getLife()-1);
+		joueurRepo.save(j);
 
 		return partie;
 	}
