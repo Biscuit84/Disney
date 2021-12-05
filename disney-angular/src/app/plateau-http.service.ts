@@ -37,6 +37,14 @@ export class PlateauHttpService {
   findByPartie(idPartie:number): Observable<Plateau> {
   return this.http.get<Plateau>(this.plateauUrl + idPartie);
   }
+
+  findByIdWithCasesDetails(id: number): Observable<Plateau> {
+    return this.http.get<Plateau>(this.plateauUrl + id + "/details");
+  }
+
+
+
+
   /*
 
   deleteById(id: number) {
