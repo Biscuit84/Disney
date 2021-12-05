@@ -27,7 +27,10 @@ import { ModificationProfilJoueurComponent } from './modification-profil-joueur/
 import { DateAgoPipe } from './date-ago.pipe';
 import { BoutiqueEtoilesComponent } from './boutique/boutique-etoiles/boutique-etoiles.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+<<<<<<< HEAD
 import { GestionDuCompteComponent } from './gestion-du-compte/gestion-du-compte.component';
+=======
+>>>>>>> develop
 import { GestionProfilAdminComponent } from './Gestion/gestion-profil-admin/gestion-profil-admin.component';
 import { GestionCompteAdminComponent } from './Gestion/gestion-compte-admin/gestion-compte-admin.component';
 import { GestionBoutiqueAdminComponent } from './Gestion/gestion-boutique-admin/gestion-boutique-admin.component';
