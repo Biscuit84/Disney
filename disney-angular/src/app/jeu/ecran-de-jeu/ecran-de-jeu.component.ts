@@ -5,9 +5,10 @@ import { Router } from '@angular/router';
 import { PageConnexionService } from 'src/app/page-connexion/page-connexion.service';
 import { AppConfigService } from 'src/app/app-config.service';
 import { PartieHttpService } from 'src/app/partie-http.service';
-import { Compte, Joueur, Partie, Personnage, Plateau, TourDeJeuDto } from 'src/model';
+import { Cases, CasesPlateau, Compte, Joueur, Partie, Personnage, Plateau, TourDeJeuDto } from 'src/model';
 import { PlateauHttpService } from 'src/app/plateau-http.service';
 import { JoueurHttpService } from 'src/app/joueur-http.service';
+import { CaseHttpService } from 'src/app/case-http.service';
 
 @Component({
   selector: 'ecran-de-jeu, [ecran-de-jeu]',
@@ -27,17 +28,21 @@ export class EcranDeJeuComponent implements OnInit {
 
   plateau: Plateau;
   public tourEnCours: TourDeJeuDto;
+  public casesPlateau:Array<CasesPlateau>;
+  public cases:Array<Cases>;
 
 
-  moi: Joueur = new Joueur;
+  //moi: Joueur = new Joueur;
   ////////////////////////// CONSTRUCTEUR  //////////////////////////
-  constructor(public compteService: PageConnexionService, public partieService: PartieHttpService, private plateauService: PlateauHttpService, private joueurService: JoueurHttpService) {
+  constructor(public compteService: PageConnexionService, public partieService: PartieHttpService, private plateauService: PlateauHttpService, private joueurService: JoueurHttpService, private casesService: CaseHttpService,) {
     this.joueur = this.compteService.compte;
     this.idJoueur = this.joueur.id;
     this.partie = this.partieService.LaPartie;
     console.log(this.partie);
     this.personnage=this.partieService.LaPartie.personnages[0];
-
+    this.plateau = this.partieService.LaPartie.plateau; // on recupere le plateau, son id et son nb de case seulement
+    //this.casesPlateau=this.partieService.LaPartie.plateau.casesPlateau;
+    //console.log(this.casesPlateau);
   }
 
   ////////////////////////// DECLARATION DES VARIABLES //////////////////////////
@@ -71,6 +76,7 @@ export class EcranDeJeuComponent implements OnInit {
   public nBcaseW: number;
   public nBcaseH: number;
   public listeCases = [];
+
 
   // // taille des cases
   public taillecaseW: number;// = this.w / this.nBcaseW;
@@ -127,7 +133,9 @@ export class EcranDeJeuComponent implements OnInit {
     this.ctxPlayerIA3 = this.canvasIA3.nativeElement.getContext('2d');
 
     // quel plateau 
-    this.plateau = this.partie.plateau;
+
+
+
     this.drawPlateau(this, this.plateau);
 
     // joueur
@@ -152,7 +160,7 @@ export class EcranDeJeuComponent implements OnInit {
   }
 
 
-  ////////////////////////// Methode de la classe  //////////////////////////
+  ////////////////////////// Methode de la classe liées aux boutons  //////////////////////////
 
   // bouton joueur
   Play() {
@@ -168,6 +176,15 @@ export class EcranDeJeuComponent implements OnInit {
   EndTurn() {
     this.FinDeTour(this, this.pionJoueur);
   }
+
+
+
+
+
+
+
+  ////////////////////////// Methode de la classe liées au jeu  //////////////////////////
+
 
   nbcaseDemande(): [number, number] {
     if (this.nbcasePlateau <= 9) { this.nBcaseW = 3; this.nBcaseH = 3 }
@@ -192,6 +209,10 @@ export class EcranDeJeuComponent implements OnInit {
       nbCases: number;
       cases: Array<CasesPlateau>;
     */
+
+      
+
+
 
     //this.nbcasePlateau = 61; 
     this.nbcasePlateau = this.plateau.nbCases;

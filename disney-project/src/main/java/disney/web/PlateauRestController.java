@@ -34,17 +34,29 @@ public class PlateauRestController {
 	@GetMapping("")
 	@JsonView(Views.ViewsPlateau.class)
 	public List<Plateau> findAll() {
-		List<Plateau> plateaus = plateauRepo.findAll();
+		List<Plateau> plateaux = plateauRepo.findAll();
 
-		return plateaus;
+		return plateaux;
 	}
 	
 	@GetMapping("/detail")
 	@JsonView(Views.ViewsPlateauDetail.class)
 	public List<Plateau> findAllWithDetail() {
-		List<Plateau> plateaus = plateauRepo.findAll();
+		List<Plateau> plateaux = plateauRepo.findAll();
 
-		return plateaus;
+		return plateaux;
+	}
+	
+	@GetMapping("/{id}/detail")
+	@JsonView(Views.ViewsPlateauDetail.class)
+	public Plateau findByIdWithDetail(@PathVariable Long id) {
+		Optional<Plateau> optPlateau = plateauRepo.findByIdWithDetail(id);
+		System.out.println("le plateau" + optPlateau);
+		if (optPlateau.isPresent()) {
+			return optPlateau.get();
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Plateau non trouvé");
+		}
 	}
 
 	@GetMapping("{id}")
@@ -55,7 +67,7 @@ public class PlateauRestController {
 		if (optPlateau.isPresent()) {
 			return optPlateau.get();
 		} else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Plateau non trouvé");
 		}
 	}
 	/*
@@ -67,7 +79,7 @@ public class PlateauRestController {
 		if (optPlateau.isPresent()) {
 			return optPlateau.get();
 		} else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Plateau non trouvé");
 		}
 	}
 */
@@ -84,7 +96,7 @@ public class PlateauRestController {
 	@JsonView(Views.ViewsPlateau.class)
 	public Plateau update(@PathVariable Long id, @RequestBody Plateau plateau) {
 		if (!plateauRepo.existsById(id)) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Plateau non trouvé");
 		}
 
 		plateau = plateauRepo.save(plateau);
