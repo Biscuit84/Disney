@@ -1,7 +1,6 @@
 package disney.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -13,13 +12,12 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Version;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 import com.fasterxml.jackson.annotation.JsonView;
-
-import javassist.expr.Instanceof;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -55,7 +53,8 @@ public abstract class Compte  {
 	
 	private boolean enable;
 	
-	
+	@DateTimeFormat(pattern="dd/MM/yyyy")
+	private LocalDate dateLastConnexion;
 	
 	
 
@@ -179,6 +178,8 @@ public abstract class Compte  {
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
 	}
+	
+	
 
 
 	
@@ -210,6 +211,38 @@ public abstract class Compte  {
 //
 //		return stringRoles;
 //	}
+
+
+
+	public boolean isEnable() {
+		return enable;
+	}
+
+
+
+
+
+	public void setEnable(boolean enable) {
+		this.enable = enable;
+	}
+
+
+
+
+
+	public LocalDate getDateLastConnexion() {
+		return dateLastConnexion;
+	}
+
+
+
+
+
+	public void setDateLastConnexion(LocalDate dateLastConnexion) {
+		this.dateLastConnexion = dateLastConnexion;
+	}
+
+
 
 
 
