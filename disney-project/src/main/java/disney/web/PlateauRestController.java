@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -133,7 +135,7 @@ public class PlateauRestController {
 	@JsonView(Views.ViewsPlateau.class)
 	public Plateau updatePlateauAvecCasesPlateau(@RequestBody Plateau plat) {
 		if (!plateauRepo.existsById(plat.getId())) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Plateau non trouvé");
 		}
 
 		Plateau plateau = plateauRepo.findById(plat.getId()).get();
@@ -195,9 +197,28 @@ public class PlateauRestController {
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
 		if (!plateauRepo.existsById(id)) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Plateau non trouvé");
 		}
 		
 		plateauRepo.deleteById(id);
+	}
+	
+	
+	//delete plateau with cases plateau
+	@Transactional
+	@DeleteMapping("/{id}/deleteWithCasesPlateau")
+	public void deleteWithCasesPlateau(@PathVariable Long id) {
+		System.out.println(id);
+		if (!plateauRepo.existsById(id)) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Plateau non trouvé");
+		}
+
+		Plateau plateau = plateauRepo.getById(id);
+		List<CasesPlateau> cp = plateau.getCases();
+
+		plateauRepo.deleteById(id);
+		System.out.println("avant");
+		casesPlateauRepo.deleteAll(cp); 
+		System.out.println("apres");
 	}
 }

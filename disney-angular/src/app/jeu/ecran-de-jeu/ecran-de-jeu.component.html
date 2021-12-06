@@ -6,26 +6,26 @@
             <div class="gameControl">
                 <div class="bouttons">
                     <div class="Tour">
-                        <p> Tour : <span id="NbTour"> {{Tour}}</span> </p>
+                        <p> Tour : <span id="NbTour"> {{tourActuel}}</span> </p>
                     </div>
                     <div class="TourJoueur">
                         <p> Tour du joueur :<span id="JoueurTour"> {{joueurActuel}} </span> </p>
                     </div>
                     <div class="Avance">
-                        <button id="boutonJouer" type="button" class="btn btn-primary bouton" [disabled]="!dispoBoutonJouer"
-                            (click)="Play()">Jouer</button>
+                        <button id="boutonJouer" type="button" class="btn btn-primary bouton"
+                            [disabled]="!dispoBoutonJouer" (click)="Play()">Jouer</button>
                         <p>Lancé de dé: <span id="valeurDeAvance">{{valeurDesDes}}</span></p>
                     </div>
                     <div class="pouvoir">
-                        <button id="boutonPouvoir" type="button" class="btn btn-primary bouton" [disabled]="!dispoBoutonPouvoir"
-                            (click)="Pouvoir()">Pouvoir</button>
+                        <button id="boutonPouvoir" type="button" class="btn btn-primary bouton"
+                            [disabled]="!dispoBoutonPouvoir" (click)="Pouvoir()">Pouvoir</button>
                     </div>
 
 
 
                     <div class="Fin">
-                        <button id="boutonFinDeTour" type="button" class="btn btn-primary bouton" [disabled]="!dispoBoutonFin"
-                            (click)="EndTurn()">Fin de tour </button>
+                        <button id="boutonFinDeTour" type="button" class="btn btn-primary bouton"
+                            [disabled]="!dispoBoutonFin" (click)="EndTurn()">Fin de tour </button>
                         <p></p>
                     </div>
                     <div class="dice" id="de1">
@@ -72,21 +72,26 @@
 
         </div>
         <div id="interfaceUtilisateur">
-            <div class=titreInterface> <span>Ton personnage !</span></div>
+
             <div id="infojoueur">
-                    <div class="card" id="info">
-                        <div class="joueur">
-                          <h4><b>Pseudo : {{joueur.pseudo}}</b></h4>
-                          <p ><span  type="button" data-toggle="tooltip" data-placement="right" title="Nombre de victoire: {{joueur.nbVictoire}}" id="infoPouvoir">Niveau: {{joueur.level}}</span></p>
-                        </div>
-                        <img id="image_personnage"  src={{personnage.avatar}} alt="personnage" >
-                        <div class="personnage">
-                            <h4><b> Prenom : {{personnage.nom}}</b></h4>
-                            <p> <span type="button"  data-toggle="tooltip" data-placement="right" title="Ajouter la description du pouvoir" id="infoPouvoir">Pouvoir: {{personnage.pouvoir}}</span> </p>
-                            <p>Prince : {{personnage.prince}}</p>
-                            <p>Méchant : {{personnage.mechant}}</p>
-                          </div>
-                      </div> 
+                <div class=titreInterface> <span>Ton personnage !</span></div>
+                <div class="card" id="info">
+                    <div class="joueur">
+                        <h4><b>Pseudo : {{joueur.pseudo}}</b></h4>
+                        <p><span type="button" data-toggle="tooltip" data-placement="right"
+                                title="Nombre de victoire: {{joueur.nbVictoire}}" id="infoPouvoir">Niveau:
+                                {{joueur.level}}</span></p>
+                    </div>
+                    <img id="image_personnage" src={{personnage.avatar}} alt="personnage">
+                    <div class="personnage">
+                        <h4><b> Prenom : {{personnage.nom}}</b></h4>
+                        <p> <span type="button" data-toggle="tooltip" data-placement="right"
+                                title="Ajouter la description du pouvoir" id="infoPouvoir">Pouvoir:
+                                {{personnage.pouvoir}}</span> </p>
+                        <p>Prince : {{personnage.prince}}</p>
+                        <p>Méchant : {{personnage.mechant}}</p>
+                    </div>
+                </div>
 
 
 
@@ -107,9 +112,11 @@
 
             <!-- la vitesse des pions -->
             <div id="vitesseControl">
-                <span class="parameter">vitesse du pion :</span> <!--<span id="vitesse">1</span>-->
+                <span class="parameter">vitesse du pion :</span>
+                <!--<span id="vitesse">1</span>-->
                 <div class="slidecontainer">
-                    <input type="range" min="1" max="7" value="1" class="slider" id="vitesseRange" [disabled]="!commandeDispo" [(ngModel)] = "niveauDeVitesseDuPion">
+                    <input type="range" min="1" max="7" value="1" class="slider" id="vitesseRange"
+                        [disabled]="!commandeDispo || pionJoueur.playerIsMoving || pionIA1.playerIsMoving|| pionIA2.playerIsMoving|| pionIA3.playerIsMoving" [(ngModel)]="niveauDeVitesseDuPion">
                 </div>
             </div>
         </div>

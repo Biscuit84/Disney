@@ -139,7 +139,7 @@ class TestMain {
 		Personnage perso4 = new Personnage("Mulan", "Amoureux", "Atila", "terre",400);
 		Personnage perso5 = new Personnage("Aurore", "Philippe", "Malefique", "terre",100);
 		Personnage perso6 = new Personnage("Belle", "La Bête", "Gaston", "terre",100);
-		Personnage perso7 = new Personnage("Blanche Neige", "Prince", "La méchante reine", "terre",100);
+		Personnage perso7 = new Personnage("Blanche-Neige", "Prince", "La méchante reine", "terre",100);
 		Personnage perso8 = new Personnage("Cendrillon", "Prince charmant", "Mme de Trénaine", "terre",100);
 		Personnage perso9 = new Personnage("Raiponce", "Eugene", "Gotel", "terre",100);
 		Personnage perso10 = new Personnage("Tiana", "ray", "Maitre des ombres", "terre",100);
