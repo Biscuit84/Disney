@@ -60,13 +60,8 @@ export class JeuComponent implements OnInit {
     return this.plateauService.findAll();
   }
 
-
-
-
   CreerLapartie() {
-
     this.partieService.launchGame(this.idJoueur, this.idPerso, this.idPlateau).subscribe((resp: Partie) => {
-
       this.partieService.LaPartie = resp;
       this.partie = resp;
        this.casesPlateauService.findAllCasesByPlateau(this.partie.plateau.id).subscribe(resp => {
