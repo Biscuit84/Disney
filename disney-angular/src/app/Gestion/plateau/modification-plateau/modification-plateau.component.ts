@@ -34,7 +34,12 @@ export class ModificationPlateauComponent implements OnInit {
     
   }
 
-  delete(plateau: Plateau) {
-
+  delete(plateau:Plateau){
+    this.plateauService.deleteById(plateau.id).subscribe(() => {
+      this.plateauService.findAllPlateau().subscribe((plats: Array<Plateau>) => {
+        this.listPlateauDejaCree = plats;
+      })
+    })
   }
+
 }

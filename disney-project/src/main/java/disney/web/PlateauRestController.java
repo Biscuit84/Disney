@@ -133,7 +133,7 @@ public class PlateauRestController {
 	@JsonView(Views.ViewsPlateau.class)
 	public Plateau updatePlateauAvecCasesPlateau(@RequestBody Plateau plat) {
 		if (!plateauRepo.existsById(plat.getId())) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Plateau non trouvé");
 		}
 
 		Plateau plateau = plateauRepo.findById(plat.getId()).get();
@@ -195,9 +195,24 @@ public class PlateauRestController {
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
 		if (!plateauRepo.existsById(id)) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Plateau non trouvé");
 		}
 		
+		plateauRepo.deleteById(id);
+	}
+	
+	
+	//delete plateau with cases plateau
+	@DeleteMapping("/{id}/deleteWithCasesPlateau")
+	public void deleteWithCasesPlateau(@PathVariable Long id) {
+		if (!plateauRepo.existsById(id)) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Plateau non trouvé");
+		}
+
+		Plateau plateau = plateauRepo.getById(id);
+		List<CasesPlateau> cp = plateau.getCases();
+
+		casesPlateauRepo.deleteAll(cp);
 		plateauRepo.deleteById(id);
 	}
 }
