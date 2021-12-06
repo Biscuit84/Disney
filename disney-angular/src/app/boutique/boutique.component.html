@@ -21,7 +21,7 @@
       <main class="d-flex flex-column mb-3">
 
 
-        <div class="card containerCard" id="ecranconnec1">
+        <div class="card containerCard" id="ecranconnec1" style="margin-bottom:80px;">
           <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
               <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
@@ -33,24 +33,24 @@
             </div>
             <div class="carousel-inner">
               <div class="carousel-item active" data-bs-interval="10000">
-                <img src="../../assets/images/boutique/stars.jpg" class="d-block w-100 imageCaroussel" alt="...">
+                <img src="../../assets/images/boutique/PromoPerso.png" class="d-block w-100 imageCaroussel" alt="...">
                 <div class="carousel-caption d-none d-md-block">
-                  <h1>Promotion!</h1>
+                  <!-- <h1>Promotion!</h1>
                   <p>2 persos achetés, 1 vie offerte!!!</p>
-                  <p class="">jusqu'au 31 décembre 2021!</p>
+                  <p class="">jusqu'au 31 décembre 2021!</p> -->
                 </div>
               </div>
               <div class="carousel-item" data-bs-interval="2000">
-                <img src="../../assets/images/boutique/stars.jpg" class="d-block w-100 imageCaroussel" alt="...">
+                <img src="../../assets/images/boutique/PromoVie.png" class="d-block w-100 imageCaroussel" alt="...">
                 <div class="carousel-caption d-none d-md-block">
-                  <h1><a [routerLink]="['/boutique/personnages']">Achat des personnages et des vies</a></h1>
+                  <!-- <h1><a [routerLink]="['/boutique/personnages']"></a></h1> -->
                   <!-- <p>Some representative placeholder content for the second slide.</p> -->
                 </div>
               </div>
               <div class="carousel-item">
-                <img src="../../assets/images/boutique/stars.jpg" class="d-block w-100 imageCaroussel" alt="...">
+                <img src="../../assets/images/boutique/PromoEtoile.png" class="d-block w-100 imageCaroussel" alt="...">
                 <div class="carousel-caption d-none d-md-block">
-                  <h1><a [routerLink]="['/boutique/etoiles']">Achat des etoiles</a></h1>
+                  <!-- <h1><a [routerLink]="['/boutique/etoiles']"></a></h1> -->
                   <!-- <p>Some representative placeholder content for the third slide.</p> -->
                 </div>
               </div>
@@ -67,8 +67,29 @@
             </button>
           </div>
 
+
         </div>
 
+        
+        <div class="d-flex justify-content-evenly">
+        <div class="card d-flex justify-content-evenly" style="width: 18rem;">
+          <img src="../../assets/images/boutique/frogPrincess.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Acheter des Personnages & Vies</h5>
+            <p class="card-text">Personaliser votre avatar et Acheter des vies pour plus de fun</p>
+            <a id="btnAchat" [routerLink]="['/boutique/personnages']"class="btn btn-primary">Boutique Personnages & Vies</a>
+          </div>
+        </div>
+
+        <div class="card d-flex justify-content-evenly" style="width: 18rem;">
+          <img src="../../assets/images/boutique/elsaEtoile.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Acheter des Etoiles</h5>
+            <p class="card-text">Les étoiles vous permettent d'avancer dans le jeu, n'hésité plus !</p>
+            <a id="btnAchat" [routerLink]="['/boutique/etoiles']" class="btn btn-primary">Boutique Etoiles</a>
+          </div>
+        </div>
+      </div>
         <!-- <div class="card containerCard ecranconnec" id="ecranconnec2">
 
     <div class="row row-cols-1 row-cols-md-2 g-2 ensembleCard">
