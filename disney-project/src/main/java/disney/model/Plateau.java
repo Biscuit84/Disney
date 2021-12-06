@@ -26,7 +26,7 @@ public class Plateau   {
 	private String nom;
 	@Column(name="nombre_de_cases")
 	private int nbCases;
-	
+	private boolean disponible;
 	@OneToMany(mappedBy = "plateau")
 	@JsonView(Views.ViewsPlateauDetail.class)
 	private List<CasesPlateau> cases= new ArrayList<CasesPlateau>();
@@ -98,6 +98,35 @@ public class Plateau   {
 	public void setNbCases(int nbCases) {
 		this.nbCases = nbCases;
 	}
+
+	
+
+	public int getVersion() {
+		return version;
+	}
+
+
+
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
+
+
+
+	public boolean isDisponible() {
+		return disponible;
+	}
+
+
+
+
+	public void setDisponible(boolean disponible) {
+		this.disponible = disponible;
+	}
+
+
 
 
 	@Override

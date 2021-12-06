@@ -38,10 +38,8 @@ export class CasesPlateauHttpService {
     return this.http.get<CasesPlateau>(this.casesPlateauUrl + id);
   }
 
-  deleteById(id: number) {
-    this.http.delete<void>(this.casesPlateauUrl + id).subscribe(resp => {
-      this.load();
-    }, error => console.log(error));
+  deleteById(id: number): Observable<CasesPlateau> {
+   return this.http.delete<CasesPlateau> (this.casesPlateauUrl + id);
   }
 
   create(casesPlateau: CasesPlateau) {
