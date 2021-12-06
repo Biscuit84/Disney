@@ -29,18 +29,83 @@
 
           <ul class="navbar-nav" *ngIf="pageConnexionService.isJoueur()">
             <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/accueilJoueur']" routerLinkActive="activebutton">Mon compte</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" aria-current="page" [routerLink]="['/jeu']" routerLinkActive="activebutton">Le jeu</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" [routerLink]="['/boutique']" routerLinkActive="activebutton">La boutique</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" [routerLink]="['/compte']" routerLinkActive="activebutton">Mon compte</a>
-            </li>
+
             <li class="nav-item">
               <a class="nav-link" (click)=deconnexion()>Deconnexion</a>
             </li>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
           </ul>
+          <div class="dropdown dropdown-pull-right btn-group" *ngIf="pageConnexionService.isJoueur()">
+            <button id="btnGroupDrop1" type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <img src="../../assets/images/avatar/avatar_mickey.png" class="logo_admin rounded-circle"
+                id="avatarAdmin" />
+            </button>
+
+            <ul class="dropdown-menu" id="avatars">
+              <li class="d-flex flex-row mb-3">
+                <a class="dropdown-item choixAvatar" href="#"><img id="avatar1" onclick="changeAvatar(event)"
+                    src="../../assets/images/avatar/avatar_elsa.png" class="logo_avatar rounded-circle" /></a>
+                <a class="dropdown-item choixAvatar" id="avatarMulan" href="#"><img id="avatar2"
+                    onclick="changeAvatar(event)" src="../../assets/images/avatar/avatar_ariel.jpg"
+                    class="logo_avatar rounded-circle" /></a>
+                <a class="dropdown-item choixAvatar" id="avatarAurore" href="#"><img id="avatar3"
+                    onclick="changeAvatar(event)" src="../../assets/images/avatar/avatar_aurore.jpg"
+                    class="logo_avatar rounded-circle" /></a>
+              </li>
+              <li class="d-flex flex-row mb-3">
+                <a class="dropdown-item choixAvatar" id="avatarJasmine" href="#"><img id="avatar5"
+                    onclick="changeAvatar(event)" src="../../assets/images/avatar/avatar_belle.jpg"
+                    class="logo_avatar rounded-circle" /></a>
+                <a class="dropdown-item choixAvatar" id="avatarRaiponce" href="#"><img id="avatar6"
+                    onclick="changeAvatar(event)" src="../../assets/images/avatar/avatar_blanche_neige.jpg"
+                    class="logo_avatar rounded-circle" /></a>
+                <a class="dropdown-item choixAvatar" id="avatarCendrillon" href="#"><img id="avatar4"
+                    onclick="changeAvatar(event)" src="../../assets/images/avatar/avatar_cendrillon.jpg"
+                    class="logo_avatar rounded-circle" /></a>
+              </li>
+              <li class="d-flex flex-row mb-3">
+                <a class="dropdown-item choixAvatar" id="avatarBlancheNeige" href="#"><img id="avatar7"
+                    onclick="changeAvatar(event)" src="../../assets/images/avatar/avatar_jasmine.jpg"
+                    class="logo_avatar rounded-circle" /></a>
+                <a class="dropdown-item choixAvatar" id="avatarBelle" href="#"><img id="avatar8"
+                    onclick="changeAvatar(event)" src="../../assets/images/avatar/avatar_mulan.jpg"
+                    class="logo_avatar rounded-circle" /></a>
+                <a class="dropdown-item choixAvatar" id="avatarAriel" href="#"><img id="avatar9"
+                    onclick="changeAvatar(event)" onclick="changeAvatar(event)"
+                    src="../../assets/images/avatar/avatar_raiponce.jpg" class="logo_avatar rounded-circle" /></a>
+              </li>
+              <li class="d-flex flex-row mb-3">
+                <a class="dropdown-item choixAvatar" id="avatarTiana" href="#"><img id="avatar10"
+                    onclick="changeAvatar(event)" src="../../assets/images/avatar/avatar_tiana.jpg"
+                    class="logo_avatar rounded-circle" /></a>
+                <a class="dropdown-item choixAvatar" id="avatarTiana" href="#"><img id="avatar11"
+                    onclick="changeAvatar(event)" src="../../assets/images/avatar/avatar_mickey.png"
+                    class="logo_avatar rounded-circle" /></a>
+                <a class="dropdown-item choixAvatar" id="avatarTiana" href="#"><img id="avatar12"
+                    onclick="changeAvatar(event)" src="../../assets/images/avatar/avatar_minnie.png"
+                    class="logo_avatar rounded-circle" /></a>
+
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="modifProfilJoueur.html">Gestion du Profil</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#seDeconnecter">Déconnexion</a>
+              </li>
+            </ul>
+          </div>
 
 
 
@@ -48,16 +113,30 @@
 
           <ul class="navbar-nav" *ngIf="pageConnexionService.compte?.role == 'admin' ">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" [routerLink]="['/jeu']" routerLinkActive="activebutton">Gestion du
-                jeu</a>
+              <a class="nav-link" aria-current="page" [routerLink]="['/gestionAdmin']"
+                routerLinkActive="activebutton">Accueil</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" [routerLink]="['/boutique']" routerLinkActive="activebutton">Gestion de la
+              <a class="nav-link" aria-current="page" [routerLink]="['/gestionAdmin/profil']"
+                routerLinkActive="activebutton">Gestion du
+                profil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" [routerLink]="['/gestionAdmin/compte']"
+                routerLinkActive="activebutton">Gestion des
+                comptes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" [routerLink]="['/gestionAdmin/plateau']"
+                routerLinkActive="activebutton">Gestion des
+                parties</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/gestionAdmin/boutique']" routerLinkActive="activebutton">Gestion de
+                la
                 boutique</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" [routerLink]="['/compte']" routerLinkActive="activebutton">Mon compte</a>
-            </li>
+
             <li class="nav-item">
               <a class="nav-link" (click)=deconnexion()>Deconnexion</a>
             </li>
