@@ -240,6 +240,42 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
+                            <button type="button" class="btn btn-primary" data-bs-target="#validerPaiement"
+                                data-bs-toggle="modal" id="liveToastBtn">Valider le
+                                panier</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="validerPaiement" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Paiement de la commande</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <h2>Coordonnées bancaire</h2>
+                            <p>Numéro de carte :</p>
+                            <input type="number"><br>
+                            <p>Date d'expiration :</p>
+                            <input type="date">
+                            <p>Cryptogramme :</p>
+                            <input type="number">
+                            <hr>
+                            <span *ngFor="let etoile of listeEtoilesPanier">{{etoile.nombre}} <i
+                                class="fas fa-star etoile"></i>: {{etoile.prix}}
+                                <i class="fas fa-euro-sign"></i><br>
+                            </span>
+                            <ul id="recapCommande"></ul>
+
+                            <br>
+                            <h2>Total de la commande:</h2>
+                            <p class="montantTotalPanier"> {{prixTotalPanier}} <i class="fas fa-euro-sign"></i></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
                             <button type="button" class="btn btn-primary" data-bs-target="#exampleModalToggle2"
                                 data-bs-toggle="modal" (click)="validerPanier()" id="liveToastBtn">Valider le
                                 panier</button>
