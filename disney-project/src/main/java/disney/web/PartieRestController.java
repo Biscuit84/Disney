@@ -332,28 +332,72 @@ public class PartieRestController {
 	
 	//creation de la liste des joueurs:
 	public List<Joueur> listeJoueursPartie(Long idJoueur, Historique historique, Partie partie) {
-		Set <Joueur> setDesJoueurs = new HashSet <Joueur> ();
+//		Set <Joueur> setDesJoueurs = new HashSet <Joueur> ();
+//		Joueur IA1 = joueurRepo.findById((long) 1).get();
+//		Joueur IA2 = joueurRepo.findById((long) 2).get();
+//		Joueur IA3 = joueurRepo.findById((long) 3).get();
+//		Joueur joueurCourant = joueurRepo.findById(idJoueur).get();
+//
+//		joueurCourant.setPartie(partie);
+//		setDesJoueurs.add(joueurCourant);
+//		setDesJoueurs.add(IA1);
+//		setDesJoueurs.add(IA2);
+//		setDesJoueurs.add(IA3);
+//
+//		historique.setJoueur(joueurCourant);
+//		
+//		List<Joueur> listeDesJoueurs = new ArrayList<>(setDesJoueurs);
+		
 		Joueur IA1 = joueurRepo.findById((long) 1).get();
 		Joueur IA2 = joueurRepo.findById((long) 2).get();
 		Joueur IA3 = joueurRepo.findById((long) 3).get();
-		Joueur joueurCourant = joueurRepo.findById(idJoueur).get();
-
+		Joueur joueurCourant = joueurRepo.findById(idJoueur).get();		
+		
 		joueurCourant.setPartie(partie);
-		setDesJoueurs.add(joueurCourant);
-		setDesJoueurs.add(IA1);
-		setDesJoueurs.add(IA2);
-		setDesJoueurs.add(IA3);
 
 		historique.setJoueur(joueurCourant);
 		
-		List<Joueur> listeDesJoueurs = new ArrayList<>(setDesJoueurs);
-
+     	List<Joueur> listeDesJoueurs = new ArrayList<>();
+		listeDesJoueurs.add(joueurCourant);
+		listeDesJoueurs.add(IA1);
+		listeDesJoueurs.add(IA2);
+		listeDesJoueurs.add(IA3);
+		
 		return listeDesJoueurs;
 	}
 
 	//creation de la liste des persos de la partie:
 	public List<Personnage> listePersosPartie(Long idPersoChoisi, Historique historique, Partie partie) {
-		Set<Personnage> setPersoPartie = new HashSet <Personnage> ();
+//		Set<Personnage> setPersoPartie = new HashSet <Personnage> ();
+//		//perso joueur:
+//		Personnage peJoueur = persoRepo.findById(idPersoChoisi).get();
+//		peJoueur.setPartie(partie);
+//		peJoueur.setPosition(0);
+//		historique.setPersonnage(peJoueur);
+//
+//		//persosIA
+//		List <Personnage> listePersonnagesIA=persoRepo.findAll();
+//		listePersonnagesIA.remove(peJoueur);
+//
+//		//tirage aleatoire pour choix des perso IA
+//		Set <Personnage> setIAChoixPersonnage = new HashSet<> ();
+//
+//		while(setIAChoixPersonnage.size()<3) {
+//			for (int i=0;i<=2;i++) {
+//				int nombreAleatoireIA = r.nextInt(listePersonnagesIA.size());
+//				Personnage personnageIA= listePersonnagesIA.get(nombreAleatoireIA);
+//				personnageIA.setPartie(partie);
+//				personnageIA.setPosition(0);
+//				setIAChoixPersonnage.add(personnageIA);
+//			}
+//		}
+//
+//		setPersoPartie.add(peJoueur); 
+//		setPersoPartie.addAll(setIAChoixPersonnage);
+//		
+//		List<Personnage> listePersoPartie = new ArrayList<>(setPersoPartie);
+		List<Personnage> listePersoPartie = new ArrayList<>();
+		
 		//perso joueur:
 		Personnage peJoueur = persoRepo.findById(idPersoChoisi).get();
 		peJoueur.setPartie(partie);
@@ -363,25 +407,24 @@ public class PartieRestController {
 		//persosIA
 		List <Personnage> listePersonnagesIA=persoRepo.findAll();
 		listePersonnagesIA.remove(peJoueur);
-
+		
 		//tirage aleatoire pour choix des perso IA
-		Set <Personnage> setIAChoixPersonnage = new HashSet<> ();
+		List<Personnage> listIAChoixPersonnage = new ArrayList<>();
 
-		while(setIAChoixPersonnage.size()<3) {
+		while( listIAChoixPersonnage.size()<3) {
 			for (int i=0;i<=2;i++) {
 				int nombreAleatoireIA = r.nextInt(listePersonnagesIA.size());
 				Personnage personnageIA= listePersonnagesIA.get(nombreAleatoireIA);
 				personnageIA.setPartie(partie);
 				personnageIA.setPosition(0);
-				setIAChoixPersonnage.add(personnageIA);
+				listIAChoixPersonnage.add(personnageIA);
+				listePersonnagesIA.remove(personnageIA);
 			}
 		}
 
-		setPersoPartie.add(peJoueur); 
-		setPersoPartie.addAll(setIAChoixPersonnage);
+		listePersoPartie.add(peJoueur); 
+		listePersoPartie.addAll( listIAChoixPersonnage);
 		
-		List<Personnage> listePersoPartie = new ArrayList<>(setPersoPartie);
-
 		return listePersoPartie;
 	}
 
