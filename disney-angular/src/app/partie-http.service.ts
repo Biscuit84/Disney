@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { CasesPlateau, Joueur, Partie, TourDeJeuDto } from 'src/model';
 import { AppConfigService } from './app-config.service';
 import { JoueurHttpService } from './joueur-http.service';
@@ -15,9 +15,22 @@ export class PartieHttpService {
   LaPartie: Partie = new Partie;
   LesCasesPlateau: CasesPlateau;
 
+  victoire: boolean = false;
+
   constructor(private http: HttpClient, private appConfig: AppConfigService, private joueurService: JoueurHttpService) {
     this.partieUrl = this.appConfig.backEndUrl + "partie/"
   }
+
+
+  // pour transiter l'info de la victoire de ecran de jeu a fin de partie
+  private messageSource = new BehaviorSubject(true);
+  currentMessage = this.messageSource.asObservable();
+
+  changeMessage(message: boolean) {
+    this.messageSource.next(message)
+  }
+
+
 
   // créer une partie avec les données : JOUEUR / PERSO / PLATEAU
   launchGame(idJoueur: number, idPerso: number, idPlateau: number): Observable<Partie> {  // la fonction marche en soit
@@ -33,11 +46,18 @@ export class PartieHttpService {
   // on efface la partie
   ExitGame() {
     this.LaPartie = null;
+    console.log(this.LaPartie)
   }
 
   findById(id: number): Observable<Partie> {
     return this.http.get<Partie>(this.partieUrl + id);
   }
+
+   setVictoire(v:boolean){
+     this.victoire=v;
+     console.log(this.victoire);
+   }
+    
 
   /*
     // CRUD SIMPLE

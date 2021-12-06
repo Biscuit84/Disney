@@ -6,7 +6,7 @@
             <div class="gameControl">
                 <div class="bouttons">
                     <div class="Tour">
-                        <p> Tour : <span id="NbTour"> {{Tour}}</span> </p>
+                        <p> Tour : <span id="NbTour"> {{tourActuel}}</span> </p>
                     </div>
                     <div class="TourJoueur">
                         <p> Tour du joueur :<span id="JoueurTour"> {{joueurActuel}} </span> </p>
@@ -116,7 +116,7 @@
                 <!--<span id="vitesse">1</span>-->
                 <div class="slidecontainer">
                     <input type="range" min="1" max="7" value="1" class="slider" id="vitesseRange"
-                        [disabled]="!commandeDispo" [(ngModel)]="niveauDeVitesseDuPion">
+                        [disabled]="!commandeDispo || pionJoueur.playerIsMoving || pionIA1.playerIsMoving|| pionIA2.playerIsMoving|| pionIA3.playerIsMoving" [(ngModel)]="niveauDeVitesseDuPion">
                 </div>
             </div>
         </div>

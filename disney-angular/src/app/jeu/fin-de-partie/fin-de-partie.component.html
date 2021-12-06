@@ -1,18 +1,18 @@
 <!-- fin de partie -->
 
 
-<div id="InterfaceFinDePartie" [ngStyle]="{'background-image': 'url(' + imageName + ')'}" style="z-index: -1;">
-
+<div id="InterfaceFinDePartie" [ngStyle]="{'background-image': 'url(' + imageName +')'}" style="z-index: -1;">
+    <!-- <div id="InterfaceFinDePartie" [ngStyle]="{'background-image': 'url(' + imageName + ')'}" style="z-index: -1;"> -->
     
     <!-- https://jsfiddle.net/elin/7m3bL/-->
-    <div id="Fireworks"  *ngIf="gagne">
+    <div id="Fireworks"  *ngIf="message">
         <div class="fondfond" style="z-index: -1;"> </div>
         <div id="beforeFireworks"></div>
         <div id="afterFireworks"></div>
     </div>
 
     <!-- source : https://codepen.io/arickle/pen/XKjMZY -->
-    <div id="pluie" class="back-row-toggle splat-toggle" style="z-index: -1;" *ngIf="gagne==false">
+    <div id="pluie" class="back-row-toggle splat-toggle" style="z-index: -1;" *ngIf="message==false">
         <div class="rain front-row" style="z-index: 5;"></div>
         <div class="rain back-row" style="z-index: 5;"></div>
     </div>
@@ -20,8 +20,8 @@
     <div class="fond">
         <!-- Texte -->
         <div class="texteFin">
-            <div *ngIf="gagne==false" id="textFinPerdu" class="texte" style="z-index: 11;">PERDU</div>
-            <div *ngIf="gagne" id="textFinGagne" class="texte" style="z-index: 11;">GAGNÉ</div>
+            <div *ngIf="message==false" id="textFinPerdu" class="texte" style="z-index: 11;">PERDU</div>
+            <div *ngIf="message" id="textFinGagne" class="texte" style="z-index: 11;">GAGNÉ</div>
 
         </div>
         <div class="Resume" style="z-index: 100;">
