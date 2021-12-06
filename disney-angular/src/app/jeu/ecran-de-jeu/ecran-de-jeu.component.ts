@@ -5,7 +5,8 @@ import { PageConnexionService } from 'src/app/page-connexion/page-connexion.serv
 import { PartieHttpService } from 'src/app/partie-http.service';
 import { Cases, CasesPlateau, Compte, Partie, Personnage, Plateau, TourDeJeuDto } from 'src/model';
 import { CasesPlateauHttpService } from 'src/app/cases-plateau-http.service';
-import { ContentObserver } from '@angular/cdk/observers';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'ecran-de-jeu, [ecran-de-jeu]',
@@ -32,9 +33,13 @@ export class EcranDeJeuComponent implements OnInit {
   srcPionIA2:string;
   srcPionIA3:string;
 
+  // pour transiter des infos
+  message:boolean;
+  subscription: Subscription;
+
   //moi: Joueur = new Joueur;
   ////////////////////////// CONSTRUCTEUR  //////////////////////////
-  constructor(public compteService: PageConnexionService, public partieService: PartieHttpService, private casesPlateauService: CasesPlateauHttpService) {
+  constructor(public compteService: PageConnexionService, public partieService: PartieHttpService, private casesPlateauService: CasesPlateauHttpService, private router:Router) {
     this.joueur = this.compteService.compte;
     this.idJoueur = this.joueur.id;
     this.partie = this.partieService.LaPartie;
@@ -46,6 +51,7 @@ export class EcranDeJeuComponent implements OnInit {
     this.srcPionIA1= '../../../assets/images/jeu/pion/pion_' + this.partie.personnages[0].nom + '.jpg';
     this.srcPionIA2= '../../../assets/images/jeu/pion/pion_' + this.partie.personnages[2].nom + '.jpg';
     this.srcPionIA3= '../../../assets/images/jeu/pion/pion_' + this.partie.personnages[3].nom + '.jpg';
+    this.partieService.currentMessage.subscribe(message => this.message = message)
     //console.log(this.srcPionJoueur);
   
     //console.log(this.casesPlateau)
@@ -65,10 +71,10 @@ export class EcranDeJeuComponent implements OnInit {
 
   // lancement partie var
   public partieEnCours: boolean = true;
-  public Tour: number = 0;
+  public tourActuel: number = 0;
   public joueurActuel: number = 0;
-  public tourActuel = document.getElementById("NbTour");
-  public tourJoueur = document.getElementById("JoueurTour");
+  //public tourActuel = document.getElementById("NbTour");
+  p//ublic tourJoueur = document.getElementById("JoueurTour");
 
   // les des
   public nombreDe: number = 2;
@@ -129,8 +135,9 @@ export class EcranDeJeuComponent implements OnInit {
   public dispoBoutonFin = true;
   public dispoBoutonPouvoir = false; // pas encore implémenté
   public volumeSon: number = 100;
+  public actualisation:any;
   //public mouvement:boolean = false;
-  ////////////////////////// ngOnInit  //////////////////////////
+  ////////////////////////// ngOnInit  ///////////////////////////////////////////////////////////////////////////////
   // note : ça sert à initialiser des données et est appelé qu'une fois ! 
 
   ngOnInit() {
@@ -159,7 +166,7 @@ export class EcranDeJeuComponent implements OnInit {
     this.drawPlayer(this, this.pionIA3);
 
     // actualisation (en setinterval pour les deplacements)
-    setInterval(this.drawPlayers, this.tauxRaffraichissement, this);
+    this.actualisation = setInterval(this.drawPlayers, this.tauxRaffraichissement, this);
 
   } //ngOnInit fin
 
@@ -345,10 +352,6 @@ export class EcranDeJeuComponent implements OnInit {
           this.roundRect(limiteX11, limiteY11, Math.abs(limiteX11 - limiteX22), Math.abs(limiteY11 - limiteY22), 10, true, false, "orange", 0.5)
         }
 
-        //ctx.strokeStyle = "black";
-        //ctx.stroke();
-        //this.ctxPlateau.fill(); // ça remplit la forme (case ici)
-
         this.ctxPlateau.font = '100px';
         this.ctxPlateau.textBaseline = 'hanging';
         this.ctxPlateau.textAlign = "center";
@@ -378,6 +381,7 @@ export class EcranDeJeuComponent implements OnInit {
   // dessine un pion
   drawPlayer(self, pion) {
 
+
     // vitesse en fonciton du range
     let n: number = self.niveauDeVitesseDuPion;
 
@@ -403,17 +407,32 @@ export class EcranDeJeuComponent implements OnInit {
     pion.positionIndexCasePlayerPrecedente--;
 
     let diff: number = pion.positionIndexCasePlayer - pion.futurePositionIndexCasePlayer;
-
+    let test:boolean=false;
     // rentre dans la boucle seulement si l'index <= à la longueur de la liste des cases du plateau
-    if (pion.positionIndexCasePlayerSuivante <= self.nbcasePlateau - 1 || pion.positionIndexCasePlayerPrecedente >= 0) {
+    if (( pion.positionIndexCasePlayerSuivante <= self.nbcasePlateau - 1 || pion.positionIndexCasePlayerPrecedente >= 0) && test==false) {
+      if (diff == 0) {
+        //  console.log("le pion"+ pion.numeroPassage+ "est à l'arret");
+        pion.playerIsMoving = false;
+        //self.commandeDispo=false;
+ 
+        if (self.partieEnCours == false && pion.finished == true) {
+          test=false;
+          //setTimeout(finDePartie, 2000, pion);
+        }
 
-      if (diff < 0) {
+        if (pion.numeroPassage == 0 && self.joueurActuel == 0) {
+          // on est a l'arret donc on peut réaffichier le bouton fin de tour
+          self.dispoBoutonFin = true;
+        }
+      }
+      else if (diff < 0) {
         pion.playerIsMoving = true;
+        //self.commandeDispo=false;
 
         self.dispoBoutonFin = false;
         //console.log("diff:" + diff + ", position Y du pion : " + pion.positionYPlayer);
         //console.log("on avance de" + diff);
-
+        //console.log(pion.numeroPassage)
         if (self.listeCases[pion.positionIndexCasePlayer].positionCaseY < self.listeCases[pion.positionIndexCasePlayerSuivante].positionCaseY) {      // avancer case par case
           pion.positionYPlayer += self.velocityH;
           //console.log("on avance en Y")
@@ -432,6 +451,8 @@ export class EcranDeJeuComponent implements OnInit {
         }
       }
       else if (diff > 0) {
+        //self.commandeDispo=false;
+
         self.dispoBoutonJouer = false;
         self.dispoBoutonFin = false;
 
@@ -451,19 +472,7 @@ export class EcranDeJeuComponent implements OnInit {
         }
 
       }
-      else if (diff == 0) {
-        //  console.log("le pion"+ pion.numeroPassage+ "est à l'arret");
-        pion.playerIsMoving = false;
-        if (self.partieEnCours == false && pion.finished == true) {
-          //setTimeout(finDePartie, 2000, pion);
-        }
 
-        if (pion.numeroPassage == 0 && self.joueurActuel == 0) {
-          // on est a l'arret donc on peut réaffichier le bouton fin de tour
-          //self.dispoBoutonJouer = true;
-          self.dispoBoutonFin = true;
-        }
-      }
     }
 
     if (pion.numeroPassage == 0) {
@@ -552,20 +561,20 @@ export class EcranDeJeuComponent implements OnInit {
 
       // LES PIONS UN ET DEUX FINISSENT LEURS TOURS AUTO
       else if (self.joueurActuel == 1 || self.joueurActuel == 2) { // si ce n'est pas le joueur qui joue on "click" auto sur la suite
-        let pionSuivant = self.listePion[self.joueurActuel + 1];
+        //let pionSuivant = self.listePion[self.joueurActuel + 1];
         let waitTime = 2000 + self.tauxRaffraichissement*(self.tourEnCours.valueDice1+self.tourEnCours.valueDice2)*self.taillecaseW/self.velocityW;
         console.log("wait time = " + waitTime);
-        setTimeout(self.FinDeTour, waitTime, self, pionSuivant, this.tourEnCours); // passe le tour auto
+        setTimeout(self.FinDeTour, waitTime, self, pion, this.tourEnCours); // passe le tour auto
         self.dispoBoutonFin = false;
       }
 
       // LE DERNEIR PION A FINI, CEST AU TOUR DU JOUEUR
       else if (self.joueurActuel == 3) {
-        self.joueurActuel = self.listePion[0].numeroPassage; // on revient au joueur
-        self.dispoBoutonJouer = true;
-        self.dispoBoutonFin = true;
+        //self.dispoBoutonJouer = true;
+        let waitTime = 2000 + self.tauxRaffraichissement*(self.tourEnCours.valueDice1+self.tourEnCours.valueDice2)*self.taillecaseW/self.velocityW;
+        console.log("wait time = " + waitTime);
+        setTimeout(self.FinDeTour, waitTime, self, pion, this.tourEnCours); // passe le tour auto
       }
-
     });
   }
 
@@ -581,30 +590,22 @@ export class EcranDeJeuComponent implements OnInit {
         self.joueurActuel++; // console.log("on incremente le numero du joueur")
         let pionSuivant = self.listePion[self.joueurActuel];
         setTimeout(self.Jouer, 3000, self, pionSuivant);
-
-        //$("#boutonJouer").prop('disabled', true);
-        //$("#boutonFinDeTour").prop('disabled', true);
-        //self.dispoBoutonJouer = false;
-        //self.dispoBoutonFin = false;
       }
 
       //PION 4 a finit et ça repasse au joueur
       else {
         self.joueurActuel = 0;
-        self.Tour++;// incrémente le nombre de tour
-
-        //$("#boutonJouer").prop('disabled', false);
-        //$("#boutonFinDeTour").prop('disabled', false);
-        //self.dispoBoutonJouer = true;
+        self.tourActuel++;// incrémente le nombre de tour
         self.dispoBoutonFin = true;
+        self.dispoBoutonJouer = true;
       }
     }
 
     // si la partie est finie ! 
     else if (self.partieEnCours == false) {
       //console.log("findetour, if partieencours false")
-      self.commandeDispo = false;
-      setTimeout(self.finDePartie, 20000, self, pion,)
+     // self.commandeDispo = false;
+      //setTimeout(self.finDePartie, 20000, self, pion,)
       //self.finDePartie(self, pion);
     }
   }
@@ -620,7 +621,6 @@ export class EcranDeJeuComponent implements OnInit {
     finPartie: boolean = false;
     effetAActiver: boolean = false;
     */
-
     let totalDe = 0;
 
     // si on decide de n'avoir qu'un ou deux des
@@ -635,30 +635,6 @@ export class EcranDeJeuComponent implements OnInit {
 
     self.valeurDesDes = totalDe;
 
-    // avant avec que le front : 
-    // //calcule le nouvel index:
-    // var nouvelIndex = Number(pion.positionIndexCasePlayer) + Number(totalDe); // pour les conditions du front
-    // //console.log(tour.positionFutureJoueur - nouvelIndex);
-    // // gere le cas où on dépasse la case arrivee
-    // if (nouvelIndex >= self.nbcasePlateau - 1) {
-    //   nouvelIndex = self.nbcasePlateau - 1;
-    //   // la partie est terminée / le pion a gagné
-    //   self.partieEnCours = false;
-    //   pion.finished = true; // c'est CE pion qui a gagné
-    //   console.log("la partie est terminée")
-    //   // si c'est le joeur qui gagne : 
-    //   if (pion.numeroPassage == 0) {
-    //     // on passera pas dans fin de tour sauf si on clique donc
-    //     setTimeout(self.finDePartie, 15000, self, pion,)
-    //   }
-    // }
-    // //détermine la future position X et Y du player
-    // pion.futurePositionIndexCasePlayer = nouvelIndex;
-    //calcule le nouvel index:
-    //var nouvelIndex = Number(pion.positionIndexCasePlayer) + Number(totalDe); // pour les conditions du front
-    //console.log(tour.positionFutureJoueur - nouvelIndex);
-
-
     // gere le cas où on dépasse la case arrivee
     if (tour.positionFutureJoueur >= self.nbcasePlateau - 1) {
       // la partie est terminée / le pion a gagné
@@ -666,22 +642,46 @@ export class EcranDeJeuComponent implements OnInit {
       pion.finished = true; // c'est CE pion qui a gagné
       console.log("la partie est terminée")
 
-      if (tour.findepartie == true) {//la partie est finie et ça a été vérifié avec le back.
+      if (tour.findepartie == true || self.partieEnCours==false) {//la partie est finie et ça a été vérifié avec le back.
         console.log("on rentre ici")
-        setTimeout(self.finDePartie, 15000, self, pion);
-        clearInterval(self.actualisationJoueur1);
-        clearInterval(self.actualisationJoueur2);
-        clearInterval(self.actualisationJoueur3);
-        clearInterval(self.actualisationJoueur4);
+        
+        console.log(pion)
+        let waitTime = 3000 + self.tauxRaffraichissement*(self.tourEnCours.valueDice1+self.tourEnCours.valueDice2)*self.taillecaseW/self.velocityW;
+        setTimeout(self.finDePartie, waitTime, self, pion);
+        //setTimeout(clearInterval, waitTime+500, self.actualisation);
+        //clearInterval(self.actualisation);
+
       }
     }
-
     //la position du pion est celle du back.
     pion.futurePositionIndexCasePlayer = tour.positionFutureJoueur;
     //// TODO: faire les actions/pouvoirs des joueurs
   }
 
+  // fin de partie : redirection
+  finDePartie(self, pion) {
 
+
+    console.log("on est arrivé / fin de partie ")
+    // on clear les set intervals pour pas qu'ils tournent dans le vide 
+    clearInterval(self.actualisation);
+    if (pion.numeroPassage == 0) {
+      self.partieService.changeMessage(true);
+      console.log("on est arrivé gagné")
+      // le joueur à gagner
+      //this.partieService.victoire=true;
+      self.partieService.ExitGame();
+      self.router.navigate(['jeu/findepartie']);
+    } else {
+      // le joueur à perdu
+      self.partieService.changeMessage(false);
+      console.log("on est arrivé perdu")
+      self.router.navigate(['jeu/findepartie']);
+    }
+  }
+
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////:
 
   // lance un dé et l'affiche
   DiceValue(idDe) {
@@ -796,7 +796,6 @@ export class EcranDeJeuComponent implements OnInit {
     this.ctxPlateau.stroke();
     this.ctxPlateau.closePath();
     this.ctxPlateau.restore();
-
   }
 
   roundRect(x, y, width, height, radius, fill, stroke, color, alpha) {
@@ -834,8 +833,6 @@ export class EcranDeJeuComponent implements OnInit {
     }
     this.ctxPlateau.globalAlpha = alpha; // c'est l'opacité
   }
-
-
 
 
 
@@ -878,7 +875,6 @@ export class EcranDeJeuComponent implements OnInit {
     this.ctxPlateau.fillStyle = color;
     this.ctxPlateau.fill();
     this.ctxPlateau.restore();
-
   }
 
   /*
@@ -916,24 +912,7 @@ export class EcranDeJeuComponent implements OnInit {
 
 
 
-  finDePartie(self, pion) {
-
-
-    console.log("on est arrivé / fin de partie ")
-    // on clear les set intervals pour pas qu'ils tournent dans le vide 
-
-
-    if (pion.numeroPassage == 0) {
-      console.log("on est arrivé gagné")
-      // le joueur à gagner
-      self.router.navigate(['jeu/findepartie']);
-
-    } else {
-      // le joueur à perdu
-      console.log("on est arrivé perdu")
-      self.router.navigate(['jeu/findepartie']);
-    }
-  }
+ 
 }
 
 

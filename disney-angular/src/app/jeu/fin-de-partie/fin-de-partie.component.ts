@@ -1,5 +1,11 @@
+import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y/input-modality/input-modality-detector';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import * as $ from 'jquery';
+import { Subscription } from 'rxjs';
+import { PageConnexionService } from 'src/app/page-connexion/page-connexion.service';
+import { PartieHttpService } from 'src/app/partie-http.service';
+import { Compte, Partie } from 'src/model';
 
 
 @Component({
@@ -10,14 +16,25 @@ import * as $ from 'jquery';
 export class FinDePartieComponent implements OnInit {
 
   // recupérer si on a gagné ou perdu
-  gagne = true;
+  message:boolean;
+  subscription: Subscription;
 
+  ////////////////////////// CONSTRUCTEUR  //////////////////////////
+  constructor( private router:Router, public partieService:PartieHttpService) {
+  
+   //this.message=this.partieService.victoire;
+   //console.log(this.partieService.victoire)
 
-  ngOnInit(): void {
-    this.getImage();
   }
 
+  ngOnInit(): void {
+   
+    this.subscription = this.partieService.currentMessage.subscribe(message => {this.message = message;  this.getImage();})
+  }
 
+  newMessage() {
+    //this.partieService.changeMessage(true)
+  }
 
 
   imageName: String;
@@ -25,7 +42,7 @@ export class FinDePartieComponent implements OnInit {
 
   getImage() {
     
-    switch (this.gagne) {
+    switch (this.message) {
       case true: {
         this.imageName = "../../assets/images/jeu/win.jpg";
         console.log(this.imageName);
