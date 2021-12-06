@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import disney.model.Admin;
+import disney.model.Avatar;
 import disney.model.Boutique;
 import disney.model.Carte;
 import disney.model.Cases;
@@ -28,6 +29,7 @@ import disney.model.TypeCarte;
 import disney.model.TypeCase;
 import disney.model.Vie;
 import disney.repository.IAdminRepo;
+import disney.repository.IAvatarRepo;
 import disney.repository.IBoutiqueRepo;
 import disney.repository.ICarteRepo;
 import disney.repository.ICasesPlateauRepo;
@@ -46,64 +48,101 @@ import disney.repository.IVieRepo;
 class TestMain {
 
 
-		// TODO Auto-generated method stub
+	// TODO Auto-generated method stub
 
-//		AnnotationConfigApplicationContext spring = new AnnotationConfigApplicationContext(AppConfig.class);
-		
-		@Autowired
-		IJoueurRepo joueurRepo;
-		@Autowired
-		IAdminRepo adminRepo;
-		@Autowired
-		IPersonnageRepo persoRepo;
-		@Autowired
-		ICasesRepo casesRepo;
-		@Autowired
-		IBoutiqueRepo boutiqueRepo;
-		@Autowired
-		ICarteRepo carteRepo;
-		@Autowired
-		ICasesPlateauRepo casesPlateauRepo;
-		@Autowired
-		IHistoriqueRepo historiqueRepo;
-		@Autowired
-		IPartieRepo partieRepo;
-		@Autowired
-		IPersoObtenuRepo persoObtenuRepo;
-		@Autowired
-		IPlateauRepo plateauRepo;
-		@Autowired
-		ICompteRepo compteRepo;
-		@Autowired
-		IVieRepo vieRepo;
-		@Autowired
-		IEtoileRepo etoilesRepo;
+	//		AnnotationConfigApplicationContext spring = new AnnotationConfigApplicationContext(AppConfig.class);
 
-		
-//		
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("HH:mm");
-//		
-		@Test
-		void contextLoads() throws ParseException {
-////	
-			//IA 
-			Joueur ia1 = new Joueur("mickey.mickey@adresseMail.com","mickeyTropFortMickey","Mickey");
-			Joueur ia2 = new Joueur("donald.donald@adresseMail.com","donaldTropFortDonald","Donald");
-			Joueur ia3 = new Joueur("dingo.dingo@adresseMail.com","dingoTropFortDonald","Dingo");
-			ia1 = joueurRepo.save(ia1);
-			ia2 = joueurRepo.save(ia2);
-			ia3 = joueurRepo.save(ia3);
-			
+
+	@Autowired
+	IAvatarRepo avatarRepo;
+	@Autowired
+	IJoueurRepo joueurRepo;
+	@Autowired
+	IAdminRepo adminRepo;
+	@Autowired
+	IPersonnageRepo persoRepo;
+	@Autowired
+	ICasesRepo casesRepo;
+	@Autowired
+	IBoutiqueRepo boutiqueRepo;
+	@Autowired
+	ICarteRepo carteRepo;
+	@Autowired
+	ICasesPlateauRepo casesPlateauRepo;
+	@Autowired
+	IHistoriqueRepo historiqueRepo;
+	@Autowired
+	IPartieRepo partieRepo;
+	@Autowired
+	IPersoObtenuRepo persoObtenuRepo;
+	@Autowired
+	IPlateauRepo plateauRepo;
+	@Autowired
+	ICompteRepo compteRepo;
+	@Autowired
+	IVieRepo vieRepo;
+	@Autowired
+	IEtoileRepo etoilesRepo;
+
+
+	//		
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+	DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("HH:mm");
+	//		
+	@Test
+	void contextLoads() throws ParseException {
+		////	
+
+
+		//Avatars:
+		Avatar avatar1 = new Avatar("Elsa", "../../assets/images/avatar/avatar_elsa.png");
+		Avatar avatar2 = new Avatar("Ariel", "../../assets/images/avatar/avatar_ariel.jpg");
+		Avatar avatar3 = new Avatar("Aurore", "../../assets/images/avatar/avatar_aurore.jpg");
+		Avatar avatar4 = new Avatar("Belle", "../../assets/images/avatar/avatar_belle.jpg");
+		Avatar avatar5 = new Avatar("Blanche-neige", "../../assets/images/avatar/avatar_blanche_neige.jpg");
+		Avatar avatar6 = new Avatar("Cendrillon", "../../assets/images/avatar/avatar_cendrillon.jpg");
+		Avatar avatar7 = new Avatar("Jasmine", "../../assets/images/avatar/avatar_jasmine.jpg");
+		Avatar avatar8 = new Avatar("Mulan", "../../assets/images/avatar/avatar_mulan.jpg");
+		Avatar avatar9 = new Avatar("Raiponce", "../../assets/images/avatar/avatar_raiponce.jpg");
+		Avatar avatar10 = new Avatar("Tiana", "../../assets/images/avatar/avatar_tiana.jpg");
+		Avatar avatar11 = new Avatar("Mickey", "../../assets/images/avatar/avatar_mickey.png");
+		Avatar avatar12 = new Avatar("Minnie", "../../assets/images/avatar/avatar_minnie.png");
+		avatar1=avatarRepo.save(avatar1);
+		avatar2=avatarRepo.save(avatar2);
+		avatar3=avatarRepo.save(avatar3);
+		avatar4=avatarRepo.save(avatar4);
+		avatar5=avatarRepo.save(avatar5);
+		avatar6=avatarRepo.save(avatar6);
+		avatar7=avatarRepo.save(avatar7);
+		avatar8=avatarRepo.save(avatar8);
+		avatar9=avatarRepo.save(avatar9);
+		avatar10=avatarRepo.save(avatar10);
+		avatar11=avatarRepo.save(avatar11);
+		avatar12=avatarRepo.save(avatar12);
+
+
+
+
+		//IA 
+		Joueur ia1 = new Joueur("mickey.mickey@adresseMail.com","mickeyTropFortMickey","Mickey");
+		Joueur ia2 = new Joueur("donald.donald@adresseMail.com","donaldTropFortDonald","Donald");
+		Joueur ia3 = new Joueur("dingo.dingo@adresseMail.com","dingoTropFortDonald","Dingo");
+		ia1 = joueurRepo.save(ia1);
+		ia2 = joueurRepo.save(ia2);
+		ia3 = joueurRepo.save(ia3);
+
 		//JOUEURS
 		Joueur joueur1 = new Joueur("joueur1", "1234", "Toto", "Titi", "toto.titi@gmail.com", "TotoTropFort", "noob", 3);
+		joueur1.setAvatar(avatar1);
 		joueur1=joueurRepo.save(joueur1);
 		Joueur joueur2 = new Joueur("joueur2", "password", "Tartanpion", "Tintin", "Tart.tintin@gmail.com", "TintinTheBest", "champion", 3);
+		joueur2.setAvatar(avatar2);
 		joueur2=joueurRepo.save(joueur2);
 		Joueur joueur3 = new Joueur("joueur3", "1234", "j3", "Titi", "j3@gmail.com", "TotoTropFort", "noob", 3);
+		joueur3.setAvatar(avatar11);
 		joueur3.setNbEtoiles(1000);
 		joueur3 = joueurRepo.save(joueur3);
-		
+
 		Joueur joueur4 = new Joueur("MinnieDu44", "1234", "Minnie", "Mouse", "minnie.mouse@gmail.com", "Princesse Minnie", "expert", 15);
 		joueur4.setNbEtoiles(5000);
 		joueur4 = joueurRepo.save(joueur4);		
@@ -113,25 +152,25 @@ class TestMain {
 		Joueur joueur6 = new Joueur("PicsouDu75", "1234", "Balthazar", "Picsou", "bigboss@gmail.com", "Scrooge McDuck", "dieu", 100);
 		joueur6.setNbEtoiles(1000000);
 		joueur6 = joueurRepo.save(joueur6);	
-		
-		
-		
+
+
+
 		List <Joueur>listeJoueurs = new ArrayList<Joueur>();
 		listeJoueurs.add(joueur1);
 		listeJoueurs.add(joueur2);
 		listeJoueurs.add(joueur3);
-		
+
 		Set <Joueur>listeJoueursPartie = new HashSet<Joueur>();
 		listeJoueursPartie.add(joueur1);
 		listeJoueursPartie.add(joueur2);
 		listeJoueursPartie.add(joueur3);
-		
+
 		//ADMIN
 		Admin admin1 = new Admin("admin1", "987654321", "admin1", "admin1","admin1@gmail.com");
 		admin1=adminRepo.save(admin1);
 		Admin admin2 = new Admin("admin2", "123456789", "admin2", "admin2","admin2@gmail.com");
 		admin2=adminRepo.save(admin2);
-		
+
 		//Personnages
 		Personnage perso1 = new Personnage("Elsa", "Olaf", "Hans", "Glace",100);
 		Personnage perso2 = new Personnage("Ariel", "Eric", "Ursula", "Eau",200);
@@ -153,7 +192,7 @@ class TestMain {
 		perso8.setAvatar("../../assets/images/persoBoutique/Cendrillon.jpg");
 		perso9.setAvatar("../../assets/images/persoBoutique/raiponce.jpg");
 		perso10.setAvatar("../../assets/images/persoBoutique/tiana.jpg");
-		
+
 		List<Personnage> listeTotalePerso = new ArrayList<> ();
 		listeTotalePerso.add(perso1);
 		listeTotalePerso.add(perso2);
@@ -165,7 +204,7 @@ class TestMain {
 		listeTotalePerso.add(perso8);
 		listeTotalePerso.add(perso9);
 		listeTotalePerso.add(perso10);
-		
+
 		Set<Personnage> listePersoPartie = new HashSet<>();
 		listePersoPartie.add(perso1);
 		listePersoPartie.add(perso2);
@@ -177,7 +216,7 @@ class TestMain {
 		listePersoPartie.add(perso8);
 		listePersoPartie.add(perso9);
 		listePersoPartie.add(perso10);
-		
+
 		perso1=persoRepo.save(perso1);
 		perso2=persoRepo.save(perso2);
 		perso3=persoRepo.save(perso3);
@@ -188,7 +227,7 @@ class TestMain {
 		perso8=persoRepo.save(perso8);
 		perso9=persoRepo.save(perso9);
 		perso10=persoRepo.save(perso10);
-		
+
 		//Cases
 		Cases caseMechant = new Cases("Mechant",TypeCase.mechant);
 		Cases caseGentil = new Cases("Gentil",TypeCase.prince);
@@ -208,7 +247,7 @@ class TestMain {
 		caseDepart = casesRepo.save(caseDepart);
 		caseArrivee = casesRepo.save(caseArrivee);
 		casePioche = casesRepo.save(casePioche);
-		
+
 		//BOUTIQUE
 		final List<Vie> listeTotaleVie = new ArrayList<>();
 		listeTotaleVie.add(new Vie(1, 100, "../../../assets/images/boutique/potion-1.png"));
@@ -226,23 +265,23 @@ class TestMain {
 
 		Boutique boutique = new Boutique(listeTotalePerso, listeTotaleVie, listeTotaleEtoiles);
 		boutique = boutiqueRepo.save(boutique);
-		
+
 		//Cartes
 		Carte c1 = new Carte("Carte Avance",TypeCarte.Bonus);
 		Carte c2 = new Carte("Carte Recule",TypeCarte.Malus);
 		Carte c3 = new Carte("Aller en Prison",TypeCarte.Prison);
-		
+
 		c1=carteRepo.save(c1);
 		c2=carteRepo.save(c2);
 		c3=carteRepo.save(c3);
-		
+
 		//Plateau
 		Plateau plateau1 = new Plateau ("Plateau Demo", 20);
 		plateau1=plateauRepo.save(plateau1);
-		
+
 		//CasesPlateau
 		List <CasesPlateau> casesPlateauDemo = new ArrayList();
-		
+
 		CasesPlateau c1pDemo = new CasesPlateau(plateau1, caseDepart, 0);
 		casesPlateauDemo.add(c1pDemo);
 		CasesPlateau c2pDemo = new CasesPlateau(plateau1, caseVide, 1);
@@ -283,7 +322,7 @@ class TestMain {
 		casesPlateauDemo.add(c19pDemo);
 		CasesPlateau c20pDemo = new CasesPlateau(plateau1, caseArrivee, 19);
 		casesPlateauDemo.add(c20pDemo);
-		
+
 		c1pDemo=casesPlateauRepo.save(c1pDemo);
 		c2pDemo=casesPlateauRepo.save(c2pDemo);
 		c3pDemo=casesPlateauRepo.save(c3pDemo);
@@ -306,22 +345,22 @@ class TestMain {
 		c20pDemo=casesPlateauRepo.save(c20pDemo);
 		c11pDemo=casesPlateauRepo.save(c11pDemo);
 		c12pDemo=casesPlateauRepo.save(c12pDemo);
-		
+
 		plateau1.setCases(casesPlateauDemo);
 		plateau1.setDisponible(true);
-		
+
 		plateau1=plateauRepo.save(plateau1);
-		
-		
+
+
 		// plateau de test
 		Plateau plateau2 = new Plateau ("Plateau Test", 10);
 		plateau2.setDisponible(true);
 		plateau2=plateauRepo.save(plateau2);
-		
-		
+
+
 		//CasesPlateau
 		List <CasesPlateau> casesPlateauTest = new ArrayList();
-		
+
 		CasesPlateau c1pTest = new CasesPlateau(plateau2, caseDepart, 0);
 		casesPlateauTest.add(c1pTest);
 		CasesPlateau c2pTest = new CasesPlateau(plateau2, caseVide, 1);
@@ -343,7 +382,7 @@ class TestMain {
 		CasesPlateau c10pTest = new CasesPlateau(plateau2, caseArrivee, 9);
 		casesPlateauTest.add(c10pTest);
 
-		
+
 		c1pTest=casesPlateauRepo.save(c1pTest);
 		c2pTest=casesPlateauRepo.save(c2pTest);
 		c3pTest=casesPlateauRepo.save(c3pTest);
@@ -354,20 +393,20 @@ class TestMain {
 		c8pTest=casesPlateauRepo.save(c8pTest);
 		c9pTest=casesPlateauRepo.save(c9pTest);
 		c10pTest=casesPlateauRepo.save(c10pTest);
-		
+
 		plateau2.setCases(casesPlateauTest);
-		
+
 		plateau2=plateauRepo.save(plateau2);
-		
-		
+
+
 		//Plateau 3
 		Plateau plateau3 = new Plateau ("Plateau Regular", 63);
 		plateau3.setDisponible(false);
 		plateau3=plateauRepo.save(plateau3);
-		
+
 		//CasesPlateau
 		List <CasesPlateau> casesPlateauRegular = new ArrayList();
-		
+
 		CasesPlateau c1pRegular = new CasesPlateau(plateau3, caseDepart, 0);
 		casesPlateauRegular.add(c1pRegular);
 		CasesPlateau c2pRegular = new CasesPlateau(plateau3, caseVide, 1);
@@ -405,7 +444,7 @@ class TestMain {
 		CasesPlateau c18pRegular = new CasesPlateau(plateau3, casePioche, 17);
 		casesPlateauRegular.add(c18pRegular);
 		CasesPlateau c19pRegular = new CasesPlateau(plateau3, caseMechant, 18);
-        casesPlateauRegular.add(c19pRegular);
+		casesPlateauRegular.add(c19pRegular);
 		CasesPlateau c20pRegular = new CasesPlateau(plateau3, caseVide, 19);
 		casesPlateauRegular.add(c20pRegular);
 		CasesPlateau c21pRegular = new CasesPlateau(plateau3, caseGentil, 20);
@@ -425,7 +464,7 @@ class TestMain {
 		CasesPlateau c28pRegular = new CasesPlateau(plateau3, casePioche, 27);
 		casesPlateauRegular.add(c28pRegular);
 		CasesPlateau c29pRegular = new CasesPlateau(plateau3, caseMechant, 28);
-        casesPlateauRegular.add(c29pRegular);
+		casesPlateauRegular.add(c29pRegular);
 		CasesPlateau c30pRegular = new CasesPlateau(plateau3, caseVide, 29);
 		casesPlateauRegular.add(c30pRegular);
 		CasesPlateau c31pRegular = new CasesPlateau(plateau3, caseGentil, 30);
@@ -445,7 +484,7 @@ class TestMain {
 		CasesPlateau c38pRegular = new CasesPlateau(plateau3, casePioche, 37);
 		casesPlateauRegular.add(c38pRegular);
 		CasesPlateau c39pRegular = new CasesPlateau(plateau3, caseMechant, 38);
-        casesPlateauRegular.add(c39pRegular);
+		casesPlateauRegular.add(c39pRegular);
 		CasesPlateau c40pRegular = new CasesPlateau(plateau3, caseVide, 39);
 		casesPlateauRegular.add(c40pRegular);
 		CasesPlateau c41pRegular = new CasesPlateau(plateau3, caseGentil, 40);
@@ -465,7 +504,7 @@ class TestMain {
 		CasesPlateau c48pRegular = new CasesPlateau(plateau3, casePioche, 47);
 		casesPlateauRegular.add(c48pRegular);
 		CasesPlateau c49pRegular = new CasesPlateau(plateau3, caseMechant, 48);
-        casesPlateauRegular.add(c49pRegular);
+		casesPlateauRegular.add(c49pRegular);
 		CasesPlateau c50pRegular = new CasesPlateau(plateau3, caseVide, 49);
 		casesPlateauRegular.add(c50pRegular);
 		CasesPlateau c51pRegular = new CasesPlateau(plateau3, caseGentil, 50);
@@ -485,7 +524,7 @@ class TestMain {
 		CasesPlateau c58pRegular = new CasesPlateau(plateau3, casePioche, 57);
 		casesPlateauRegular.add(c58pRegular);
 		CasesPlateau c59pRegular = new CasesPlateau(plateau3, caseMechant, 58);
-        casesPlateauRegular.add(c59pRegular);
+		casesPlateauRegular.add(c59pRegular);
 		CasesPlateau c60pRegular = new CasesPlateau(plateau3, caseVide, 59);
 		casesPlateauRegular.add(c60pRegular);
 		CasesPlateau c61pRegular = new CasesPlateau(plateau3, caseGentil, 60);
@@ -494,7 +533,7 @@ class TestMain {
 		casesPlateauRegular.add(c62pRegular);
 		CasesPlateau c63pRegular = new CasesPlateau(plateau3, caseArrivee, 62);
 		casesPlateauRegular.add(c63pRegular);
-		
+
 		c1pRegular=casesPlateauRepo.save(c1pRegular);
 		c2pRegular=casesPlateauRepo.save(c2pRegular);
 		c3pRegular=casesPlateauRepo.save(c3pRegular);
@@ -527,7 +566,7 @@ class TestMain {
 		c30pRegular=casesPlateauRepo.save(c30pRegular);
 		c31pRegular=casesPlateauRepo.save(c31pRegular);
 		c32pRegular=casesPlateauRepo.save(c32pRegular);
-        c33pRegular=casesPlateauRepo.save(c33pRegular);
+		c33pRegular=casesPlateauRepo.save(c33pRegular);
 		c34pRegular=casesPlateauRepo.save(c34pRegular);
 		c35pRegular=casesPlateauRepo.save(c35pRegular);
 		c36pRegular=casesPlateauRepo.save(c36pRegular);
@@ -537,7 +576,7 @@ class TestMain {
 		c40pRegular=casesPlateauRepo.save(c40pRegular);
 		c41pRegular=casesPlateauRepo.save(c41pRegular);
 		c42pRegular=casesPlateauRepo.save(c42pRegular);
-        c43pRegular=casesPlateauRepo.save(c43pRegular);
+		c43pRegular=casesPlateauRepo.save(c43pRegular);
 		c44pRegular=casesPlateauRepo.save(c44pRegular);
 		c45pRegular=casesPlateauRepo.save(c45pRegular);
 		c46pRegular=casesPlateauRepo.save(c46pRegular);
@@ -547,7 +586,7 @@ class TestMain {
 		c50pRegular=casesPlateauRepo.save(c50pRegular);
 		c51pRegular=casesPlateauRepo.save(c51pRegular);
 		c52pRegular=casesPlateauRepo.save(c52pRegular);
-        c53pRegular=casesPlateauRepo.save(c53pRegular);
+		c53pRegular=casesPlateauRepo.save(c53pRegular);
 		c54pRegular=casesPlateauRepo.save(c54pRegular);
 		c55pRegular=casesPlateauRepo.save(c55pRegular);
 		c56pRegular=casesPlateauRepo.save(c56pRegular);
@@ -557,60 +596,57 @@ class TestMain {
 		c60pRegular=casesPlateauRepo.save(c60pRegular);
 		c61pRegular=casesPlateauRepo.save(c61pRegular);
 		c62pRegular=casesPlateauRepo.save(c62pRegular);
-        c63pRegular=casesPlateauRepo.save(c63pRegular);
+		c63pRegular=casesPlateauRepo.save(c63pRegular);
 
 		plateau3.setCases(casesPlateauRegular);
-		
+
 		plateau3=plateauRepo.save(plateau3);
-		
-		
-		
-		
+
+
+
+
 		//Partie
 		Partie partie1 = new Partie(plateau1,listeTotalePerso);
 		partie1.setJoueurs(listeJoueurs);
 		partie1=partieRepo.save(partie1);
-		
+
 		//HISTORIQUE
 		String DateDebutPartie1 = "13/11/2021 15:49";
 		LocalDateTime localDateT1 = LocalDateTime.parse(DateDebutPartie1, formatter);
 
 		LocalDateTime heureFinPartie = LocalDateTime.now();
-		
+
 		Historique historique1 = new Historique();
 		historique1.setDateHeureDebutPartie(localDateT1);
 		historique1.setDateHeureFinPartie(heureFinPartie);
 		historique1=historiqueRepo.save(historique1);
-		
+
 		long minuteOfGameDuration = Duration.between(localDateT1, heureFinPartie).toMinutes();
 		System.out.println("duree de la partie:"+minuteOfGameDuration);
-		
+
 		//PersoObtenus
-		
+
 		PersoObtenu perso1ObtenuJoueur2 = new PersoObtenu(perso2, joueur2);
 		PersoObtenu perso2ObtenuJoueur2 = new PersoObtenu(perso1, joueur2);
 		PersoObtenu perso3ObtenuJoueur2 = new PersoObtenu(perso3, joueur2);
 		PersoObtenu perso4ObtenuJoueur2 = new PersoObtenu(perso4, joueur2);
 		PersoObtenu perso1ObtenuJoueur1 = new PersoObtenu (perso1, joueur1);
 		PersoObtenu perso2ObtenuJoueur1 = new PersoObtenu (perso2, joueur1);
-		
+
 		perso1ObtenuJoueur2=persoObtenuRepo.save(perso1ObtenuJoueur2);
 		perso2ObtenuJoueur2=persoObtenuRepo.save(perso2ObtenuJoueur2);
 		perso3ObtenuJoueur2=persoObtenuRepo.save(perso3ObtenuJoueur2);
 		perso4ObtenuJoueur2=persoObtenuRepo.save(perso4ObtenuJoueur2);
-		
+
 		perso1ObtenuJoueur1=persoObtenuRepo.save(perso1ObtenuJoueur1);
 		perso2ObtenuJoueur1=persoObtenuRepo.save(perso2ObtenuJoueur1);
-		
-		}
-		
-		//Compte connecte:
-//		Compte connected = compteRepo.findByLoginAndPassword("joueur1", "1234");
-//		
-//		System.out.println("Compte connecte:"+connected);
-//		
-//		spring.close();
-		
 
+	}
 
+	//Compte connecte:
+	//		Compte connected = compteRepo.findByLoginAndPassword("joueur1", "1234");
+	//		
+	//		System.out.println("Compte connecte:"+connected);
+	//		
+	//		spring.close();
 }

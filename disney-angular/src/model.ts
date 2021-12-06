@@ -8,7 +8,7 @@ export class Compte {
   prenom: string;
   mail: string;
   role: string;
-  avatar: string;
+  avatar: Avatar;
   pseudo: string;
   level: string;
   life: number;
@@ -26,7 +26,7 @@ export class Compte {
     prenom?: string,
     mail?: string,
     role?: string,
-    avatar?: string,
+    avatar?: Avatar,
     pseudo?: string,
     level?: string,
     life?: number,
@@ -121,6 +121,31 @@ export class Boutique {
 
 
 }
+
+export class Avatar {
+  id: number;
+  version: number;
+  nom: string;
+  image: string;
+
+
+  constructor(
+    id?: number, 
+    version?: number, 
+    nom?: string, 
+    image?: string
+) {
+    this.id = id
+    this.version = version
+    this.nom = nom
+    this.image = image
+  }
+  
+
+
+}
+
+
 
 export class Vie {
   id: number;

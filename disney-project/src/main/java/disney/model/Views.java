@@ -63,4 +63,7 @@ public interface Views {
 	}
 	public static interface ViewsPlateauDetail extends ViewsPlateau{
 	}
+	
+	public static interface ViewsAvatar extends ViewsCommon{
+	}
 }

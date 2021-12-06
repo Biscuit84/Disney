@@ -21,9 +21,11 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import disney.model.Avatar;
 import disney.model.Compte;
 import disney.model.Joueur;
 import disney.model.Views;
+import disney.repository.IAvatarRepo;
 import disney.repository.ICompteRepo;
 import disney.repository.IJoueurRepo;
 import disney.dto.ConnexionDTO;
@@ -39,6 +41,9 @@ public class CompteRestController {
 	
 	@Autowired
 	private IJoueurRepo joueurRepo;
+	
+	@Autowired
+	private IAvatarRepo avatarRepo;
 	
 	@GetMapping("")
 	@JsonView(Views.ViewsCompte.class)
@@ -64,6 +69,9 @@ public class CompteRestController {
 	@PostMapping("")
 	@JsonView(Views.ViewsCompte.class)
 	public Compte create(@RequestBody Compte compte) {
+		//on charge mickey par defaut
+		Avatar avatarParDefaut = avatarRepo.findById((long) 11).get();
+		compte.setAvatar(avatarParDefaut);
 		compte = compteRepo.save(compte);
 
 		return compte;

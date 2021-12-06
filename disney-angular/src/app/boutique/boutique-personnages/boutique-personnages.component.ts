@@ -78,6 +78,7 @@ export class BoutiquePersonnagesComponent implements OnInit {
     this.boutiqueService.achatBoutique(panierDto).subscribe((resp: BoutiqueDto) => {
       this.joueurService.infosJoueur().subscribe(respJoueur => {
         this.joueur = respJoueur;
+        this.pageConnexionService.compte = this.joueur;
       }, error => console.log(error));
 
       this.boutique = resp;
