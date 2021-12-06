@@ -384,6 +384,7 @@ export class Plateau {
   nom: string;
   nbCases: number;
   cases: Array<CasesPlateau>;
+  disponible: boolean;
 
 
   constructor(

@@ -8,7 +8,13 @@
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
+  margin-top: 5rem;
 }
+
+.ecranCard{
+  background-color: transparent;
+}
+
 
 .card {
   top: 4em;
@@ -25,9 +31,12 @@
     width: 400px;
     max-width: 100%;
     margin: 0 25px 25px 0;
-    display: inline-block;
+    /* display: inline-block; */
     vertical-align: top;
+
+    flex-basis: 33%;
   }
+  
   
   .element-list {
     border: solid 1px #ccc;
@@ -126,3 +135,26 @@ button[disabled] {
     cursor: not-allowed;
     pointer-events: all !important;
 }
+
+
+
+/* essai */
+.container{
+  display: flex;
+  flex-basis: 100%;
+}
+/* 
+#listeCases{
+position: fixed;
+float: right;
+order: 0;
+}
+
+#listeCases2{
+  order: 1;
+  }
+
+  #listeCases3{
+    order: 1;
+    float: left;
+    } */

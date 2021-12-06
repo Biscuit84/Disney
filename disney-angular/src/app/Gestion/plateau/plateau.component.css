@@ -20,4 +20,9 @@
   justify-content: center;
   margin: 0 auto;
   width: 80%;
+  background-color: transparent;
+}
+
+.conteneur{
+  height: 100%;
 }
