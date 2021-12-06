@@ -14,7 +14,7 @@
             </label>
         </div>
         <!-- <input > -->
-<div class="">
+
         <div cdkDropListGroup class="container">
             <div class="list-container " id="listeCases">
                 <h2>Liste des cases</h2>
@@ -27,7 +27,7 @@
 
             <div class="list-container " id="listeCases2">
                 <h2>Plateau</h2>
-                <div cdkDropList [cdkDropListData]="listCasesPlateau" class="element-list" (cdkDropListDropped)="drop($event)">
+                <div cdkDropList [cdkDropListData]="listCasesPlateau" class="element-list" (cdkDropListDropped)="drop($event)" style="overflow: scroll;">
                     <div class="element-box" *ngFor="let casePlateau of listCasesPlateau" cdkDrag class="{{casePlateau.typeCase}}">
                         {{casePlateau.nom}}
                     </div>
@@ -39,7 +39,7 @@
                 </div>
             </div>
         </div>
-</div>
+
         <button type="button" class="btn btn-success" (click)="savePlateau()" [disabled]="this.nomPlateau == '' || listCasesPlateau.length == 0">
             Valider le plateau
         </button>
