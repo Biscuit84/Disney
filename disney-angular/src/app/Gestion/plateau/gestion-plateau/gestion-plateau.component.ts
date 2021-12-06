@@ -115,6 +115,8 @@ export class GestionPlateauComponent implements OnInit {
   }
 
 
+
+
   private majPlateau() {
     this.plateau.nom = this.nomPlateau;
     this.plateau.nbCases = this.listCasesPlateau.length;
