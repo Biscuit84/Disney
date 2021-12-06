@@ -47,8 +47,8 @@ export class EcranDeJeuComponent implements OnInit {
     this.personnage = this.partieService.LaPartie.personnages[0];
     this.plateau = this.partieService.LaPartie.plateau; // on recupere le plateau, son id et son nb de case seulement
     this.casesPlateau = this.casesPlateauService.lesCasesPlateau;
-    this.srcPionJoueur= '../../../assets/images/jeu/pion/pion_' + this.partie.personnages[1].nom + '.jpg';
-    this.srcPionIA1= '../../../assets/images/jeu/pion/pion_' + this.partie.personnages[0].nom + '.jpg';
+    this.srcPionJoueur= '../../../assets/images/jeu/pion/pion_' + this.partie.personnages[0].nom + '.jpg';
+    this.srcPionIA1= '../../../assets/images/jeu/pion/pion_' + this.partie.personnages[1].nom + '.jpg';
     this.srcPionIA2= '../../../assets/images/jeu/pion/pion_' + this.partie.personnages[2].nom + '.jpg';
     this.srcPionIA3= '../../../assets/images/jeu/pion/pion_' + this.partie.personnages[3].nom + '.jpg';
     this.partieService.currentMessage.subscribe(message => this.message = message)
