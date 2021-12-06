@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CasesPlateauHttpService } from 'src/app/cases-plateau-http.service';
 import { PlateauHttpService } from 'src/app/plateau-http.service';
 import { Cases, CasesPlateau, Plateau } from 'src/model';
 
@@ -14,12 +15,12 @@ export class ModificationPlateauComponent implements OnInit {
   listCases: Array<Cases> = new Array<Cases>();
   plateau: Plateau = new Plateau();
   nomPlateau: string = "";
-  id:number = -1;
-  clicked:boolean = false;
+  id: number = -1;
+  clicked: boolean = false;
 
-  constructor(private plateauService: PlateauHttpService) {
+  constructor(private plateauService: PlateauHttpService, private casesPlateauService: CasesPlateauHttpService) {
     console.log("DANS LE C DE MODIF");
-    
+
   }
 
   ngOnInit(): void {
@@ -31,15 +32,33 @@ export class ModificationPlateauComponent implements OnInit {
 
   plateauDetail(plateau: Plateau) {
     this.id = plateau.id;
-    
+
   }
 
-  delete(plateau:Plateau){
+  assignPlateau(plateau: Plateau) {
+    this.plateau = plateau;
+  }
+
+  delete(plateau: Plateau) {
     this.plateauService.deleteById(plateau.id).subscribe(() => {
-      this.plateauService.findAllPlateau().subscribe((plats: Array<Plateau>) => {
-        this.listPlateauDejaCree = plats;
-      })
+      console.log("fini delete");
+      this.plateauService.findAllPlateau().subscribe(plateau => {
+        this.listPlateauDejaCree = plateau;
+      });
     })
+
+    // this.casesPlateauService.findAllCasesByPlateau(plateau.id).subscribe(resp => {
+    //   this.listCasesPlateau = resp;
+    //   for (let lp of this.listCasesPlateau) {
+    //     this.casesPlateauService.deleteById(lp.id).subscribe()
+    //   }
+    // })
+
+    // this.plateauService.deleteById(plateau.id).subscribe(() => {
+    //   this.plateauService.findAllPlateau().subscribe((plats: Array<Plateau>) => {
+    //     this.listPlateauDejaCree = plats;
+    //   })
+    // })
   }
 
 }

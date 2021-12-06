@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -203,8 +205,10 @@ public class PlateauRestController {
 	
 	
 	//delete plateau with cases plateau
+	@Transactional
 	@DeleteMapping("/{id}/deleteWithCasesPlateau")
 	public void deleteWithCasesPlateau(@PathVariable Long id) {
+		System.out.println(id);
 		if (!plateauRepo.existsById(id)) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Plateau non trouvé");
 		}
@@ -212,7 +216,9 @@ public class PlateauRestController {
 		Plateau plateau = plateauRepo.getById(id);
 		List<CasesPlateau> cp = plateau.getCases();
 
-		casesPlateauRepo.deleteAll(cp);
 		plateauRepo.deleteById(id);
+		System.out.println("avant");
+		casesPlateauRepo.deleteAll(cp); 
+		System.out.println("apres");
 	}
 }
