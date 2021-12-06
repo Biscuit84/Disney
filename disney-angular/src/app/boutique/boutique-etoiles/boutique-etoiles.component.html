@@ -359,7 +359,7 @@
             <br>
             <br>
 
-            <div class="row">
+            <div class="row" style="margin-bottom:50px;">
                 <div *ngFor="let etoile of boutiqueEtoiles" class="col">
                     <div class="card borderAjust" style="width: 18rem;">
                         <img src={{etoile.image}} class="card-img-top borderImage"
@@ -379,6 +379,12 @@
             </div>
             <br>
             <br>
+
+            <div class="btn-group justify-content-sm-center d-flex justify-content-center" role="group" aria-label="Basic example">
+                <button id="BtnRetourBoutique" type="button" class="btn btn-primary" [routerLink]="['/boutique']">Accueil Boutique</button>
+                <button id="BtnBoutiquePerso" type="button" class="btn btn-primary" [routerLink]="['/boutique/personnages']">Boutique Personnages & Vies</button>
+              </div>
+
         </main>
     </div>
 </div>

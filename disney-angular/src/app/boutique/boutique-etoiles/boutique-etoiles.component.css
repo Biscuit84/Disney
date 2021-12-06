@@ -378,4 +378,16 @@ ul {
   margin-top: 1rem;
 }
 
+/* ******Btn retour***** */
+
+#BtnRetourBoutique{
+  background-color: #dd94cb;
+  border-color: white;
+  ;
+}
+
+#BtnBoutiquePerso{
+  background-color: #dd94cb;
+  border-color:white;
+}
 
