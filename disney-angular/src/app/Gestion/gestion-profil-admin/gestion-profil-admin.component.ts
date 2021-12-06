@@ -1,23 +1,23 @@
-import { APP_BOOTSTRAP_LISTENER, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PageConnexionService } from 'src/app/page-connexion/page-connexion.service';
 import { Compte } from 'src/model';
 import { GestionProfilAdminService } from './gestion-profil-admin.service';
-import * as $ from 'jquery';
-import 'bootstrap';
 @Component({
   selector: 'app-gestion-profil-admin',
   templateUrl: './gestion-profil-admin.component.html',
   styleUrls: ['./gestion-profil-admin.component.css']
 })
 export class GestionProfilAdminComponent implements OnInit {
-admin:Compte
-adminForm:Compte
-  constructor(public compteService:PageConnexionService, private gestionAdminService:GestionProfilAdminService) {
-    this.adminForm=this.compteService.compte;
-   }
+  admin: Compte
+  adminForm: Compte = new Compte();
+  constructor(public compteService: PageConnexionService, private gestionAdminService: GestionProfilAdminService) {
+    this.adminForm = this.compteService.compte;
+    this.edit();
+  }
 
   ngOnInit(): void {
   }
+
   edit() {
     this.gestionAdminService.findById(this.compteService.compte.id).subscribe(response => {
       this.adminForm = response;
@@ -25,26 +25,20 @@ adminForm:Compte
   }
 
   save() {
-    if(this.adminForm.id) {
-      this.gestionAdminService.modify(this.adminForm);
+    if (this.adminForm.id) {
+      this.gestionAdminService.modify(this.adminForm).subscribe(resp => {
+        this.adminForm = resp;
+      }, error => console.log(error));
     } else {
-      this.gestionAdminService.create(this.adminForm);
+      this.gestionAdminService.create(this.adminForm).subscribe(resp => {
+        this.adminForm = resp;
+      }, error => console.log(error));
     }
 
-    this.test();
     this.cancel();
   }
 
   cancel() {
-    
     this.adminForm = null;
-  }
-
-  test() {
-    // console.log($(".collapse"));
-
-    // let test = document.getElementById("flush-collapseOne");
-    // let bs = new APP_BOOTSTRAP_LISTENER.
-    // $(".collapse").collapse('toggle');
   }
 }

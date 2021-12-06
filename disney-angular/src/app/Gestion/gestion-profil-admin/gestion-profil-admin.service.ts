@@ -9,27 +9,22 @@ import { Compte } from 'src/model';
   providedIn: 'root'
 })
 export class GestionProfilAdminService {
-  gestionUrl:string
-  admins:Array<Compte> = new Array<Compte>();
-  constructor(private http: HttpClient, private appConfig: AppConfigService, public compteService:PageConnexionService) {
+  gestionUrl: string
+  admins: Array<Compte> = new Array<Compte>();
+  constructor(private http: HttpClient, private appConfig: AppConfigService, public compteService: PageConnexionService) {
     this.gestionUrl = this.appConfig.backEndUrl + "compte/"
     this.load();
-   }
-   findById(id: number): Observable<Compte> {
+  }
+  findById(id: number): Observable<Compte> {
     return this.http.get<Compte>(this.gestionUrl + id);
   }
 
-  create(admin: Compte) {
-    this.http.post<Compte>(this.gestionUrl, admin).subscribe(resp => {
-      this.load();
-    }, error => console.log(error));
+  create(admin: Compte): Observable<Compte> {
+    return this.http.post<Compte>(this.gestionUrl, admin);
   }
 
-  modify(admin: Compte) {
-    this.http.put<Compte>(this.gestionUrl + admin.id, admin).subscribe(resp => {
-      this.compteService.compte = resp;
-      this.load();
-    }, error => console.log(error));
+  modify(admin: Compte): Observable<Compte> {
+    return this.http.put<Compte>(this.gestionUrl + admin.id, admin);
   }
 
   deleteById(id: number) {
