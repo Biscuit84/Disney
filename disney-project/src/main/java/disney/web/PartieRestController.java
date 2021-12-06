@@ -211,6 +211,7 @@ public class PartieRestController {
 					}
 					historique.setPositionArrivee(positionActuelle);
 					historique.setNbEtoilesGagnees(500-100*(positionActuelle-1));
+					
 					//on dit qu'il est premier
 //					int positionActuelle = 1;
 //					for(Personnage p : lp) {
@@ -269,13 +270,13 @@ public class PartieRestController {
 		partie.setNbTourDeJeu(0);
 		
 		//	2. Creer une nouvelle partie et creation de la liste des joueurs:
-		Set <Joueur> listeDesJoueurs = listeJoueursPartie(idJoueur, historique, partie);
+		List <Joueur> listeDesJoueurs = listeJoueursPartie(idJoueur, historique, partie);
 		partie.setJoueurs(new ArrayList<>(listeDesJoueurs));
 
 		//	3. choix du perso: 
 		//		- afficher la liste des persos du joueur grace a: PersoObtenuRestController.findAllPersoObtenuByIdJoueur(idJoueur);
 		//		- creation de la liste des persos de la partie:
-		Set<Personnage> listePersoPartie = listePersosPartie(idPersoChoisi, historique, partie);
+		List<Personnage> listePersoPartie = listePersosPartie(idPersoChoisi, historique, partie);
 		partie.setPersonnages(new ArrayList<>(listePersoPartie));
 
 		partie = partieRepo.save(partie);
@@ -330,27 +331,29 @@ public class PartieRestController {
 	
 	
 	//creation de la liste des joueurs:
-	public Set<Joueur> listeJoueursPartie(Long idJoueur, Historique historique, Partie partie) {
-		Set <Joueur> listeDesJoueurs = new HashSet <Joueur> ();
+	public List<Joueur> listeJoueursPartie(Long idJoueur, Historique historique, Partie partie) {
+		Set <Joueur> setDesJoueurs = new HashSet <Joueur> ();
 		Joueur IA1 = joueurRepo.findById((long) 1).get();
 		Joueur IA2 = joueurRepo.findById((long) 2).get();
 		Joueur IA3 = joueurRepo.findById((long) 3).get();
 		Joueur joueurCourant = joueurRepo.findById(idJoueur).get();
 
 		joueurCourant.setPartie(partie);
-		listeDesJoueurs.add(joueurCourant);
-		listeDesJoueurs.add(IA1);
-		listeDesJoueurs.add(IA2);
-		listeDesJoueurs.add(IA3);
+		setDesJoueurs.add(joueurCourant);
+		setDesJoueurs.add(IA1);
+		setDesJoueurs.add(IA2);
+		setDesJoueurs.add(IA3);
 
 		historique.setJoueur(joueurCourant);
+		
+		List<Joueur> listeDesJoueurs = new ArrayList<>(setDesJoueurs);
 
 		return listeDesJoueurs;
 	}
 
 	//creation de la liste des persos de la partie:
-	public Set<Personnage> listePersosPartie(Long idPersoChoisi, Historique historique, Partie partie) {
-		Set<Personnage> listePersoPartie = new HashSet <Personnage> ();
+	public List<Personnage> listePersosPartie(Long idPersoChoisi, Historique historique, Partie partie) {
+		Set<Personnage> setPersoPartie = new HashSet <Personnage> ();
 		//perso joueur:
 		Personnage peJoueur = persoRepo.findById(idPersoChoisi).get();
 		peJoueur.setPartie(partie);
@@ -362,20 +365,22 @@ public class PartieRestController {
 		listePersonnagesIA.remove(peJoueur);
 
 		//tirage aleatoire pour choix des perso IA
-		Set <Personnage> iAChoixPersonnage = new HashSet<> ();
+		Set <Personnage> setIAChoixPersonnage = new HashSet<> ();
 
-		while(iAChoixPersonnage.size()<3) {
+		while(setIAChoixPersonnage.size()<3) {
 			for (int i=0;i<=2;i++) {
 				int nombreAleatoireIA = r.nextInt(listePersonnagesIA.size());
 				Personnage personnageIA= listePersonnagesIA.get(nombreAleatoireIA);
 				personnageIA.setPartie(partie);
 				personnageIA.setPosition(0);
-				iAChoixPersonnage.add(personnageIA);
+				setIAChoixPersonnage.add(personnageIA);
 			}
 		}
 
-		listePersoPartie.add(peJoueur); 
-		listePersoPartie.addAll(iAChoixPersonnage);
+		setPersoPartie.add(peJoueur); 
+		setPersoPartie.addAll(setIAChoixPersonnage);
+		
+		List<Personnage> listePersoPartie = new ArrayList<>(setPersoPartie);
 
 		return listePersoPartie;
 	}

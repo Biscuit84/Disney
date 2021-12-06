@@ -58,11 +58,9 @@ export class PlateauHttpService {
 
 
 
-  // deleteById(id: number) {
-  //   this.http.delete<void>(this.plateauUrl + id).subscribe(resp => {
-  //     this.load();
-  //   }, error => console.log(error));
-  // }
+  deleteById(id: number) {
+   return this.http.delete<void>(this.plateauUrl + id+ "/deleteWithCasesPlateau");
+  }
 
   //save plateau avec les cases Plateau!!!
   createPlateau(plateau: Plateau): Observable<Plateau> {
