@@ -277,7 +277,13 @@ export class PartieDTO {
   plateau: Plateau;
   monPersonnage: Personnage;
   nbTourDeJeu:number;
+<<<<<<< HEAD
   joueur: Joueur;
+=======
+  idPlateau:number
+  idPerso:number
+  idJoueur:number
+>>>>>>> develop
 
   constructor(
     id?: number,
@@ -285,7 +291,14 @@ export class PartieDTO {
     plateau?: Plateau,
     monPersonnage?: Personnage,
     nbTourDeJeu?:number,
+<<<<<<< HEAD
     joueur?:Joueur,
+=======
+    idPlateau?:number,
+  idPerso?:number,
+    idJoueur?:number
+
+>>>>>>> develop
   ) {
     this.id = id
     this.version = version

@@ -64,6 +64,7 @@ export class JeuComponent implements OnInit {
 
 
   CreerLapartie() {
+<<<<<<< HEAD
 <<<<<<< refs/remotes/origin/master
    this.plateauService.findById(this.idPlateau).subscribe( resp => {
     this.partieForm.plateau = resp;
@@ -75,6 +76,9 @@ export class JeuComponent implements OnInit {
 =======
     this.partieService.launchGame(this.idJoueur, this.idPerso, this.idPlateau).subscribe((resp: Partie) => {
 >>>>>>> liaison back / front pour le plateau
+=======
+    this.partieService.launchGame(this.idJoueur, this.idPerso, this.idPlateau).subscribe((resp: Partie) => {
+>>>>>>> develop
       this.partieService.LaPartie = resp;
       this.partie = resp;
        this.casesPlateauService.findAllCasesByPlateau(this.partie.plateau.id).subscribe(resp => {
