@@ -20,6 +20,7 @@
                     <tr>
                         <th scope="col">Nom</th>
                         <th scope="col">Nombre de cases</th>
+                        <th>Plateau disponible pour les joueurs</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -27,6 +28,7 @@
                     <tr *ngFor="let plateau of listPlateauDejaCree" class="cliquable">
                         <td (click)="plateauDetail(plateau)">{{plateau.nom}}</td>
                         <td (click)="plateauDetail(plateau)">{{plateau.nbCases}}</td>
+                        <td (click)="plateauDetail(plateau)">{{plateau.disponible}}</td>
                         <td>
                             <div class="btn-group btn-group-sm">
                                 <a class="btn btn-primary" (click)="plateauDetail(plateau)"><i
@@ -46,6 +48,8 @@
 </div>
 
 
+
+
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" 
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -61,7 +65,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
-                <button type="button" class="btn btn-primary" (click)="delete(plateau)">Valider</button>
+                <button type="button" class="btn btn-primary" (click)="delete(plateau)" data-bs-dismiss="modal">Valider</button>
             </div>
         </div>
     </div>

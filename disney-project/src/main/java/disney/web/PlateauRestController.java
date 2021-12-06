@@ -123,6 +123,7 @@ public class PlateauRestController {
 			cp.setPlateau(plateau);
 		}
 		
+		plateau.setDisponible(plateau.isDisponible());
 		plateau = plateauRepo.save(plateau);		
 		casesPlateauRepo.saveAll(plateau.getCases());
 		
@@ -141,6 +142,7 @@ public class PlateauRestController {
 		Plateau plateau = plateauRepo.findById(plat.getId()).get();
 		plateau.setNom(plat.getNom());
 		plateau.setNbCases(plat.getCases().size());
+		plateau.setDisponible(plat.isDisponible());
 
 		casesPlateauRepo.deleteAll(plateau.getCases());
 
@@ -215,7 +217,8 @@ public class PlateauRestController {
 
 		Plateau plateau = plateauRepo.getById(id);
 		List<CasesPlateau> cp = plateau.getCases();
-
+		
+		
 		plateauRepo.deleteById(id);
 		System.out.println("avant");
 		casesPlateauRepo.deleteAll(cp); 

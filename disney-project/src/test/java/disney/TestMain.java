@@ -308,36 +308,39 @@ class TestMain {
 		c12pDemo=casesPlateauRepo.save(c12pDemo);
 		
 		plateau1.setCases(casesPlateauDemo);
+		plateau1.setDisponible(true);
 		
 		plateau1=plateauRepo.save(plateau1);
 		
 		
 		// plateau de test
-		Plateau Plateau2 = new Plateau ("Plateau Test", 10);
-		Plateau2=plateauRepo.save(Plateau2);
+		Plateau plateau2 = new Plateau ("Plateau Test", 10);
+		plateau2.setDisponible(true);
+		plateau2=plateauRepo.save(plateau2);
+		
 		
 		//CasesPlateau
 		List <CasesPlateau> casesPlateauTest = new ArrayList();
 		
-		CasesPlateau c1pTest = new CasesPlateau(Plateau2, caseDepart, 0);
+		CasesPlateau c1pTest = new CasesPlateau(plateau2, caseDepart, 0);
 		casesPlateauTest.add(c1pTest);
-		CasesPlateau c2pTest = new CasesPlateau(Plateau2, caseVide, 1);
+		CasesPlateau c2pTest = new CasesPlateau(plateau2, caseVide, 1);
 		casesPlateauTest.add(c2pTest);
-		CasesPlateau c3pTest = new CasesPlateau(Plateau2, caseDeplacement, 2);
+		CasesPlateau c3pTest = new CasesPlateau(plateau2, caseDeplacement, 2);
 		casesPlateauTest.add(c3pTest);
-		CasesPlateau c4pTest = new CasesPlateau(Plateau2, caseDuel, 3);
+		CasesPlateau c4pTest = new CasesPlateau(plateau2, caseDuel, 3);
 		casesPlateauTest.add(c4pTest);
-		CasesPlateau c5pTest = new CasesPlateau(Plateau2, casePioche, 4);
+		CasesPlateau c5pTest = new CasesPlateau(plateau2, casePioche, 4);
 		casesPlateauTest.add(c5pTest);
-		CasesPlateau c6pTest = new CasesPlateau(Plateau2, casePrison, 5);
+		CasesPlateau c6pTest = new CasesPlateau(plateau2, casePrison, 5);
 		casesPlateauTest.add(c6pTest);
-		CasesPlateau c7pTest = new CasesPlateau(Plateau2, caseGentil, 6);
+		CasesPlateau c7pTest = new CasesPlateau(plateau2, caseGentil, 6);
 		casesPlateauTest.add(c7pTest);
-		CasesPlateau c8pTest = new CasesPlateau(Plateau2, caseMechant, 7);
+		CasesPlateau c8pTest = new CasesPlateau(plateau2, caseMechant, 7);
 		casesPlateauTest.add(c8pTest);
-		CasesPlateau c9pTest = new CasesPlateau(Plateau2, caseDeplacement, 8);
+		CasesPlateau c9pTest = new CasesPlateau(plateau2, caseDeplacement, 8);
 		casesPlateauTest.add(c9pTest);
-		CasesPlateau c10pTest = new CasesPlateau(Plateau2, caseArrivee, 9);
+		CasesPlateau c10pTest = new CasesPlateau(plateau2, caseArrivee, 9);
 		casesPlateauTest.add(c10pTest);
 
 		
@@ -352,13 +355,14 @@ class TestMain {
 		c9pTest=casesPlateauRepo.save(c9pTest);
 		c10pTest=casesPlateauRepo.save(c10pTest);
 		
-		Plateau2.setCases(casesPlateauTest);
+		plateau2.setCases(casesPlateauTest);
 		
-		Plateau2=plateauRepo.save(Plateau2);
+		plateau2=plateauRepo.save(plateau2);
 		
 		
 		//Plateau 3
 		Plateau plateau3 = new Plateau ("Plateau Regular", 63);
+		plateau3.setDisponible(false);
 		plateau3=plateauRepo.save(plateau3);
 		
 		//CasesPlateau
