@@ -2,10 +2,11 @@
     <div class="card mt-3">
         <div class="card-header bg-info text-white">
             <h1 class="card-title">Mise à jour des plateaux
-                <button class="rounded-circle top-right btn btn-info" type="button" [routerLink]="['/gestionAdmin/plateau']">
+                <button class="rounded-circle top-right btn btn-info" type="button"
+                    [routerLink]="['/gestionAdmin/plateau']">
                     <em class="fas fa-arrow-left"></em>
                 </button>
-            </h1> 
+            </h1>
         </div>
         <div class="card-body">
             <!-- <h1 class="card-title">Mise à jour des plateaux
@@ -28,29 +29,11 @@
                         <td (click)="plateauDetail(plateau)">{{plateau.nbCases}}</td>
                         <td>
                             <div class="btn-group btn-group-sm">
-                                <a class="btn btn-primary" (click)="plateauDetail(plateau)"><i class="bi bi-pencil-square"></i></a>
-                                <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-trash"></i></a>
-
-  <!-- Modal -->
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Supression du plateau: {{plateau.nom}}</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-         Etes-vous sur de vouloir supprimer ce plateau?
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
-          <button type="button" class="btn btn-primary" (click)="delete(plateau)" >Valider</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
+                                <a class="btn btn-primary" (click)="plateauDetail(plateau)"><i
+                                        class="bi bi-pencil-square"></i></a>
+                                <!-- <a class="btn btn-danger" (click)="delete(plateau)" ><i class="bi bi-trash"></i></a> -->
+                                <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="assignPlateau(plateau)"><i
+                                        class="bi bi-trash"></i></a>
                             </div>
                             <!-- <em class="fas fa-edit" (click)="plateauDetail(plateau)"></em>
                             <em class="fas fa-trash" (click)="delete(plateau)"></em> -->
@@ -63,10 +46,28 @@
 </div>
 
 
-  
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" 
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Supression du plateau:
+                    {{plateau.nom}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Etes-vous sur de vouloir supprimer ce plateau?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
+                <button type="button" class="btn btn-primary" (click)="delete(plateau)">Valider</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
-<app-gestion-plateau titre="Modification du plateau" [idPlateau]="id" *ngIf="id != -1" >
+<app-gestion-plateau titre="Modification du plateau" [idPlateau]="id" *ngIf="id != -1">
 </app-gestion-plateau>
-
