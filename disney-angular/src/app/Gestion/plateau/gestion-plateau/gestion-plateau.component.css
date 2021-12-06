@@ -34,7 +34,7 @@
     /* display: inline-block; */
     vertical-align: top;
 
-    flex-basis: 33%;
+    
   }
   
   
@@ -43,8 +43,9 @@
     min-height: 60px;
     background: white;
     border-radius: 4px;
-    overflow: hidden;
-    display: block;
+    overflow: scroll;
+    max-height: 567px;
+    
   }
   
   .element-box {
@@ -79,6 +80,7 @@
   
   .element-box:last-child {
     border: none;
+    
   }
   
   .element-list.cdk-drop-list-dragging .element-box:not(.cdk-drag-placeholder) {
@@ -143,18 +145,15 @@ button[disabled] {
   display: flex;
   flex-basis: 100%;
 }
-/* 
-#listeCases{
-position: fixed;
-float: right;
-order: 0;
-}
 
+#listeCases{
+
+}
 #listeCases2{
-  order: 1;
+  
+  max-width: 100%;
   }
 
   #listeCases3{
-    order: 1;
-    float: left;
-    } */
+   
+    }
