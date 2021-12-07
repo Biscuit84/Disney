@@ -22,7 +22,7 @@
             <div class="form-group">
                 <label for="plateau"> Sur quel plateau veux-tu jouer ?</label>
                 <select class="form-control" id="plateau" [(ngModel)]="idPlateau">
-                    <option *ngFor="let p of listPlateauPerso" [value]="p.id">{{p.nom}} de {{p.nbCases}}</option>
+                    <option *ngFor="let p of listPlateauPerso" [value]="p.id">{{p.nom}} de {{p.nbCases}} cases. </option>
                 </select>
             </div>
         </div>
