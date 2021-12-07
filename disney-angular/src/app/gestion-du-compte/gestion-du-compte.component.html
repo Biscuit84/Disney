@@ -9,7 +9,7 @@
         <p>Nombre de victoire: {{this.compteService.compte.nbVictoire}}</p>
         <p>Nombre de vie(s): {{this.compteService.compte.life}}</p>
         <p> <i class="fas fa-star etoile"></i>: {{this.compteService.compte.nbEtoiles}}</p>
-        <button id="modifierBtn" type="submit" [routerLink]="['/modifProfil']" class="btn btn-primary">Modifier leprofil</button>
+        <button id="modifierBtn" type="submit" [routerLink]="['/modifProfil']" class="btn btn-primary">Modifier le profil</button>
       </div>
     </div>
     <div id="basgauche">
@@ -28,7 +28,7 @@
           <p class="mb-1"></p>
         </div>
         <small ></small>
-        <a href="#" class="list-group-item list-group-item-action" *ngFor="let histo of showHistorique()">
+        <a href="#" class="list-group-item list-group-item-action" *ngFor="let histo of showHistorique()" style="background-color: rgba(245, 245, 245, 0.8);">
           <img class="image" src="{{histo.personnage.avatar}}">
           <div id="info">
             <div class="d-flex w-100 justify-content-between">
