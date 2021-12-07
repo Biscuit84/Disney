@@ -13,6 +13,7 @@ body {
     background-repeat:no-repeat;
     background-attachment: fixed;
     background-size: cover;
+    
    
 
 }
@@ -57,7 +58,7 @@ body {
   }    
   
   body{
-    height: 90vh;
+    height: 130vh;
     /* background-color: darkorchid; */
   }
   
