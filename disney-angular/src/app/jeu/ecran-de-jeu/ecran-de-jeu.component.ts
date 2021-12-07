@@ -1,12 +1,13 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Self, ViewChild } from '@angular/core';
 import { CaseVirtuelle, pionPlayer } from './plateau-canvas-util';
 import * as $ from 'jquery';
 import { PageConnexionService } from 'src/app/page-connexion/page-connexion.service';
 import { PartieHttpService } from 'src/app/partie-http.service';
-import { Cases, CasesPlateau, Compte, Partie, Personnage, Plateau, TourDeJeuDto } from 'src/model';
+import { Cases, CasesPlateau, Compte, Joueur, Partie, Personnage, Plateau, TourDeJeuDto } from 'src/model';
 import { CasesPlateauHttpService } from 'src/app/cases-plateau-http.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { TemplateLiteralElement } from '@angular/compiler';
 
 @Component({
   selector: 'ecran-de-jeu, [ecran-de-jeu]',
@@ -27,6 +28,7 @@ export class EcranDeJeuComponent implements OnInit {
   plateau: Plateau;
   public tourEnCours: TourDeJeuDto;
   public casesPlateau: Array<CasesPlateau>;
+  public joueurs: Array<Joueur>;
   public cases: Array<Cases>;
   srcPionJoueur: string;
   srcPionIA1: string;
@@ -36,6 +38,7 @@ export class EcranDeJeuComponent implements OnInit {
   // pour transiter des infos
   message: boolean;
   subscription: Subscription;
+
 
   //moi: Joueur = new Joueur;
   ////////////////////////// CONSTRUCTEUR  //////////////////////////
@@ -54,6 +57,7 @@ export class EcranDeJeuComponent implements OnInit {
     this.srcPionIA3 = '../../../assets/images/jeu/pion/pion_' + this.partie.personnages[3].nom + '.jpg';
     this.partieService.currentMessage.subscribe(message => this.message = message)
     //console.log(this.srcPionJoueur);
+    this.joueurs=this.partieService.LaPartie.joueursPartie;
 
     //console.log(this.casesPlateau)
   }
@@ -74,6 +78,9 @@ export class EcranDeJeuComponent implements OnInit {
   public partieEnCours: boolean = true;
   public tourActuel: number = 0;
   public joueurActuel: number = 0;
+  public caseEnCours:"string";
+  //public nomDuJoueur:string;
+ 
   //public tourActuel = document.getElementById("NbTour");
   //ublic tourJoueur = document.getElementById("JoueurTour");
 
@@ -168,6 +175,7 @@ export class EcranDeJeuComponent implements OnInit {
 
     // actualisation (en setinterval pour les deplacements)
     this.actualisation = setInterval(this.drawPlayers, this.tauxRaffraichissement, this);
+   
 
   } //ngOnInit fin
 
@@ -182,8 +190,11 @@ export class EcranDeJeuComponent implements OnInit {
 
   // bouton joueur
   Play() {
-    this.dispoBoutonJouer = false;
+    //this.dispoBoutonJouer = false;
+    this.pionJoueur.playedTurn++;
     this.Jouer(this, this.pionJoueur);
+    //this.nomDuJoueur= this.joueurs[this.joueurActuel].pseudo;
+    
   }
 
   Pouvoir() {
@@ -344,32 +355,28 @@ export class EcranDeJeuComponent implements OnInit {
         this.ctxPlateau.globalAlpha = 0.5; // c'est l'opacité
         if (this.listeCases[numeroCase - 1].typeCase == "depart") {
           this.drawSquare(pX, pY, this.taillecaseW, this.taillecaseH, "white");
-
-          this.roundRect(limiteX11, limiteY11, Math.abs(limiteX11 - limiteX22), Math.abs(limiteY11 - limiteY22), 10, true, false, "blue")
+          this.roundRect(limiteX11, limiteY11, Math.abs(limiteX11 - limiteX22), Math.abs(limiteY11 - limiteY22), 10, true, false, "plum")
         }
         else if (this.listeCases[numeroCase - 1].typeCase == "arrivee") {
           this.drawSquare(pX, pY, this.taillecaseW, this.taillecaseH, "white");
-
-          this.roundRect(limiteX11, limiteY11, Math.abs(limiteX11 - limiteX22), Math.abs(limiteY11 - limiteY22), 10, true, false, "lightyellow")
-
+          this.roundRect(limiteX11, limiteY11, Math.abs(limiteX11 - limiteX22), Math.abs(limiteY11 - limiteY22), 10, true, false, "lightgoldenrodyellow")
           this.drawStar(milieudelacaseX, milieudelacaseY, 5, (limiteX2 - limiteX1) / 2, (limiteX2 - limiteX1) / 4, "yellow")
         }
         else if (this.listeCases[numeroCase - 1].typeCase == "vide") {
           this.drawSquare(pX, pY, this.taillecaseW, this.taillecaseH, "white");
-
-          this.roundRect(limiteX11, limiteY11, Math.abs(limiteX11 - limiteX22), Math.abs(limiteY11 - limiteY22), 10, true, false, "lightblue")
+          this.roundRect(limiteX11, limiteY11, Math.abs(limiteX11 - limiteX22), Math.abs(limiteY11 - limiteY22), 10, true, false, "lightsteelblue") //[184,255,250]
         }
         else if (this.listeCases[numeroCase - 1].typeCase == "mechant") {
           this.drawSquare(pX, pY, this.taillecaseW, this.taillecaseH, "white");
 
-          this.roundRect(limiteX11, limiteY11, Math.abs(limiteX11 - limiteX22), Math.abs(limiteY11 - limiteY22), 10, true, false, "black")
-          this.drawHeart(milieudelacaseX, limiteY1, limiteX2, limiteY2, (limiteX2 - limiteX1), (limiteY2 - limiteY1), "black");
+          this.roundRect(limiteX11, limiteY11, Math.abs(limiteX11 - limiteX22), Math.abs(limiteY11 - limiteY22), 10, true, false, "darkslateblue")
+          this.drawHeart(milieudelacaseX, limiteY1, limiteX2, limiteY2, (limiteX2 - limiteX1), (limiteY2 - limiteY1), "midnightblue");
         }
         else if (this.listeCases[numeroCase - 1].typeCase == "prince") {
           this.drawSquare(pX, pY, this.taillecaseW, this.taillecaseH, "white");
  
           this.roundRect(limiteX11, limiteY11, Math.abs(limiteX11 - limiteX22), Math.abs(limiteY11 - limiteY22), 10, true, false, "lightpink")
-          this.drawHeart(milieudelacaseX, limiteY1, limiteX2, limiteY2, (limiteX2 - limiteX1), (limiteY2 - limiteY1), "red");
+          this.drawHeart(milieudelacaseX, limiteY1, limiteX2, limiteY2, (limiteX2 - limiteX1), (limiteY2 - limiteY1), "crimson");
         }
         else if (this.listeCases[numeroCase - 1].typeCase == "prison") {
 
@@ -384,39 +391,53 @@ export class EcranDeJeuComponent implements OnInit {
           if ((parametre >= 0) && isEven(y)) {
             var color = 'green';
             var sens = "right";
-            console.log("1")
+            this.roundRect(limiteX11, limiteY11, Math.abs(limiteX11 - limiteX22), Math.abs(limiteY11 - limiteY22), 10, true, false, "palegreen")
+            this.drawArrow(limiteX1, milieudelacaseY, limiteX2, milieudelacaseY, milieudelacaseX, milieudelacaseY, this.taillecaseH, "limegreen", "right");
           }
           else if ((parametre >= 0) && isEven(y) == false) {
             var color = 'green';
             var sens = "left";
-            console.log("2")
+            this.roundRect(limiteX11, limiteY11, Math.abs(limiteX11 - limiteX22), Math.abs(limiteY11 - limiteY22), 10, true, false, "palegreen")
+            this.drawArrow(limiteX1, milieudelacaseY, limiteX2, milieudelacaseY, milieudelacaseX, milieudelacaseY, this.taillecaseH, "limegreen", "left");
           }
           else if ((parametre == -1) && isEven(y)) {
             var color = 'red';
             var sens = "left";
-            console.log("3")
+            this.roundRect(limiteX11, limiteY11, Math.abs(limiteX11 - limiteX22), Math.abs(limiteY11 - limiteY22), 10, true, false, "lightcoral")
+            this.drawArrow(limiteX1, milieudelacaseY, limiteX2, milieudelacaseY, milieudelacaseX, milieudelacaseY, this.taillecaseH, "red", "left");
           }
           else if ((parametre == -1) && isEven(y) == false) {
             var color = 'red';
             var sens = "right";
-            console.log("4")
+            this.roundRect(limiteX11, limiteY11, Math.abs(limiteX11 - limiteX22), Math.abs(limiteY11 - limiteY22), 10, true, false, "lightcoral")
+            this.drawArrow(limiteX1, milieudelacaseY, limiteX2, milieudelacaseY, milieudelacaseX, milieudelacaseY, this.taillecaseH, "red", "right");
           }
-          this.roundRect(limiteX11, limiteY11, Math.abs(limiteX11 - limiteX22), Math.abs(limiteY11 - limiteY22), 10, true, false, color)
-          this.drawArrow(limiteX1, milieudelacaseY, limiteX2, milieudelacaseY, milieudelacaseX, milieudelacaseY, this.taillecaseH, color, sens);
         }
         else if (this.listeCases[numeroCase - 1].typeCase == "duel") {
           this.drawSquare(pX, pY, this.taillecaseW, this.taillecaseH, "white");
           this.ctxPlateau.globalAlpha = 0.7; // c'est l'opacité
-          this.roundRect(limiteX11, limiteY11, Math.abs(limiteX11 - limiteX22), Math.abs(limiteY11 - limiteY22), 10, true, false, "yellow")
+          this.roundRect(limiteX11, limiteY11, Math.abs(limiteX11 - limiteX22), Math.abs(limiteY11 - limiteY22), 10, true, false, "sandybrown")
+
+          this.drawStar(limiteX11+this.taillecaseW*0.2, limiteY11+this.taillecaseH*0.3, 8, (limiteX2 - limiteX1) / 5, (limiteX2 - limiteX1) / 10, "tomato")
+          this.drawStar(limiteX11+this.taillecaseW*0.6, limiteY11+this.taillecaseH*0.7, 12, (limiteX2 - limiteX1) / 4, (limiteX2 - limiteX1) / 8, "tomato")
+          this.drawStar(limiteX11+this.taillecaseW*0.7, limiteY11+this.taillecaseH*0.4, 10, (limiteX2 - limiteX1) / 7, (limiteX2 - limiteX1) / 14, "tomato")
+          this.drawStar(limiteX11+this.taillecaseW*0.1, limiteY11+this.taillecaseH*0.7, 7, (limiteX2 - limiteX1) / 8, (limiteX2 - limiteX1) / 16, "tomato")
+          this.drawStar(limiteX11+this.taillecaseW*0.5, limiteY11+this.taillecaseH*0.1, 9, (limiteX2 - limiteX1) / 9, (limiteX2 - limiteX1) / 18, "tomato")
+          this.drawStar(milieudelacaseX, milieudelacaseY, 10, (limiteX2 - limiteX1) / 3, (limiteX2 - limiteX1) / 6, "tomato")
+          //this.drawCross(x, y, size, this.taillecaseH, "indianred") 
         }
         else if (this.listeCases[numeroCase - 1].typeCase == "pioche") {
           this.drawSquare(pX, pY, this.taillecaseW, this.taillecaseH, "white");
           this.ctxPlateau.globalAlpha = 0.7; // c'est l'opacité
-          this.roundRect(limiteX11, limiteY11, Math.abs(limiteX11 - limiteX22), Math.abs(limiteY11 - limiteY22), 10, true, false, "orange")
+          this.roundRect(limiteX11, limiteY11, Math.abs(limiteX11 - limiteX22), Math.abs(limiteY11 - limiteY22), 10, true, false, "lightsalmon")
+          this.roundRect(limiteX11+this.taillecaseW*0.2, limiteY11+this.taillecaseW*0.1, Math.abs(limiteX11 - limiteX22)*0.4, Math.abs(limiteY11 - limiteY22)*0.6, 10, true, false, "salmon")
+          this.roundRect(limiteX11+this.taillecaseW*0.4, limiteY11+this.taillecaseH*0.2, Math.abs(limiteX11 - limiteX22)*0.4, Math.abs(limiteY11 - limiteY22)*0.6, 10, true, false, "salmon")
+          
         }
-        this.ctxPlateau.font = '100px';
-        this.ctxPlateau.textBaseline = 'hanging';
+        //this.ctxPlateau.font = '100px';
+        this.ctxPlateau.textBaseline = 'middle';
         this.ctxPlateau.textAlign = "center";
+        this.ctxPlateau.font = '15px serif';
         var affichecase = numeroCase - 1;
         if (numeroCase == this.nbcasePlateau) {
           var str = "arrivée";
@@ -425,10 +446,13 @@ export class EcranDeJeuComponent implements OnInit {
           var str = "départ";
         }
         else {
-          var str = "case " + affichecase;
+          //var str = "case " + affichecase;
+          var str = " " + affichecase + " ";
         }
         this.ctxPlateau.closePath();
         this.ctxPlateau.beginPath();
+        this.drawCircle(milieudelacaseX,milieudelacaseY, this.taillecaseH/10, "white");
+      
         this.ctxPlateau.strokeText(str, pX + this.taillecaseW / 2, pY + this.taillecaseH / 2);  //ctx.strokeText(texte, x, y [, largeurMax]);
         this.ctxPlateau.closePath();
       }
@@ -493,7 +517,7 @@ export class EcranDeJeuComponent implements OnInit {
         pion.playerIsMoving = true;
         //self.commandeDispo=false;
 
-        self.dispoBoutonFin = false;
+        //self.dispoBoutonFin = false;
         //console.log("diff:" + diff + ", position Y du pion : " + pion.positionYPlayer);
         //console.log("on avance de" + diff);
         //console.log(pion.numeroPassage)
@@ -517,8 +541,8 @@ export class EcranDeJeuComponent implements OnInit {
       else if (diff > 0) {
         //self.commandeDispo=false;
 
-        self.dispoBoutonJouer = false;
-        self.dispoBoutonFin = false;
+        //self.dispoBoutonJouer = false;
+        //self.dispoBoutonFin = false;
 
         console.log("on recule de" + diff);
         pion.playerIsMoving = true;
@@ -549,7 +573,15 @@ export class EcranDeJeuComponent implements OnInit {
         if (pion.playerIsMoving) {
           self.ctxJoueur.clearRect(0, 0, self.canvasJoueur.nativeElement.width, self.canvasJoueur.nativeElement.height); //clear pour refresh
         }
+        //self.roundRect( pion.positionXPlayer, pion.positionYPlayer, image.width, image.height, 10, false, true,'white');
+        //self.ctxJoueur.clip();
+        let circlePath = new Path2D();
+        self.ctxJoueur.save();
+        circlePath.arc( pion.positionXPlayer+self.taillecaseH/4,  pion.positionYPlayer+self.taillecaseH/4, self.taillecaseH/4, 0, 2 * Math.PI ); //void ctx.arc(x, y, rayon, angleDépart, angleFin, sensAntiHoraire);
+        // Set the clip to the circle
+        self.ctxJoueur.clip(circlePath);
         self.ctxJoueur.drawImage(image, pion.positionXPlayer, pion.positionYPlayer, image.width, image.height);
+        self.ctxJoueur.restore();
       }
     }
     else if (pion.numeroPassage == 1) {
@@ -563,7 +595,13 @@ export class EcranDeJeuComponent implements OnInit {
         if (pion.playerIsMoving) {
           self.ctxPlayerIA1.clearRect(0, 0, self.canvasIA1.nativeElement.width, self.canvasIA1.nativeElement.height);
         }
+        self.ctxPlayerIA1.save();
+        //let circlePath = new Path2D();
+        //circlePath.arc( pion.positionXPlayer+self.taillecaseH/4,  pion.positionYPlayer+self.taillecaseH/4, self.taillecaseH/4, 0, 2 * Math.PI ); //void ctx.arc(x, y, rayon, angleDépart, angleFin, sensAntiHoraire);
+        // Set the clip to the circle
+        //self.ctxPlayerIA1.clip(circlePath);
         self.ctxPlayerIA1.drawImage(image, positionx, positiony, image.width, image.height);
+        self.ctxPlayerIA1.restore();
       }
     }
     else if (pion.numeroPassage == 2) {
@@ -577,7 +615,13 @@ export class EcranDeJeuComponent implements OnInit {
         if (pion.playerIsMoving) {
           self.ctxPlayerIA2.clearRect(0, 0, self.canvasIA2.nativeElement.width, self.canvasIA2.nativeElement.height);
         }
+        self.ctxPlayerIA2.save();
+        let circlePath = new Path2D();
+        circlePath.arc( pion.positionXPlayer+self.taillecaseH/4,  pion.positionYPlayer+self.taillecaseH/4, self.taillecaseH/4, 0, 2 * Math.PI ); //void ctx.arc(x, y, rayon, angleDépart, angleFin, sensAntiHoraire);
+        // Set the clip to the circle
+        //self.ctxPlayerIA2.clip(circlePath);
         self.ctxPlayerIA2.drawImage(image, positionx, positiony, image.width, image.height);
+        self.ctxPlayerIA2.restore();
       }
     }
     else if (pion.numeroPassage == 3) {
@@ -591,7 +635,13 @@ export class EcranDeJeuComponent implements OnInit {
         if (pion.playerIsMoving) {
           self.ctxPlayerIA3.clearRect(0, 0, self.canvasIA3.nativeElement.width, self.canvasIA3.nativeElement.height);
         }
+        self.ctxPlayerIA3.save();
+        let circlePath = new Path2D();
+        circlePath.arc( pion.positionXPlayer+self.taillecaseH/4,  pion.positionYPlayer+self.taillecaseH/4, self.taillecaseH/4, 0, 2 * Math.PI ); //void ctx.arc(x, y, rayon, angleDépart, angleFin, sensAntiHoraire);
+        // Set the clip to the circle
+        //self.ctxPlayerIA3.clip(circlePath);
         self.ctxPlayerIA3.drawImage(image, positionx, positiony, image.width, image.height);
+        self.ctxPlayerIA3.restore();
       }
     }
   }
@@ -616,6 +666,7 @@ export class EcranDeJeuComponent implements OnInit {
       // lancement du tour 
       setTimeout(self.TourJoueur, 2200, self, pion, self.tourEnCours);  //setTimeout(TourJoueur(pionJoueur), 2200); //marche pas  //setTimeout(function() {TourJoueur(pionJoueur);}, 2200); //autre ecriture
       self.joueurActuel = pion.numeroPassage;
+      //self.nomDuJoueur= self.joueurs[self.joueurActuel].pseudo;
 
       // LE JOUEUR PEUT FINIR SON TOUR 
       if (self.joueurActuel == 0) {
@@ -626,22 +677,22 @@ export class EcranDeJeuComponent implements OnInit {
       // LES PIONS UN ET DEUX FINISSENT LEURS TOURS AUTO
       else if (self.joueurActuel == 1 || self.joueurActuel == 2) { // si ce n'est pas le joueur qui joue on "click" auto sur la suite
         //let pionSuivant = self.listePion[self.joueurActuel + 1];
-        var waitTime = 2000 + self.tauxRaffraichissement * (self.tourEnCours.valueDice1 + self.tourEnCours.valueDice2) * self.taillecaseW / self.velocityW;
+        var waitTime = 1000 + self.tauxRaffraichissement * (self.tourEnCours.valueDice1 + self.tourEnCours.valueDice2) * self.taillecaseW / self.velocityW;
         if (self.tourEnCours.effetAActiver == true) {
           if(self.tourEnCours.deplacement !=0){
             waitTime = waitTime + self.tourEnCours.deplacement * self.tauxRaffraichissement * self.taillecaseW / self.velocityW + 1000;
           }
         }
 
-        console.log("wait time = " + waitTime);
+        //console.log("wait time = " + waitTime);
         setTimeout(self.FinDeTour, waitTime, self, pion, self.tourEnCours); // passe le tour auto
-        self.dispoBoutonFin = false;
+        //self.dispoBoutonFin = false;
       }
 
       // LE DERNEIR PION A FINI, CEST AU TOUR DU JOUEUR
       else if (self.joueurActuel == 3) {
         //self.dispoBoutonJouer = true;
-        var waitTime = 2000 + self.tauxRaffraichissement * (self.tourEnCours.valueDice1 + self.tourEnCours.valueDice2) * self.taillecaseW / self.velocityW;
+        var waitTime = 1000 + self.tauxRaffraichissement * (self.tourEnCours.valueDice1 + self.tourEnCours.valueDice2) * self.taillecaseW / self.velocityW;
         if (self.tourEnCours.effetAActiver == true) {
           if(self.tourEnCours.deplacement !=0){
             waitTime = waitTime + self.tourEnCours.deplacement * self.tauxRaffraichissement * self.taillecaseW / self.velocityW + 1000;
@@ -649,6 +700,8 @@ export class EcranDeJeuComponent implements OnInit {
         }
         console.log("wait time = " + waitTime);
         setTimeout(self.FinDeTour, waitTime, self, pion, self.tourEnCours); // passe le tour auto
+        this.dispoBoutonJouer=true;
+        this.dispoBoutonFin=true;
       }
     });
   }
@@ -657,19 +710,23 @@ export class EcranDeJeuComponent implements OnInit {
   // permet de finir son tour et donc de faire jouer les IA
   FinDeTour(self, pion) {
     // si la partie n'est pas finie
-    self.dispoBoutonFin = false;
+   // self.dispoBoutonFin = false;
     if (self.partieEnCours == true) {
 
       // PION 1, 2 et 3 ONT FINI et ça passe au suivnat
       if (self.joueurActuel != 3) { // n'est pas le dernier de la liste (donc pion 4)
         self.joueurActuel++; // console.log("on incremente le numero du joueur")
+        //self.nomDuJoueur= self.joueurs[self.joueurActuel].pseudo;
         let pionSuivant = self.listePion[self.joueurActuel];
-        setTimeout(self.Jouer, 3000, self, pionSuivant);
+        setTimeout(self.Jouer, 1000, self, pionSuivant);
+        self.dispoBoutonFin = false;
+        self.dispoBoutonJouer = false;
       }
 
       //PION 4 a finit et ça repasse au joueur
       else {
         self.joueurActuel = 0;
+        //self.nomDuJoueur= self.joueurs[self.joueurActuel].pseudo;
         self.tourActuel++;// incrémente le nombre de tour
         self.dispoBoutonFin = true;
         self.dispoBoutonJouer = true;
@@ -677,12 +734,12 @@ export class EcranDeJeuComponent implements OnInit {
     }
 
     // si la partie est finie ! 
-    else if (self.partieEnCours == false) {
+    //else if (self.partieEnCours == false) {
       //console.log("findetour, if partieencours false")
       // self.commandeDispo = false;
       //setTimeout(self.finDePartie, 20000, self, pion,)
       //self.finDePartie(self, pion);
-    }
+    //}
   }
 
 
@@ -711,6 +768,56 @@ export class EcranDeJeuComponent implements OnInit {
 
     self.valeurDesDes = totalDe;
 
+    
+
+        //affichage du type de case pour le joueur :
+
+        console.log(self.listeCases)
+
+        if (self.listeCases[pion.futurePositionIndexCasePlayer].typeCase=="depart" ){
+          var effet = "Case Départ, c'est parti !"
+        }
+        else if (self.listeCases[pion.futurePositionIndexCasePlayer].typeCase=="arrivee" ){
+          var effet = "Case Arrivée, BRAVO !"
+        }
+        else if (self.listeCases[pion.futurePositionIndexCasePlayer].typeCase=="prison" ){
+          var effet = "Case Prison, mauvaise ambiance..."
+        }
+        else if (self.listeCases[pion.futurePositionIndexCasePlayer].typeCase=="pioche" ){
+          var effet = "Case pioche, tu réfléchis à tes choix de vie..."
+        }
+        else if (self.listeCases[pion.futurePositionIndexCasePlayer].typeCase=="prince" ){
+          var effet = "Case prince, tu retrouves un être cher et cela double ton déplacement ! "
+        }
+        else if (self.listeCases[pion.futurePositionIndexCasePlayer].typeCase=="mechant" ){
+          var effet = "Case mechant, tu tombes nez à nez à ton ennemi qui te repousse à ton point de départ, dommage... "
+        }
+        else if (self.listeCases[pion.futurePositionIndexCasePlayer].typeCase=="duel" ){
+          var effet = "Case duel, ici de nombreux combat ont eu lieu... "
+        }
+        else if (self.listeCases[pion.futurePositionIndexCasePlayer].typeCase=="vide" ){
+          var effet = "Case vide, tu mérites bien de te reposer un peu ! "
+        }
+        else if (self.listeCases[pion.futurePositionIndexCasePlayer].typeCase=="deplacement" ){
+          if (self.listeCases[pion.futurePositionIndexCasePlayer].parametre==-1) {
+            var effet = "Case déplacement, tu suis une route mais c'était la mauvaise !  "
+          }
+          else  {
+            var effet = "Case déplacement, tu as trouvé un raccourcis ! "
+          }
+        }
+    
+    self.caseEnCours=effet;
+    
+    
+    
+
+
+
+
+
+
+
     // gere le cas où on dépasse la case arrivee
     if (pion.positionIndexCasePlayer + totalDe >= self.nbcasePlateau - 1) {
       // la partie est terminée / le pion a gagné
@@ -722,7 +829,7 @@ export class EcranDeJeuComponent implements OnInit {
         console.log("on rentre ici")
 
         console.log(pion)
-        let waitTime = 3000 + self.tauxRaffraichissement * (self.tourEnCours.valueDice1 + self.tourEnCours.valueDice2) * self.taillecaseW / self.velocityW;
+        let waitTime = 1000 + self.tauxRaffraichissement * (self.tourEnCours.valueDice1 + self.tourEnCours.valueDice2) * self.taillecaseW / self.velocityW;
         setTimeout(self.finDePartie, waitTime, self, pion);
         // setTimeout(clearInterval, waitTime+500, self.actualisation);
         // clearInterval(self.actualisation);
@@ -744,8 +851,9 @@ export class EcranDeJeuComponent implements OnInit {
     else { // pas de case speciale ET on a pas finit de jouer pour autant
       // la position du pion est celle du back.
       pion.futurePositionIndexCasePlayer = tour.positionFutureJoueur;
-
     }
+
+    // besoin d'un test quand même si on arrive à la fin
 
 
     //// TODO: faire les actions/pouvoirs des joueurs
@@ -754,10 +862,25 @@ export class EcranDeJeuComponent implements OnInit {
   effetCaseDeplacement(self, pion, tour) {
     // cette case à un effet de deplacement
 
-    //var deplacement = self.tour.effetAActiver.deplacement;
-    pion.futurePositionIndexCasePlayer = tour.positionFutureJoueur;
-
-
+       // besoin d'un test quand même si on arrive à la fin
+       if ( tour.positionFutureJoueur >= self.nbcasePlateau - 1) {
+        // la partie est terminée / le pion a gagné
+        self.partieEnCours = false;
+        pion.finished = true; // c'est CE pion qui a gagné
+        console.log("la partie est terminée grace a ce bonus !")
+  
+        if (tour.findepartie == true || self.partieEnCours == false) {//la partie est finie et ça a été vérifié avec le back.
+  
+  
+          let waitTime = 1000 + self.tauxRaffraichissement * (tour.deplacement) * self.taillecaseW / self.velocityW;
+          setTimeout(self.finDePartie, waitTime, self, pion);
+  
+          //pion.futurePositionIndexCasePlayer = tour.positionFutureJoueur;
+        }
+      }
+      // dans tous les cas 
+      pion.futurePositionIndexCasePlayer = tour.positionFutureJoueur;
+  
   }
 
   // fin de partie : redirection
@@ -926,6 +1049,7 @@ export class EcranDeJeuComponent implements OnInit {
     this.ctxPlateau.quadraticCurveTo(x, y, x + radius.tl, y);
     this.ctxPlateau.closePath();
     if (fill) {
+      //this.ctxPlateau.fillStyle = `rgba(color[1], color[2], color[3], 0.5)`;;
       this.ctxPlateau.fillStyle = color;
       this.ctxPlateau.fill();
     }
@@ -1060,14 +1184,73 @@ export class EcranDeJeuComponent implements OnInit {
     this.ctxPlateau.rect(fromx + 4*epaisseur, fromy, epaisseur, toy - fromy)
 
     this.ctxPlateau.closePath();
+    //var r_a = 0.3;
+    //this.ctxPlateau.fillStyle = `rgba(color[1], color[2], color[3], ${r_a})`;
     this.ctxPlateau.fillStyle = color;
     this.ctxPlateau.fill();
   }
 
 
+  drawCircle(milieux, milieuy, rayon, color  ) {
+    this.ctxPlateau.beginPath();
 
 
+    //ctx.arc(x, y, rayon, angleDépart, angleFin, sensAntiHoraire);
+    this.ctxPlateau.arc(milieux, milieuy, rayon, 0, 2*Math.PI, true)
 
+    this.ctxPlateau.closePath();
+    this.ctxPlateau.fillStyle = color;
+    this.ctxPlateau.fill();
+  }
+
+
+ drawCross(x, y, size, width, color) {
+    // Start at the top left corner and draw an X
+    this.ctxPlateau.beginPath();
+    x -= size;
+    y -= size;
+    this.ctxPlateau.moveTo(x, y);
+    x += width / 2;
+    y -= width / 2;
+    this.ctxPlateau.lineTo(x, y);
+    x += size;
+    y += size;
+    this.ctxPlateau.lineTo(x, y);
+    x += size;
+    y -= size;
+    this.ctxPlateau.lineTo(x, y);
+    x += width / 2;
+    y += width / 2;
+    this.ctxPlateau.lineTo(x, y);
+    x -= size;
+    y += size;
+    this.ctxPlateau.lineTo(x, y);
+    x += size;
+    y += size;
+    this.ctxPlateau.lineTo(x, y);
+    x -= width / 2;
+    y += width / 2;
+    this.ctxPlateau.lineTo(x, y);
+    x -= size;
+    y -= size;
+    this.ctxPlateau.lineTo(x, y);
+    x -= size;
+    y += size;
+    this.ctxPlateau.lineTo(x, y);
+    x -= width / 2;
+    y -= width / 2;
+    this.ctxPlateau.lineTo(x, y);
+    x += size;
+    y -= size;
+    this.ctxPlateau.lineTo(x, y);
+    x -= size;
+    y -= size;
+    this.ctxPlateau.lineTo(x, y);
+    //this.ctxPlateau.stroke();
+    this.ctxPlateau.closePath();
+    this.ctxPlateau.fillStyle = color;
+    this.ctxPlateau.fill();
+}
 
 
 

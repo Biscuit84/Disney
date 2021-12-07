@@ -88,11 +88,13 @@
   border: solid white 2px;
   border-radius: 5px;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   align-content: center;
   height: 100%;
   width: 100%;
+  margin: 0;
+  padding: 0px;
 
 }
 
@@ -108,6 +110,14 @@
   background-color: rgb(87, 20, 87);
   border-color: rgb(255, 255, 255);
 }
+.bouttons{
+  justify-content: center;
+    align-items: center;
+    /* margin-left: -3%; */
+    display: flex;
+    flex-direction: column;
+    /* padding: 2%;*/
+}
 
 .dice{
   height: 110px;
@@ -122,7 +132,45 @@
   box-shadow: darkorchid;
 }
 
+.caseEnCours{
+  text-align: center;
+  font-size: 2.5em;
+  font-family: 'Devonshire', cursive;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0%;
+  align-items: center;
+}
 
+#caseEffet{
+  text-align: center;
+  font-size: 1em;
+  font-family: cursive;
+  line-height :1em;
+}
+.tirtreCase{
+  margin-top: 33%;
+}
+#texteCase{
+    /* display: flex; */
+    /* align-self: center; */
+    /* justify-content: space-around; */
+    /* align-content: center; */
+    /* align-items: center; */
+    font-family: cursive;
+    background-color: rgb(87, 20, 87);
+    border-color: rgb(255, 255, 255);
+    color: white;
+    border: solid 2px;
+    font-size: 48%;
+    width: 78%;
+    padding: 6%;
+    margin: 4%;
+    border-radius: 22px;
+    text-align: center;
+}
 
 /* ********************************************** player control***************************************************************** */
 /* partie de l'int utilisateur sur le coté */
