@@ -26,12 +26,14 @@
   display:flex;
   justify-content:center;
   align-items:center;
+  height: fit-content;
+    width: min-content;
+    margin-top: 7rem;
 
 }
 
-.cardbody{
-  height: auto;
-  width: auto;
+.cardContenant{
+  width: 30rem;
 }
 
   .infoGeneraleNomItem{
@@ -54,4 +56,18 @@
   .dropdown-pull-right>.dropdown-menu {
     right: 0;
     left: auto;
+  }
+
+  .text-white{
+    background-color: #dab4daa1;
+  }
+
+
+  /* boutons */
+  #boutonCancel{
+    background-color: #53a1b4;
+  }
+
+  #boutonSave{
+    background-color: #dab4daa1;
   }
