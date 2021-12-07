@@ -47,7 +47,7 @@ public class PersonnageRestController {
 		if (optPersonnage.isPresent()) {
 			return optPersonnage.get();
 		} else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "personnage non trouvé");
 		}
 	}
 
@@ -64,7 +64,7 @@ public class PersonnageRestController {
 	@JsonView(Views.ViewsPersonnage.class)
 	public Personnage update(@PathVariable Long id, @RequestBody Personnage personnage) {
 		if (!personnageRepo.existsById(id)) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "personnage non trouvé");
 		}
 
 		personnage = personnageRepo.save(personnage);
@@ -76,7 +76,7 @@ public class PersonnageRestController {
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
 		if (!personnageRepo.existsById(id)) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "personnage non trouvé");
 		}
 		
 		personnageRepo.deleteById(id);

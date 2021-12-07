@@ -1,8 +1,6 @@
 package disney.web;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,7 +59,7 @@ public class CompteRestController {
 		if (optCompte.isPresent()) {
 			return optCompte.get();
 		} else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Compte non trouvé");
 		}
 	}
 
@@ -81,7 +79,7 @@ public class CompteRestController {
 	@JsonView(Views.ViewsCompte.class)
 	public Compte update(@PathVariable Long id, @RequestBody Compte compte) {
 		if (!compteRepo.existsById(id)) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Compte non trouvé");
 		}
 
 		compte = compteRepo.save(compte);
@@ -93,7 +91,7 @@ public class CompteRestController {
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
 		if (!compteRepo.existsById(id)) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Compte non trouvé");
 		}
 		
 		compteRepo.deleteById(id);

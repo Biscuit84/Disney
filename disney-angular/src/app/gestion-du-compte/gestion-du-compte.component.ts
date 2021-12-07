@@ -10,8 +10,9 @@ import { GestionDuCompteService } from './gestion-du-compte.service';
 })
 export class GestionDuCompteComponent implements OnInit {
   constructor(public compteService: PageConnexionService, private gestionDuCompteService: GestionDuCompteService) {
-    this.showHistorique
-    this.gestionDuCompteService.load()
+    
+    this.gestionDuCompteService.load();
+    this.compteService.reload();
   }
 
   ngOnInit(): void {
