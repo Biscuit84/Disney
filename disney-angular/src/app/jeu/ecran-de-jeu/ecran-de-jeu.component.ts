@@ -64,7 +64,7 @@ export class EcranDeJeuComponent implements OnInit {
   public velocityH: number = 1; // nb de pixel d'avancement du pion par raffraichissement (10ms)
   public velocityW: number = 1;
   public tauxRaffraichissement: number = 10; // vitesse du setinterval
-  public niveauDeVitesseDuPion: number = 1;
+  public niveauDeVitesseDuPion: number = 2;
   // vitesse
   public valeurdelavitesse: number = 1;
   public slider = document.getElementById("vitesseRange");
@@ -363,6 +363,7 @@ export class EcranDeJeuComponent implements OnInit {
           this.drawSquare(pX, pY, this.taillecaseW, this.taillecaseH, "white");
 
           this.roundRect(limiteX11, limiteY11, Math.abs(limiteX11 - limiteX22), Math.abs(limiteY11 - limiteY22), 10, true, false, "black")
+          this.drawHeart(milieudelacaseX, limiteY1, limiteX2, limiteY2, (limiteX2 - limiteX1), (limiteY2 - limiteY1), "black");
         }
         else if (this.listeCases[numeroCase - 1].typeCase == "prince") {
           this.drawSquare(pX, pY, this.taillecaseW, this.taillecaseH, "white");
@@ -625,10 +626,13 @@ export class EcranDeJeuComponent implements OnInit {
       // LES PIONS UN ET DEUX FINISSENT LEURS TOURS AUTO
       else if (self.joueurActuel == 1 || self.joueurActuel == 2) { // si ce n'est pas le joueur qui joue on "click" auto sur la suite
         //let pionSuivant = self.listePion[self.joueurActuel + 1];
-        let waitTime = 2000 + self.tauxRaffraichissement * (self.tourEnCours.valueDice1 + self.tourEnCours.valueDice2) * self.taillecaseW / self.velocityW;
+        var waitTime = 2000 + self.tauxRaffraichissement * (self.tourEnCours.valueDice1 + self.tourEnCours.valueDice2) * self.taillecaseW / self.velocityW;
         if (self.tourEnCours.effetAActiver == true) {
-          waitTime = waitTime + self.tourEnCours.deplacement * self.tauxRaffraichissement * self.taillecaseW / self.velocityW;
+          if(self.tourEnCours.deplacement !=0){
+            waitTime = waitTime + self.tourEnCours.deplacement * self.tauxRaffraichissement * self.taillecaseW / self.velocityW + 1000;
+          }
         }
+
         console.log("wait time = " + waitTime);
         setTimeout(self.FinDeTour, waitTime, self, pion, self.tourEnCours); // passe le tour auto
         self.dispoBoutonFin = false;
@@ -637,9 +641,11 @@ export class EcranDeJeuComponent implements OnInit {
       // LE DERNEIR PION A FINI, CEST AU TOUR DU JOUEUR
       else if (self.joueurActuel == 3) {
         //self.dispoBoutonJouer = true;
-        let waitTime = 2000 + self.tauxRaffraichissement * (self.tourEnCours.valueDice1 + self.tourEnCours.valueDice2) * self.taillecaseW / self.velocityW;
+        var waitTime = 2000 + self.tauxRaffraichissement * (self.tourEnCours.valueDice1 + self.tourEnCours.valueDice2) * self.taillecaseW / self.velocityW;
         if (self.tourEnCours.effetAActiver == true) {
-          waitTime = waitTime + self.tourEnCours.deplacement * self.tauxRaffraichissement * self.taillecaseW / self.velocityW;
+          if(self.tourEnCours.deplacement !=0){
+            waitTime = waitTime + self.tourEnCours.deplacement * self.tauxRaffraichissement * self.taillecaseW / self.velocityW + 1000;
+          }
         }
         console.log("wait time = " + waitTime);
         setTimeout(self.FinDeTour, waitTime, self, pion, self.tourEnCours); // passe le tour auto
@@ -724,6 +730,7 @@ export class EcranDeJeuComponent implements OnInit {
         pion.futurePositionIndexCasePlayer = tour.positionFutureJoueur;
       }
     }
+
     // sinon est ce que l'on arrive sur une case à effet ?
     else if (tour.effetAActiver) // case avec un effet 
     {

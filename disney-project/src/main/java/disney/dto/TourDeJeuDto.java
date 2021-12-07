@@ -8,6 +8,7 @@ public class TourDeJeuDto {
 	private boolean finPartie = false;
 	private boolean effetAActiver = false;
 	private int deplacement;
+	private int compt;
 	
 	public int getValueDice1() {
 		return valueDice1;
@@ -51,6 +52,13 @@ public class TourDeJeuDto {
 	public void setDeplacement(int deplacement) {
 		this.deplacement = deplacement;
 	}
+	public int getCompt() {
+		return compt;
+	}
+	public void setCompt(int compt) {
+		this.compt = compt;
+	}
+	
 	
 	
 	

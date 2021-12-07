@@ -1,5 +1,5 @@
 #ecran-gestion{
-    top: 7vh;
+    top: 5.5vh;
     height: 100%;
     width: 100%;
     position: relative;
@@ -14,4 +14,10 @@
     background-repeat:no-repeat;
     background-attachment: fixed;
     background-size: cover;
+    }
+
+    #couleur{
+  background-color: #dab4daa1;
+  
+
     }

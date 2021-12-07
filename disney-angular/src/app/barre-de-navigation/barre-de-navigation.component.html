@@ -36,9 +36,7 @@
               <a class="nav-link" aria-current="page" [routerLink]="['/accueilJoueur']"
                 routerLinkActive="activebutton">Mon compte</a>
             </li>
-            <!-- <li class="nav-item">
-              <a class="nav-link" [routerLink]="['/accueilJoueur']" routerLinkActive="activebutton">Mon compte</a>
-            </li> -->
+
             <li class="nav-item">
               <a class="nav-link" aria-current="page" [routerLink]="['/jeu']" routerLinkActive="activebutton">Le
                 jeu</a>
@@ -110,9 +108,9 @@
               id="avatarAdmin" />
           </a>
 
-          <ul class="dropdown-menu row" id="avatars">
-            <li class="col" *ngFor="let avatar of this.avatarService.avatars">
-              <a class="dropdown-item choixAvatar"><img id={{avatar.id}} (click)="changeAvatar(avatar)"
+          <ul class="dropdown-menu " id="avatars">
+            <li class="d-flex row liAvatar" >
+              <a class="dropdown-item choixAvatar col-3" *ngFor="let avatar of this.avatarService.avatars"><img id={{avatar.id}} (click)="changeAvatar(avatar)"
                   src={{avatar.image}} class="logo_avatar rounded-circle" />
               </a>
             </li>

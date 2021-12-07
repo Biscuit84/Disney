@@ -23,7 +23,7 @@ public class Joueur extends Compte{
 
 	private int life=3;
 
-	private int nbEtoiles=100;
+	private int nbEtoiles=500;
 	
 	private int nbVictoire=0;
 	

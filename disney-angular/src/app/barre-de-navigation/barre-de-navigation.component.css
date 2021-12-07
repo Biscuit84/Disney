@@ -31,6 +31,8 @@
   left: inherit;
   right: inherit;
   margin: 0;
+  height: 7vh;
+  min-height: 4em;
 }
 
 
@@ -54,7 +56,8 @@
 .container-fluid {
   background-color: thistle;
   color: purple;
-  height: 5em;
+  height: 7vh;
+  min-height: 4em;
 }
 
 .navbar-light .navbar-brand {
@@ -213,4 +216,18 @@ ul {
 
 .cursor-top-r{
   cursor: pointer;
+}
+
+/* CSS Avatar */
+#avatars{
+width: 22rem;
+}
+
+.dropdown-item{
+  width: 30%;
+} 
+
+.liAvatar{
+  padding-right: 0;
+  margin-left: 1rem;
 }
