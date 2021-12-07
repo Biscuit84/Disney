@@ -1,6 +1,73 @@
-#ecran-actualites{
+@import url("https://fonts.googleapis.com/css2?family=Devonshire&display=swap");
+
+
+/* #ecran-actualites{
     top: 7vh;
     height: 93.2vh;
     width: 100%;
     position: relative;
+  } */
+
+body {
+  background-image: url(../../assets/images/actualites/fondActu1.jpg);
+    background-repeat:no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+   
+
+}
+
+  #ecran-actualites {
+    top: 4em;
+    height: 100%;
+    width: 100%;
+    position: relative;
+  
+    /* font-family: 'Montserrat', sans-serif;
+    font-size: 14px; */
+
+  }
+
+  .containerCard {
+    background-color: rgba(245, 245, 245, 0.7);
+    border-radius: 10px;
+  }
+  
+  main{
+  display: flex;
+  justify-content: center;
+  }
+  
+  .ecranconnec{
+  width:48%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin-top: 10%;
+  }
+
+  #ecranconnec1{
+    height: 60%;
+    width: 60%;
+    /* align-content: center; */
+    align-self: center;
+    margin-top: 4rem;
+    border: none;
+    background-color: transparent;
+  }    
+  
+  body{
+    height: 90vh;
+    /* background-color: darkorchid; */
+  }
+  
+  .imageCaroussel{
+    border-radius:20px;
+  }
+
+  #btnNous {
+    background-color: #dd94cb;
+    border-color: #dd94cb;
+    justify-content: center;
+    display: flex;
   }
