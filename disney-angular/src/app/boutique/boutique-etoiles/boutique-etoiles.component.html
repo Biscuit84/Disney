@@ -42,6 +42,10 @@
                                     <a class="nav-link" id="nombreEtoilesJoueur">Nombre d'étoiles:
                                         {{joueur.nbEtoiles}} <i class="fas fa-star etoile"></i></a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="nombreEtoilesJoueur">Nombre de vies:
+                                        {{joueur.life}} <i class="fas fa-heart coeur"></i></a>
+                                </li>
                             </ul>
                         </div>
 
@@ -100,14 +104,35 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
 
-
                         <div class="dropdown dropdown-pull-right btn-group">
-                            <button id="btnGroupDrop1" type="button" class="btn dropdown-toggle"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="../../assets/images/avatar/avatar_mickey.png"
-                                    class="logo_admin rounded-circle" id="avatarAdmin" />
-                            </button>
+                        <div class="btn-group dropdown dropdown-pull-right cursor-top-r" *ngIf="pageConnexionService.isJoueur()">
+                            <ul class="navbar-nav">
+                              <li class="nav-item">
+                                <a class="nav-link deconnexion" (click)=deconnexion()>Deconnexion</a>
+                              </li>
+                            </ul>
+                  
+                            <a id="btnGroupDrop1" class="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true"
+                              aria-expanded="false">
+                              <img src={{this.pageConnexionService.compte.avatar.image}} class="logo_admin rounded-circle"
+                                id="avatarAdmin" />
+                            </a>
+                  
+                            <ul class="dropdown-menu " id="avatars">
+                              <li class="d-flex row liAvatar" >
+                                <a class="dropdown-item choixAvatar col-3" *ngFor="let avatar of this.avatarService.avatars"><img id={{avatar.id}} (click)="changeAvatar(avatar)"
+                                    src={{avatar.image}} class="logo_avatar rounded-circle" />
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
 
+
+
+
+<!-- 
+                        <div class="dropdown dropdown-pull-right btn-group">
                             <div class="btn-group dropdown dropdown-pull-right cursor-top-r" *ngIf="pageConnexionService.isJoueur()">
                                 <ul class="navbar-nav">
                                   <li class="nav-item">
@@ -129,7 +154,7 @@
                                   </li>
                                 </ul>
                               </div>
-                        </div>
+                        </div> -->
 
                     </div>
                 </nav>
