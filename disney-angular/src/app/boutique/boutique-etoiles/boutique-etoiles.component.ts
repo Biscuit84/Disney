@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AvatarHttpService } from 'src/app/avatar-http.service';
 import { JoueurHttpService } from 'src/app/joueur-http.service';
 import { PageConnexionService } from 'src/app/page-connexion/page-connexion.service';
 import { PersonnageHttpService } from 'src/app/personnage-http.service';
-import { BoutiqueDto, BoutiqueEtoileDto, Compte, Etoile, Personnage } from 'src/model';
+import { Avatar, BoutiqueDto, BoutiqueEtoileDto, Compte, Etoile, Personnage } from 'src/model';
 import { BoutiqueHttpService } from '../boutique-http.service';
 
 @Component({
@@ -23,7 +25,7 @@ export class BoutiqueEtoilesComponent implements OnInit {
   joueur: Compte;
 
 
-  constructor(private pageConnexionService: PageConnexionService, private persoService: PersonnageHttpService, private boutiqueService: BoutiqueHttpService, private joueurService: JoueurHttpService) {
+  constructor(public pageConnexionService: PageConnexionService, private persoService: PersonnageHttpService, private boutiqueService: BoutiqueHttpService, private joueurService: JoueurHttpService,private router: Router, public avatarService: AvatarHttpService) {
     // this.compte= pageConnexionService.connexion;
     this.joueur = this.pageConnexionService.compte;
     // this.nombreEtoileJoueur=this.joueur.nbEtoiles
@@ -111,5 +113,16 @@ export class BoutiqueEtoilesComponent implements OnInit {
       this.listeEtoilesPanier.splice(idx, 1);
     }
   }
+  deconnexion() {
+    this.pageConnexionService.deconnexion();
+    this.router.navigate(['home'])
+  }
 
+
+  findAvatarCompte() {
+  }
+
+  changeAvatar(avatar: Avatar) {
+    this.pageConnexionService.updateAvatar(avatar);
+  }
 }
