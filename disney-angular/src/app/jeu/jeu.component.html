@@ -3,12 +3,37 @@
 
     <div id="choix_partie">
 
-        <div class="card mt-3">
+
+        <div id="titre ">Créer ta partie</div>
+
+
+
+        <div class="form-group">
+            <label for="personnage"> Quel personnage veux-tu pour ta partie ?</label>
+            <select class="form-control" id="personnage" [(ngModel)]="idPerso">
+                <option *ngFor="let p of listPersonnageDispo()" [value]="p.id">{{p.nom}} avec son pouvoir :
+                    {{p.pouvoir}}
+                    <img src="{{p.avatar}}" alt="avatar">
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="plateau"> Sur quel plateau veux-tu jouer ?</label>
+            <select class="form-control" id="plateau" [(ngModel)]="idPlateau">
+                <option *ngFor="let p of listPlateauxDispo()" [value]="p.id">{{p.nom}} de {{p.nbCases}}</option>
+            </select>
+        </div>
+
+
+
+
+        <!-- 
+        <div class="card mt-3" *ngIf=(partiePossible)>
             <div class="card-header bg-info text-white">
-                <h3> Créer ta partie</h3>
+                <h3> </h3>
             </div>
             <div class="form-group">
-                <label for="personnage"> Quel personnage veux-tu pour ta parite ?</label>
+                <label for="personnage"> Quel personnage veux-tu pour ta partie ?</label>
                 <select class="form-control" id="personnage" [(ngModel)]="idPerso">
                     <option *ngFor="let p of listPersonnageDispo()" [value]="p.id">{{p.nom}} avec son pouvoir :
                         {{p.pouvoir}}</option>
@@ -20,11 +45,61 @@
                     <option *ngFor="let p of listPlateauxDispo()" [value]="p.id">{{p.nom}} de {{p.nbCases}}</option>
                 </select>
             </div>
+        </div> -->
+
+        <!--<a><button id="boutonLancement" type="button" class="btn btn-success bouton" (click)="CreerLapartie()"
+                *ngIf=(partiePossible)>Commencer la
+                partie </button></a>-->
+
+        <div class="component">
+            <ul class="align">
+                <li>
+                    <figure class='book'>
+                        <!-- Front -->
+
+                        <ul class='hardcover_front'>
+                            <li>
+                                <div class="coverDesign custom">
+                                    <h1>Princess Adventure</h1>
+                                    <p>par {{joueur.pseudo}}</p>
+                                </div>
+                            </li>
+                            <li></li>
+                        </ul>
+
+                        <!-- Pages -->
+
+                        <ul class='page'>
+                            <li></li>
+                            <li>
+                                <a class="btn" type="button" (click)="CreerLapartie()" *ngIf=(partiePossible)>Commencer
+                                    l'aventure</a>
+                                <a class="btn" type="button" *ngIf=(!partiePossible)
+                                    [routerLink]="['/boutique/personnages']">Commencer l'aventure</a>
+
+                            </li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+
+                        <!-- Back -->
+
+                        <ul class='hardcover_back'>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                        <ul class='book_spine'>
+                            <li></li>
+                            <li></li>
+                        </ul>
+
+                    </figure>
+                </li>
+            </ul>
         </div>
 
-        <a (click)="CreerLapartie()"><button id="boutonLancement" type="button" class="btn btn-success bouton">Commencer
-                la
-                partie</button></a>
+
 
 
         <div id="previsualisation">
@@ -48,8 +123,10 @@
 
 
     <div id="regles">
+        <img id="imageRegles" src="../../assets/images/jeu/regles.jpg" alt="parchemin">
         <h4> Regles du jeu</h4>
-        <p id=textregles> Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto cum, nemo minus suscipit perferendis nam sint
+        <p id=textregles> Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto cum, nemo minus suscipit
+            perferendis nam sint
             molestiae quam incidunt perspiciatis. Vel temporibus in eaque ut quidem autem vitae aliquam corporis.lo
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto nemo vero, laborum sint ipsa
             consequuntur necessitatibus fuga dignissimos, aut saepe consectetur assumenda porro quo ullam! Ad tempore

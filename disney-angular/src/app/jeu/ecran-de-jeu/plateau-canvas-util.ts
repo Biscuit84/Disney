@@ -75,6 +75,7 @@ export class CaseVirtuelle {
   color:string;
   positionCaseX: number;
   positionCaseY:number;
+  parametre:number;
 
   constructor(
     ordre?: number, 
@@ -83,7 +84,8 @@ export class CaseVirtuelle {
     typeCase?: string, 
     color?: string,
     positionCaseX?: number,
-    positionCaseY?:number
+    positionCaseY?:number,
+    parametre?:number
 
 ) {
     this.ordre = ordre
@@ -93,6 +95,7 @@ export class CaseVirtuelle {
     this.color = color
     this.positionCaseX=positionCaseX
     this.positionCaseY=positionCaseY
+    this.parametre=parametre
   }
 
 }

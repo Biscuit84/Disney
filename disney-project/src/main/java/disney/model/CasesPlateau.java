@@ -35,6 +35,8 @@ public class CasesPlateau {
 	
 	private int ordreCase;	
 	
+   private int parametre;	
+	
 	@Version
 	private int version;
 	
@@ -42,6 +44,13 @@ public class CasesPlateau {
 		this.plateau = plateau;
 		this.uneCase = uneCase;
 		this.ordreCase = ordreCase;
+	}
+	
+	public CasesPlateau(Plateau plateau, Cases uneCase, int ordreCase, int parametre) {
+		this.plateau = plateau;
+		this.uneCase = uneCase;
+		this.ordreCase = ordreCase;
+		this.setParametre(parametre);
 	}
 	public CasesPlateau() {
 		super();
@@ -73,10 +82,22 @@ public class CasesPlateau {
 		this.ordreCase = ordreCase;
 	}
 	
+	
+	
+	
+	
 	@Override
 	public String toString() {
 		return "CasesPlateau [idCasePlateau=" + idCasePlateau + ", plateau=" + plateau + ", uneCase=" + uneCase
 				+ ", ordreCase=" + ordreCase + "]";
+	}
+
+	public int getParametre() {
+		return parametre;
+	}
+
+	public void setParametre(int parametre) {
+		this.parametre = parametre;
 	}
 
 	

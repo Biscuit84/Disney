@@ -196,6 +196,8 @@ class TestMain {
 		Cases caseVide = new Cases("Vide",TypeCase.vide);
 		Cases caseDuel= new Cases("Duel",TypeCase.duel);
 		Cases caseDeplacement = new Cases("Deplacement",TypeCase.deplacement);
+		Cases caseRecule = new Cases("Recule",TypeCase.deplacement);
+		Cases caseAvance = new Cases("Avance",TypeCase.deplacement);		
 		Cases caseDepart = new Cases("Depart",TypeCase.depart);
 		Cases caseArrivee = new Cases("Arrivee",TypeCase.arrivee);
 		Cases casePioche = new Cases("Pioche",TypeCase.pioche);
@@ -205,6 +207,8 @@ class TestMain {
 		caseVide = casesRepo.save(caseVide);
 		caseDuel = casesRepo.save(caseDuel);
 		caseDeplacement = casesRepo.save(caseDeplacement);
+		caseAvance = casesRepo.save(caseAvance);
+		caseRecule = casesRepo.save(caseRecule);
 		caseDepart = casesRepo.save(caseDepart);
 		caseArrivee = casesRepo.save(caseArrivee);
 		casePioche = casesRepo.save(casePioche);
@@ -241,13 +245,13 @@ class TestMain {
 		plateau1=plateauRepo.save(plateau1);
 		
 		//CasesPlateau
-		List <CasesPlateau> casesPlateauDemo = new ArrayList();
+		List <CasesPlateau> casesPlateauDemo = new ArrayList<CasesPlateau>();
 		
 		CasesPlateau c1pDemo = new CasesPlateau(plateau1, caseDepart, 0);
 		casesPlateauDemo.add(c1pDemo);
 		CasesPlateau c2pDemo = new CasesPlateau(plateau1, caseVide, 1);
 		casesPlateauDemo.add(c2pDemo);
-		CasesPlateau c3pDemo = new CasesPlateau(plateau1, caseDeplacement, 2);
+		CasesPlateau c3pDemo = new CasesPlateau(plateau1, caseDeplacement, 2, 1);
 		casesPlateauDemo.add(c3pDemo);
 		CasesPlateau c4pDemo = new CasesPlateau(plateau1, caseDuel, 3);
 		casesPlateauDemo.add(c4pDemo);
@@ -259,7 +263,7 @@ class TestMain {
 		casesPlateauDemo.add(c7pDemo);
 		CasesPlateau c8pDemo = new CasesPlateau(plateau1, caseMechant, 7);
 		casesPlateauDemo.add(c8pDemo);
-		CasesPlateau c9pDemo = new CasesPlateau(plateau1, caseDeplacement, 8);
+		CasesPlateau c9pDemo = new CasesPlateau(plateau1, caseDeplacement, 8 , -1);
 		casesPlateauDemo.add(c9pDemo);
 		CasesPlateau c10pDemo = new CasesPlateau(plateau1, caseVide, 9);
 		casesPlateauDemo.add(c10pDemo);
@@ -275,7 +279,7 @@ class TestMain {
 		casesPlateauDemo.add(c15pDemo);
 		CasesPlateau c16pDemo = new CasesPlateau(plateau1, caseGentil, 15);
 		casesPlateauDemo.add(c16pDemo);
-		CasesPlateau c17pDemo = new CasesPlateau(plateau1, caseDeplacement, 16);
+		CasesPlateau c17pDemo = new CasesPlateau(plateau1, caseDeplacement, 16, -1);
 		casesPlateauDemo.add(c17pDemo);
 		CasesPlateau c18pDemo = new CasesPlateau(plateau1, casePioche, 17);
 		casesPlateauDemo.add(c18pDemo);
@@ -317,13 +321,13 @@ class TestMain {
 		Plateau2=plateauRepo.save(Plateau2);
 		
 		//CasesPlateau
-		List <CasesPlateau> casesPlateauTest = new ArrayList();
+		List <CasesPlateau> casesPlateauTest = new ArrayList<CasesPlateau>();
 		
 		CasesPlateau c1pTest = new CasesPlateau(Plateau2, caseDepart, 0);
 		casesPlateauTest.add(c1pTest);
 		CasesPlateau c2pTest = new CasesPlateau(Plateau2, caseVide, 1);
 		casesPlateauTest.add(c2pTest);
-		CasesPlateau c3pTest = new CasesPlateau(Plateau2, caseDeplacement, 2);
+		CasesPlateau c3pTest = new CasesPlateau(Plateau2, caseRecule, 2, -1);
 		casesPlateauTest.add(c3pTest);
 		CasesPlateau c4pTest = new CasesPlateau(Plateau2, caseDuel, 3);
 		casesPlateauTest.add(c4pTest);
@@ -335,12 +339,11 @@ class TestMain {
 		casesPlateauTest.add(c7pTest);
 		CasesPlateau c8pTest = new CasesPlateau(Plateau2, caseMechant, 7);
 		casesPlateauTest.add(c8pTest);
-		CasesPlateau c9pTest = new CasesPlateau(Plateau2, caseDeplacement, 8);
+		CasesPlateau c9pTest = new CasesPlateau(Plateau2, caseAvance, 8, +1);
 		casesPlateauTest.add(c9pTest);
 		CasesPlateau c10pTest = new CasesPlateau(Plateau2, caseArrivee, 9);
 		casesPlateauTest.add(c10pTest);
 
-		
 		c1pTest=casesPlateauRepo.save(c1pTest);
 		c2pTest=casesPlateauRepo.save(c2pTest);
 		c3pTest=casesPlateauRepo.save(c3pTest);
@@ -362,13 +365,13 @@ class TestMain {
 		plateau3=plateauRepo.save(plateau3);
 		
 		//CasesPlateau
-		List <CasesPlateau> casesPlateauRegular = new ArrayList();
+		List <CasesPlateau> casesPlateauRegular = new ArrayList<CasesPlateau>();
 		
 		CasesPlateau c1pRegular = new CasesPlateau(plateau3, caseDepart, 0);
 		casesPlateauRegular.add(c1pRegular);
 		CasesPlateau c2pRegular = new CasesPlateau(plateau3, caseVide, 1);
 		casesPlateauRegular.add(c2pRegular);
-		CasesPlateau c3pRegular = new CasesPlateau(plateau3, caseDeplacement, 2);
+		CasesPlateau c3pRegular = new CasesPlateau(plateau3, caseRecule, 2, -1);
 		casesPlateauRegular.add(c3pRegular);
 		CasesPlateau c4pRegular = new CasesPlateau(plateau3, caseDuel, 3);
 		casesPlateauRegular.add(c4pRegular);
@@ -380,7 +383,7 @@ class TestMain {
 		casesPlateauRegular.add(c7pRegular);
 		CasesPlateau c8pRegular = new CasesPlateau(plateau3, caseMechant, 7);
 		casesPlateauRegular.add(c8pRegular);
-		CasesPlateau c9pRegular = new CasesPlateau(plateau3, caseDeplacement, 8);
+		CasesPlateau c9pRegular = new CasesPlateau(plateau3, caseAvance, 8, 1);
 		casesPlateauRegular.add(c9pRegular);
 		CasesPlateau c10pRegular = new CasesPlateau(plateau3, caseVide, 9);
 		casesPlateauRegular.add(c10pRegular);
@@ -396,7 +399,7 @@ class TestMain {
 		casesPlateauRegular.add(c15pRegular);
 		CasesPlateau c16pRegular = new CasesPlateau(plateau3, caseGentil, 15);
 		casesPlateauRegular.add(c16pRegular);
-		CasesPlateau c17pRegular = new CasesPlateau(plateau3, caseDeplacement, 16);
+		CasesPlateau c17pRegular = new CasesPlateau(plateau3, caseAvance, 16, 1);
 		casesPlateauRegular.add(c17pRegular);
 		CasesPlateau c18pRegular = new CasesPlateau(plateau3, casePioche, 17);
 		casesPlateauRegular.add(c18pRegular);
@@ -416,7 +419,7 @@ class TestMain {
 		casesPlateauRegular.add(c25pRegular);
 		CasesPlateau c26pRegular = new CasesPlateau(plateau3, caseGentil, 25);
 		casesPlateauRegular.add(c26pRegular);
-		CasesPlateau c27pRegular = new CasesPlateau(plateau3, caseDeplacement, 26);
+		CasesPlateau c27pRegular = new CasesPlateau(plateau3, caseRecule, 26, -1);
 		casesPlateauRegular.add(c27pRegular);
 		CasesPlateau c28pRegular = new CasesPlateau(plateau3, casePioche, 27);
 		casesPlateauRegular.add(c28pRegular);
@@ -436,7 +439,7 @@ class TestMain {
 		casesPlateauRegular.add(c35pRegular);
 		CasesPlateau c36pRegular = new CasesPlateau(plateau3, caseGentil, 35);
 		casesPlateauRegular.add(c36pRegular);
-		CasesPlateau c37pRegular = new CasesPlateau(plateau3, caseDeplacement, 36);
+		CasesPlateau c37pRegular = new CasesPlateau(plateau3, caseAvance, 36, +1);
 		casesPlateauRegular.add(c37pRegular);
 		CasesPlateau c38pRegular = new CasesPlateau(plateau3, casePioche, 37);
 		casesPlateauRegular.add(c38pRegular);
@@ -456,7 +459,7 @@ class TestMain {
 		casesPlateauRegular.add(c45pRegular);
 		CasesPlateau c46pRegular = new CasesPlateau(plateau3, caseGentil, 45);
 		casesPlateauRegular.add(c46pRegular);
-		CasesPlateau c47pRegular = new CasesPlateau(plateau3, caseDeplacement, 46);
+		CasesPlateau c47pRegular = new CasesPlateau(plateau3, caseRecule, 46, -1);
 		casesPlateauRegular.add(c47pRegular);
 		CasesPlateau c48pRegular = new CasesPlateau(plateau3, casePioche, 47);
 		casesPlateauRegular.add(c48pRegular);
@@ -476,7 +479,7 @@ class TestMain {
 		casesPlateauRegular.add(c55pRegular);
 		CasesPlateau c56pRegular = new CasesPlateau(plateau3, caseGentil, 55);
 		casesPlateauRegular.add(c56pRegular);
-		CasesPlateau c57pRegular = new CasesPlateau(plateau3, caseDeplacement, 56);
+		CasesPlateau c57pRegular = new CasesPlateau(plateau3, caseRecule, 56, -1);
 		casesPlateauRegular.add(c57pRegular);
 		CasesPlateau c58pRegular = new CasesPlateau(plateau3, casePioche, 57);
 		casesPlateauRegular.add(c58pRegular);
@@ -554,12 +557,8 @@ class TestMain {
 		c61pRegular=casesPlateauRepo.save(c61pRegular);
 		c62pRegular=casesPlateauRepo.save(c62pRegular);
         c63pRegular=casesPlateauRepo.save(c63pRegular);
-
 		plateau3.setCases(casesPlateauRegular);
-		
 		plateau3=plateauRepo.save(plateau3);
-		
-		
 		
 		
 		//Partie
@@ -570,43 +569,38 @@ class TestMain {
 		//HISTORIQUE
 		String DateDebutPartie1 = "13/11/2021 15:49";
 		LocalDateTime localDateT1 = LocalDateTime.parse(DateDebutPartie1, formatter);
-
 		LocalDateTime heureFinPartie = LocalDateTime.now();
-		
 		Historique historique1 = new Historique();
 		historique1.setDateHeureDebutPartie(localDateT1);
 		historique1.setDateHeureFinPartie(heureFinPartie);
 		historique1=historiqueRepo.save(historique1);
-		
 		long minuteOfGameDuration = Duration.between(localDateT1, heureFinPartie).toMinutes();
 		System.out.println("duree de la partie:"+minuteOfGameDuration);
 		
 		//PersoObtenus
-		
+		// joueur 2
 		PersoObtenu perso1ObtenuJoueur2 = new PersoObtenu(perso2, joueur2);
 		PersoObtenu perso2ObtenuJoueur2 = new PersoObtenu(perso1, joueur2);
 		PersoObtenu perso3ObtenuJoueur2 = new PersoObtenu(perso3, joueur2);
 		PersoObtenu perso4ObtenuJoueur2 = new PersoObtenu(perso4, joueur2);
-		PersoObtenu perso1ObtenuJoueur1 = new PersoObtenu (perso1, joueur1);
-		PersoObtenu perso2ObtenuJoueur1 = new PersoObtenu (perso2, joueur1);
-		
 		perso1ObtenuJoueur2=persoObtenuRepo.save(perso1ObtenuJoueur2);
 		perso2ObtenuJoueur2=persoObtenuRepo.save(perso2ObtenuJoueur2);
 		perso3ObtenuJoueur2=persoObtenuRepo.save(perso3ObtenuJoueur2);
-		perso4ObtenuJoueur2=persoObtenuRepo.save(perso4ObtenuJoueur2);
+		perso4ObtenuJoueur2=persoObtenuRepo.save(perso4ObtenuJoueur2);	
 		
+		// joueur 1
+		PersoObtenu perso1ObtenuJoueur1 = new PersoObtenu (perso1, joueur1);
+		PersoObtenu perso2ObtenuJoueur1 = new PersoObtenu (perso2, joueur1);
 		perso1ObtenuJoueur1=persoObtenuRepo.save(perso1ObtenuJoueur1);
 		perso2ObtenuJoueur1=persoObtenuRepo.save(perso2ObtenuJoueur1);
 		
+		// joueur 4
+		PersoObtenu perso1ObtenuJoueur4 = new PersoObtenu (perso1, joueur4);
+		PersoObtenu perso2ObtenuJoueur4 = new PersoObtenu (perso2, joueur4);
+		perso1ObtenuJoueur4=persoObtenuRepo.save(perso1ObtenuJoueur4);
+		perso2ObtenuJoueur4=persoObtenuRepo.save(perso2ObtenuJoueur4);
+		
 		}
-		
-		//Compte connecte:
-//		Compte connected = compteRepo.findByLoginAndPassword("joueur1", "1234");
-//		
-//		System.out.println("Compte connecte:"+connected);
-//		
-//		spring.close();
-		
 
 
 }

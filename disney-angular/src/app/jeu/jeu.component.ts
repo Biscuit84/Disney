@@ -12,7 +12,7 @@ import { PlateauHttpService } from '../plateau-http.service';
 @Component({
   selector: 'app-jeu',
   templateUrl: './jeu.component.html',
-  styleUrls: ['./jeu.component.css']
+  styleUrls: ['./jeu.component.css', './livre.css']
 })
 export class JeuComponent implements OnInit {
 
@@ -21,11 +21,13 @@ export class JeuComponent implements OnInit {
   joueur: Compte;
   partie: Partie;
   personnage: Personnage = new Personnage;
-  plateau:Plateau;
+  plateau: Plateau;
 
   idPerso: number = null;
   idPlateau: number = null;
 
+  partiePossible: boolean;
+  life: number;
 
   constructor(private router: Router,
     public compteService: PageConnexionService,
@@ -37,7 +39,11 @@ export class JeuComponent implements OnInit {
 
     this.joueur = this.compteService.compte;
     this.idJoueur = this.joueur.id;
-
+    this.life = this.compteService.compte.life;
+    if (this.life > 0) {
+      this.partiePossible = true;
+    }
+    else { this.partiePossible = false }
     this.listPersonnageDispo();
   }
 
@@ -64,10 +70,23 @@ export class JeuComponent implements OnInit {
     this.partieService.launchGame(this.idJoueur, this.idPerso, this.idPlateau).subscribe((resp: Partie) => {
       this.partieService.LaPartie = resp;
       this.partie = resp;
-       this.casesPlateauService.findAllCasesByPlateau(this.partie.plateau.id).subscribe(resp => {
-       this.casesPlateauService.lesCasesPlateau = resp;
-       this.router.navigate(['jeu/ecrandejeu']);
-       });      
+      console.log(this.compteService.compte)
+      if (this.compteService.compte.life > 0) {
+        // c'est ok la partie se créé
+        //this.partiePossible=true;
+        console.log(resp)
+        this.casesPlateauService.findAllCasesByPlateau(this.partie.plateau.id).subscribe(resp => {
+          this.casesPlateauService.lesCasesPlateau = resp;
+          this.router.navigate(['jeu/ecrandejeu']);
+        });
+      }
+      else {
+        // ça veut dire qu'il y a plus assez de vie
+        console.log("tu n'as pas de vie")
+        //this.partiePossible=false;
+      }
+
+
     }, error => {
       console.log(error);
     }, () => {

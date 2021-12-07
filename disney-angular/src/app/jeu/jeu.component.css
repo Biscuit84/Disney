@@ -11,7 +11,7 @@
 
   }
 
-  #boutonLancement{
+  #boutonLancement, #boutonBoutique{
     font-family:  cursive;
     margin: auto;
     top: 0;
@@ -51,4 +51,9 @@
   .texteRegles{
     font-size: 2rem;
     background-color: rgba(221, 202, 231, 0.541);
+  }
+
+  #imageRegles{
+    width: 50%;
+    height: 100%;
   }
