@@ -30,6 +30,9 @@ export class JeuComponent implements OnInit {
   life: number;
   clicked=false;
 
+  listPersonnage : Array<Personnage>  = new Array<Personnage> ();
+  listPlateauPerso :  Array<Plateau> = new  Array<Plateau>();
+
   constructor(private router: Router,
     public compteService: PageConnexionService,
     private persoObtenuService: PersoObtenuHttpService,
@@ -42,13 +45,17 @@ export class JeuComponent implements OnInit {
     this.idJoueur = this.joueur.id;
     this.life = this.compteService.compte.life;
     this.listPersonnageDispo();
+    this.listPlateauxDispoUniquement();
   }
 
   ngOnInit(): void {
+
   }
 
-  listPersonnageDispo(): Array<Personnage> {
-    return this.persoObtenuService.findAllPersonnageDuJoueur();
+  listPersonnageDispo(){
+    this.persoObtenuService.findAllPersonnageDuJoueur().subscribe(listPerso => {
+      this.listPersonnage = listPerso;
+    })
   }
 
   personnageSelectionne() {
@@ -58,13 +65,10 @@ export class JeuComponent implements OnInit {
     }, err => console.log(err));
   }
 
-
-  listPlateauxDispo(): Array<Plateau> {
-    return this.plateauService.findAll();
-  }
-
-  listPlateauxDispoUniquement(): Array<Plateau> {
-    return this.plateauService.findAllPlateauDisponibles();
+  listPlateauxDispoUniquement() {
+    this.plateauService.loadPlateauDispo().subscribe(listPlateauxDispo => {
+      this.listPlateauPerso = listPlateauxDispo;
+    });
   }
 
 

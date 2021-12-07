@@ -11,18 +11,18 @@ import { PageConnexionService } from './page-connexion/page-connexion.service';
 export class PersoObtenuHttpService {
 
   // en fonction du joueur
-  idJoueur: number ;
-  joueur:Compte;
+  idJoueur: number;
+  joueur: Compte;
 
-  
+
   persoObtenus: Array<PersoObtenu> = new Array<PersoObtenu>();
   personnagesDuJoueur: Array<Personnage> = new Array<Personnage>();
   persoObtenuUrl: string;
 
   constructor(public compteService: PageConnexionService, private http: HttpClient, private appConfig: AppConfigService) {
     this.persoObtenuUrl = this.appConfig.backEndUrl + "persoObtenu/"
-    this.joueur= this.compteService.compte;
-    this.idJoueur= this.joueur.id
+    this.joueur = this.compteService.compte;
+    this.idJoueur = this.joueur.id
     this.load(this.idJoueur);
     this.loadPersonnage(this.idJoueur)
   }
@@ -42,16 +42,16 @@ export class PersoObtenuHttpService {
 
   /*
 
-  	@GetMapping("/detail/{id}")
-	@JsonView(Views.ViewsPersoObtenuDetailJoueur.class)
-	public List<Personnage> findAllPersoObtenuByIdJoueur(@PathVariable Long id) {
-		List<PersoObtenu> persosObtenu = persoObtenuRepo.findAllByJoueur(id);
-		List<Personnage> listPerso = new ArrayList<Personnage>();
-		for(PersoObtenu po : persosObtenu) {
-			listPerso.add(po.getPerso());
-		}
-		return listPerso;
-	}
+    @GetMapping("/detail/{id}")
+  @JsonView(Views.ViewsPersoObtenuDetailJoueur.class)
+  public List<Personnage> findAllPersoObtenuByIdJoueur(@PathVariable Long id) {
+    List<PersoObtenu> persosObtenu = persoObtenuRepo.findAllByJoueur(id);
+    List<Personnage> listPerso = new ArrayList<Personnage>();
+    for(PersoObtenu po : persosObtenu) {
+      listPerso.add(po.getPerso());
+    }
+    return listPerso;
+  }
   */
 
 
@@ -66,21 +66,21 @@ export class PersoObtenuHttpService {
     }, error => console.log(error));
   }
 
-  findAll(): Array<PersoObtenu>{
+  findAll(): Array<PersoObtenu> {
     return this.persoObtenus; // la liste des perso obtenus d'un joueur
   }
 
-    // PersoObtenu en fonction du joueur
-    loadPersonnage(idJoueur: number) {
-      this.http.get<Array<Personnage>>(this.persoObtenuUrl + "detail/" + idJoueur).subscribe(response => {
-        this.personnagesDuJoueur= response;
+  // PersoObtenu en fonction du joueur
+  loadPersonnage(idJoueur: number) {
+    this.http.get<Array<Personnage>>(this.persoObtenuUrl + "detail/" + idJoueur).subscribe(response => {
+      this.personnagesDuJoueur = response;
       //  console.log(this.personnagesDuJoueur);
-      }, error => console.log(error));
-    }
+    }, error => console.log(error));
+  }
 
-    findAllPersonnageDuJoueur(){
-      return this.personnagesDuJoueur;
-    }
+  findAllPersonnageDuJoueur(): Observable<Array<Personnage>> {
+    return this.http.get<Array<Personnage>>(this.persoObtenuUrl + "detail/" + this.joueur.id);
+  }
 
 
 

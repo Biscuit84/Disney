@@ -57,6 +57,7 @@ export class ModificationPlateauComponent implements OnInit {
       console.log("fini delete");
       this.plateauService.findAllPlateau().subscribe(plateau => {
         this.listPlateauDejaCree = plateau;
+        this.plateauDejaUtilise();
       });
     })
 

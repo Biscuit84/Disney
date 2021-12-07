@@ -22,7 +22,7 @@ public class PersoObtenuRestControllerTest {
 	private IPersonnageRepo persoRepo;
 	
 	@Test
-	void testToto() {
+	void testPersoObtenu() {
 		Long id = (long) 2 ;
 		//je prépare ma liste de lp attendu :
 		List<Personnage> lpPredefini = new ArrayList<Personnage>();
