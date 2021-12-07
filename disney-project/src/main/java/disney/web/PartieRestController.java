@@ -276,6 +276,9 @@ public class PartieRestController {
 				if(historique.isVictoire()) {
 					historique.setPositionArrivee(1);
 					historique.setNbEtoilesGagnees(500);
+					int nbetoileactuelle = joueur.getNbEtoiles();
+
+					joueur.setNbEtoiles(nbetoileactuelle + 500);	
 				} else {
 					int positionActuelle = 1;
 					Personnage persoJoueur = historique.getPersonnage();
