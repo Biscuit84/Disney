@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Compte, Partie } from 'src/model';
+import { Avatar, Compte, Partie } from 'src/model';
 import { Joueur } from 'src/model';
 import { PageConnexionService } from './page-connexion/page-connexion.service';
 import { AppConfigService } from './app-config.service';
@@ -10,7 +10,6 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class JoueurHttpService {
-
 
   joueurUrl:string;
   joueurs: Array<Joueur> = new Array<Joueur>();

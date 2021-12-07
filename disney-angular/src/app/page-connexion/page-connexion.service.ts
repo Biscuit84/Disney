@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import {  Compte, ConnexionDTO,  } from 'src/model';
+import {  Avatar, Compte, ConnexionDTO,  } from 'src/model';
 import { AppConfigService } from '../app-config.service';
 
 @Injectable({
@@ -30,5 +30,13 @@ export class PageConnexionService {
 
   isAdmin(): boolean {
     return this.compte?.role=='admin';
+  }
+
+  updateAvatar(avatar: Avatar) {
+    var c : Compte = this.compte;
+    c.avatar = avatar;
+    this.http.put<Compte>(this.connexionUrl+c.id , c).subscribe(resp => {
+      this.compte = resp;
+    });
   }
 }

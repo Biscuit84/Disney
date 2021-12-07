@@ -17,6 +17,7 @@ export class GestionPlateauComponent implements OnInit {
   listePlateaux: Array<Plateau> = new Array<Plateau>();
   plateau: Plateau = new Plateau();
   nombreCases: number;
+  disponible: boolean;
   // listCases = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
 
   // listCasesPlateau = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
@@ -88,6 +89,7 @@ export class GestionPlateauComponent implements OnInit {
     //update
     if (this.plateau.id) {
       this.majPlateau();
+      console.log("*******PLATEAU DISPOOOOO dans update"+this.plateau.disponible);
       this.plateauService.updatePlateau(this.plateau).subscribe(resp => {
         this.plateau = resp;
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -100,6 +102,7 @@ export class GestionPlateauComponent implements OnInit {
       //creation
       this.plateau = new Plateau();
       this.majPlateau();
+      console.log("*******PLATEAU DISPOOOOO dans create"+this.plateau.disponible);
       this.plateauService.createPlateau(this.plateau).subscribe(resp => {
         this.plateau = resp;
         this.load();
@@ -120,6 +123,8 @@ export class GestionPlateauComponent implements OnInit {
   private majPlateau() {
     this.plateau.nom = this.nomPlateau;
     this.plateau.nbCases = this.listCasesPlateau.length;
+    this.plateau.disponible = this.disponible;
+    console.log("*******PLATEAU DISPOOOOO"+this.plateau.disponible);
 
     var listCp = new Array<CasesPlateau>();
     var position = 0;

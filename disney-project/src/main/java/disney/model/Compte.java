@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -49,7 +50,8 @@ public abstract class Compte  {
 	@Column(unique = true)
 	protected String mail;
 	
-	protected String avatar;
+	@ManyToOne
+	protected Avatar avatar;
 	
 	private boolean enable;
 	
@@ -167,7 +169,7 @@ public abstract class Compte  {
 
 
 
-	public String getAvatar() {
+	public Avatar getAvatar() {
 		return avatar;
 	}
 
@@ -175,7 +177,7 @@ public abstract class Compte  {
 
 
 
-	public void setAvatar(String avatar) {
+	public void setAvatar(Avatar avatar) {
 		this.avatar = avatar;
 	}
 	
