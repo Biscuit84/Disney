@@ -1,6 +1,6 @@
 <div id="ecran-creation-plateau">
     <div class="card ecranCard ">
-        <h1 class="card-title texteBlanc">{{titre}} <button class="rounded-circle top-right btn btn-info" type="button" [routerLink]="['/gestionAdmin/plateau']"><i class="fas fa-arrow-left"></i></button></h1>
+        <h1 class="card-title texteBlanc" id="titrePageGestionTableau">{{titre}} <button class="rounded-circle top-right btn" type="button" [routerLink]="['/gestionAdmin/plateau']"><i class="fas fa-arrow-left"></i></button></h1>
         
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label class="texteBlanc">Nom du plateau de jeu</mat-label>
@@ -39,7 +39,7 @@
                 </div>
             </div>
             <div>
-            <button type="button" class="btn btn-success" (click)="savePlateau()" [disabled]="this.nomPlateau == '' || listCasesPlateau.length == 0">
+            <button type="button" class="btn boutonValidier" (click)="savePlateau()" [disabled]="this.nomPlateau == '' || listCasesPlateau.length == 0">
                 Valider le plateau
             </button>
         </div>

@@ -1,8 +1,9 @@
 <div id="ecran-update-plateau" *ngIf="id == -1">
-    <div class="card mt-3">
-        <div class="card-header bg-info text-white">
+    <div class="cardTableau">
+    <div class="card mt-3 ">
+        <div class="card-header headerTableau">
             <h1 class="card-title">Mise à jour des plateaux
-                <button class="rounded-circle top-right btn btn-info" type="button"
+                <button class="rounded-circle headerTableau top-right btn" type="button"
                     [routerLink]="['/gestionAdmin/plateau']">
                     <em class="fas fa-arrow-left"></em>
                 </button>
@@ -54,6 +55,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 
 

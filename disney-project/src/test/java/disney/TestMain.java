@@ -235,7 +235,7 @@ class TestMain {
 		Cases casePrison = new Cases("Prison",TypeCase.prison);
 		Cases caseVide = new Cases("Vide",TypeCase.vide);
 		Cases caseDuel= new Cases("Duel",TypeCase.duel);
-		Cases caseDeplacement = new Cases("Deplacement",TypeCase.deplacement);
+//		Cases caseDeplacement = new Cases("Deplacement",TypeCase.deplacement);
 		Cases caseRecule = new Cases("Recule",TypeCase.deplacement);
 		Cases caseAvance = new Cases("Avance",TypeCase.deplacement);		
 		Cases caseDepart = new Cases("Depart",TypeCase.depart);
@@ -246,7 +246,7 @@ class TestMain {
 		casePrison = casesRepo.save(casePrison);
 		caseVide = casesRepo.save(caseVide);
 		caseDuel = casesRepo.save(caseDuel);
-		caseDeplacement = casesRepo.save(caseDeplacement);
+//		caseDeplacement = casesRepo.save(caseDeplacement);
 		caseAvance = casesRepo.save(caseAvance);
 		caseRecule = casesRepo.save(caseRecule);
 		caseDepart = casesRepo.save(caseDepart);
@@ -291,7 +291,7 @@ class TestMain {
 		casesPlateauDemo.add(c1pDemo);
 		CasesPlateau c2pDemo = new CasesPlateau(plateau1, caseVide, 1);
 		casesPlateauDemo.add(c2pDemo);
-		CasesPlateau c3pDemo = new CasesPlateau(plateau1, caseDeplacement, 2, 1);
+		CasesPlateau c3pDemo = new CasesPlateau(plateau1, caseAvance, 2, 1);
 		casesPlateauDemo.add(c3pDemo);
 		CasesPlateau c4pDemo = new CasesPlateau(plateau1, caseDuel, 3);
 		casesPlateauDemo.add(c4pDemo);
@@ -303,7 +303,7 @@ class TestMain {
 		casesPlateauDemo.add(c7pDemo);
 		CasesPlateau c8pDemo = new CasesPlateau(plateau1, caseMechant, 7);
 		casesPlateauDemo.add(c8pDemo);
-		CasesPlateau c9pDemo = new CasesPlateau(plateau1, caseDeplacement, 8 , -1);
+		CasesPlateau c9pDemo = new CasesPlateau(plateau1, caseRecule, 8 , -1);
 		casesPlateauDemo.add(c9pDemo);
 		CasesPlateau c10pDemo = new CasesPlateau(plateau1, caseVide, 9);
 		casesPlateauDemo.add(c10pDemo);
@@ -319,7 +319,7 @@ class TestMain {
 		casesPlateauDemo.add(c15pDemo);
 		CasesPlateau c16pDemo = new CasesPlateau(plateau1, caseGentil, 15);
 		casesPlateauDemo.add(c16pDemo);
-		CasesPlateau c17pDemo = new CasesPlateau(plateau1, caseDeplacement, 16, -1);
+		CasesPlateau c17pDemo = new CasesPlateau(plateau1, caseRecule, 16, -1);
 		casesPlateauDemo.add(c17pDemo);
 		CasesPlateau c18pDemo = new CasesPlateau(plateau1, casePioche, 17);
 		casesPlateauDemo.add(c18pDemo);
