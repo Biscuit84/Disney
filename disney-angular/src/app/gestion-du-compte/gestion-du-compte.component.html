@@ -9,11 +9,11 @@
         <p>Nombre de victoire: {{this.compteService.compte.nbVictoire}}</p>
         <p>Nombre de vie(s): {{this.compteService.compte.life}}</p>
         <p> <i class="fas fa-star etoile"></i>: {{this.compteService.compte.nbEtoiles}}</p>
-        <button id="modifierBtn" type="submit" [routerLink]="['/modifProfil']" class="btn btn-primary">Modifier leprofil</button>
+        <button id="modifierBtn" type="submit" [routerLink]="['/modifProfil']" class="btn btn-primary">Modifier le profil</button>
       </div>
     </div>
     <div id="basgauche">
-      <button id="jouerBtn" type="submit" [routerLink]="['/jeu']" class="btn btn-primary">Jouer</button>
+      <button id="jouerBtn" type="submit" [routerLink]="['/jeu']" class="btn btn-primary" style="width: 40%;">Jouer</button>
     </div>
   </div>
 
@@ -21,14 +21,14 @@
     <div id="historique">
       <span></span>
       <div class="list-group">
-        <div id="blocTitre" class="list-group-item list-group-item-action active" aria-current="true">
+        <div id="blocTitre" class="list-group-item list-group-item-action active" aria-current="true" style="background-color: #dab4da;">
           <div class="d-flex w-100 justify-content-between">
             <h1 id="list-titre">Historique des parties</h1>
           </div>
           <p class="mb-1"></p>
         </div>
         <small ></small>
-        <a href="#" class="list-group-item list-group-item-action" *ngFor="let histo of showHistorique()">
+        <a href="#" class="list-group-item list-group-item-action" *ngFor="let histo of showHistorique()" style="background-color: rgba(245, 245, 245, 0.8);">
           <img class="image" src="{{histo.personnage.avatar}}">
           <div id="info">
             <div class="d-flex w-100 justify-content-between">

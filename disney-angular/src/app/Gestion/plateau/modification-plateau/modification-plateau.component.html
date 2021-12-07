@@ -1,56 +1,52 @@
 <div id="ecran-update-plateau" *ngIf="id == -1">
-    <div class="card mt-3">
-        <div class="card-header bg-info text-white">
-            <h1 class="card-title">Mise à jour des plateaux
-                <button class="rounded-circle top-right btn btn-info" type="button"
-                    [routerLink]="['/gestionAdmin/plateau']">
-                    <em class="fas fa-arrow-left"></em>
-                </button>
-            </h1>
-        </div>
-        <div class="card-body">
-            <!-- <h1 class="card-title">Mise à jour des plateaux
+    <div class="cardTableau">
+        <div class="card mt-3 ">
+            <div class="card-header headerTableau">
+                <h1 class="card-title">Mise à jour des plateaux
+                    <button class="rounded-circle headerTableau top-right btn" type="button"
+                        [routerLink]="['/gestionAdmin/plateau']">
+                        <em class="fas fa-arrow-left"></em>
+                    </button>
+                </h1>
+            </div>
+            <div class="card-body">
+                <!-- <h1 class="card-title">Mise à jour des plateaux
                 <button class="rounded-circle top-right btn btn-info" type="button" [routerLink]="['/gestionAdmin/plateau']">
                 <em class="fas fa-arrow-left"></em>
             </button>
             </h1> -->
 
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Nom</th>
-                        <th scope="col">Nombre de cases</th>
-                        <th>Plateau disponible pour les joueurs</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let plateau of listPlateauDejaCree" class="cliquable">
-                        <td (click)="plateauDetail(plateau)">{{plateau.nom}}</td>
-                        <td (click)="plateauDetail(plateau)">{{plateau.nbCases}}</td>
-                        <td (click)="plateauDetail(plateau)">{{plateau.disponible}}</td>
-                        <td>
-                            <div class="btn-group btn-group-sm">
-                                <a class="btn btn-primary" (click)="plateauDetail(plateau)"><i
-                                        class="bi bi-pencil-square"></i></a>
-                                <!-- <a class="btn btn-danger" (click)="delete(plateau)" ><i class="bi bi-trash"></i></a> -->
-                                <span  class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" title="On ne peut pas supprimer un plateau qui a déjà été choisi lors d'une partie">
-                                    <button *ngIf="!plateau.disponible" class="btn btn-secondary trashDisabled"  disabled ><i
-                                        class="bi bi-trash"></i></button>
-                                  </span>
-                                
-                                <button *ngIf="plateau.disponible" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="button" (click)="assignPlateau(plateau)" ><i
-                                            class="bi bi-trash"></i></button>
-                            </div>
-                            <!-- <em class="fas fa-edit" (click)="plateauDetail(plateau)"></em>
-                            <em class="fas fa-trash" (click)="delete(plateau)"></em> -->
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Nombre de cases</th>
+                            <th>Plateau disponible pour les joueurs</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let plateau of listPlateauDejaCree" class="cliquable">
+                            <td (click)="plateauDetail(plateau)">{{plateau.nom}}</td>
+                            <td (click)="plateauDetail(plateau)">{{plateau.nbCases}}</td>
+                            <td (click)="plateauDetail(plateau)">{{plateau.disponible}}</td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <a class="btn btn-primary" (click)="plateauDetail(plateau)"><i
+                                            class="bi bi-pencil-square"></i></a>
+                                            &nbsp;
+                                    <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip"
+                                        title="On ne peut pas supprimer un plateau">
+                                        <button class="btn btn-danger trashDisabled" [disabled]="plateau.dejaUtilise"
+                                            (click)="delete(plateau)"><i class="bi bi-trash"></i></button>
+                                    </span>
 
-            <div>
-                <p></p>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
             </div>
         </div>
     </div>
@@ -60,7 +56,7 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" 
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -74,7 +70,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
-                <button type="button" class="btn btn-primary" (click)="delete(plateau)" data-bs-dismiss="modal">Valider</button>
+                <button type="button" class="btn btn-primary" (click)="delete(plateau)"
+                    data-bs-dismiss="modal">Valider</button>
             </div>
         </div>
     </div>

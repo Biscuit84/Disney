@@ -5,80 +5,10 @@
     <div class="card containerCard" id="ecranconnec">
         <div class="card-body">
             <div class="card mt-3">
-                <div class="card-header bg-info text-white">
-                    <h3>Mes Informations</h3>
+                <div class="card-header text-white">
+                    <h1>Mes Informations</h1>
                 </div>
-
-                <div class="card-body">
-                    <div class="form-group">
-                        <label for="avatar" class="form-label">Avatar</label>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-                            aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="dropdown dropdown-pull-right btn-group" >
-                            <button id="btnGroupDrop1" type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
-                              aria-haspopup="true" aria-expanded="false">
-                              <img src="../../assets/images/avatar/avatar_mickey.png" class="logo_admin rounded-circle"
-                                id="avatarAdmin" />
-                            </button>
-                
-                            <ul class="dropdown-menu" id="avatars">
-                              <li class="d-flex flex-row mb-3">
-                                <a class="dropdown-item choixAvatar" href="#"><img id="avatar1" onclick="changeAvatar(event)"
-                                    src="../../assets/images/avatar/avatar_elsa.png" class="logo_avatar rounded-circle" /></a>
-                                <a class="dropdown-item choixAvatar" id="avatarMulan" href="#"><img id="avatar2"
-                                    onclick="changeAvatar(event)" src="../../assets/images/avatar/avatar_ariel.jpg"
-                                    class="logo_avatar rounded-circle" /></a>
-                                <a class="dropdown-item choixAvatar" id="avatarAurore" href="#"><img id="avatar3"
-                                    onclick="changeAvatar(event)" src="../../assets/images/avatar/avatar_aurore.jpg"
-                                    class="logo_avatar rounded-circle" /></a>
-                              </li>
-                              <li class="d-flex flex-row mb-3">
-                                <a class="dropdown-item choixAvatar" id="avatarJasmine" href="#"><img id="avatar5"
-                                    onclick="changeAvatar(event)" src="../../assets/images/avatar/avatar_belle.jpg"
-                                    class="logo_avatar rounded-circle" /></a>
-                                <a class="dropdown-item choixAvatar" id="avatarRaiponce" href="#"><img id="avatar6"
-                                    onclick="changeAvatar(event)" src="../../assets/images/avatar/avatar_blanche_neige.jpg"
-                                    class="logo_avatar rounded-circle" /></a>
-                                <a class="dropdown-item choixAvatar" id="avatarCendrillon" href="#"><img id="avatar4"
-                                    onclick="changeAvatar(event)" src="../../assets/images/avatar/avatar_cendrillon.jpg"
-                                    class="logo_avatar rounded-circle" /></a>
-                              </li>
-                              <li class="d-flex flex-row mb-3">
-                                <a class="dropdown-item choixAvatar" id="avatarBlancheNeige" href="#"><img id="avatar7"
-                                    onclick="changeAvatar(event)" src="../../assets/images/avatar/avatar_jasmine.jpg"
-                                    class="logo_avatar rounded-circle" /></a>
-                                <a class="dropdown-item choixAvatar" id="avatarBelle" href="#"><img id="avatar8"
-                                    onclick="changeAvatar(event)" src="../../assets/images/avatar/avatar_mulan.jpg"
-                                    class="logo_avatar rounded-circle" /></a>
-                                <a class="dropdown-item choixAvatar" id="avatarAriel" href="#"><img id="avatar9"
-                                    onclick="changeAvatar(event)" onclick="changeAvatar(event)"
-                                    src="../../assets/images/avatar/avatar_raiponce.jpg" class="logo_avatar rounded-circle" /></a>
-                              </li>
-                              <li class="d-flex flex-row mb-3">
-                                <a class="dropdown-item choixAvatar" id="avatarTiana" href="#"><img id="avatar10"
-                                    onclick="changeAvatar(event)" src="../../assets/images/avatar/avatar_tiana.jpg"
-                                    class="logo_avatar rounded-circle" /></a>
-                                <a class="dropdown-item choixAvatar" id="avatarTiana" href="#"><img id="avatar11"
-                                    onclick="changeAvatar(event)" src="../../assets/images/avatar/avatar_mickey.png"
-                                    class="logo_avatar rounded-circle" /></a>
-                                <a class="dropdown-item choixAvatar" id="avatarTiana" href="#"><img id="avatar12"
-                                    onclick="changeAvatar(event)" src="../../assets/images/avatar/avatar_minnie.png"
-                                    class="logo_avatar rounded-circle" /></a>
-                
-                              </li>
-                              <li class="nav-item">
-                                <a class="nav-link" href="modifProfilJoueur.html">Gestion du Profil</a>
-                              </li>
-                              <li class="nav-item">
-                                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#seDeconnecter">Déconnexion</a>
-                              </li>
-                            </ul>
-                          </div>
-                    </div>
-                    <br><br><br><br>
+                <div class="card-body cardContenant">
                     <div class="form-group">
                         <label for="nom" class="form-label">Nom</label>
                         <input type="text" class="form-control" id="nom" [(ngModel)]="joueurForm.nom">
@@ -103,11 +33,11 @@
 
                 <div class="card-footer">
                     <div class="btn-group btn-group-lg float-end">
-                        <a class="btn btn-success" (click)="save()">
-                            <i class="bi bi-check-square"></i>
-                        </a>
-                        <a class="btn btn-warning" (click)="cancel()">
+                        <a class="btn " (click)="cancel()" id="boutonCancel" [routerLink]="['/accueilJoueur']">
                             <i class="bi bi-backspace"></i>
+                        </a>
+                        <a class="btn " id="boutonSave" (click)="save()">
+                            <i class="bi bi-check-square"></i>
                         </a>
                     </div>
                 </div>

@@ -7,11 +7,11 @@
     <div class="card containerCard" id="ecranconnec">
         <div class="card-body">
             <div class="card mt-3">
-                <div class="card-header bg-info text-white">
+                <div class="card-header headerTableau">
                     <h3>Mes Informations</h3>
                 </div>
 
-                <div class="card-body">
+                <div class="card-body formulaire">
                     <div class="form-group">
                         <label for="nom" class="form-label">Nom</label>
                         <input type="text" class="form-control" id="nom"  [(ngModel)]="adminForm.nom">
@@ -34,12 +34,13 @@
 
                 <div class="card-footer">
                     <div class="btn-group btn-group-lg float-end">
-                        <a class="btn btn-success" (click)="save()">
-                            <i class="bi bi-check-square"></i>
-                        </a>
-                        <a class="btn btn-warning" (click)="cancel()">
+                        <a class="btn " id="boutonCancel" [routerLink]="['/gestionAdmin']">
                             <i class="bi bi-backspace"></i>
                         </a>
+                        <a class="btn " id="boutonSave"  (click)="save()">
+                            <i class="bi bi-check-square"></i>
+                        </a>
+                       
                     </div>
                 </div>
 

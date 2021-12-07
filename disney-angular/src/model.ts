@@ -401,6 +401,7 @@ export class Plateau {
   nbCases: number;
   cases: Array<CasesPlateau>;
   disponible: boolean;
+  dejaUtilise: boolean = false;
 
 
   constructor(
