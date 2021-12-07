@@ -329,6 +329,7 @@ export class TourDeJeuDto {
   finPartie: boolean = false;
   effetAActiver: boolean = false;
   deplacement:number;
+  compt:number;
   
 
 
@@ -339,7 +340,8 @@ export class TourDeJeuDto {
     positionFutureJoueur?: number,
     finPartie?: boolean,
     effetAActiver?: boolean,
-    deplacement?:number
+    deplacement?:number,
+    compt?:number
 
   ) {
     this.valueDice1 = valueDice1
@@ -349,6 +351,7 @@ export class TourDeJeuDto {
     this.finPartie = finPartie
     this.effetAActiver = effetAActiver
     this.deplacement=deplacement
+    this.compt=compt
    
   }
 
