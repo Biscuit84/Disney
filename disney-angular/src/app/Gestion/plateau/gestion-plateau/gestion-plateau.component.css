@@ -8,11 +8,12 @@
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
-  margin-top: 5rem;
+  margin-top: 2rem;
+  height: 90vh;
 }
 
 .ecranCard{
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 
@@ -33,9 +34,12 @@
     margin: 0 25px 25px 0;
     /* display: inline-block; */
     vertical-align: top;
-
     
   }
+
+.texteBlanc{
+  color:whitesmoke;
+}
   
   
   .element-list {
@@ -144,6 +148,7 @@ button[disabled] {
 .container{
   display: flex;
   flex-basis: 100%;
+  justify-content: center;
 }
 
 #listeCases{
@@ -154,6 +159,6 @@ button[disabled] {
   max-width: 100%;
   }
 
-  #listeCases3{
-   
-    }
+.trahGrey{
+  color:darkgrey;
+}
