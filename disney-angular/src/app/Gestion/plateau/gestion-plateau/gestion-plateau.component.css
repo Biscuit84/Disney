@@ -9,11 +9,13 @@
   background-attachment: fixed;
   background-size: cover;
   margin-top: 2rem;
-  height: 90vh;
+  height: 96vh;
 }
 
 .ecranCard{
   background-color: rgba(0, 0, 0, 0.2);
+  margin-right: 2rem;
+  margin-left: 2rem;
 }
 
 
@@ -26,6 +28,7 @@
   float: right;
   cursor: pointer;
   color: white;
+  background-color: #dab4da;
 }
 
 .list-container {
@@ -39,6 +42,7 @@
 
 .texteBlanc{
   color:whitesmoke;
+  font-size: 1rem;
 }
   
   
@@ -47,8 +51,8 @@
     min-height: 60px;
     background: white;
     border-radius: 4px;
-    overflow: scroll;
-    max-height: 567px;
+    overflow: hidden;
+    max-height: 41rem;
     
   }
   
@@ -156,9 +160,28 @@ button[disabled] {
 }
 #listeCases2{
   
-  max-width: 100%;
+  max-height: 39rem;
   }
 
 .trahGrey{
-  color:darkgrey;
+  color: lightsteelblue;
+}
+
+.boutonValidier{
+  background-color: #dab4da;
+  color:whitesmoke;
+  margin-top: 16rem;
+}
+
+#trashCase{
+  text-align: -webkit-center;
+  margin-top: 14rem;
+}
+
+#nomPlateau{
+  color: whitesmoke;
+}
+
+#titrePageGestionTableau{
+  font-size: 2rem;
 }
