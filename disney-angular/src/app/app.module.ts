@@ -35,6 +35,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { GestionPlateauComponent } from './Gestion/plateau/gestion-plateau/gestion-plateau.component';
 import {MatInputModule} from '@angular/material/input';
 import { ModificationPlateauComponent } from './Gestion/plateau/modification-plateau/modification-plateau.component';
+import { GestionBoutiquePersonnageComponent } from './Gestion/gestion-boutique-admin/gestion-boutique-personnage/gestion-boutique-personnage.component';
 
 
 
@@ -66,7 +67,8 @@ import { ModificationPlateauComponent } from './Gestion/plateau/modification-pla
     GestionCompteAdminComponent,
     GestionBoutiqueAdminComponent,
     GestionPlateauComponent,
-    ModificationPlateauComponent
+    ModificationPlateauComponent,
+    GestionBoutiquePersonnageComponent
   ],
   imports: [
     BrowserModule,
