@@ -66,4 +66,10 @@ public interface Views {
 	
 	public static interface ViewsAvatar extends ViewsCommon{
 	}
+	
+	public static interface ViewsVie extends ViewsCommon{
+	}
+	
+	public static interface ViewsEtoile extends ViewsCommon{
+	}
 }

@@ -47,7 +47,7 @@ public class CarteRestController {
 		if (optCarte.isPresent()) {
 			return optCarte.get();
 		} else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Carte non trouvé");
 		}
 	}
 
@@ -64,7 +64,7 @@ public class CarteRestController {
 	@JsonView(Views.ViewsCarte.class)
 	public Carte update(@PathVariable Long id, @RequestBody Carte carte) {
 		if (!carteRepo.existsById(id)) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Carte non trouvé");
 		}
 
 		carte = carteRepo.save(carte);
@@ -76,7 +76,7 @@ public class CarteRestController {
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
 		if (!carteRepo.existsById(id)) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Carte non trouvé");
 		}
 		
 		carteRepo.deleteById(id);

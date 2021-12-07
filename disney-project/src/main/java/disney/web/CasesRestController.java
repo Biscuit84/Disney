@@ -54,7 +54,7 @@ public class CasesRestController {
 		if (optCases.isPresent()) {
 			return optCases.get();
 		} else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Case non trouvé");
 		}
 	}
 
@@ -71,7 +71,7 @@ public class CasesRestController {
 	@JsonView(Views.ViewsCases.class)
 	public Cases update(@PathVariable Long id, @RequestBody Cases cases) {
 		if (!casesRepo.existsById(id)) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Case non trouvé");
 		}
 
 		cases = casesRepo.save(cases);
@@ -83,7 +83,7 @@ public class CasesRestController {
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
 		if (!casesRepo.existsById(id)) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Case non trouvé");
 		}
 		
 		casesRepo.deleteById(id);

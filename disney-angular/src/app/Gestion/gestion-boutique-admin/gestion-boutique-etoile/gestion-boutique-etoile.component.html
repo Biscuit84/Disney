@@ -1,0 +1,75 @@
+<div class="card mt-3">
+    <div id="fondList" class="card-header text-white">
+        <h2>Liste des packages etoiles</h2>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Identifiant</th>
+                    <th>Version</th>
+                    <th>Nombre</th>
+                    <th>Prix</th>
+                    <th>Image</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let etoile of list()">
+                    <td>{{etoile.id}}</td>
+                    <td>{{etoile.version}}</td>
+                    <td>{{etoile.nombre}}</td>
+                    <td>{{etoile.prix}}</td>
+                    <td>{{etoile.image}}</td>
+                    <td>
+                        <div class="btn-group btn-group-sm">
+                            <a class="btn btn-primary" (click)="edit(etoile.id)"><i class="bi bi-pencil-square"></i></a>
+                            <a class="btn btn-danger" (click)="remove(etoile.id)"><i class="bi bi-trash"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+        <a class="btn btn-success btn-lg" (click)="add()">
+            <i class="bi bi-plus-square"></i>
+        </a>
+    </div>
+</div>
+
+<div class="card mt-3" *ngIf="etoileForm">
+    <div class="card-header text-white">
+        <h3>Création d'un package etoile</h3>
+    </div>
+    <div class="card-body">
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="number" class="form-control" id="nombre" [(ngModel)]="etoileForm.nombre">
+        </div>
+        <div class="form-group">
+            <label for="prix">Prix</label>
+            <input type="number" class="form-control" id="prix" [(ngModel)]="etoileForm.prix">
+        </div>
+        <div class="form-group">
+            <label for="image">Image</label>
+            <input type="text" class="form-control" id="image" [(ngModel)]="etoileForm.image">
+        </div>
+        
+    </div>
+
+    <div class="card-footer">
+        <div class="btn-group btn-group-lg float-end">
+            <a class="btn btn-success" (click)="save()">
+                <i class="bi bi-check-square"></i>
+            </a>
+            <a class="btn btn-warning" (click)="cancel()">
+                <i class="bi bi-backspace"></i>
+            </a>
+        </div>
+    </div>
+
+</div>
+
+
+
