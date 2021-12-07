@@ -145,6 +145,7 @@ class TestMain {
 
 		Joueur joueur4 = new Joueur("MinnieDu44", "1234", "Minnie", "Mouse", "minnie.mouse@gmail.com", "Princesse Minnie", "expert", 15);
 		joueur4.setNbEtoiles(5000);
+		joueur4.setAvatar(avatar12);
 		joueur4 = joueurRepo.save(joueur4);		
 		Joueur joueur5 = new Joueur("DaisyDu13", "1234", "Daisy", "Duck", "daisy.duck@gmail.com", "Imperatrice Daisy", "intermediaire", 2);
 		joueur5.setNbEtoiles(100);
@@ -365,11 +366,11 @@ class TestMain {
 		//CasesPlateau
 		List <CasesPlateau> casesPlateauTest = new ArrayList<CasesPlateau>();
 		
-		CasesPlateau c1pTest = new CasesPlateau(Plateau2, caseDepart, 0);
+		CasesPlateau c1pTest = new CasesPlateau(plateau2, caseDepart, 0);
 		casesPlateauTest.add(c1pTest);
 		CasesPlateau c2pTest = new CasesPlateau(plateau2, caseVide, 1);
 		casesPlateauTest.add(c2pTest);
-		CasesPlateau c3pTest = new CasesPlateau(Plateau2, caseRecule, 2, -1);
+		CasesPlateau c3pTest = new CasesPlateau(plateau2, caseRecule, 2, -1);
 		casesPlateauTest.add(c3pTest);
 		CasesPlateau c4pTest = new CasesPlateau(plateau2, caseDuel, 3);
 		casesPlateauTest.add(c4pTest);
@@ -381,7 +382,7 @@ class TestMain {
 		casesPlateauTest.add(c7pTest);
 		CasesPlateau c8pTest = new CasesPlateau(plateau2, caseMechant, 7);
 		casesPlateauTest.add(c8pTest);
-		CasesPlateau c9pTest = new CasesPlateau(Plateau2, caseAvance, 8, +1);
+		CasesPlateau c9pTest = new CasesPlateau(plateau2, caseAvance, 8, +1);
 		casesPlateauTest.add(c9pTest);
 		CasesPlateau c10pTest = new CasesPlateau(plateau2, caseArrivee, 9);
 		casesPlateauTest.add(c10pTest);
@@ -647,10 +648,3 @@ class TestMain {
 
 	}
 
-	//Compte connecte:
-	//		Compte connected = compteRepo.findByLoginAndPassword("joueur1", "1234");
-	//		
-	//		System.out.println("Compte connecte:"+connected);
-	//		
-	//		spring.close();
-}
