@@ -365,11 +365,11 @@ class TestMain {
 		//CasesPlateau
 		List <CasesPlateau> casesPlateauTest = new ArrayList<CasesPlateau>();
 		
-		CasesPlateau c1pTest = new CasesPlateau(Plateau2, caseDepart, 0);
+		CasesPlateau c1pTest = new CasesPlateau(plateau2, caseDepart, 0);
 		casesPlateauTest.add(c1pTest);
 		CasesPlateau c2pTest = new CasesPlateau(plateau2, caseVide, 1);
 		casesPlateauTest.add(c2pTest);
-		CasesPlateau c3pTest = new CasesPlateau(Plateau2, caseRecule, 2, -1);
+		CasesPlateau c3pTest = new CasesPlateau(plateau2, caseRecule, 2, -1);
 		casesPlateauTest.add(c3pTest);
 		CasesPlateau c4pTest = new CasesPlateau(plateau2, caseDuel, 3);
 		casesPlateauTest.add(c4pTest);
@@ -381,7 +381,7 @@ class TestMain {
 		casesPlateauTest.add(c7pTest);
 		CasesPlateau c8pTest = new CasesPlateau(plateau2, caseMechant, 7);
 		casesPlateauTest.add(c8pTest);
-		CasesPlateau c9pTest = new CasesPlateau(Plateau2, caseAvance, 8, +1);
+		CasesPlateau c9pTest = new CasesPlateau(plateau2, caseAvance, 8, +1);
 		casesPlateauTest.add(c9pTest);
 		CasesPlateau c10pTest = new CasesPlateau(plateau2, caseArrivee, 9);
 		casesPlateauTest.add(c10pTest);
@@ -653,4 +653,4 @@ class TestMain {
 	//		System.out.println("Compte connecte:"+connected);
 	//		
 	//		spring.close();
-}
+
