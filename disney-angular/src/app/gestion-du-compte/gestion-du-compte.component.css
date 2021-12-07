@@ -42,7 +42,8 @@
     border-radius: 5px;
     width: 40vh;
     position: absolute;
-    left:8%;
+    left:15%;
+    background-color: rgba(245, 245, 245, 0.8)
   }
   
   /* On mouse-over, add a deeper shadow */
@@ -74,9 +75,10 @@
  #jouerBtn
  {
   position: relative;
-   background-color: #dd94cb;
-   border-color: #dd94cb;
+   background-color: #dab4da;
+   border-color: #dab4da;
    top: 40%;
+   font-size: xx-large;
  }
 
  #jouerBtn:hover
@@ -91,6 +93,7 @@
   width: 50%;
   justify-content: center;
   display: flex;
+  height: 60px;
  }
 
  #modifierBtn{

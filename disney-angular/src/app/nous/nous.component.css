@@ -7,6 +7,9 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    background-image: url(../../assets/images/Nous/fondNous.png);
+    background-repeat: no-repeat;
+    background-size: cover;
   }
   .trombi{
     display: flex;
