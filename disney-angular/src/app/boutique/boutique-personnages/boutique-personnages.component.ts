@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { PersonnageHttpService } from 'src/app/personnage-http.service';
-import { BoutiqueDto, BoutiquePersoAndLifeDto, Compte, Personnage, PersonnageDto, Vie } from 'src/model';
+import { Avatar, BoutiqueDto, BoutiquePersoAndLifeDto, Compte, Personnage, PersonnageDto, Vie } from 'src/model';
 import { BoutiqueHttpService } from '../boutique-http.service';
 import * as $ from 'jquery';
 import { PageConnexionService } from 'src/app/page-connexion/page-connexion.service';
 import { JoueurHttpService } from 'src/app/joueur-http.service';
+import { Router } from '@angular/router';
+import { AvatarHttpService } from 'src/app/avatar-http.service';
 // declare var $:JQueryStatic;
 
 @Component({
@@ -25,10 +27,13 @@ export class BoutiquePersonnagesComponent implements OnInit {
   // compte: Compte;
   nombreEtoilesJoueur: number;
   joueur: Compte;
+  avatarJoueur: Avatar = new Avatar();
+  listeAvatars: Array<Avatar> = new Array<Avatar>();
+  srcAvatarCompte: string = "";
 
 
-  constructor(private pageConnexionService: PageConnexionService, private persoService: PersonnageHttpService,
-    private boutiqueService: BoutiqueHttpService, private joueurService: JoueurHttpService) {
+  constructor(public pageConnexionService: PageConnexionService, private persoService: PersonnageHttpService,
+    private boutiqueService: BoutiqueHttpService, private joueurService: JoueurHttpService,private router: Router, public avatarService: AvatarHttpService) {
     // this.compte= pageConnexionService.connexion;
     this.joueur = this.pageConnexionService.compte;
     // this.nombreEtoileJoueur=this.joueur.nbEtoiles
@@ -137,4 +142,16 @@ export class BoutiquePersonnagesComponent implements OnInit {
     }
   }
 
+  deconnexion() {
+    this.pageConnexionService.deconnexion();
+    this.router.navigate(['home'])
+  }
+
+
+  findAvatarCompte() {
+  }
+
+  changeAvatar(avatar: Avatar) {
+    this.pageConnexionService.updateAvatar(avatar);
+  }
 }

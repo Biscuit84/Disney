@@ -1,6 +1,6 @@
 #ecran-gestion-plateau {
   top: 4em;
-  height: 100%;
+  height: 90vh;
   width: 100%;
   position: relative;
   /* background-color: lightgray; */
@@ -8,6 +8,7 @@
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
+ 
 }
 
 .row {

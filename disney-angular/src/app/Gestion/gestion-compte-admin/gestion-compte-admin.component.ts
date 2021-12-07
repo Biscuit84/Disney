@@ -8,7 +8,8 @@ import { GestionCompteAdminService } from './gestion-compte-admin.service';
   styleUrls: ['./gestion-compte-admin.component.css']
 })
 export class GestionCompteAdminComponent implements OnInit {
-
+  admin = "admin"
+  joueur= "joueur"
   gestionForm: Compte
   constructor(private gestionCompteAdminService: GestionCompteAdminService) { }
 

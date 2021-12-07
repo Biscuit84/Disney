@@ -648,3 +648,10 @@ class TestMain {
 
 	}
 
+	//Compte connecte:
+	//		Compte connected = compteRepo.findByLoginAndPassword("joueur1", "1234");
+	//		
+	//		System.out.println("Compte connecte:"+connected);
+	//		
+	//		spring.close();
+

@@ -217,3 +217,17 @@ ul {
 .cursor-top-r{
   cursor: pointer;
 }
+
+/* CSS Avatar */
+#avatars{
+width: 22rem;
+}
+
+.dropdown-item{
+  width: 30%;
+} 
+
+.liAvatar{
+  padding-right: 0;
+  margin-left: 1rem;
+}
