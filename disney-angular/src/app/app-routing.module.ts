@@ -25,6 +25,7 @@ import { GestionBoutiqueAdminComponent } from './Gestion/gestion-boutique-admin/
 import { GestionDuCompteComponent } from './gestion-du-compte/gestion-du-compte.component';
 import { GestionPlateauComponent } from './Gestion/plateau/gestion-plateau/gestion-plateau.component';
 import { ModificationPlateauComponent } from './Gestion/plateau/modification-plateau/modification-plateau.component';
+import { GestionBoutiquePersonnageComponent } from './Gestion/gestion-boutique-admin/gestion-boutique-personnage/gestion-boutique-personnage.component';
 
 
 const routes : Routes= [
@@ -54,7 +55,7 @@ const routes : Routes= [
   {path : "gestionAdmin/boutique", component: GestionBoutiqueAdminComponent},
   {path : "gestionAdmin/createPlateau", component: GestionPlateauComponent},
   {path : "gestionAdmin/updatePlateau", component: ModificationPlateauComponent},
-
+  {path : "gestionAdmin/boutique/personnage", component: GestionBoutiquePersonnageComponent},
 
   // autres
   {path : "", redirectTo:"home", pathMatch: "full"},
