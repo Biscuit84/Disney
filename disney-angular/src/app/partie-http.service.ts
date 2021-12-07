@@ -59,11 +59,17 @@ export class PartieHttpService {
    }
     
 
+   findAllParties(): Observable<Array<Partie>> {
+    return this.http.get<Array<Partie>>(this.partieUrl);
+  }
+
+  findAllPartiesWithPlateaux(): Observable<Array<Partie>> {
+    return this.http.get<Array<Partie>>(this.partieUrl +"/detailPlateaux");
+  }
+
   /*
     // CRUD SIMPLE
-    findAll(): Array<Partie> {
-      return this.parties;
-    }
+    
   
     load() {
       this.http.get<Array<Partie>>(this.partieUrl).subscribe(response => {
