@@ -12,7 +12,7 @@ import { GestionBoutiqueEtoileService } from './gestion-boutique-etoile.service'
 export class GestionBoutiqueEtoileComponent implements OnInit {
 
 etoileForm :Etoile;
-
+urlDefautImage : string = "../../../assets/images/boutique/etoile-1.png";
 
   constructor(private appConfig: AppConfigService, private etoileService : GestionBoutiqueEtoileService) { }
 
@@ -25,6 +25,7 @@ etoileForm :Etoile;
 
   add() {
     this.etoileForm = new Etoile();
+    this.etoileForm.image = this.urlDefautImage;
   }
 
   edit(id: number) {

@@ -11,7 +11,7 @@ import { AppConfigService } from 'src/app/app-config.service';
 export class GestionBoutiquePersonnageComponent implements OnInit {
 
   personnageForm : Personnage;
-
+urlDefautAvatar: string = "../../assets/images/persoBoutique/elsa.jpg";
 
   constructor(private appConfig: AppConfigService, private personnageService : GestionBoutiquePersonnageService) { 
 
@@ -26,6 +26,7 @@ export class GestionBoutiquePersonnageComponent implements OnInit {
 
   add() {
     this.personnageForm = new Personnage();
+    this.personnageForm.avatar = this.urlDefautAvatar;
   }
 
   edit(id: number) {

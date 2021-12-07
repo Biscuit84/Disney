@@ -11,7 +11,7 @@ import { AppConfigService } from 'src/app/app-config.service';
 export class GestionBoutiqueVieComponent implements OnInit {
 
   vieForm : Vie;
-
+  urlDefautImage : string = "../../../assets/images/boutique/potion-1.png";
   constructor(private appConfig: AppConfigService, private vieService : GestionBoutiqueVieService) { 
 
   }
@@ -25,6 +25,7 @@ export class GestionBoutiqueVieComponent implements OnInit {
 
   add() {
     this.vieForm = new Vie();
+    this.vieForm.image = this.urlDefautImage;
   }
 
   edit(id: number) {
