@@ -20,6 +20,12 @@ export class PageConnexionService {
     return this.http.post<Compte>(this.connexionUrl + "connexion", connexion);
   }
 
+  reload() {
+    this.http.get<Compte>(this.connexionUrl+this.compte.id).subscribe(resp => {
+      this.compte = resp;
+    }, err => console.log(err));
+  }
+
   deconnexion() {
     this.compte = null;
   }

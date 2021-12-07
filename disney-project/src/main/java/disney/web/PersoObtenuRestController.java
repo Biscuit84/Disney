@@ -67,7 +67,7 @@ public class PersoObtenuRestController {
 		if (optPersoObtenu.isPresent()) {
 			return optPersoObtenu.get();
 		} else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Personnage obtenu non trouvé");
 		}
 	}
 

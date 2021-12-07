@@ -145,6 +145,7 @@ class TestMain {
 
 		Joueur joueur4 = new Joueur("MinnieDu44", "1234", "Minnie", "Mouse", "minnie.mouse@gmail.com", "Princesse Minnie", "expert", 15);
 		joueur4.setNbEtoiles(5000);
+		joueur4.setAvatar(avatar12);
 		joueur4 = joueurRepo.save(joueur4);		
 		Joueur joueur5 = new Joueur("DaisyDu13", "1234", "Daisy", "Duck", "daisy.duck@gmail.com", "Imperatrice Daisy", "intermediaire", 2);
 		joueur5.setNbEtoiles(100);

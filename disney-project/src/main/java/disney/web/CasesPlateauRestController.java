@@ -56,7 +56,7 @@ public class CasesPlateauRestController {
 		if (optCasesPlateau.isPresent()) {
 			return optCasesPlateau.get();
 		} else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cases Plateau non trouvé");
 		}
 	}
 	
@@ -68,7 +68,7 @@ public class CasesPlateauRestController {
 		if (optCasesPlateau.isPresent()) {
 			return optCasesPlateau.get();
 		} else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "CasePlateau non trouvée");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Case Plateau non trouvée");
 		}
 	}
 	
@@ -96,7 +96,7 @@ public class CasesPlateauRestController {
 	@JsonView(Views.ViewsCasesPlateau.class)
 	public CasesPlateau update(@PathVariable Long id, @RequestBody CasesPlateau casesplateau) {
 		if (!casesplateauRepo.existsById(id)) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cases Plateau non trouvé");
 		}
 
 		casesplateau = casesplateauRepo.save(casesplateau);
@@ -108,7 +108,7 @@ public class CasesPlateauRestController {
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
 		if (!casesplateauRepo.existsById(id)) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cases Plateau non trouvé");
 		}
 		
 		casesplateauRepo.deleteById(id);

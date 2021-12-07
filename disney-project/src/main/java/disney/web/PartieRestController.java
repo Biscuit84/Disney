@@ -81,7 +81,7 @@ public class PartieRestController {
 		if (optPartie.isPresent()) {
 			return optPartie.get();
 		} else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Partie non trouvé");
 		}
 	}
 
@@ -93,7 +93,7 @@ public class PartieRestController {
 		if (optPartie.isPresent()) {
 			return optPartie.get();
 		} else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Partie non trouvé");
 		}
 	}
 
@@ -131,15 +131,15 @@ public class PartieRestController {
 		partieRepo.deleteById(id);
 	}
 
-	
+
 	@PutMapping("/effect")
 	public void appliquerEffet() {
 		//TODO appliquer l'effet déclanché dans "jouerUnTour(@PathVariable Long idJoueur, @PathVariable Long idPartie)"
 	}
 
-	
+
 	//////////////////////////////////////////////////////// GAMING AREA ////////////////////////////////////////////////////////
-	
+
 	// lance un tour de jeu
 	@PutMapping("/tour/{idJoueur}/{idPartie}")
 	public TourDeJeuDto jouerUnTour(@PathVariable Long idJoueur, @PathVariable Long idPartie) {
@@ -154,7 +154,7 @@ public class PartieRestController {
 
 		// quel est le joueur
 		Joueur joueur = joueurRepo.findById(idJoueur).get();
-		
+
 		//on récupère la partie en cours
 		Partie partie = partieRepo.findById(idPartie).get();
 		Historique historique = historiqueRepo.findByPartie(partie);
@@ -163,7 +163,7 @@ public class PartieRestController {
 
 			System.out.println(historique);
 			System.out.println(partie.getPlateau().getCases());
-			
+
 			List<CasesPlateau>listeOrdreCases = casesPlateauRepo.findAllByPlateau(partie.getPlateau());
 			System.out.println("############# listeOrdreCases : "+listeOrdreCases);
 
@@ -181,34 +181,72 @@ public class PartieRestController {
 			Personnage persoQuiJoue = lp.get(indexPersoQuiJoue);
 			System.out.println("## position avant : "+persoQuiJoue.getPosition());
 			int positionFuturePersonnage = persoQuiJoue.getPosition() + totalValueDice;
-			
-			/////////////////EFFET DES CASES
+
+			/////////////////EFFET DES CASES ////////////////////////////////////////////
 			// on parcours la liste de case pour savoir s'il y a un effet à activer
 			if (positionFuturePersonnage < partie.getPlateau().getNbCases()-1) {
-			CasesPlateau cp = listeOrdreCases.get(positionFuturePersonnage);
-			if(cp.getUneCase().getTypeCase()== TypeCase.deplacement) {
-				System.out.println("c'est une case deplacement");
-				boolean effetAActiver=true;
-				var sens=cp.getUneCase().getParameter();
-				int deplacement;
-				if (sens>0) {
-					deplacement = rollOneDice();
+				
+				CasesPlateau cp = listeOrdreCases.get(positionFuturePersonnage);
+				// case deplacement
+				if(cp.getUneCase().getTypeCase()== TypeCase.deplacement) {
+					System.out.println("c'est une case deplacement");
+					//boolean effetAActiver=true;
+					var sens=cp.getParametre();
+					int deplacement;
+					if (sens==1) {
+						deplacement = rollOneDice();
+					}
+					else if (sens==-1){
+						deplacement = -rollOneDice();
+					}
+					else {deplacement=0;}
+					
+					if( positionFuturePersonnage + deplacement < 0 ) { // on ne peut pas aller au dessous de 0 pour les cases
+						deplacement = positionFuturePersonnage; 
+						positionFuturePersonnage=0;
+					}else { 
+						positionFuturePersonnage=positionFuturePersonnage+deplacement;
+					}
+					
+					tourDeJeuDto.setDeplacement(deplacement);
+					tourDeJeuDto.setEffetAActiver(true);
 				}
-				else {
-					deplacement = -rollOneDice();
+				// case prison
+				else if(cp.getUneCase().getTypeCase()==TypeCase.prison) {
+					System.out.println("c'est une case prison");
+					//boolean effetAActiver=true;
+					// 
+					tourDeJeuDto.setEffetAActiver(true);
 				}
-				positionFuturePersonnage=positionFuturePersonnage+deplacement;
-				tourDeJeuDto.setDeplacement(deplacement);
-				tourDeJeuDto.setEffetAActiver(true);
+				
+				else if(cp.getUneCase().getTypeCase()==TypeCase.prince) {
+					System.out.println("c'est une case prince");
+ 
+					int deplacement = totalValueDice; // on double l'effet des dés
+					 
+					tourDeJeuDto.setDeplacement(deplacement);
+					tourDeJeuDto.setEffetAActiver(true);
+					positionFuturePersonnage=positionFuturePersonnage+deplacement;
+				}
+				else if(cp.getUneCase().getTypeCase()==TypeCase.mechant) { // on annule le lancé de dés
+					System.out.println("c'est une case mechant");
+					int deplacement = -totalValueDice;
+ 
+					tourDeJeuDto.setDeplacement(deplacement);
+					tourDeJeuDto.setEffetAActiver(true);
+					positionFuturePersonnage=positionFuturePersonnage+deplacement;
+				}				
+				
+				
+				
 			}
-			}
-			
+
 			//TODO avec listeOrdreCases prévoir un deuxieme appel sur la methode "appliquerEffet" pour appliquer l'effet
 			//cela permet de terminer le déplacement du perso, avant d'appliquer l'effet.
-//			CasesPlateau cp = listeOrdreCases.get(indexPositionFuturePersonnage);
+			//			CasesPlateau cp = listeOrdreCases.get(indexPositionFuturePersonnage);
 			//TODO calcul de l'effet
-//			tourDeJeuDto.setEffetAActiver(true);
-			
+			//			tourDeJeuDto.setEffetAActiver(true);
+
 			// si on a gagné :D
 			if(positionFuturePersonnage >= partie.getPlateau().getNbCases()-1) {
 				positionFuturePersonnage = partie.getPlateau().getNbCases();
@@ -220,11 +258,12 @@ public class PartieRestController {
 				if(historique.getPersonnage().getId()==persoQuiJoue.getId()) {
 					//bravo
 					historique.setVictoire(true);
+					joueur.setNbVictoire(joueur.getNbVictoire()+1);
 				} else {
 					//defaite
 					historique.setVictoire(false);
 				}
-				
+
 				//on calcul la postition du joueur
 				if(historique.isVictoire()) {
 					historique.setPositionArrivee(1);
@@ -237,35 +276,35 @@ public class PartieRestController {
 							positionActuelle++;
 						}
 					}
-					
+
 					int nbetoile=500-100*(positionActuelle-1); // le joueur tant d'etoile
-					
+
 					historique.setPositionArrivee(positionActuelle);
 					historique.setNbEtoilesGagnees(nbetoile);
-					
-					
+
+
 					int nbetoileactuelle = joueur.getNbEtoiles();
-					
+
 					joueur.setNbEtoiles(nbetoileactuelle + nbetoile);					
 
-					
+
 					//on dit qu'il est premier
-//					int positionActuelle = 1;
-//					for(Personnage p : lp) {
-//						int positionPerso = p.getPosition();
-//
-//						System.out.println("positionPerso : "+positionPerso);
-//						System.out.println("positionPersoQuiJoue : "+persoQuiJoue.getPosition());
-//						if(positionPerso > persoQuiJoue.getPosition()) {
-//							positionActuelle ++;
-//							System.out.println(positionActuelle);
-//						}
-//					}
-//					historique.setPositionArrivee(positionActuelle);
-//					historique.setNbEtoilesGagnees(500-100*(positionActuelle-1));
-					
+					//					int positionActuelle = 1;
+					//					for(Personnage p : lp) {
+					//						int positionPerso = p.getPosition();
+					//
+					//						System.out.println("positionPerso : "+positionPerso);
+					//						System.out.println("positionPersoQuiJoue : "+persoQuiJoue.getPosition());
+					//						if(positionPerso > persoQuiJoue.getPosition()) {
+					//							positionActuelle ++;
+					//							System.out.println(positionActuelle);
+					//						}
+					//					}
+					//					historique.setPositionArrivee(positionActuelle);
+					//					historique.setNbEtoilesGagnees(500-100*(positionActuelle-1));
+
 				}
-				
+
 				//on met la date de fin de partie
 				historique.setDateHeureFinPartie(LocalDateTime.now());
 				tourDeJeuDto.setFinPartie(true);
@@ -274,18 +313,19 @@ public class PartieRestController {
 				System.out.println(" ############################# ");
 				System.out.println(" #FIN DE PARTIE# : histo "+historique);
 			}
-			
+
 			persoQuiJoue.setPosition(positionFuturePersonnage);
 			System.out.println("## position apres : "+persoQuiJoue.getPosition());
-			
+
 			//		List<Personnage> lp = partie.getPersonnages();
 
 			// fin de tour
 			tourDeJeuDto.setPositionFutureJoueur(persoQuiJoue.getPosition());
 			persoRepo.save(persoQuiJoue);
 			partieRepo.save(partie);
+			joueurRepo.save(joueur);
 
-			
+
 			return tourDeJeuDto;
 		}
 		return null;
@@ -299,16 +339,16 @@ public class PartieRestController {
 
 		Historique historique = new Historique();
 		Partie partie = new Partie();
-		
-		
-		
+
+
+
 		//	1. choix du plateau: afficher la liste des plateaux dispo grace a : PlateauRestController.findAll()
 		//		Long idPlateau= (long) 1;
 		Plateau p = plateauRepo.findByIdWithDetail(idPlateauChoisi).get();
 		System.out.println("le plateau" + plateauRepo.findByIdWithDetail(idPlateauChoisi).get());
 		partie.setPlateau(p);
 		partie.setNbTourDeJeu(0);
-		
+
 		//	2. Creer une nouvelle partie et creation de la liste des joueurs:
 		List <Joueur> listeDesJoueurs = listeJoueursPartie(idJoueur, historique, partie);
 		partie.setJoueurs(new ArrayList<>(listeDesJoueurs));
@@ -326,119 +366,119 @@ public class PartieRestController {
 		historiqueRepo.save(historique);
 		System.out.println(partie.getPersonnages());
 		//		System.out.println();
-		
+
 		Joueur j = joueurRepo.getById(idJoueur);
 		j.setLife(j.getLife()-1);
 		joueurRepo.save(j);
 
-		
+
 		return partie;
 	}
-	
-	//creation de la partie:
-//		@PostMapping("/debuterLaPartie/{partieDTO.idJoueur}/{partieDTO.idPersoChoisi}/{partieDTO.idPlateauChoisi}")
-//		@JsonView(Views.ViewsPartieDetailPersos.class)
-//		public Partie debuterLaPartie(@RequestBody PartieDTO partieDTO) {
-//			Historique historique = new Historique();
-//			Partie partie = new Partie();
-//			
-//			//	1. choix du plateau: afficher la liste des plateaux dispo grace a : PlateauRestController.findAll()
-//			//		Long idPlateau= (long) 1;
-//			Plateau p = plateauRepo.findById(partieDTO.getIdPlateau()).get();
-//			partie.setPlateau(p);
-//			partie.setNbTourDeJeu(0);
-//			
-//			//	2. Creer une nouvelle partie et creation de la liste des joueurs:
-//			Set <Joueur> listeDesJoueurs = listeJoueursPartie(partieDTO.getIdJoueur(), historique);
-//			partie.setJoueurs(new ArrayList<>(listeDesJoueurs));
-//
-//			//	3. choix du perso: 
-//			//		- afficher la liste des persos du joueur grace a: PersoObtenuRestController.findAllPersoObtenuByIdJoueur(idJoueur);
-//			//		- creation de la liste des persos de la partie:
-//			Set<Personnage> listePersoPartie = listePersosPartie(partieDTO.getIdPerso(), historique, partie);
-//			partie.setPersonnages(new ArrayList<>(listePersoPartie));
-//
-//			partie = partieRepo.save(partie);
-//
-//			historique.setPartie(partie);
-//			historique.setDateHeureDebutPartie(LocalDateTime.now());
-//			historiqueRepo.save(historique);
-//			System.out.println(partie.getPersonnages());
-//			//		System.out.println();
-//
-//			return partie;
-//		}
 
-	
-	
+	//creation de la partie:
+	//		@PostMapping("/debuterLaPartie/{partieDTO.idJoueur}/{partieDTO.idPersoChoisi}/{partieDTO.idPlateauChoisi}")
+	//		@JsonView(Views.ViewsPartieDetailPersos.class)
+	//		public Partie debuterLaPartie(@RequestBody PartieDTO partieDTO) {
+	//			Historique historique = new Historique();
+	//			Partie partie = new Partie();
+	//			
+	//			//	1. choix du plateau: afficher la liste des plateaux dispo grace a : PlateauRestController.findAll()
+	//			//		Long idPlateau= (long) 1;
+	//			Plateau p = plateauRepo.findById(partieDTO.getIdPlateau()).get();
+	//			partie.setPlateau(p);
+	//			partie.setNbTourDeJeu(0);
+	//			
+	//			//	2. Creer une nouvelle partie et creation de la liste des joueurs:
+	//			Set <Joueur> listeDesJoueurs = listeJoueursPartie(partieDTO.getIdJoueur(), historique);
+	//			partie.setJoueurs(new ArrayList<>(listeDesJoueurs));
+	//
+	//			//	3. choix du perso: 
+	//			//		- afficher la liste des persos du joueur grace a: PersoObtenuRestController.findAllPersoObtenuByIdJoueur(idJoueur);
+	//			//		- creation de la liste des persos de la partie:
+	//			Set<Personnage> listePersoPartie = listePersosPartie(partieDTO.getIdPerso(), historique, partie);
+	//			partie.setPersonnages(new ArrayList<>(listePersoPartie));
+	//
+	//			partie = partieRepo.save(partie);
+	//
+	//			historique.setPartie(partie);
+	//			historique.setDateHeureDebutPartie(LocalDateTime.now());
+	//			historiqueRepo.save(historique);
+	//			System.out.println(partie.getPersonnages());
+	//			//		System.out.println();
+	//
+	//			return partie;
+	//		}
+
+
+
 	//creation de la liste des joueurs:
 	public List<Joueur> listeJoueursPartie(Long idJoueur, Historique historique, Partie partie) {
-//		Set <Joueur> setDesJoueurs = new HashSet <Joueur> ();
-//		Joueur IA1 = joueurRepo.findById((long) 1).get();
-//		Joueur IA2 = joueurRepo.findById((long) 2).get();
-//		Joueur IA3 = joueurRepo.findById((long) 3).get();
-//		Joueur joueurCourant = joueurRepo.findById(idJoueur).get();
-//
-//		joueurCourant.setPartie(partie);
-//		setDesJoueurs.add(joueurCourant);
-//		setDesJoueurs.add(IA1);
-//		setDesJoueurs.add(IA2);
-//		setDesJoueurs.add(IA3);
-//
-//		historique.setJoueur(joueurCourant);
-//		
-//		List<Joueur> listeDesJoueurs = new ArrayList<>(setDesJoueurs);
-		
+		//		Set <Joueur> setDesJoueurs = new HashSet <Joueur> ();
+		//		Joueur IA1 = joueurRepo.findById((long) 1).get();
+		//		Joueur IA2 = joueurRepo.findById((long) 2).get();
+		//		Joueur IA3 = joueurRepo.findById((long) 3).get();
+		//		Joueur joueurCourant = joueurRepo.findById(idJoueur).get();
+		//
+		//		joueurCourant.setPartie(partie);
+		//		setDesJoueurs.add(joueurCourant);
+		//		setDesJoueurs.add(IA1);
+		//		setDesJoueurs.add(IA2);
+		//		setDesJoueurs.add(IA3);
+		//
+		//		historique.setJoueur(joueurCourant);
+		//		
+		//		List<Joueur> listeDesJoueurs = new ArrayList<>(setDesJoueurs);
+
 		Joueur IA1 = joueurRepo.findById((long) 1).get();
 		Joueur IA2 = joueurRepo.findById((long) 2).get();
 		Joueur IA3 = joueurRepo.findById((long) 3).get();
 		Joueur joueurCourant = joueurRepo.findById(idJoueur).get();		
-		
+
 		joueurCourant.setPartie(partie);
 
 		historique.setJoueur(joueurCourant);
-		
-     	List<Joueur> listeDesJoueurs = new ArrayList<>();
+
+		List<Joueur> listeDesJoueurs = new ArrayList<>();
 		listeDesJoueurs.add(joueurCourant);
 		listeDesJoueurs.add(IA1);
 		listeDesJoueurs.add(IA2);
 		listeDesJoueurs.add(IA3);
-		
+
 		return listeDesJoueurs;
 	}
 
 	//creation de la liste des persos de la partie:
 	public List<Personnage> listePersosPartie(Long idPersoChoisi, Historique historique, Partie partie) {
-//		Set<Personnage> setPersoPartie = new HashSet <Personnage> ();
-//		//perso joueur:
-//		Personnage peJoueur = persoRepo.findById(idPersoChoisi).get();
-//		peJoueur.setPartie(partie);
-//		peJoueur.setPosition(0);
-//		historique.setPersonnage(peJoueur);
-//
-//		//persosIA
-//		List <Personnage> listePersonnagesIA=persoRepo.findAll();
-//		listePersonnagesIA.remove(peJoueur);
-//
-//		//tirage aleatoire pour choix des perso IA
-//		Set <Personnage> setIAChoixPersonnage = new HashSet<> ();
-//
-//		while(setIAChoixPersonnage.size()<3) {
-//			for (int i=0;i<=2;i++) {
-//				int nombreAleatoireIA = r.nextInt(listePersonnagesIA.size());
-//				Personnage personnageIA= listePersonnagesIA.get(nombreAleatoireIA);
-//				personnageIA.setPartie(partie);
-//				personnageIA.setPosition(0);
-//				setIAChoixPersonnage.add(personnageIA);
-//			}
-//		}
-//
-//		setPersoPartie.add(peJoueur); 
-//		setPersoPartie.addAll(setIAChoixPersonnage);
-//		
-//		List<Personnage> listePersoPartie = new ArrayList<>(setPersoPartie);
+		//		Set<Personnage> setPersoPartie = new HashSet <Personnage> ();
+		//		//perso joueur:
+		//		Personnage peJoueur = persoRepo.findById(idPersoChoisi).get();
+		//		peJoueur.setPartie(partie);
+		//		peJoueur.setPosition(0);
+		//		historique.setPersonnage(peJoueur);
+		//
+		//		//persosIA
+		//		List <Personnage> listePersonnagesIA=persoRepo.findAll();
+		//		listePersonnagesIA.remove(peJoueur);
+		//
+		//		//tirage aleatoire pour choix des perso IA
+		//		Set <Personnage> setIAChoixPersonnage = new HashSet<> ();
+		//
+		//		while(setIAChoixPersonnage.size()<3) {
+		//			for (int i=0;i<=2;i++) {
+		//				int nombreAleatoireIA = r.nextInt(listePersonnagesIA.size());
+		//				Personnage personnageIA= listePersonnagesIA.get(nombreAleatoireIA);
+		//				personnageIA.setPartie(partie);
+		//				personnageIA.setPosition(0);
+		//				setIAChoixPersonnage.add(personnageIA);
+		//			}
+		//		}
+		//
+		//		setPersoPartie.add(peJoueur); 
+		//		setPersoPartie.addAll(setIAChoixPersonnage);
+		//		
+		//		List<Personnage> listePersoPartie = new ArrayList<>(setPersoPartie);
 		List<Personnage> listePersoPartie = new ArrayList<>();
-		
+
 		//perso joueur:
 		Personnage peJoueur = persoRepo.findById(idPersoChoisi).get();
 		peJoueur.setPartie(partie);
@@ -448,7 +488,7 @@ public class PartieRestController {
 		//persosIA
 		List <Personnage> listePersonnagesIA=persoRepo.findAll();
 		listePersonnagesIA.remove(peJoueur);
-		
+
 		//tirage aleatoire pour choix des perso IA
 		List<Personnage> listIAChoixPersonnage = new ArrayList<>();
 
@@ -465,7 +505,7 @@ public class PartieRestController {
 
 		listePersoPartie.add(peJoueur); 
 		listePersoPartie.addAll( listIAChoixPersonnage);
-		
+
 		return listePersoPartie;
 	}
 

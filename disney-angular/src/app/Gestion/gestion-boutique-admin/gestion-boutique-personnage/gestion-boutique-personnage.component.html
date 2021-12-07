@@ -1,1 +1,91 @@
-<p>gestion-boutique-personnage works!</p>
+<div class="card mt-3">
+    <div id="fondList" class="card-header text-white">
+        <h2>Liste des personnages</h2>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Identifiant</th>
+                    <th>Version</th>
+                    <th>Nom</th>
+                    <th>Prince</th>
+                    <th>Mechant</th>
+                    <th>Pouvoir</th>
+                    <th>Prix Achat</th>
+                    <th>Avatar</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let perso of list()">
+                    <td>{{perso.id}}</td>
+                    <td>{{perso.version}}</td>
+                    <td>{{perso.nom}}</td>
+                    <td>{{perso.prince}}</td>
+                    <td>{{perso.mechant}}</td>
+                    <td>{{perso.pouvoir}}</td>
+                    <td>{{perso.prixAchatPerso}}</td>
+                    <td>{{perso.avatar}}</td>
+                    <td>
+                        <div class="btn-group btn-group-sm">
+                            <a class="btn btn-primary" (click)="edit(perso.id)"><i class="bi bi-pencil-square"></i></a>
+                            <a class="btn btn-danger" (click)="remove(perso.id)"><i class="bi bi-trash"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+        <a class="btn btn-success btn-lg" (click)="add()">
+            <i class="bi bi-plus-square"></i>
+        </a>
+    </div>
+</div>
+
+<div class="card mt-3" *ngIf="personnageForm">
+    <div class="card-header text-white">
+        <h3>Création d'un personnage</h3>
+    </div>
+    <div class="card-body">
+        <div class="form-group">
+            <label for="nom">Nom</label>
+            <input type="text" class="form-control" id="nom" [(ngModel)]="personnageForm.nom">
+        </div>
+        <div class="form-group">
+            <label for="prince">Prince</label>
+            <input type="text" class="form-control" id="prince" [(ngModel)]="personnageForm.prince">
+        </div>
+        <div class="form-group">
+            <label for="mechant">Mechant</label>
+            <input type="text" class="form-control" id="mechant" [(ngModel)]="personnageForm.mechant">
+        </div>
+        <div class="form-group">
+            <label for="pouvoir">Pouvoir</label>
+            <input type="text" class="form-control" id="pouvoir" [(ngModel)]="personnageForm.pouvoir">
+        </div>
+        <div class="form-group">
+            <label for="prixAchatPerso">Prix achat</label>
+            <input type="number" class="form-control" id="prixAchatPerso" [(ngModel)]="personnageForm.prixAchatPerso">
+        </div>
+        <div class="form-group">
+            <label for="avatar">Avatar</label>
+            <input type="text" class="form-control" id="avatar" [(ngModel)]="personnageForm.avatar"  >
+        </div>
+        
+    </div>
+
+    <div class="card-footer">
+        <div class="btn-group btn-group-lg float-end">
+            <a class="btn btn-success" (click)="save()">
+                <i class="bi bi-check-square"></i>
+            </a>
+            <a class="btn btn-warning" (click)="cancel()">
+                <i class="bi bi-backspace"></i>
+            </a>
+        </div>
+    </div>
+
+</div>
+

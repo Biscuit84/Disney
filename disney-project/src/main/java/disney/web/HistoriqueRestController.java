@@ -58,7 +58,7 @@ public class HistoriqueRestController {
 		if (optHistorique.isPresent()) {
 			return optHistorique.get();
 		} else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Historique non trouvé");
 		}
 	}
 	
@@ -70,7 +70,7 @@ public class HistoriqueRestController {
 		if (optHistorique.isPresent()) {
 			return optHistorique.get();
 		} else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Historique non trouvé");
 		}
 	}
 
@@ -87,7 +87,7 @@ public class HistoriqueRestController {
 	@JsonView(Views.ViewsHistorique.class)
 	public Historique update(@PathVariable Long id, @RequestBody Historique historique) {
 		if (!historiqueRepo.existsById(id)) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Historique non trouvé");
 		}
 
 		historique = historiqueRepo.save(historique);
@@ -99,7 +99,7 @@ public class HistoriqueRestController {
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
 		if (!historiqueRepo.existsById(id)) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Historique non trouvé");
 		}
 		
 		historiqueRepo.deleteById(id);
