@@ -6,38 +6,43 @@
             <div class="gameControl">
                 <div class="bouttons">
                     <div class="Tour">
-                        <p> Tour : <span id="NbTour"> {{tourActuel}}</span> </p>
+                        <p> Tour : <span id="NbTour"> {{tourActuel +1 }}</span> </p>
                     </div>
                     <div class="TourJoueur">
-                        <p> Tour du joueur :<span id="JoueurTour"> {{joueurActuel}} </span> </p>
+                        <p> Tour du joueur :<span id="JoueurTour"> {{joueurActuel+1}} </span> </p>
                     </div>
                     <div class="Avance">
                         <button id="boutonJouer" type="button" class="btn btn-primary bouton"
-                            [disabled]="!dispoBoutonJouer" (click)="Play()">Jouer</button>
+                            [disabled]="!dispoBoutonJouer|| pionJoueur.playerIsMoving || pionIA1.playerIsMoving|| pionIA2.playerIsMoving|| pionIA3.playerIsMoving || joueurActuel!=0 || tourActuel<pionJoueur. playedTurn"
+                            (click)="Play(); !dispoBoutonJouer">Jouer</button>
                         <p>Lancé de dé: <span id="valeurDeAvance">{{valeurDesDes}}</span></p>
                     </div>
                     <div class="pouvoir">
                         <button id="boutonPouvoir" type="button" class="btn btn-primary bouton"
-                            [disabled]="!dispoBoutonPouvoir" (click)="Pouvoir()">Pouvoir</button>
+                            [disabled]="!dispoBoutonPouvoir" (click)="Pouvoir(); !dispoBoutonPouvoir">Pouvoir</button>
                     </div>
-
-
-
-                    <div class="Fin">
+                    <p></p>
+                    <div class=" Fin">
                         <button id="boutonFinDeTour" type="button" class="btn btn-primary bouton"
-                            [disabled]="!dispoBoutonFin" (click)="EndTurn()">Fin de tour </button>
+                            [disabled]="!dispoBoutonFin || pionJoueur.playerIsMoving || pionIA1.playerIsMoving|| pionIA2.playerIsMoving|| pionIA3.playerIsMoving || joueurActuel!=0"
+                            (click)="EndTurn(); !dispoBoutonFin">Fin de tour</button>
                         <p></p>
                     </div>
-                    <div class="dice" id="de1">
+                    <div class=" dice" id="de1">
                         <p><span id="affichageDe"> </span></p>
-                        <img id="imageDe" src="../../assets/images/jeu/de0.png" alt="de1">
+                        <img id="imageDe" src="../../assets/images/jeu/de1.png" alt="de1">
                     </div>
                     <div>
                         <p></p>
                     </div>
                     <div class="dice" id="de2">
                         <p><span id="affichageDe2"> </span></p>
-                        <img id="imageDe2" src="../../assets/images/jeu/de0.png" alt="de2">
+                        <img id="imageDe2" src="../../assets/images/jeu/de1.png" alt="de2">
+                    </div>
+                    <div class="caseEnCours">
+                        <p class=titreCase>  Effet de la case  :</p>
+                        <div id="texteCase"> <p id="caseEffet"> {{caseEnCours}} </p> </div>
+                        
                     </div>
                 </div>
             </div>
@@ -88,7 +93,7 @@
                     <div class=titreInterface> <span>Ton personnage !</span></div>
                     <img id="image_personnage" src={{personnage.avatar}} alt="personnage">
                     <div class="personnage">
-                        <p class="titresection"><b> Prenom : {{personnage.nom}}</b></p>
+                        <p class="titresection"> Prenom : {{personnage.nom}}</p>
                         <p class=" detail"> <span type="button" data-toggle="tooltip" data-placement="right"
                                 title="Ajouter la description du pouvoir" id="infoPouvoir">Pouvoir:
                                 {{personnage.pouvoir}}</span> </p>
