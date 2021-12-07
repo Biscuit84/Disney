@@ -36,6 +36,8 @@ import { GestionPlateauComponent } from './Gestion/plateau/gestion-plateau/gesti
 import {MatInputModule} from '@angular/material/input';
 import { ModificationPlateauComponent } from './Gestion/plateau/modification-plateau/modification-plateau.component';
 import { GestionBoutiquePersonnageComponent } from './Gestion/gestion-boutique-admin/gestion-boutique-personnage/gestion-boutique-personnage.component';
+import { GestionBoutiqueVieComponent } from './Gestion/gestion-boutique-admin/gestion-boutique-vie/gestion-boutique-vie.component';
+import { GestionBoutiqueEtoileComponent } from './Gestion/gestion-boutique-admin/gestion-boutique-etoile/gestion-boutique-etoile.component';
 
 
 
@@ -68,7 +70,9 @@ import { GestionBoutiquePersonnageComponent } from './Gestion/gestion-boutique-a
     GestionBoutiqueAdminComponent,
     GestionPlateauComponent,
     ModificationPlateauComponent,
-    GestionBoutiquePersonnageComponent
+    GestionBoutiquePersonnageComponent,
+    GestionBoutiqueVieComponent,
+    GestionBoutiqueEtoileComponent
   ],
   imports: [
     BrowserModule,

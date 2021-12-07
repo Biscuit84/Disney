@@ -18,67 +18,67 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import disney.model.Admin;
+import disney.model.Vie;
 import disney.model.Views;
-import disney.repository.IAdminRepo;
+import disney.repository.IVieRepo;
 
 
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/vie")
 @CrossOrigin("*")
-public class AdminRestController {
+public class VieRestController {
 
 	@Autowired
-	private IAdminRepo adminRepo;
+	private IVieRepo vieRepo;
 	
 	@GetMapping("")
-	@JsonView(Views.ViewsAdmin.class)
-	public List<Admin> findAll() {
-		List<Admin> admins = adminRepo.findAll();
+	@JsonView(Views.ViewsVie.class)
+	public List<Vie> findAll() {
+		List<Vie> vies = vieRepo.findAll();
 
-		return admins;
+		return vies;
 	}
 
 	@GetMapping("{id}")
-	@JsonView(Views.ViewsAdmin.class)
-	public Admin find(@PathVariable Long id) {
-		Optional<Admin> optAdmin = adminRepo.findById(id);
+	@JsonView(Views.ViewsVie.class)
+	public Vie find(@PathVariable Long id) {
+		Optional<Vie> optVie = vieRepo.findById(id);
 
-		if (optAdmin.isPresent()) {
-			return optAdmin.get();
+		if (optVie.isPresent()) {
+			return optVie.get();
 		} else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Admin non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Vie non trouvé");
 		}
 	}
 
 
 	@PostMapping("")
-	@JsonView(Views.ViewsAdmin.class)
-	public Admin create(@RequestBody Admin admin) {
-		admin = adminRepo.save(admin);
+	@JsonView(Views.ViewsVie.class)
+	public Vie create(@RequestBody Vie vie) {
+		vie = vieRepo.save(vie);
 
-		return admin;
+		return vie;
 	}
 
 	@PutMapping("/{id}")
-	@JsonView(Views.ViewsAdmin.class)
-	public Admin update(@PathVariable Long id, @RequestBody Admin admin) {
-		if (!adminRepo.existsById(id)) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Admin non trouvé");
+	@JsonView(Views.ViewsVie.class)
+	public Vie update(@PathVariable Long id, @RequestBody Vie vie) {
+		if (!vieRepo.existsById(id)) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Vie non trouvé");
 		}
 
-		admin = adminRepo.save(admin);
+		vie = vieRepo.save(vie);
 
-		return admin;
+		return vie;
 	}
 
 	
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
-		if (!adminRepo.existsById(id)) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Admin non trouvé");
+		if (!vieRepo.existsById(id)) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Vie non trouvé");
 		}
 		
-		adminRepo.deleteById(id);
+		vieRepo.deleteById(id);
 	}
 }

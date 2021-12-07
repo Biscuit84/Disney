@@ -26,6 +26,8 @@ import { GestionDuCompteComponent } from './gestion-du-compte/gestion-du-compte.
 import { GestionPlateauComponent } from './Gestion/plateau/gestion-plateau/gestion-plateau.component';
 import { ModificationPlateauComponent } from './Gestion/plateau/modification-plateau/modification-plateau.component';
 import { GestionBoutiquePersonnageComponent } from './Gestion/gestion-boutique-admin/gestion-boutique-personnage/gestion-boutique-personnage.component';
+import { GestionBoutiqueVieComponent } from './Gestion/gestion-boutique-admin/gestion-boutique-vie/gestion-boutique-vie.component';
+import { GestionBoutiqueEtoileComponent } from './Gestion/gestion-boutique-admin/gestion-boutique-etoile/gestion-boutique-etoile.component';
 
 
 const routes : Routes= [
@@ -56,7 +58,8 @@ const routes : Routes= [
   {path : "gestionAdmin/createPlateau", component: GestionPlateauComponent},
   {path : "gestionAdmin/updatePlateau", component: ModificationPlateauComponent},
   {path : "gestionAdmin/boutique/personnage", component: GestionBoutiquePersonnageComponent},
-
+  {path : "gestionAdmin/boutique/vie", component: GestionBoutiqueVieComponent},
+  {path : "gestionAdmin/boutique/etoile", component: GestionBoutiqueEtoileComponent},
   // autres
   {path : "", redirectTo:"home", pathMatch: "full"},
   {path: '**', component: PageNotFoundComponent }

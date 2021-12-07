@@ -81,7 +81,7 @@ public class PartieRestController {
 		if (optPartie.isPresent()) {
 			return optPartie.get();
 		} else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Partie non trouvé");
 		}
 	}
 
@@ -93,7 +93,7 @@ public class PartieRestController {
 		if (optPartie.isPresent()) {
 			return optPartie.get();
 		} else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Evaluation non trouvé");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Partie non trouvé");
 		}
 	}
 
