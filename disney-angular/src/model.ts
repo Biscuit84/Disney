@@ -1,3 +1,4 @@
+import { NumberSymbol } from "@angular/common";
 
 export class Compte {
   id: number;
@@ -277,28 +278,12 @@ export class PartieDTO {
   plateau: Plateau;
   monPersonnage: Personnage;
   nbTourDeJeu:number;
-<<<<<<< HEAD
-  joueur: Joueur;
-=======
-  idPlateau:number
-  idPerso:number
-  idJoueur:number
->>>>>>> develop
-
   constructor(
     id?: number,
     version?: number,
     plateau?: Plateau,
     monPersonnage?: Personnage,
     nbTourDeJeu?:number,
-<<<<<<< HEAD
-    joueur?:Joueur,
-=======
-    idPlateau?:number,
-  idPerso?:number,
-    idJoueur?:number
-
->>>>>>> develop
   ) {
     this.id = id
     this.version = version
@@ -318,6 +303,7 @@ export class TourDeJeuDto {
   positionFutureJoueur: number;
   finPartie: boolean = false;
   effetAActiver: boolean = false;
+  deplacement:number;
   
 
 
@@ -327,7 +313,8 @@ export class TourDeJeuDto {
     tourDeJeuEnCours?: number,
     positionFutureJoueur?: number,
     finPartie?: boolean,
-    effetAActiver?: boolean
+    effetAActiver?: boolean,
+    deplacement?:number
 
   ) {
     this.valueDice1 = valueDice1
@@ -336,6 +323,7 @@ export class TourDeJeuDto {
     this.positionFutureJoueur = positionFutureJoueur
     this.finPartie = finPartie
     this.effetAActiver = effetAActiver
+    this.deplacement=deplacement
    
   }
 
@@ -433,6 +421,7 @@ export class CasesPlateau {
   uneCase: Cases;
   joueurs: Array<Joueur>;
   ordreCase: number;
+  parametre:number;
 
 
   constructor(
@@ -441,7 +430,8 @@ export class CasesPlateau {
     ordreCase?: number,
     plateau?: Plateau,
     uneCase?: Cases,
-    joueurs?: Array<Joueur>
+    joueurs?: Array<Joueur>,
+    parametre?: number
 
   ) {
     this.id = id
@@ -450,6 +440,7 @@ export class CasesPlateau {
     this.plateau = plateau
     this.uneCase = uneCase
     this.joueurs = joueurs
+    this.parametre=parametre
   }
 
 

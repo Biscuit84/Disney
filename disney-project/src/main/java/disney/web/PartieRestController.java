@@ -2,11 +2,9 @@ package disney.web;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,6 +29,7 @@ import disney.model.Joueur;
 import disney.model.Partie;
 import disney.model.Personnage;
 import disney.model.Plateau;
+import disney.model.TypeCase;
 import disney.model.Views;
 import disney.repository.ICasesPlateauRepo;
 import disney.repository.IHistoriqueRepo;
@@ -138,6 +137,9 @@ public class PartieRestController {
 		//TODO appliquer l'effet déclanché dans "jouerUnTour(@PathVariable Long idJoueur, @PathVariable Long idPartie)"
 	}
 
+	
+	//////////////////////////////////////////////////////// GAMING AREA ////////////////////////////////////////////////////////
+	
 	// lance un tour de jeu
 	@PutMapping("/tour/{idJoueur}/{idPartie}")
 	public TourDeJeuDto jouerUnTour(@PathVariable Long idJoueur, @PathVariable Long idPartie) {
@@ -150,6 +152,9 @@ public class PartieRestController {
 		tourDeJeuDto.setValueDice1(valueDice1);
 		tourDeJeuDto.setValueDice2(valueDice2);
 
+		// quel est le joueur
+		Joueur joueur = joueurRepo.findById(idJoueur).get();
+		
 		//on récupère la partie en cours
 		Partie partie = partieRepo.findById(idPartie).get();
 		Historique historique = historiqueRepo.findByPartie(partie);
@@ -176,12 +181,35 @@ public class PartieRestController {
 			Personnage persoQuiJoue = lp.get(indexPersoQuiJoue);
 			System.out.println("## position avant : "+persoQuiJoue.getPosition());
 			int positionFuturePersonnage = persoQuiJoue.getPosition() + totalValueDice;
+			
+			/////////////////EFFET DES CASES
+			// on parcours la liste de case pour savoir s'il y a un effet à activer
+			if (positionFuturePersonnage < partie.getPlateau().getNbCases()-1) {
+			CasesPlateau cp = listeOrdreCases.get(positionFuturePersonnage);
+			if(cp.getUneCase().getTypeCase()== TypeCase.deplacement) {
+				System.out.println("c'est une case deplacement");
+				boolean effetAActiver=true;
+				var sens=cp.getUneCase().getParameter();
+				int deplacement;
+				if (sens>0) {
+					deplacement = rollOneDice();
+				}
+				else {
+					deplacement = -rollOneDice();
+				}
+				positionFuturePersonnage=positionFuturePersonnage+deplacement;
+				tourDeJeuDto.setDeplacement(deplacement);
+				tourDeJeuDto.setEffetAActiver(true);
+			}
+			}
+			
 			//TODO avec listeOrdreCases prévoir un deuxieme appel sur la methode "appliquerEffet" pour appliquer l'effet
 			//cela permet de terminer le déplacement du perso, avant d'appliquer l'effet.
 //			CasesPlateau cp = listeOrdreCases.get(indexPositionFuturePersonnage);
 			//TODO calcul de l'effet
 //			tourDeJeuDto.setEffetAActiver(true);
 			
+			// si on a gagné :D
 			if(positionFuturePersonnage >= partie.getPlateau().getNbCases()-1) {
 				positionFuturePersonnage = partie.getPlateau().getNbCases();
 				persoQuiJoue.setPosition(positionFuturePersonnage);
@@ -209,8 +237,17 @@ public class PartieRestController {
 							positionActuelle++;
 						}
 					}
+					
+					int nbetoile=500-100*(positionActuelle-1); // le joueur tant d'etoile
+					
 					historique.setPositionArrivee(positionActuelle);
-					historique.setNbEtoilesGagnees(500-100*(positionActuelle-1));
+					historique.setNbEtoilesGagnees(nbetoile);
+					
+					
+					int nbetoileactuelle = joueur.getNbEtoiles();
+					
+					joueur.setNbEtoiles(nbetoileactuelle + nbetoile);					
+
 					
 					//on dit qu'il est premier
 //					int positionActuelle = 1;
@@ -259,8 +296,11 @@ public class PartieRestController {
 	@PostMapping("/debuterLaPartie/{idJoueur}/{idPersoChoisi}/{idPlateauChoisi}")
 	@JsonView(Views.ViewsPartieDetailPersos.class)
 	public Partie debuterLaPartie(@PathVariable Long idJoueur, @PathVariable Long idPersoChoisi, @PathVariable Long idPlateauChoisi) {
+
 		Historique historique = new Historique();
 		Partie partie = new Partie();
+		
+		
 		
 		//	1. choix du plateau: afficher la liste des plateaux dispo grace a : PlateauRestController.findAll()
 		//		Long idPlateau= (long) 1;
@@ -291,6 +331,7 @@ public class PartieRestController {
 		j.setLife(j.getLife()-1);
 		joueurRepo.save(j);
 
+		
 		return partie;
 	}
 	

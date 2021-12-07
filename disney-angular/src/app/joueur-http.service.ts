@@ -40,6 +40,10 @@ export class JoueurHttpService {
     return this.http.get<Compte>(url);
   }
 
+  
+  //updateJoueur(joueur: Joueur): Observable<Joueur> {
+  //  return this.http.put<Joueur>(this.joueurUrl + "", joueur);
+  //}
 
 
 
