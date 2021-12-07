@@ -11,6 +11,64 @@
 
   }
 
+#boutonNouvellePartie{
+  display: flex;
+  align-self: center;
+  justify-content: space-around;
+  align-items: center;
+  /* height: 12%; */
+  width: 50%;
+  font-family: cursive;
+  background-color: rgb(87, 20, 87);
+  border-color: rgb(255, 255, 255);
+  /* padding: 0; */
+  margin: 0;
+}
+
+#parametre{
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+  margin-bottom: 0;
+  border-radius: white 0.25rem;
+  background-color: #d369e1;
+  padding: 4%;
+  text-align: center;
+  font-size: cursive;
+  border: white solid;
+}
+label{
+  text-align: center;
+  font-family:  cursive;
+  background: none;
+  font-size: 1vw;
+}
+
+#choix_partie {
+  width: 40%;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+  #titre{
+    border: solid #ffffff;
+    background: #d572e3;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    /* justify-self: center; */
+    padding: 4%;
+    font-size: 3em;
+    font-family: 'Devonshire', cursive;
+    color: white;
+  }
+
   #boutonLancement, #boutonBoutique{
     font-family:  cursive;
     margin: auto;
@@ -25,9 +83,7 @@
     z-index: 100;
     }
 
-  #choix_partie {
-    width: 50%;
-  }
+
     
   #previsulation{
     text-align: center;

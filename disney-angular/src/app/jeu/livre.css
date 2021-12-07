@@ -17,18 +17,19 @@ a {
 }
 
 .btn {
-display: inline-block;
-	text-transform: uppercase;
-	border: 2px solid #2b527a;
-	margin-top: 45%; 
-	font-size: 1.8em;
-	font-weight: 600;
-	padding: 0.3em 0.4em;
-
-	text-align: center;
-	-webkit-transition: color 0.3s, border-color 0.3s;
-	-moz-transition: color 0.3s, border-color 0.3s;
-	transition: color 0.3s, border-color 0.3s;
+    /* display: inline-block; */
+    text-transform: uppercase;
+    /* border: 2px solid #2b527a; */
+    margin-top: 31%;
+    font-size: 1.8em;
+    font-weight: 600;
+    padding: 0.3em 0.4em;
+    text-align: center;
+    transition: color 0.3s, border-color 0.3s;
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* align-self: auto; */
+    
 }
 
 .btn:hover {
@@ -44,13 +45,14 @@ display: inline-block;
 	width: 100%;
 	max-width: 1170px;
 	text-align: center;
+	
 }
 
 .align > li {
 	width: 500px;
 	min-height: 300px;
 	display: inline-block;
-	margin: 30px 20px 30px 30px;
+    margin: 30px -159px 28px 30px;
 	padding: 0 0 0 60px;
 	vertical-align: top;
 }
@@ -396,6 +398,7 @@ Table of Contents
 */
 
 .book:hover > .hardcover_front {
+	transform: translate(50%, 0);
 	-webkit-transform: rotateY(-145deg) translateZ(0);
 	-moz-transform: rotateY(-145deg) translateZ(0);
 	transform: rotateY(-145deg) translateZ(0);
@@ -403,6 +406,7 @@ Table of Contents
 }
 
 .book:hover > .page li:nth-child(1) {
+	transform: translate(50%, 0);
 	-webkit-transform: rotateY(-30deg);
 	-moz-transform: rotateY(-30deg);
 	transform: rotateY(-30deg);
@@ -412,6 +416,7 @@ Table of Contents
 }
 
 .book:hover > .page li:nth-child(2) {
+	transform: translate(50%, 0);
 	-webkit-transform: rotateY(-35deg);
 	-moz-transform: rotateY(-35deg);
 	transform: rotateY(-35deg);
@@ -421,6 +426,7 @@ Table of Contents
 }
 
 .book:hover > .page li:nth-child(3) {
+	transform: translate(50%, 0);
 	-webkit-transform: rotateY(-118deg);
 	-moz-transform: rotateY(-118deg);
 	transform: rotateY(-118deg);
@@ -430,6 +436,7 @@ Table of Contents
 }
 
 .book:hover > .page li:nth-child(4) {
+	transform: translate(50%, 0);
 	-webkit-transform: rotateY(-130deg);
 	-moz-transform: rotateY(-130deg);
 	transform: rotateY(-130deg);
@@ -439,6 +446,7 @@ Table of Contents
 }
 
 .book:hover > .page li:nth-child(5) {
+	transform: translate(50%, 0);
 	-webkit-transform: rotateY(-140deg);
 	-moz-transform: rotateY(-140deg);
 	transform: rotateY(-140deg);
