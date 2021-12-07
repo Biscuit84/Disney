@@ -811,7 +811,7 @@ export class EcranDeJeuComponent implements OnInit {
       pion.futurePositionIndexCasePlayer = pion.positionIndexCasePlayer + totalDe;
 
       // on va devoir se déplacer encore une fois.
-      let waitTime = 1000+self.tauxRaffraichissement * (self.tourEnCours.valueDice1 + self.tourEnCours.valueDice2) * self.taillecaseW / self.velocityW;
+      let waitTime = 2000+self.tauxRaffraichissement * (self.tourEnCours.deplacement) * self.taillecaseW / self.velocityW;
       setTimeout(self.effetCaseDeplacement, waitTime, self, pion, tour);
     }
     else { // pas de case speciale ET on a pas finit de jouer pour autant
@@ -851,11 +851,11 @@ export class EcranDeJeuComponent implements OnInit {
 
   // fin de partie : redirection
   finDePartie(self, pion) {
-
+    clearInterval(self.actualisation);
 
     console.log("on est arrivé / fin de partie ")
     // on clear les set intervals pour pas qu'ils tournent dans le vide 
-    clearInterval(self.actualisation);
+    
     if (pion.numeroPassage == 0) {
       self.partieService.changeMessage(true);
       console.log("on est arrivé gagné")
@@ -1054,8 +1054,8 @@ export class EcranDeJeuComponent implements OnInit {
               var effet = "Case Départ, c'est parti !"
             }
             else if (position=="arrivee" ){
-              let name= this.joueurs[pion.numeroPassage].pseudo;
-              var effet = "Case Arrivée, BRAVO "+name+" ! Dommage pour les autres ! "
+              //let name= this.joueurs[pion.numeroPassage].pseudo;
+              var effet = "Case Arrivée, BRAVO ! "
             }
             else if (position=="prison" ){
               var effet = "Case Prison, mauvaise ambiance..."
