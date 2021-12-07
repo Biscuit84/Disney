@@ -166,6 +166,8 @@ public class PartieRestController {
 		//on récupère la partie en cours
 		Partie partie = partieRepo.findById(idPartie).get();
 		Historique historique = historiqueRepo.findByPartie(partie);
+		
+		System.out.println("MA SUPER PARTIEEEEEEEEEEE : "+historique.getPersonnage());
 		//si la partie n'est pas terminée
 		if(historique.getDateHeureFinPartie() == null) {
 
@@ -184,8 +186,23 @@ public class PartieRestController {
 			partie.setNbTourDeJeu(tourDeJeuEnCours);
 			tourDeJeuDto.setTourDeJeuEnCours(tourDeJeuEnCours);
 
-			//la liste des perso dans l'ordre de jeu
+			// la liste des perso n'est pas dans l'ordre
+			// comme le joueur commence toujours la partie, 
+			// alors on positionne son perso dans la première position de la liste
 			List<Personnage> lp = partie.getPersonnages();
+			Personnage player = new Personnage();
+			for(Personnage p : lp) {
+				if(p.getId() == historique.getPersonnage().getId()) {
+					player = p;
+				}
+			}
+			
+			int index = lp.indexOf(player);
+			lp.remove(index);
+			lp.add(0, player);
+			
+			
+			System.out.println("###########################LISTE PERSO : "+lp);
 			Personnage persoQuiJoue = lp.get(indexPersoQuiJoue);
 			System.out.println("## position avant : "+persoQuiJoue.getPosition());
 			int positionFuturePersonnage = persoQuiJoue.getPosition() + totalValueDice;
