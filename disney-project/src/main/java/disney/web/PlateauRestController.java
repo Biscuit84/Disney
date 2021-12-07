@@ -48,6 +48,14 @@ public class PlateauRestController {
 		return plateaux;
 	}
 	
+	@GetMapping("/withPlateauDispo")
+	@JsonView(Views.ViewsPlateau.class)
+	public List<Plateau> findAllPlateauDispo() {
+		List<Plateau> plateaux = plateauRepo.findAllPlateauDispo();
+
+		return plateaux;
+	}
+	
 	@GetMapping("/detail")
 	@JsonView(Views.ViewsPlateauDetail.class)
 	public List<Plateau> findAllWithDetail() {

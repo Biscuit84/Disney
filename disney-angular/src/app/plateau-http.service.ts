@@ -10,6 +10,7 @@ import { Cases, Plateau } from '../model';
 export class PlateauHttpService {
 
   plateaux: Array<Plateau> = new Array<Plateau>();
+  plateauxUniquementDisponibles: Array<Plateau> = new Array<Plateau>();
   plateauUrl: string;
   casesUrl: string;
 
@@ -17,6 +18,7 @@ export class PlateauHttpService {
     this.plateauUrl = this.appConfig.backEndUrl + "plateau/"
     this.casesUrl = this.appConfig.backEndUrl + "cases/"
     this.load();
+    this.loadPlateauDispo();
   }
 
   load() {
@@ -26,9 +28,20 @@ export class PlateauHttpService {
     }, error => console.log(error));
   }
 
+  loadPlateauDispo() {
+    this.http.get<Array<Plateau>>(this.plateauUrl +"/withPlateauDispo").subscribe(response => {
+
+      this.plateauxUniquementDisponibles = response;
+    }, error => console.log(error));
+  }
+
   findAll(): Array<Plateau> {
     //console.log(this.plateaux);
     return this.plateaux;
+  }
+
+  findAllPlateauDisponibles( ): Array<Plateau> {
+    return this.plateauxUniquementDisponibles;
   }
 
   findAllPlateau(): Observable<Array<Plateau>> {
