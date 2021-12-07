@@ -25,7 +25,7 @@ public class Joueur extends Compte{
 
 	private int nbEtoiles=500;
 	
-	private int nbVictoire=0;
+	private int nbVictoire;
 	
 	private int nbDefaite=0;
 	

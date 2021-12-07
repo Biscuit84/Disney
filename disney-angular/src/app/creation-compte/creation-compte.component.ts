@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Compte } from 'src/model';
 import { AppConfigService } from '../app-config.service';
 import { CreationCompteService } from './creation-compte.service';
@@ -10,7 +11,7 @@ import { CreationCompteService } from './creation-compte.service';
 })
 export class CreationCompteComponent implements OnInit {
 creatForm: Compte =new Compte();
-  constructor( private creationCompteService:CreationCompteService) { }
+  constructor( private creationCompteService:CreationCompteService, private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -27,6 +28,8 @@ add(){
     this.creatForm.life=3;
     this.creationCompteService.create(this.creatForm);
     this.creatForm = null;
+    this.router.navigate(['connexion'])
+
   }
 
 }

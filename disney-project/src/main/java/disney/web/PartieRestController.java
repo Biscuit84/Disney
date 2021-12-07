@@ -258,6 +258,7 @@ public class PartieRestController {
 				if(historique.getPersonnage().getId()==persoQuiJoue.getId()) {
 					//bravo
 					historique.setVictoire(true);
+					joueur.setNbVictoire(joueur.getNbVictoire()+1);
 				} else {
 					//defaite
 					historique.setVictoire(false);
@@ -322,6 +323,7 @@ public class PartieRestController {
 			tourDeJeuDto.setPositionFutureJoueur(persoQuiJoue.getPosition());
 			persoRepo.save(persoQuiJoue);
 			partieRepo.save(partie);
+			joueurRepo.save(joueur);
 
 
 			return tourDeJeuDto;
