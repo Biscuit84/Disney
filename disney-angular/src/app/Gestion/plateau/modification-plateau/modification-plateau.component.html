@@ -34,13 +34,13 @@
                                 <a class="btn btn-primary" (click)="plateauDetail(plateau)"><i
                                         class="bi bi-pencil-square"></i></a>
                                 <!-- <a class="btn btn-danger" (click)="delete(plateau)" ><i class="bi bi-trash"></i></a> -->
-                                <span  class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" title="On ne peut pas supprimer un plateau qui a déjà été choisi lors d'une partie">
-                                    <button *ngIf="!plateau.disponible" class="btn btn-secondary trashDisabled"  disabled ><i
+                                <span  class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" title="On ne peut pas supprimer un plateau">
+                                    <button class="btn btn-secondary trashDisabled"  disabled><i
                                         class="bi bi-trash"></i></button>
                                   </span>
                                 
-                                <button *ngIf="plateau.disponible" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="button" (click)="assignPlateau(plateau)" ><i
-                                            class="bi bi-trash"></i></button>
+                                <!-- <button *ngIf="!plateau.dejaUtilise" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="button" (click)="assignPlateau(plateau)" ><i
+                                            class="bi bi-trash"></i></button> -->
                             </div>
                             <!-- <em class="fas fa-edit" (click)="plateauDetail(plateau)"></em>
                             <em class="fas fa-trash" (click)="delete(plateau)"></em> -->

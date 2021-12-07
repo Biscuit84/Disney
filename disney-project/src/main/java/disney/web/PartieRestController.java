@@ -72,6 +72,14 @@ public class PartieRestController {
 
 		return parties;
 	}
+	
+	@GetMapping("/detailPlateaux")
+	@JsonView(Views.ViewsPartieDetail.class)
+	public List<Partie> findAllWithPlateau() {
+		List<Partie> parties = partieRepo.findAllWithDetailPlateau();
+
+		return parties;
+	}
 
 	@GetMapping("/{id}")
 	@JsonView(Views.ViewsPartie.class)

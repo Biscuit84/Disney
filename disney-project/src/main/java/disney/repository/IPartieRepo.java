@@ -1,5 +1,6 @@
 package disney.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,6 +13,9 @@ public interface IPartieRepo extends JpaRepository<Partie,Long> {
 	
 	@Query("select distinct p from Partie p left join fetch p.plateau pl left join fetch p.personnages pe where p.id = :id")
 	Optional<Partie> findByIdWithDetailPlateauAndPersos(@Param("id") Long id);
+	
+	@Query("select distinct p from Partie p left join fetch p.plateau pl")
+	List<Partie> findAllWithDetailPlateau();
 	
 	@Query("select distinct p from Partie p left join fetch p.personnages pe where p.id = :id")
 	Optional<Partie> findByIdWithDetailPersos(@Param("id") Long id);
