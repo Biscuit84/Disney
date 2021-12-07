@@ -26,8 +26,9 @@ export class JeuComponent implements OnInit {
   idPerso: number = null;
   idPlateau: number = null;
 
-  partiePossible: boolean;
+  partiePossible: boolean=false;
   life: number;
+  clicked=false;
 
   constructor(private router: Router,
     public compteService: PageConnexionService,
@@ -40,10 +41,6 @@ export class JeuComponent implements OnInit {
     this.joueur = this.compteService.compte;
     this.idJoueur = this.joueur.id;
     this.life = this.compteService.compte.life;
-    if (this.life > 0) {
-      this.partiePossible = true;
-    }
-    else { this.partiePossible = false }
     this.listPersonnageDispo();
   }
 
@@ -57,7 +54,7 @@ export class JeuComponent implements OnInit {
   personnageSelectionne() {
     this.personnageService.findById(this.idPerso).subscribe(response => {
       this.personnage = response;
-      console.log("ici")
+     // console.log("ici")
     }, err => console.log(err));
   }
 
@@ -66,16 +63,34 @@ export class JeuComponent implements OnInit {
     return this.plateauService.findAll();
   }
 
-  CreerLapartie() {
+
+  nouvellePartie()
+  {
+    if (this.compteService.compte.life > 0) {
+      // c'est ok la partie se créé
+      console.log("aller !")
+      this.partiePossible = true;
+      }
+    
+    else {
+      // ça veut dire qu'il y a plus assez de vie
+      console.log("tu n'as pas de vie")
+      this.partiePossible = false;
+      //this.partiePossible=false;
+    }
+  }
+
+
+  creerLapartie() {
     this.partieService.launchGame(this.idJoueur, this.idPerso, this.idPlateau).subscribe((resp: Partie) => {
       this.compteService.compte.life--;
       this.partieService.LaPartie = resp;
       this.partie = resp;
-      console.log(this.compteService.compte)
+      //console.log(this.compteService.compte)
       if (this.compteService.compte.life > 0) {
         // c'est ok la partie se créé
         //this.partiePossible=true;
-        console.log(resp)
+        //console.log(resp)
         this.casesPlateauService.findAllCasesByPlateau(this.partie.plateau.id).subscribe(resp => {
           this.casesPlateauService.lesCasesPlateau = resp;
           this.router.navigate(['jeu/ecrandejeu']);
@@ -84,6 +99,7 @@ export class JeuComponent implements OnInit {
       else {
         // ça veut dire qu'il y a plus assez de vie
         console.log("tu n'as pas de vie")
+        this.router.navigate(['boutique']);
         //this.partiePossible=false;
       }
 
