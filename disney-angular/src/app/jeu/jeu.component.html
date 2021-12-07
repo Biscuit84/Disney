@@ -11,7 +11,7 @@
             <div class="form-group">
                 <label for="personnage"> Quel personnage veux-tu pour ta partie ?</label>
                 <select class="form-control" id="personnage" [(ngModel)]="idPerso">
-                    <option *ngFor="let p of listPersonnageDispo()" [value]="p.id">{{p.nom}} avec son pouvoir :
+                    <option *ngFor="let p of listPersonnage" [value]="p.id">{{p.nom}} avec son pouvoir :
                         {{p.pouvoir}}
                         <img src="{{p.avatar}}" alt="avatar">
                     </option>
@@ -22,7 +22,7 @@
             <div class="form-group">
                 <label for="plateau"> Sur quel plateau veux-tu jouer ?</label>
                 <select class="form-control" id="plateau" [(ngModel)]="idPlateau">
-                    <option *ngFor="let p of listPlateauxDispoUniquement()" [value]="p.id">{{p.nom}} de {{p.nbCases}}</option>
+                    <option *ngFor="let p of listPlateauPerso" [value]="p.id">{{p.nom}} de {{p.nbCases}}</option>
                 </select>
             </div>
         </div>
