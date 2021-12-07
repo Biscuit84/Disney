@@ -680,11 +680,11 @@ export class EcranDeJeuComponent implements OnInit {
       else if (self.joueurActuel == 1 || self.joueurActuel == 2) { // si ce n'est pas le joueur qui joue on "click" auto sur la suite
         //let pionSuivant = self.listePion[self.joueurActuel + 1];
         var waitTime = 2000 + self.tempsDes + self.tauxRaffraichissement * (self.tourEnCours.valueDice1 + self.tourEnCours.valueDice2) * self.taillecaseW / self.velocityW;
-        if (self.tourEnCours.effetAActiver == true) {
+        
           if(self.tourEnCours.deplacement !=0){
-            waitTime = waitTime + self.tourEnCours.deplacement * self.tauxRaffraichissement * self.taillecaseW / self.velocityW + 1000;
+            waitTime = waitTime + Math.abs(self.tourEnCours.deplacement) * self.tauxRaffraichissement * self.taillecaseW / self.velocityW + 1000;
           }
-        }
+        
 
         //console.log("wait time = " + waitTime);
         setTimeout(self.FinDeTour, waitTime, self, pion, self.tourEnCours.positionFutureJoueur); // passe le tour auto
@@ -695,11 +695,11 @@ export class EcranDeJeuComponent implements OnInit {
       else if (self.joueurActuel == 3) {
         //self.dispoBoutonJouer = true;
         var waitTime = 2000 + self.tempsDes + self.tauxRaffraichissement * (self.tourEnCours.valueDice1 + self.tourEnCours.valueDice2) * self.taillecaseW / self.velocityW;
-        if (self.tourEnCours.effetAActiver == true) {
+        
           if(self.tourEnCours.deplacement !=0){
-            waitTime = waitTime + self.tourEnCours.deplacement * self.tauxRaffraichissement * self.taillecaseW / self.velocityW + 1000;
+            waitTime = waitTime + Math.abs(self.tourEnCours.deplacement) * self.tauxRaffraichissement * self.taillecaseW / self.velocityW + 1000;
           }
-        }
+        
         console.log("wait time = " + waitTime);
         setTimeout(self.FinDeTour, waitTime, self, pion, self.tourEnCours.positionFutureJoueur); // passe le tour auto
         this.dispoBoutonJouer=true;
@@ -795,7 +795,7 @@ export class EcranDeJeuComponent implements OnInit {
         console.log("on rentre ici")
 
         console.log(pion)
-        let waitTime = 1000+self.tempsDes + self.tauxRaffraichissement * (self.tourEnCours.valueDice1 + self.tourEnCours.valueDice2) * self.taillecaseW / self.velocityW;
+        let waitTime = 1000+self.tempsDes + self.tauxRaffraichissement * (self.tourEnCours.valueDice1 + self.tourEnCours.valueDice2 + Math.abs(self.tourEnCours.deplacement)) * self.taillecaseW / self.velocityW;
         setTimeout(self.finDePartie, waitTime, self, pion);
         // setTimeout(clearInterval, waitTime+500, self.actualisation);
         // clearInterval(self.actualisation);
@@ -811,7 +811,7 @@ export class EcranDeJeuComponent implements OnInit {
       pion.futurePositionIndexCasePlayer = pion.positionIndexCasePlayer + totalDe;
 
       // on va devoir se déplacer encore une fois.
-      let waitTime = 2000+self.tauxRaffraichissement * (self.tourEnCours.deplacement) * self.taillecaseW / self.velocityW;
+      let waitTime = 2000+self.tauxRaffraichissement * Math.abs(self.tourEnCours.deplacement) * self.taillecaseW / self.velocityW;
       setTimeout(self.effetCaseDeplacement, waitTime, self, pion, tour);
     }
     else { // pas de case speciale ET on a pas finit de jouer pour autant
@@ -838,7 +838,7 @@ export class EcranDeJeuComponent implements OnInit {
         if (tour.findepartie == true || self.partieEnCours == false) {//la partie est finie et ça a été vérifié avec le back.
   
   
-          let waitTime = 1000+self.tempsDes + self.tauxRaffraichissement * (tour.deplacement) * self.taillecaseW / self.velocityW+1000;
+          let waitTime = 1000+self.tempsDes + self.tauxRaffraichissement * Math.abs(tour.deplacement) * self.taillecaseW / self.velocityW+1000;
           setTimeout(self.finDePartie, waitTime, self, pion);
   
           //pion.futurePositionIndexCasePlayer = tour.positionFutureJoueur;
