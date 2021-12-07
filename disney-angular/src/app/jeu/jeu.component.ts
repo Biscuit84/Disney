@@ -63,6 +63,11 @@ export class JeuComponent implements OnInit {
     return this.plateauService.findAll();
   }
 
+  listPlateauxDispoUniquement(): Array<Plateau> {
+    return this.plateauService.findAllPlateauDisponibles();
+  }
+
+
 
   nouvellePartie()
   {

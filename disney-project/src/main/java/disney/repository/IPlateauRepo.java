@@ -20,6 +20,9 @@ public interface IPlateauRepo extends JpaRepository<Plateau,Long> {
 	//@Query("select p from Plateau p where p.partie.id = :id ")
 	//Optional<Plateau> findByPartieId();
 	
+	@Query("select distinct p from Plateau p where p.disponible = TRUE")
+	List<Plateau> findAllPlateauDispo();
+	
 	
 	
 }
