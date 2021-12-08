@@ -95,45 +95,52 @@
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
   }
 
-  .depart {
+  .Depart {
+    background-color: plum;
+    color: white;
+}
+
+.Arrivee {
+    background-color: rgb(240, 240, 82);
+    color: white;
+}
+
+.Mechant {
+    background-color: darkslateblue;
+    color: white;
+}
+
+.Gentil {
+    background-color: lightpink;
+    color: white;
+}
+
+.Prison {
+    background-color: grey;
+    color: white;
+}
+
+.Vide {
+  background-color: lightsteelblue;
+}
+
+.Duel {
+    background-color: sandybrown;
+    color: white;
+}
+
+.Avance {
     background-color: green;
     color: white;
 }
 
-.arrivee {
-    background-color: purple;
-    color: white;
+.Recule {
+  background-color: red;
+  color: white;
 }
 
-.mechant {
-    background-color: red;
-    color: white;
-}
-
-.prince {
-    background-color: blue;
-    color: white;
-}
-
-.prison {
-    background-color: gray;
-    color: white;
-}
-
-.vide {}
-
-.duel {
-    background-color: maroon;
-    color: white;
-}
-
-.deplacement {
-    background-color: darkorange;
-    color: white;
-}
-
-.pioche {
-    background-color: cyan;
+.Pioche {
+    background-color: salmon;
     color: white;
 }
 

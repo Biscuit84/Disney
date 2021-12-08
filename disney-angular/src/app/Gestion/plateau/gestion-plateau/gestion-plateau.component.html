@@ -19,7 +19,7 @@
             <div class="list-container " id="listeCases">
                 <h2 class="texteBlanc">Liste des cases</h2>
                 <div cdkDropList [cdkDropListData]="listeCases" class="element-list">
-                    <div class="element-box" *ngFor="let case of listeCases" cdkDrag class="{{case.typeCase}}">
+                    <div class="element-box" *ngFor="let case of listeCases" cdkDrag class="{{case.nom}}">
                         {{case.nom}}
                     </div>
                 </div>
@@ -28,7 +28,7 @@
             <div class="list-container " id="listeCases2">
                 <h2 class="texteBlanc">Plateau</h2>
                 <div cdkDropList [cdkDropListData]="listCasesPlateau" class="element-list" (cdkDropListDropped)="drop($event)" style="overflow: scroll;">
-                    <div class="element-box" *ngFor="let casePlateau of listCasesPlateau" cdkDrag class="{{casePlateau.typeCase}}">
+                    <div class="element-box" *ngFor="let casePlateau of listCasesPlateau" cdkDrag class="{{casePlateau.nom}}">
                         {{casePlateau.nom}}
                     </div>
                 </div>
