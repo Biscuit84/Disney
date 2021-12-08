@@ -83,12 +83,23 @@ class BoutiqueReposotirySpringTests {
 		System.out.println("testFindAll Début ###################");
 
 		List<Etoile> le = etoileRepo.findAll();
-
 		Boutique boutiqueEnBDD = boutiqueRepo.findById((long) 1).get();
+		
+		int sizeStart = boutiqueEnBDD.getListEtoiles().size();
+		
+		Etoile etoile1 = new Etoile (100, 5, "../../../assets/images/boutique/etoile-1.png");
+		
+		etoile1 = etoileRepo.save(etoile1);
+		
+		le.add(etoile1);
 
 		boutiqueEnBDD.setListEtoiles(le);
 		
-		assertEquals(le, boutiqueEnBDD.getListEtoiles());
+		boutiqueEnBDD = boutiqueRepo.save(boutiqueEnBDD);
+		
+		int sizeEnd = boutiqueEnBDD.getListEtoiles().size();
+		
+		assertEquals(1, sizeEnd - sizeStart);
 
 		System.out.println("testFindAll Fin ###################");
 	}
@@ -100,10 +111,22 @@ class BoutiqueReposotirySpringTests {
 		List<Vie> lv = vieRepo.findAll();
 
 		Boutique boutiqueEnBDD = boutiqueRepo.findById((long) 1).get();
+		
+		int sizeStart = boutiqueEnBDD.getListVies().size();
+		
+		Vie vie1 = new Vie(1, 100, "../../../assets/images/boutique/potion-1.png");
+		
+		vie1 = vieRepo.save(vie1);
+		
+		lv.add(vie1);
 
 		boutiqueEnBDD.setListVies(lv);
 		
-		assertEquals(lv, boutiqueEnBDD.getListVies());
+		boutiqueEnBDD = boutiqueRepo.save(boutiqueEnBDD);
+		
+		int sizeEnd = boutiqueEnBDD.getListVies().size();
+		
+		assertEquals(1, sizeEnd - sizeStart);
 
 		System.out.println("testFindAll Fin ###################");
 	}
