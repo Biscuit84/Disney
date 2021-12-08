@@ -160,6 +160,16 @@ export class EcranDeJeuComponent implements OnInit {
     this.ctxPlayerIA3 = this.canvasIA3.nativeElement.getContext('2d');
     //console.log(this.casesPlateau)
 
+    this.ctxPlateau.globalCompositeOperation = "source-over"; // pour afficher le pion SUR le fond
+    this.ctxJoueur.globalCompositeOperation = "source-over"; // pour afficher le pion SUR le fond
+    this.ctxPlayerIA1.globalCompositeOperation = "source-over"; // pour afficher le pion SUR le fond1
+    this.ctxPlayerIA2.globalCompositeOperation = "source-over"; // pour afficher le pion SUR le fond1
+    this.ctxPlayerIA3.globalCompositeOperation = "source-over"; // pour afficher le pion SUR le fond1
+
+    
+
+
+
     // on charge les bonnes images pour les pions
     this.pionJoueur.image = this.srcPionJoueur;
     this.pionIA1.image = this.srcPionIA1;
@@ -170,15 +180,15 @@ export class EcranDeJeuComponent implements OnInit {
     this.drawPlateau(this, this.plateau);
 
     // joueur
-    this.drawPlayer(this, this.pionJoueur);
-    this.drawPlayer(this, this.pionIA1);
-    this.drawPlayer(this, this.pionIA2);
-    this.drawPlayer(this, this.pionIA3);
+    //this.drawPlayer(this, this.pionJoueur);
+    //this.drawPlayer(this, this.pionIA1);
+    //this.drawPlayer(this, this.pionIA2);
+    //this.drawPlayer(this, this.pionIA3);
 
     // actualisation (en setinterval pour les deplacements)
     this.actualisation = setInterval(this.drawPlayers, this.tauxRaffraichissement, this);
-   
-
+    //window.requestAnimationFrame(this.affichagePion());
+    //window.requestAnimationFrame()
   } //ngOnInit fin
 
 
@@ -576,7 +586,6 @@ export class EcranDeJeuComponent implements OnInit {
           self.ctxJoueur.clearRect(0, 0, self.canvasJoueur.nativeElement.width, self.canvasJoueur.nativeElement.height); //clear pour refresh
         }
         //self.roundRect( pion.positionXPlayer, pion.positionYPlayer, image.width, image.height, 10, false, true,'white');
-        //self.ctxJoueur.clip();
         let circlePath = new Path2D();
         self.ctxJoueur.save();
         circlePath.arc( pion.positionXPlayer+self.taillecaseH/4,  pion.positionYPlayer+self.taillecaseH/4, self.taillecaseH/4, 0, 2 * Math.PI ); //void ctx.arc(x, y, rayon, angleDépart, angleFin, sensAntiHoraire);
@@ -598,10 +607,10 @@ export class EcranDeJeuComponent implements OnInit {
           self.ctxPlayerIA1.clearRect(0, 0, self.canvasIA1.nativeElement.width, self.canvasIA1.nativeElement.height);
         }
         self.ctxPlayerIA1.save();
-        //let circlePath = new Path2D();
-        //circlePath.arc( pion.positionXPlayer+self.taillecaseH/4,  pion.positionYPlayer+self.taillecaseH/4, self.taillecaseH/4, 0, 2 * Math.PI ); //void ctx.arc(x, y, rayon, angleDépart, angleFin, sensAntiHoraire);
+        let circlePath = new Path2D();
+        circlePath.arc( positionx+self.taillecaseH/4,  positiony+self.taillecaseH/4, self.taillecaseH/4, 0, 2 * Math.PI ); //void ctx.arc(x, y, rayon, angleDépart, angleFin, sensAntiHoraire);
         // Set the clip to the circle
-        //self.ctxPlayerIA1.clip(circlePath);
+        self.ctxPlayerIA1.clip(circlePath);
         self.ctxPlayerIA1.drawImage(image, positionx, positiony, image.width, image.height);
         self.ctxPlayerIA1.restore();
       }
@@ -619,9 +628,9 @@ export class EcranDeJeuComponent implements OnInit {
         }
         self.ctxPlayerIA2.save();
         let circlePath = new Path2D();
-        circlePath.arc( pion.positionXPlayer+self.taillecaseH/4,  pion.positionYPlayer+self.taillecaseH/4, self.taillecaseH/4, 0, 2 * Math.PI ); //void ctx.arc(x, y, rayon, angleDépart, angleFin, sensAntiHoraire);
+        circlePath.arc( positionx+self.taillecaseH/4,  positiony+self.taillecaseH/4, self.taillecaseH/4, 0, 2 * Math.PI ); //void ctx.arc(x, y, rayon, angleDépart, angleFin, sensAntiHoraire);
         // Set the clip to the circle
-        //self.ctxPlayerIA2.clip(circlePath);
+        self.ctxPlayerIA2.clip(circlePath);
         self.ctxPlayerIA2.drawImage(image, positionx, positiony, image.width, image.height);
         self.ctxPlayerIA2.restore();
       }
@@ -639,9 +648,9 @@ export class EcranDeJeuComponent implements OnInit {
         }
         self.ctxPlayerIA3.save();
         let circlePath = new Path2D();
-        circlePath.arc( pion.positionXPlayer+self.taillecaseH/4,  pion.positionYPlayer+self.taillecaseH/4, self.taillecaseH/4, 0, 2 * Math.PI ); //void ctx.arc(x, y, rayon, angleDépart, angleFin, sensAntiHoraire);
+        circlePath.arc( positionx+self.taillecaseH/4,  positiony+self.taillecaseH/4,self.taillecaseH/4, 0, 2 * Math.PI ); //void ctx.arc(x, y, rayon, angleDépart, angleFin, sensAntiHoraire);
         // Set the clip to the circle
-        //self.ctxPlayerIA3.clip(circlePath);
+        self.ctxPlayerIA3.clip(circlePath);
         self.ctxPlayerIA3.drawImage(image, positionx, positiony, image.width, image.height);
         self.ctxPlayerIA3.restore();
       }
@@ -657,6 +666,9 @@ export class EcranDeJeuComponent implements OnInit {
     self.partieService.GameTour(self.idJoueur, self.partie).subscribe(res => {
       self.tourEnCours = res;
       console.log("TOUR DE JEUX : {}", self.tourEnCours);
+      //let deplacement1 = pion.positionActuelleJoueur+self.tourEnCours.valueDice1+self.tourEnCours.valueDice2;
+      //let waitTime1=self.tempsDes + self.tauxRaffraichissement * deplacement1 * self.taillecaseW / self.velocityW;
+      //setTimeout(self.affichageInformation, waitTime1, self, pion, self.tourEnCours);
       self.affichageInformation(self, pion, res);
       //console.log("///////")
       //console.log(self.tourEnCours)
@@ -767,6 +779,7 @@ export class EcranDeJeuComponent implements OnInit {
     finPartie: boolean = false;
     effetAActiver: boolean = false;
     */
+    self.affichageInformation(self, pion, tour);
     let totalDe = 0;
     console.log(tour)
 
@@ -955,6 +968,8 @@ export class EcranDeJeuComponent implements OnInit {
       }
     }
   }
+
+
 
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////:
@@ -1288,10 +1303,15 @@ export class EcranDeJeuComponent implements OnInit {
   drawPrison(fromx, fromy, tox, toy, color) {
     this.ctxPlateau.beginPath();
 
-    let epaisseur = (tox - fromx) / 5;
+    let epaisseur = (tox - fromx) / 9;
     this.ctxPlateau.rect(fromx, fromy, epaisseur, toy - fromy)
     this.ctxPlateau.rect(fromx + 2*epaisseur, fromy, epaisseur, toy - fromy)
     this.ctxPlateau.rect(fromx + 4*epaisseur, fromy, epaisseur, toy - fromy)
+    this.ctxPlateau.rect(fromx + 6*epaisseur, fromy, epaisseur, toy - fromy)
+    this.ctxPlateau.rect(fromx + 8*epaisseur, fromy, epaisseur, toy - fromy)
+
+    this.ctxPlateau.rect(fromx , fromy, tox-fromx, epaisseur)
+    this.ctxPlateau.rect(fromx , toy-epaisseur, tox-fromx, epaisseur)
 
     this.ctxPlateau.closePath();
     //var r_a = 0.3;
@@ -1376,8 +1396,7 @@ export class EcranDeJeuComponent implements OnInit {
   
     Render(): void {
       this.drawAll();
-      this.ctxPlateau.globalCompositeOperation = "source-over"; // pour afficher le pion SUR le fond
-      this.ctxJoueur.globalCompositeOperation = "source-over"; // pour afficher le pion SUR le fond
+      
       //setInterval()
       // slider.oninput = function () {
       //   output.innerHTML = this.value;
