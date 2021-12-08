@@ -22,13 +22,14 @@
             <div class="form-group">
                 <label for="plateau"> Sur quel plateau veux-tu jouer ?</label>
                 <select class="form-control" id="plateau" [(ngModel)]="idPlateau">
-                    <option *ngFor="let p of listPlateauPerso" [value]="p.id">{{p.nom}} de {{p.nbCases}} cases. </option>
+                    <option *ngFor="let p of listPlateauPerso" [value]="p.id">{{p.nom}} de {{p.nbCases}} cases.
+                    </option>
                 </select>
             </div>
         </div>
 
 
-<!--//////////////////////////////////// le livre //////////////////////////////////////////-->
+        <!--//////////////////////////////////// le livre //////////////////////////////////////////-->
         <div class="component">
             <ul class="align">
                 <li>
@@ -105,17 +106,51 @@
 
 
     <div id="regles">
-        <img id="imageRegles" src="../../assets/images/jeu/regles.jpg" alt="parchemin">
-        <h4> Regles du jeu</h4>
-        <p id=textregles> Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto cum, nemo minus suscipit
-            perferendis nam sint
-            molestiae quam incidunt perspiciatis. Vel temporibus in eaque ut quidem autem vitae aliquam corporis.lo
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto nemo vero, laborum sint ipsa
-            consequuntur necessitatibus fuga dignissimos, aut saepe consectetur assumenda porro quo ullam! Ad tempore
-            ipsam labore nemo!</p>
+        <div id="pageRegles">
+            <!-- <img id="imageRegles" src="../../assets/images/jeu/regles.jpg" alt="parchemin"> -->
+            <div id=titreRegles>Regles du jeu</div>
+            <div id=texteRegles> <span></span>
 
+                <p>Bienvenue dans <b>Princess Adventure !</b></p>
+                <br>
+                <p>Les méchants de ce monde veulent empêcher les princesses et leurs princes de vivre heureux !</p>
 
+                <p> Ton objectif est de réussir à atteindre le bout du plateau en premier, pour cela tu auras à chaque
+                    tour
+                    le droit de lancer 2 dés qui te permettront d'avancer.
+                    Mais attention ! Le chemin ne sera pas forcément de tout repos, sur chaque case tu vivras une
+                    aventure
+                    différente !</p>
+
+                <p> Par exemple une fois arrivé sur la case <span class="typeCase">déplacement</span> (fléche) à l'issu
+                    du
+                    jet de dé, tu seras amener à te déplacer d'un nombre aléatoire de case en <span class="typeCase"
+                        style='color:"limegreen"'>avant</span> ou en <span class="typeCase"
+                        style='color:"red"'>arrière</span>.
+                    La case <span class="typeCase" style='color:"crimson"'>prince</span> (coeur rose) te fera rencontrer
+                    ton prince qui t'aidera à
+                    avancer d'autant de case que ton jet de dé !
+                    En revanche sur la case <span class="typeCase" style='color:"midnightblue"'>mechant</span> (coeur
+                    bleu foncé) t'attend ton pire ennemi et
+                    tu devras rebrousser chemin d'autant de case que tu venais d'avancer...</p>
+
+                <p> Il y a d'autres types de case :
+                    Case <span class="typeCase" style='color:"lightsteelblue"'>vide</span> (case vide).
+                    Case <span class="typeCase" style='color:"black"'>prison</span> (barreau).
+                    Case <span class="typeCase" style='color:"tomato"'>duel</span> (plusieurs étoiles).
+                    Case <span class="typeCase" style='color:"salmon"'>pioche</span> (2 cartes).
+                    Pour l'instant tu ne fais que les visiter mais cela changera...
+                </p>
+                <br>
+                <p>Fais donc bien attention à toi ! Bon courage ! </p>
+
+                <p> PS : pour le moment tu ne peux pas utiliser le pouvoir de ton personnage, mais nous savons que tu
+                    pourras dans le futur ! patience ! </p>
+
+            </div>
+        </div>
     </div>
+
 
 
 

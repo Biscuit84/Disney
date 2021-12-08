@@ -36,9 +36,9 @@
                                             class="bi bi-pencil-square"></i></a>
                                             &nbsp;
                                     <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip"
-                                        title="On ne peut pas supprimer un plateau">
+                                        title="On ne peut pas supprimer un plateau déjà utilisé pour une partie">
                                         <button class="btn btn-danger trashDisabled" [disabled]="plateau.dejaUtilise"
-                                            (click)="delete(plateau)"><i class="bi bi-trash"></i></button>
+                                            (click)="recuperePlateau(plateau)" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-trash"></i></button>
                                     </span>
 
                                 </div>
@@ -56,7 +56,7 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<!-- <div class="modal fade" id="exampleModal1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -75,8 +75,29 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Supression du plateau:
+                {{plateau.nom}}</h5>
+        </div>
+        <div class="modal-body">
+            Etes-vous sur de vouloir supprimer ce plateau?
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
+            <button type="button" class="btn btn-primary" (click)="delete(plateau)"
+                data-bs-dismiss="modal">Valider</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 <app-gestion-plateau titre="Modification du plateau" [idPlateau]="id" *ngIf="id != -1">
