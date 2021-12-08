@@ -16,4 +16,7 @@ public interface IBoutiqueRepo extends JpaRepository<Boutique,Long> {
 	
 	@Query("select distinct b from Boutique b left join fetch b.personnages p where b.id = :id")
 	Optional<Boutique> findByIdWithPersonnages(@Param("id") Long id);
+	
+//	@Query("select distinct b from Boutique b left join fetch b.listEtoiles p where b.id = :id")
+//	Optional<Boutique> findByIdWithEtoiles(@Param("id") Long id);
 }
