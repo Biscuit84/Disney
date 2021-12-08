@@ -126,22 +126,28 @@ class TestMain {
 		//IA 
 		Joueur ia1 = new Joueur("mickey.mickey@adresseMail.com","mickeyTropFortMickey","Mickey");
 		Joueur ia2 = new Joueur("donald.donald@adresseMail.com","donaldTropFortDonald","Donald");
-		Joueur ia3 = new Joueur("dingo.dingo@adresseMail.com","dingoTropFortDonald","Dingo");
+		Joueur ia3 = new Joueur("dingo.dingo@adresseMail.com","dingoTropFortDingo","Dingo");
 		ia1 = joueurRepo.save(ia1);
 		ia2 = joueurRepo.save(ia2);
 		ia3 = joueurRepo.save(ia3);
 
 		//JOUEURS
-		Joueur joueur1 = new Joueur("joueur1", "1234", "Toto", "Titi", "toto.titi@gmail.com", "TotoTropFort", "noob", 3);
+		Joueur joueur1 = new Joueur("joueur1", "1234", "Biscay", "Hugo", "hugo@gmail.com", "Princesse Saucisse", "débutant", 3);
 		joueur1.setAvatar(avatar1);
+		joueur1.setNbEtoiles(1000);
 		joueur1=joueurRepo.save(joueur1);
-		Joueur joueur2 = new Joueur("joueur2", "password", "Tartanpion", "Tintin", "Tart.tintin@gmail.com", "TintinTheBest", "champion", 3);
+		Joueur joueur2 = new Joueur("joueur2", "1234", "Champagne", "Justine", "justine@gmail.com", "Princesse Plateau", "dieu", 3);
 		joueur2.setAvatar(avatar2);
+		joueur2.setNbEtoiles(1000);
 		joueur2=joueurRepo.save(joueur2);
-		Joueur joueur3 = new Joueur("joueur3", "1234", "j3", "Titi", "j3@gmail.com", "TotoTropFort", "noob", 3);
+		Joueur joueur3 = new Joueur("joueur3", "1234", "Cengiz", "Selin", "selin@gmail.com", "Princesse Presidente", "débutant", 3);
 		joueur3.setAvatar(avatar11);
 		joueur3.setNbEtoiles(1000);
 		joueur3 = joueurRepo.save(joueur3);
+		Joueur joueur7 = new Joueur("joueur7", "1234", "Bruno", "Anais", "anais@gmail.com", "Princesse Dors Peu", "débutant", 3);
+		joueur7.setAvatar(avatar11);
+		joueur7.setNbEtoiles(1000);
+		joueur7 = joueurRepo.save(joueur7);
 
 		Joueur joueur4 = new Joueur("MinnieDu44", "1234", "Minnie", "Mouse", "minnie.mouse@gmail.com", "Princesse Minnie", "expert", 15);
 		joueur4.setNbEtoiles(5000);
@@ -173,16 +179,16 @@ class TestMain {
 		admin2=adminRepo.save(admin2);
 
 		//Personnages
-		Personnage perso1 = new Personnage("Elsa", "Olaf", "Hans", "Glace",100);
-		Personnage perso2 = new Personnage("Ariel", "Eric", "Ursula", "Eau",200);
-		Personnage perso3 = new Personnage("Jasmine", "Aladdin", "Jafar", "feu",300);
-		Personnage perso4 = new Personnage("Mulan", "Amoureux", "Atila", "terre",400);
-		Personnage perso5 = new Personnage("Aurore", "Philippe", "Malefique", "terre",100);
-		Personnage perso6 = new Personnage("Belle", "La Bête", "Gaston", "terre",100);
-		Personnage perso7 = new Personnage("Blanche-Neige", "Prince", "La méchante reine", "terre",100);
-		Personnage perso8 = new Personnage("Cendrillon", "Prince charmant", "Mme de Trénaine", "terre",100);
-		Personnage perso9 = new Personnage("Raiponce", "Eugene", "Gotel", "terre",100);
-		Personnage perso10 = new Personnage("Tiana", "ray", "Maitre des ombres", "terre",100);
+		Personnage perso1 = new Personnage("Elsa", "Olaf", "Hans", "Glace",500);
+		Personnage perso2 = new Personnage("Ariel", "Eric", "Ursula", "Eau",500);
+		Personnage perso3 = new Personnage("Jasmine", "Aladdin", "Jafar", "Sable",1000);
+		Personnage perso4 = new Personnage("Mulan", "Chang", "Shan-Yu", "Mushu",500);
+		Personnage perso5 = new Personnage("Aurore", "Philippe", "Malefique", "Sommeil",1000);
+		Personnage perso6 = new Personnage("Belle", "La Bête", "Gaston", "La Rose",5000);
+		Personnage perso7 = new Personnage("Blanche-Neige", "Prince", "La méchante reine", "Chant",2500);
+		Personnage perso8 = new Personnage("Cendrillon", "Prince charmant", "Mme de Trémaine", "La Bonne Fée",5000);
+		Personnage perso9 = new Personnage("Raiponce", "Eugene", "Gothel", "Chevelure",500);
+		Personnage perso10 = new Personnage("Tiana", "Ray", "Docteur Facilier", "Bisous",1000);
 		perso1.setAvatar("../../assets/images/persoBoutique/elsa.jpg");
 		perso2.setAvatar("../../assets/images/persoBoutique/arel.jpg");
 		perso3.setAvatar("../../assets/images/persoBoutique/jasmine.jpg");
@@ -255,17 +261,17 @@ class TestMain {
 
 		//BOUTIQUE
 		final List<Vie> listeTotaleVie = new ArrayList<>();
-		listeTotaleVie.add(new Vie(1, 100, "../../../assets/images/boutique/potion-1.png"));
-		listeTotaleVie.add(new Vie(3, 275, "../../../assets/images/boutique/potion-3.png"));
-		listeTotaleVie.add(new Vie(5, 400, "../../../assets/images/boutique/potion-5.png"));
-		listeTotaleVie.add(new Vie(10, 750, "../../../assets/images/boutique/potion-10.png"));
+		listeTotaleVie.add(new Vie(1, 500, "../../../assets/images/boutique/potion-1.png"));
+		listeTotaleVie.add(new Vie(3, 1250, "../../../assets/images/boutique/potion-3.png"));
+		listeTotaleVie.add(new Vie(5, 2400, "../../../assets/images/boutique/potion-5.png"));
+		listeTotaleVie.add(new Vie(10, 4500, "../../../assets/images/boutique/potion-10.png"));
 		vieRepo.saveAll(listeTotaleVie);
 
 		final List<Etoile> listeTotaleEtoiles = new ArrayList<>();
-		listeTotaleEtoiles.add(new Etoile(100, 5, "../../../assets/images/boutique/etoile-1.png"));
-		listeTotaleEtoiles.add(new Etoile(300, 13, "../../../assets/images/boutique/etoile-3.png"));
-		listeTotaleEtoiles.add(new Etoile(500, 22, "../../../assets/images/boutique/etoile-5.png"));
-		listeTotaleEtoiles.add(new Etoile(1000, 40, "../../../assets/images/boutique/etoile-10.png"));
+		listeTotaleEtoiles.add(new Etoile(1000, 5, "../../../assets/images/boutique/etoile-1.png"));
+		listeTotaleEtoiles.add(new Etoile(3000, 13, "../../../assets/images/boutique/etoile-3.png"));
+		listeTotaleEtoiles.add(new Etoile(5000, 22, "../../../assets/images/boutique/etoile-5.png"));
+		listeTotaleEtoiles.add(new Etoile(10000, 30, "../../../assets/images/boutique/etoile-10.png"));
 		etoilesRepo.saveAll(listeTotaleEtoiles);
 
 		Boutique boutique = new Boutique(listeTotalePerso, listeTotaleVie, listeTotaleEtoiles);
@@ -404,7 +410,7 @@ class TestMain {
 
 
 		//Plateau 3
-		Plateau plateau3 = new Plateau ("Plateau Regular", 63);
+		Plateau plateau3 = new Plateau ("Aventure", 63);
 		plateau3.setDisponible(true);
 		plateau3=plateauRepo.save(plateau3);
 
@@ -606,7 +612,7 @@ class TestMain {
 		
 		
 		//Plateau 4
-		Plateau plateau4 = new Plateau ("Chemin semé d'embuche", 71);
+		Plateau plateau4 = new Plateau ("Chemin semé d'embuches", 71);
 		plateau4.setDisponible(true);
 		plateau4=plateauRepo.save(plateau4);
 
@@ -835,7 +841,7 @@ class TestMain {
 		
 
 		//Plateau 5
-		Plateau plateau5 = new Plateau ("Foret paisible",71);
+		Plateau plateau5 = new Plateau ("Forêt paisible",71);
 		plateau5.setDisponible(true);
 		plateau5=plateauRepo.save(plateau5);
 
@@ -1211,6 +1217,18 @@ class TestMain {
 		PersoObtenu perso2ObtenuJoueur1 = new PersoObtenu (perso2, joueur1);
 		perso1ObtenuJoueur1=persoObtenuRepo.save(perso1ObtenuJoueur1);
 		perso2ObtenuJoueur1=persoObtenuRepo.save(perso2ObtenuJoueur1);
+		
+		// joueur 3
+		PersoObtenu perso4ObtenuJoueur3 = new PersoObtenu (perso4, joueur3);
+		PersoObtenu perso5ObtenuJoueur3 = new PersoObtenu (perso5, joueur3);
+		perso4ObtenuJoueur3=persoObtenuRepo.save(perso4ObtenuJoueur3);
+		perso5ObtenuJoueur3=persoObtenuRepo.save(perso5ObtenuJoueur3);
+		
+		// joueur 7
+		PersoObtenu perso3ObtenuJoueur7 = new PersoObtenu (perso3, joueur7);
+		PersoObtenu perso8ObtenuJoueur7 = new PersoObtenu (perso8, joueur7);
+		perso3ObtenuJoueur7=persoObtenuRepo.save(perso3ObtenuJoueur7);
+		perso8ObtenuJoueur7=persoObtenuRepo.save(perso8ObtenuJoueur7);
 		
 		// joueur 4
 		PersoObtenu perso1ObtenuJoueur4 = new PersoObtenu (perso1, joueur4);
