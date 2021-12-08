@@ -2,31 +2,29 @@ package disney;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.ArrayList;
+
 import java.util.List;
-import java.util.Optional;
+
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
-import com.fasterxml.jackson.annotation.JsonView;
+import org.springframework.transaction.annotation.Transactional;
 
-import disney.dto.BoutiqueDto;
+
+
+
 import disney.model.Boutique;
 import disney.model.Etoile;
 import disney.model.Personnage;
 import disney.model.Vie;
-import disney.model.Views;
+
 import disney.repository.IBoutiqueRepo;
 import disney.repository.IEtoileRepo;
 import disney.repository.IPersonnageRepo;
 import disney.repository.IVieRepo;
-import disney.web.BoutiqueRestController;
 
 @SpringBootTest
 class BoutiqueReposotirySpringTests {
@@ -42,9 +40,6 @@ class BoutiqueReposotirySpringTests {
 
 	@Autowired
 	private IPersonnageRepo personnageRepo;
-
-	@Autowired
-	private BoutiqueRestController boutiqueRestController;
 
 	@Test
 	public void testFindByIdWithPersonnages() {
@@ -79,6 +74,7 @@ class BoutiqueReposotirySpringTests {
 	
 	
 	@Test
+	@Transactional
 	public void testFindByIdWithEtoile() {
 		System.out.println("testFindAll Début ###################");
 
@@ -105,6 +101,7 @@ class BoutiqueReposotirySpringTests {
 	}
 	
 	@Test
+	@Transactional
 	public void testFindByIdWithVie() {
 		System.out.println("testFindAll Début ###################");
 
