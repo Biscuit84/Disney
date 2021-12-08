@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Compte } from 'src/model';
 import { PageConnexionService } from '../page-connexion/page-connexion.service';
 import { ModificationProfilJoueurService } from './modification-profil-joueur.service';
@@ -10,7 +11,7 @@ import { ModificationProfilJoueurService } from './modification-profil-joueur.se
 })
 export class ModificationProfilJoueurComponent implements OnInit {
 joueurForm : Compte
-  constructor(public compteService:PageConnexionService, private gestionJoueurService:ModificationProfilJoueurService) {
+  constructor(public compteService:PageConnexionService, private gestionJoueurService:ModificationProfilJoueurService,public router:Router) {
     this.joueurForm=this.compteService.compte;
    }
 
@@ -29,7 +30,7 @@ joueurForm : Compte
       this.gestionJoueurService.create(this.joueurForm);
     }
 
-    
+    this.router.navigate(['accueilJoueur'])
     this.cancel();
   }
 

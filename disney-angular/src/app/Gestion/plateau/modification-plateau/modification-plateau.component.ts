@@ -48,7 +48,7 @@ export class ModificationPlateauComponent implements OnInit {
 
   }
 
-  assignPlateau(plateau: Plateau) {
+  recuperePlateau(plateau: Plateau) {
     this.plateau = plateau;
   }
 

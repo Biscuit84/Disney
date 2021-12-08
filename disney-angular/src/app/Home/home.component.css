@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Devonshire&display=swap");
 #ecran-home{
     width: 100%;
     top: 7vh;
@@ -9,7 +10,15 @@
     margin:0px;
   }
 
-  
+  h1{
+    font-family: 'Devonshire', cursive;
+    font-size: 4em;
+  }
+  p{
+    font-family: 'Devonshire', cursive;
+    font-size: 2em;
+  }
+
   
   
   .container-fluid{
@@ -42,5 +51,6 @@
       width: 5em;
       height: 7vh;
   }
+
   
   

@@ -8,7 +8,7 @@
     background-attachment: fixed;
     background-size: cover;
   
-    height: 92.5vh;
+    height: 94vh;
     justify-content : center;
     display: flex;
   
@@ -20,6 +20,7 @@
   height: fit-content;
   width: 32rem;
   margin-top: 5rem;
+  background-color: #ffffffba;
 }
 
 .headerTableau{
