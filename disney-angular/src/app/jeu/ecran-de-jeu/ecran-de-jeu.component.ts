@@ -1082,7 +1082,7 @@ export class EcranDeJeuComponent implements OnInit {
               var effet = "Case prince, tu retrouves un être cher et cela double ton déplacement ! "
             }
             else if (position=="mechant" ){
-              var effet = "Case mechant, tu tombes nez à nez à ton ennemi qui te repousse à ton point de départ, dommage... "
+              var effet = "Case mechant, tu tombes nez à nez avec ton ennemi qui te repousse à ton point de départ, dommage... "
             }
             else if (position=="duel" ){
               var effet = "Case duel, ici de nombreux combat ont eu lieu... "
