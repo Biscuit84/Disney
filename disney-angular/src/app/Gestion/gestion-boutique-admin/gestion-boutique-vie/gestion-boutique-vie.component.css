@@ -7,3 +7,12 @@
 #fondList{
     margin-top: 53px;
 }
+body{
+    width:100%;
+    height: 98.3vh;
+    margin: 0px;
+    background-image: url(../../../../assets/images/studioDisney.jpg);
+    background-repeat:no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    }
