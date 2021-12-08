@@ -9,26 +9,30 @@ import { PageConnexionService } from '../page-connexion/page-connexion.service';
   providedIn: 'root'
 })
 export class GestionDuCompteService {
-historiqueUrl:string;
-historiques: Array<Historique> = new Array<Historique>();
-joueur:Compte
-// id:number
-  constructor(public compteService:PageConnexionService,private http: HttpClient, private appConfig: AppConfigService) {
-    
-    this.joueur=this.compteService.compte
-    // this.id=this.joueur.id
-    
-    this.historiqueUrl = this.appConfig.backEndUrl + "historique/"+this.joueur.id+"/joueur"
+  historiqueUrl: string;
+  historiques: Array<Historique> = new Array<Historique>();
+  joueur: Compte
+  // id:number
+  constructor(public compteService: PageConnexionService, private http: HttpClient, private appConfig: AppConfigService) {
 
-    
+        // this.id=this.joueur.id
+
+    this.historiqueUrl = this.appConfig.backEndUrl + "historique/";
+
+
     this.load()
-   }
+  }
 
- Historique():Array<Historique>{
-   return this.historiques;
- }
- load() {
-  this.http.get<Array<Historique>>(this.historiqueUrl).subscribe(response => {
-    this.historiques = response;
-  }, error => console.log(error));}
+  Historique(): Array<Historique> {
+    return this.historiques;
+  }
+
+  load() {
+    
+    if (this.compteService.compte) {
+      this.http.get<Array<Historique>>(this.historiqueUrl + this.compteService.compte.id + "/joueur").subscribe(response => {
+        this.historiques = response;
+      }, error => console.log(error));
+    }
+  }
 }
